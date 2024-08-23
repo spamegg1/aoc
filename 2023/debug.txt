@@ -1,0 +1,19 @@
+// rsh ~ lsr, pzl ~ lsr, lsr ~ lhk, rzs ~ lsr, frs ~ lsr)
+// rzs ~ lsr, cmg ~ bvb, lsr ~ lhk, bvb ~ hfx, bvb ~ xhk, ntq ~ bvb, rhn ~ bvb, pzl ~ lsr, rsh ~ lsr, frs ~ lsr)
+// rzs ~ lsr, xhk ~ hfx, rhn ~ xhk, lsr ~ lhk, ntq ~ bvb, pzl ~ lsr, rsh ~ lsr, frs ~ lsr, ntq ~ xhk, cmg ~ bvb, bvb ~ hfx, jqt ~ xhk, rhn ~ bvb)
+// rzs ~ lsr, rhn ~ hfx, rhn ~ xhk, lsr ~ lhk, ntq ~ bvb, pzl ~ lsr, rsh ~ lsr, frs ~ lsr, ntq ~ xhk, ntq ~ hfx, cmg ~ bvb, jqt ~ xhk, rhn ~ bvb, pzl ~ hfx)
+// rzs ~ lsr, cmg ~ nvd, rhn ~ hfx, rhn ~ xhk, lsr ~ lhk, ntq ~ bvb, cmg ~ qnr, pzl ~ lsr, rsh ~ lsr, frs ~ lsr, ntq ~ xhk, ntq ~ hfx, cmg ~ lhk, rzs ~ cmg, jqt ~ xhk, rhn ~ bvb, pzl ~ hfx)
+// rzs ~ lsr, rhn ~ hfx, rhn ~ xhk, lsr ~ lhk, ntq ~ bvb, cmg ~ qnr, pzl ~ lsr, qnr ~ nvd, rsh ~ lsr, frs ~ lsr, ntq ~ xhk, jqt ~ nvd, ntq ~ hfx, cmg ~ lhk, nvd ~ lhk, rzs ~ cmg, jqt ~ xhk, rhn ~ bvb, pzl ~ hfx, pzl ~ nvd)
+// rzs ~ lsr, rhn ~ hfx, rhn ~ xhk, lsr ~ lhk, rsh ~ pzl, ntq ~ bvb, cmg ~ qnr, qnr ~ nvd, rsh ~ lsr, frs ~ lsr, ntq ~ xhk, jqt ~ nvd, ntq ~ hfx, cmg ~ lhk, nvd ~ lhk, rzs ~ cmg, jqt ~ xhk, rhn ~ bvb)
+// rzs ~ lsr, rsh ~ frs, rhn ~ hfx, rhn ~ xhk, lsr ~ lhk, rsh ~ pzl, ntq ~ bvb, frs ~ lhk, cmg ~ qnr, qnr ~ nvd, rsh ~ lsr, ntq ~ xhk, jqt ~ nvd, ntq ~ hfx, cmg ~ lhk, frs ~ qnr, nvd ~ lhk, rzs ~ cmg, jqt ~ xhk, rhn ~ bvb)
+// rzs ~ lsr, rhn ~ hfx, rhn ~ xhk, lsr ~ lhk, ntq ~ bvb, frs ~ lhk, cmg ~ qnr, qnr ~ nvd, rzs ~ rsh, ntq ~ xhk, jqt ~ nvd, ntq ~ hfx, cmg ~ lhk, frs ~ qnr, nvd ~ lhk, rzs ~ cmg, jqt ~ xhk, rhn ~ bvb)
+// rzs ~ lsr, rhn ~ hfx, rhn ~ xhk, lsr ~ lhk, ntq ~ jqt, frs ~ lhk, cmg ~ qnr, qnr ~ nvd, rzs ~ rsh, jqt ~ nvd, cmg ~ lhk, frs ~ qnr, nvd ~ lhk, rzs ~ cmg, jqt ~ xhk, rhn ~ bvb)
+// rhn ~ hfx, rhn ~ xhk, lsr ~ lhk, ntq ~ jqt, frs ~ lhk, cmg ~ qnr, qnr ~ nvd, jqt ~ nvd, cmg ~ lhk, frs ~ qnr, nvd ~ lhk, jqt ~ xhk, rhn ~ bvb, rzs ~ qnr)
+// rhn ~ hfx, rhn ~ xhk, lsr ~ lhk, frs ~ lhk, cmg ~ qnr, qnr ~ nvd, cmg ~ lhk, frs ~ qnr, nvd ~ lhk, jqt ~ rhn, rhn ~ bvb, rzs ~ qnr)
+// rhn ~ hfx, frs ~ qnr, rhn ~ xhk, jqt ~ rhn, rhn ~ bvb, cmg ~ qnr, qnr ~ nvd, rzs ~ qnr)
+// rhn ~ hfx, rhn ~ xhk, jqt ~ rhn, rhn ~ bvb)
+// )
+
+// hfx/pzl
+// bvb/cmg
+// nvd/jqt

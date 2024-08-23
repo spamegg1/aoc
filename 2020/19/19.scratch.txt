@@ -1,0 +1,6 @@
+State(Map(<0> -> List(<4><1><5>), <1> -> List(<2><3>, <3><2>), <2> -> List(<4><4>, <5><5>), <3> -> List(<4><5>, <5><4>)),Queue((<4>,List(a)), (<5>,List(b))))
+State(Map(<0> -> List(a<1><5>), <1> -> List(<2><3>, <3><2>), <2> -> List(aa, <5><5>), <3> -> List(a<5>, <5>a)),Queue((<5>,List(b))))
+State(Map(<0> -> List(a<1>b), <1> -> List(<2><3>, <3><2>)),Queue((<2>,List(aa, bb)), (<3>,List(ab, ba))))
+State(Map(<0> -> List(a<1>b), <1> -> List(aa<3>, bb<3>, <3>aa, <3>bb)),Queue((<3>,List(ab, ba))))
+State(Map(<0> -> List(a<1>b)),Queue((<1>,List(aaab, aaba, bbab, bbba, abaa, baaa, abbb, babb))))
+State(Map(<0> -> List(aaaabb, aaabab, abbabb, abbbab, aabaab, abaaab, aabbbb, ababbb)),Queue())
