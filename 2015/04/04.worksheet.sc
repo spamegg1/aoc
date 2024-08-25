@@ -22,35 +22,19 @@ Now find one that starts with six zeroes.
  */
 import org.apache.commons.codec.digest.DigestUtils.md5Hex
 
-object DataDefs:
-  ???
-
-object Parsing:
-  import DataDefs.*
-  ???
-
 object Solving:
-  import DataDefs.*
-
-  private def solve(line: String)(zeroes: Int) =
+  def solve(zeroes: Int)(line: String) =
     var number = 1L
     while !md5Hex(s"$line$number").startsWith("0" * zeroes) do number += 1L
     number
 
-  def solve1(line: String) = solve(line)(5)
-  def solve2(line: String) = solve(line)(6)
-
 object Testing:
-  private lazy val line1 = "abcdef"
-  private lazy val line2 = "pqrstuv"
-  lazy val result1 = Solving.solve1(line1)
-  lazy val result2 = Solving.solve1(line2)
-Testing.result1 // part 1: 609043
-Testing.result2 // part 1: 1048970
+  private lazy val lines = Seq("abcdef", "pqrstuv")
+  lazy val result1 = lines map Solving.solve(5)
+// Testing.result1 // part 1: 609043, 1048970
 
 object Main:
-  private lazy val line = "yzbqklnj"
-  lazy val result1 = Solving.solve1(line)
-  lazy val result2 = Solving.solve2(line)
-Main.result1 // part 1: 282749
-Main.result2 // part 2: 9962624
+  lazy val result1 = Solving.solve(5)("yzbqklnj")
+  lazy val result2 = Solving.solve(6)("yzbqklnj")
+// Main.result1 // part 1: 282749
+// Main.result2 // part 2: 9962624

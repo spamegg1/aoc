@@ -106,9 +106,9 @@ object Solving:
   val solve2 = solve(checkSue2)
 
 object Main:
-  private lazy val memories = os.read.lines(os.pwd / "16.test.input.txt")
-  private lazy val lines = os.read.lines(os.pwd / "16.input.txt")
+  private lazy val memories = os.read.lines(os.pwd / "2015" / "16" / "16.test.input.txt")
+  private lazy val lines = os.read.lines(os.pwd / "2015" / "16" / "16.input.txt")
   lazy val result1 = Solving.solve1(lines)(memories)
   lazy val result2 = Solving.solve2(lines)(memories)
-Main.result1 // part 1: 213
-Main.result2 // part 2: 323
+// Main.result1 // part 1: 213
+// Main.result2 // part 2: 323

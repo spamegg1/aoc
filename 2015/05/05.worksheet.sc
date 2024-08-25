@@ -64,10 +64,6 @@ object DataDefs:
     def containsXyx: Boolean = s.sliding(3).exists(p => p(0) == p(2))
     def isNice2: Boolean = containsDoublePair && containsXyx
 
-object Parsing:
-  import DataDefs.*
-  ???
-
 object Solving:
   import DataDefs.*
 
@@ -75,16 +71,17 @@ object Solving:
   def solve2(lines: Seq[String]) = lines.count(_.isNice2)
 
 object Testing:
-  lazy val lines1 = os.read.lines(os.pwd / "05.test.input.txt")
-  lazy val lines2 = os.read.lines(os.pwd / "05.test.input.2.txt")
+  private lazy val dir = os.pwd / "2015" / "05"
+  private lazy val lines1 = os.read.lines(dir / "05.test.input.txt")
+  private lazy val lines2 = os.read.lines(dir / "05.test.input.2.txt")
   lazy val result1 = Solving.solve1(lines1)
   lazy val result2 = Solving.solve2(lines2)
-Testing.result1 // part 1: 2
-Testing.result2 // part 2: 2
+// Testing.result1 // part 1: 2
+// Testing.result2 // part 2: 2
 
 object Main:
-  lazy val lines = os.read.lines(os.pwd / "05.input.txt")
+  private lazy val lines = os.read.lines(os.pwd / "2015" / "05" / "05.input.txt")
   lazy val result1 = Solving.solve1(lines)
   lazy val result2 = Solving.solve2(lines)
-Main.result1 // part 1: 255
-Main.result2 // part 2: 55
+// Main.result1 // part 1: 255
+// Main.result2 // part 2: 55

@@ -88,15 +88,15 @@ object Solving:
     scores.maxBy(_._2)._2
 
 object Testing:
-  private lazy val lines = os.read.lines(os.pwd / "14.test.input.txt")
+  private lazy val lines = os.read.lines(os.pwd / "2015" / "14" / "14.test.input.txt")
   lazy val result1 = Solving.solve1(lines)(1000)
   lazy val result2 = Solving.solve2(lines)(1000)
-Testing.result1 // part 1: 1120
-Testing.result2 // part 2: 689
+// Testing.result1 // part 1: 1120
+// Testing.result2 // part 2: 689
 
 object Main:
-  private lazy val lines = os.read.lines(os.pwd / "14.input.txt")
+  private lazy val lines = os.read.lines(os.pwd / "2015" / "14" / "14.input.txt")
   lazy val result1 = Solving.solve1(lines)(2503)
   lazy val result2 = Solving.solve2(lines)(2503)
-Main.result1 // part 1: 2640
-Main.result2 // part 2: 1102
+// Main.result1 // part 1: 2640
+// Main.result2 // part 2: 1102

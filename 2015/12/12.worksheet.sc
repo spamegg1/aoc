@@ -55,15 +55,15 @@ object Solving:
   def solve2(line: String) = findNumbers(ignoreRed)(read(line))
 
 object Testing:
-  private lazy val lines = os.read.lines(os.pwd / "12.test.input.txt")
+  private lazy val lines = os.read.lines(os.pwd / "2015" / "12" / "12.test.input.txt")
   lazy val result1 = lines map Solving.solve1
   lazy val result2 = lines map Solving.solve2
-Testing.result1 // part 1: 15,6,6,6,3,3,0,0,0,0
-Testing.result2 // part 2:  0,6,6,4,3,3,0,0,0,0
+// Testing.result1 // part 1: 15,6,6,6,3,3,0,0,0,0
+// Testing.result2 // part 2:  0,6,6,4,3,3,0,0,0,0
 
 object Main:
-  private lazy val line = os.read.lines(os.pwd / "12.input.txt").head
+  private lazy val line = os.read.lines(os.pwd / "2015" / "12" / "12.input.txt").head
   lazy val result1 = Solving.solve1(line)
   lazy val result2 = Solving.solve2(line)
-Main.result1 // part 1: 111754
-Main.result2 // part 2: 65402
+// Main.result1 // part 1: 111754
+// Main.result2 // part 2: 65402

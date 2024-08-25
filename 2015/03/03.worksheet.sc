@@ -77,22 +77,23 @@ object Solving:
 
   def solve2(line: String) =
     val dirs = Parsing.parse(line)
-    val (santa, robot) =
-      dirs.zipWithIndex.partition((_, index) => index % 2 == 0)
+    val (santa, robot) = dirs.zipWithIndex.partition((_, index) => index % 2 == 0)
     val santaHouses = processDirs(santa.map(_._1))(start)(Set(start))
     val robotHouses = processDirs(robot.map(_._1))(start)(Set(start))
     (santaHouses union robotHouses).size
 
 object Testing:
-  lazy val line = os.read(os.pwd / "03.test.input.txt")
+  private lazy val file = os.pwd / "2015" / "03" / "03.test.input.txt"
+  private lazy val line = os.read(file)
   lazy val result1 = Solving.solve1(line)
   lazy val result2 = Solving.solve2(line)
-Testing.result1 // part 1: 5
-Testing.result2 // part 2: 13
+// Testing.result1 // part 1: 5
+// Testing.result2 // part 2: 13
 
 object Main:
-  lazy val line = os.read(os.pwd / "03.input.txt")
+  private lazy val file = os.pwd / "2015" / "03" / "03.input.txt"
+  private lazy val line = os.read(file)
   lazy val result1 = Solving.solve1(line)
   lazy val result2 = Solving.solve2(line)
-Main.result1 // part 1: 2572
-Main.result2 // part 2: 2631
+// Main.result1 // part 1: 2572
+// Main.result2 // part 2: 2631

@@ -65,14 +65,14 @@ object Solving:
     nextPass
 
 object Testing:
-  private lazy val lines = os.read.lines(os.pwd / "11.test.input.txt")
+  private lazy val lines = os.read.lines(os.pwd / "2015" / "11" / "11.test.input.txt")
   lazy val result1 = lines map Solving.solve
-Testing.result1 // part 1: abcdffaa, ghjaabcc
+// Testing.result1 // part 1: abcdffaa, ghjaabcc
 
 object Main:
   import DataDefs.*
   private lazy val line = "cqjxjnds"
   lazy val result1 = Solving.solve(line)
   lazy val result2 = Solving.solve(result1.increment)
-Main.result1 // part 1: cqjxxyzz
-Main.result2 // part 2: cqkaabcc
+// Main.result1 // part 1: cqjxxyzz
+// Main.result2 // part 2: cqkaabcc

@@ -58,18 +58,31 @@ object DataDefs:
 
 object Parsing:
   import DataDefs.*
+
   def parseLine(line: String): Dimensions = line match
     case s"${length}x${width}x${height}" =>
       Dimensions(length.toLong, width.toLong, height.toLong)
 
 object Solving:
   import DataDefs.*
-  def solve(lines: Seq[String])(fun: Dimensions => Long): Long =
-    lines.map(Parsing.parseLine).map(fun).sum
 
-object Main:
-  lazy val lines = os.read.lines(os.pwd / "02.input.txt")
+  def solve(lines: Seq[String])(fun: Dimensions => Long): Long = lines.view
+    .map(Parsing.parseLine)
+    .map(fun)
+    .sum
+
+object Testing:
+  private lazy val file = os.pwd / "2015" / "02" / "02.test.input.txt"
+  private lazy val lines = os.read.lines(file)
   lazy val result1 = Solving.solve(lines)(_.totalPaper)
   lazy val result2 = Solving.solve(lines)(_.totalRibbon)
-Main.result1 // part 1: 1586300
-Main.result2 // part 2: 3737498
+// Testing.result1 // part1: 58 + 43 = 101
+// Testing.result2 // part2: 34 + 14 = 48
+
+object Main:
+  private lazy val file = os.pwd / "2015" / "02" / "02.input.txt"
+  private lazy val lines = os.read.lines(file)
+  lazy val result1 = Solving.solve(lines)(_.totalPaper)
+  lazy val result2 = Solving.solve(lines)(_.totalRibbon)
+// Main.result1 // part 1: 1586300
+// Main.result2 // part 2: 3737498

@@ -53,23 +53,15 @@ literal. For example, for the strings above, the total encoded length
 (6 + 9 + 16 + 11 = 42) minus the characters in the original code representation
 (23, just like in the first part of this puzzle) is 42 - 23 = 19.
  */
-object DataDefs:
-  ???
-
-object Parsing:
-  import DataDefs.*
-  ???
-
 object Solving:
-  import DataDefs.*
   val regex = """(")|[a-z]|(\\")|(\\x([0-9]|[a-f]){2})|(\\\\)""".r
 
   def replace(old: String): String = old match
-    case """""""       => """\""""
-    case """\""""      => """\\\""""
-    case """\\"""      => """\\\\"""
-    case s"""\x$hex""" => s"""\\\\x$hex"""
-    case _             => old
+    case """""""        => """\""""
+    case """\""""       => """\\\""""
+    case """\\"""       => """\\\\"""
+    case s"""\\x$hex""" => s"""\\\\x$hex"""
+    case _              => old
 
   def solve1(lines: Seq[String]) =
     (lines.map(_.length).sum, lines.map(regex.findAllIn(_).length - 2).sum)
@@ -84,15 +76,15 @@ object Solving:
     (newSizes.sum, lines.map(_.length).sum)
 
 object Testing:
-  private lazy val lines = os.read.lines(os.pwd / "08.test.input.txt")
+  private lazy val lines = os.read.lines(os.pwd / "2015" / "08" / "08.test.input.txt")
   lazy val result1 = Solving.solve1(lines)
   lazy val result2 = Solving.solve2(lines)
-Testing.result1 // part 1: (23, 11) = 12
-Testing.result2 // part 2: (42, 23) = 19
+// Testing.result1 // part 1: (23, 11) = 12
+// Testing.result2 // part 2: (42, 23) = 19
 
 object Main:
-  private lazy val lines = os.read.lines(os.pwd / "08.input.txt")
+  private lazy val lines = os.read.lines(os.pwd / "2015" / "08" / "08.input.txt")
   lazy val result1 = Solving.solve1(lines)
   lazy val result2 = Solving.solve2(lines)
-Main.result1 // part 1: (6195, 4845) = 1350
-Main.result2 // part 2: (8280, 6195) = 2085
+// Main.result1 // part 1: (6195, 4845) = 1350
+// Main.result2 // part 2: (8280, 6195) = 2085

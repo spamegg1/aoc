@@ -89,8 +89,7 @@ object Parsing:
     case s"$in RSHIFT $shift -> $out" => out -> Rshift(in, shift.toInt)
     case s"$in -> $out"               => out -> Direct(in)
 
-  def parseGates(lines: Seq[String]): Map[Wire, Gate] =
-    lines.map(parseGate).toMap
+  def parseGates(lines: Seq[String]): Map[Wire, Gate] = lines.map(parseGate).toMap
 
 object Solving:
   import DataDefs.*, Gate.*
@@ -125,15 +124,15 @@ object Solving:
     circuit(wire)
 
 object Testing:
-  private lazy val lines = os.read.lines(os.pwd / "07.test.input.txt")
+  private lazy val lines = os.read.lines(os.pwd / "2015" / "07" / "07.test.input.txt")
   lazy val result1 = Solving.solve1(lines)("i")
   lazy val result2 = Solving.solve2(lines)("y")(65079)("i")
-Testing.result1 // part 1: 65079
-Testing.result2 // part 2: 456
+// Testing.result1 // part 1: 65079
+// Testing.result2 // part 2: 456
 
 object Main:
-  private lazy val lines = os.read.lines(os.pwd / "07.input.txt")
+  private lazy val lines = os.read.lines(os.pwd / "2015" / "07" / "07.input.txt")
   lazy val result1 = Solving.solve1(lines)("a")
   lazy val result2 = Solving.solve2(lines)("b")(16076)("a")
-Main.result1 // part 1: 16076
-Main.result2 // part 2: 2797
+// Main.result1 // part 1: 16076
+// Main.result2 // part 2: 2797

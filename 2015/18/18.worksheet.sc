@@ -225,16 +225,16 @@ object Solving:
     start.howManyOn
 
 object Testing:
-  private lazy val lines1 = os.read.lines(os.pwd / "18.test.input.txt")
-  private lazy val lines2 = os.read.lines(os.pwd / "18.test.input.2.txt")
+  private lazy val lines1 = os.read.lines(os.pwd / "2015" / "18" / "18.test.input.txt")
+  private lazy val lines2 = os.read.lines(os.pwd / "2015" / "18" / "18.test.input.2.txt")
   lazy val result1 = Solving.solve1(lines1)(4)
   lazy val result2 = Solving.solve2(lines2)(5)
 // Testing.result1 // part 1: 4
 // Testing.result2 // part 2: 17
 
 object Main:
-  private lazy val lines1 = os.read.lines(os.pwd / "18.input.txt")
-  private lazy val lines2 = os.read.lines(os.pwd / "18.input.2.txt")
+  private lazy val lines1 = os.read.lines(os.pwd / "2015" / "18" / "18.input.txt")
+  private lazy val lines2 = os.read.lines(os.pwd / "2015" / "18" / "18.input.2.txt")
   lazy val result1 = Solving.solve1(lines1)(100)
   lazy val result2 = Solving.solve2(lines2)(100)
 // Main.result1 // part 1: 814

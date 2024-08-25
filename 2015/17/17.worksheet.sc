@@ -47,14 +47,14 @@ object Solving:
     good.count(_.size == minSize)
 
 object Testing:
-  private lazy val lines = os.read.lines(os.pwd / "17.test.input.txt")
+  private lazy val lines = os.read.lines(os.pwd / "2015" / "17" / "17.test.input.txt")
   lazy val result1 = Solving.solve1(lines)(25)
   lazy val result2 = Solving.solve2(lines)(25)
 // Testing.result1 // part 1: 4
 // Testing.result2 // part 2: 3
 
 object Main:
-  private lazy val lines = os.read.lines(os.pwd / "17.input.txt")
+  private lazy val lines = os.read.lines(os.pwd / "2015" / "17" / "17.input.txt")
   lazy val result1 = Solving.solve1(lines)(150)
   lazy val result2 = Solving.solve2(lines)(150)
 // Main.result1 // part 1: 654

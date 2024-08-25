@@ -40,14 +40,14 @@ For example:
 What is the position of the character that causes Santa to first enter the
 basement?
  */
-object Main:
+
+object Solving:
   import util.boundary, boundary.break
 
-  lazy val line = os.read(os.pwd / "01.input.txt")
-  lazy val result1 =
-    line.foldLeft(0)((acc, c) => acc + (if c == '(' then 1 else -1))
+  def solve1(line: String) = line.foldLeft(0): (acc, c) =>
+    acc + (if c == '(' then 1 else -1)
 
-  lazy val result2 =
+  def solve2(line: String) =
     var index = 0
     var acc = 0
     boundary:
@@ -57,5 +57,17 @@ object Main:
         if acc < 0 then break()
         else index += 1
     index + 1
-Main.result1
-Main.result2
+
+object Testing:
+  lazy val file = os.pwd / "2015" / "01" / "01.test.input.txt"
+  lazy val lines = os.read.lines(file)
+  lazy val result1 = lines map Solving.solve1
+// Testing.result1 // part1: 0,0,3,3,3,-1,-1,-3,-3
+
+object Main:
+  lazy val file = os.pwd / "2015" / "01" / "01.input.txt"
+  lazy val line = os.read(file)
+  lazy val result1 = Solving.solve1(line)
+  lazy val result2 = Solving.solve2(line)
+// Main.result1 // part1: 74
+// Main.result2 // part2: 1795

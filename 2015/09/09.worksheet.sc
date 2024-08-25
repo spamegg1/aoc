@@ -62,14 +62,14 @@ object Solving:
     graph
 
 object Testing:
-  private lazy val lines = os.read.lines(os.pwd / "09.test.input.txt")
+  private lazy val lines = os.read.lines(os.pwd / "2015" / "09" / "09.test.input.txt")
   lazy val result1 = Solving.solve1(lines)
   lazy val result2 = Solving.solve2(lines)
 // Testing.result1 // part 1: 605
 // Testing.result2 // part 2:
 
 object Main:
-  private lazy val lines = os.read.lines(os.pwd / "09.input.txt")
+  private lazy val lines = os.read.lines(os.pwd / "2015" / "09" / "09.input.txt")
   lazy val result1 = Solving.solve1(lines)
   lazy val result2 = Solving.solve2(lines)
 // Main.result1 // part 1:
@@ -101,10 +101,3 @@ def shortestPathLength(graph: Array[Array[Int]]): Int =
           lengths((n2, v2)) = l
           q.enqueue((n2, v2))
     0
-// can I type like this? It feels weird, but it's OK.
-// My legs hurt though! That's the main issue.
-// Can I look with both eyes, without cross-eyeing?
-// My eyes still go cross unfortunately... but it's definitely better!
-// Legs will definitely be a challenge though!
-// The keyboard's key clicks sound much nicer like this!
-// Typing for fun.

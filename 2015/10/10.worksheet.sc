@@ -30,12 +30,13 @@ Now, starting again with the digits in your puzzle input,
 apply this process 50 times. What is the length of the new result?
  */
 object DataDefs:
-  lazy val tableRaw = os.read.lines(os.pwd / "10.table.txt")
+  lazy val tableRaw = os.read.lines(os.pwd / "2015" / "10" / "10.table.txt")
   type Name = String
   type Sequence = String
   type Table = Map[Name, Element]
 
   case class Element(name: Name, seq: Sequence, decays: List[Name])
+
   case class Compound(elements: List[Name])(using table: Table):
     lazy val decaysTo = Compound(elements.flatMap(table(_).decays))
     lazy val size = elements.map(table(_).seq.size).sum
@@ -52,7 +53,7 @@ object Parsing:
 
 object Solving:
   import DataDefs.*
-  given table: Table = Parsing.parseTable(tableRaw)
+  given Table = Parsing.parseTable(tableRaw)
   given start: Compound = Compound(List("Yb"))
 
   @annotation.tailrec

@@ -157,12 +157,12 @@ object Testing:
   private lazy val lines = Seq("turn on 499,499 through 500,500")
   lazy val result1 = Solving.solve1(lines)
   lazy val result2 = Solving.solve2(lines)
-Testing.result1 // part 1: 4
-Testing.result2 // part 2: 4
+// Testing.result1 // part 1: 4
+// Testing.result2 // part 2: 4
 
 object Main:
-  private lazy val lines = os.read.lines(os.pwd / "06.input.txt")
+  private lazy val lines = os.read.lines(os.pwd / "2015" / "06" / "06.input.txt")
   lazy val result1 = Solving.solve1(lines)
   lazy val result2 = Solving.solve2(lines)
-Main.result1 // part 1: 543903
-Main.result2 // part 2: 14687245
+// Main.result1 // part 1: 543903
+// Main.result2 // part 2: 14687245
