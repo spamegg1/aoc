@@ -1,31 +1,50 @@
 /*
-
-Advent of Code
-
-    [About][Events][Shop][Settings][Log Out]
-
-spamegg 10*
-      /^2018$/
-
-    [Calendar][AoC++][Sponsors][Leaderboard][Stats]
-
-Our sponsors help make Advent of Code possible:
-Catawiki - Online auctions for special objects. Win prizes on our private leaderboard! And obviously, we're hiring! bit.ly/join-cw
 --- Day 19: Go With The Flow ---
+With the Elves well on their way constructing the North Pole base, 
+you turn your attention back to understanding 
+the inner workings of programming the device.
 
-With the Elves well on their way constructing the North Pole base, you turn your attention back to understanding the inner workings of programming the device.
+You can't help but notice that the device's opcodes don't contain 
+any flow control like jump instructions. 
+The device's manual goes on to explain:
 
-You can't help but notice that the device's opcodes don't contain any flow control like jump instructions. The device's manual goes on to explain:
+"In programs where flow control is required, 
+the instruction pointer can be bound to a register 
+so that it can be manipulated directly. 
+This way, setr/seti can function as absolute jumps, 
+addr/addi can function as relative jumps, 
+and other opcodes can cause truly fascinating effects."
 
-"In programs where flow control is required, the instruction pointer can be bound to a register so that it can be manipulated directly. This way, setr/seti can function as absolute jumps, addr/addi can function as relative jumps, and other opcodes can cause truly fascinating effects."
+This mechanism is achieved through a declaration like #ip 1, 
+which would modify register 1 so that accesses to it 
+let the program indirectly access the instruction pointer itself. 
+To compensate for this kind of binding, 
+there are now six registers (numbered 0 through 5); 
+the five not bound to the instruction pointer behave as normal. 
+Otherwise, the same rules apply as the last time you worked with this device.
 
-This mechanism is achieved through a declaration like #ip 1, which would modify register 1 so that accesses to it let the program indirectly access the instruction pointer itself. To compensate for this kind of binding, there are now six registers (numbered 0 through 5); the five not bound to the instruction pointer behave as normal. Otherwise, the same rules apply as the last time you worked with this device.
+When the instruction pointer is bound to a register, 
+its value is written to that register just before each 
+instruction is executed, and the value of that register 
+is written back to the instruction pointer immediately 
+after each instruction finishes execution. 
+Afterward, move to the next instruction by adding one 
+to the instruction pointer, even if the value in the 
+instruction pointer was just updated by an instruction. 
+(Because of this, instructions must effectively set the 
+instruction pointer to the instruction before the one they want executed next.)
 
-When the instruction pointer is bound to a register, its value is written to that register just before each instruction is executed, and the value of that register is written back to the instruction pointer immediately after each instruction finishes execution. Afterward, move to the next instruction by adding one to the instruction pointer, even if the value in the instruction pointer was just updated by an instruction. (Because of this, instructions must effectively set the instruction pointer to the instruction before the one they want executed next.)
+The instruction pointer is 0 during the first instruction, 
+1 during the second, and so on. 
+If the instruction pointer ever causes the device to attempt 
+to load an instruction outside the instructions defined in the program, 
+the program instead immediately halts. The instruction pointer starts at 0.
 
-The instruction pointer is 0 during the first instruction, 1 during the second, and so on. If the instruction pointer ever causes the device to attempt to load an instruction outside the instructions defined in the program, the program instead immediately halts. The instruction pointer starts at 0.
-
-It turns out that this new information is already proving useful: the CPU in the device is not very powerful, and a background process is occupying most of its time. You dump the background process' declarations and instructions to a file (your puzzle input), making sure to use the names of the opcodes rather than the numbers.
+It turns out that this new information is already proving useful: 
+the CPU in the device is not very powerful, and a background 
+process is occupying most of its time. You dump the background 
+process' declarations and instructions to a file (your puzzle input), 
+making sure to use the names of the opcodes rather than the numbers.
 
 For example, suppose you have the following program:
 
@@ -38,7 +57,12 @@ setr 1 0 0
 seti 8 0 4
 seti 9 0 5
 
-When executed, the following instructions are executed. Each line contains the value of the instruction pointer at the time the instruction started, the values of the six registers before executing the instructions (in square brackets), the instruction itself, and the values of the six registers after executing the instruction (also in square brackets).
+When executed, the following instructions are executed. 
+Each line contains the value of the instruction pointer 
+at the time the instruction started, the values of the 
+six registers before executing the instructions (in square brackets), 
+the instruction itself, and the values of the six registers 
+after executing the instruction (also in square brackets).
 
 ip=0 [0, 0, 0, 0, 0, 0] seti 5 0 1 [0, 5, 0, 0, 0, 0]
 ip=1 [1, 5, 0, 0, 0, 0] seti 6 0 2 [1, 5, 6, 0, 0, 0]
@@ -70,7 +94,8 @@ In detail, when running this program, the following events occur:
   The instruction pointer is 4, so the instruction setr 1 0 0 is run.
     This is like an absolute jump: it copies the value contained in
     register 1, 5, into register 0, which causes it to end up in the
-    instruction pointer. The instruction pointer is then incremented, leaving it at 6.
+    instruction pointer. The instruction pointer is then incremented, 
+    	leaving it at 6.
   The instruction pointer is 6, so the instruction seti 9 0 5 stores 9
     into register 5. The instruction pointer is incremented,
     causing it to point outside the program, and so the program ends.
@@ -92,14 +117,14 @@ object Solving:
   def solve2(lines: Seq[String]) = 0L
 
 object Testing:
-  private lazy val lines = os.read.lines(os.pwd / "19.test.input.txt")
+  private lazy val lines = os.read.lines(os.pwd / "2018" / "19" / "19.test.input.txt")
   lazy val result1 = Solving.solve1(lines)
   lazy val result2 = Solving.solve2(lines)
 // Testing.result1 // part 1: 5
 // Testing.result2 // part 2: ???
 
 object Main:
-  private lazy val lines = os.read.lines(os.pwd / "19.input.txt")
+  private lazy val lines = os.read.lines(os.pwd / "2018" / "19" / "19.input.txt")
   lazy val result1 = Solving.solve1(lines)
   lazy val result2 = Solving.solve2(lines)
 // Main.result1 // part 1: ???

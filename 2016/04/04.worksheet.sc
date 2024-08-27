@@ -87,15 +87,15 @@ object Solving:
 
 object Testing:
   import Parsing.*
-  private lazy val lines = os.read.lines(os.pwd / "04.test.input.txt")
+  private lazy val lines = os.read.lines(os.pwd / "2016" / "04" / "04.test.input.txt")
   lazy val result1 = Solving.solve1(lines)
   lazy val result2 = "qzmt-zixmtkozy-ivhz-343[zimth]".toRoom.decrypt
-Testing.result1 // part 1: 1514
-Testing.result2 // part 2: veryencryptedname
+// Testing.result1 // part 1: 1514
+// Testing.result2 // part 2: veryencryptedname
 
 object Main:
-  private lazy val lines = os.read.lines(os.pwd / "04.input.txt")
+  private lazy val lines = os.read.lines(os.pwd / "2016" / "04" / "04.input.txt")
   lazy val result1 = Solving.solve1(lines)
   lazy val result2 = Solving.solve2(lines)
-Main.result1 // part 1: 158835
-Main.result2 // part 2: Some(993)
+// Main.result1 // part 1: 158835
+// Main.result2 // part 2: Some(993)

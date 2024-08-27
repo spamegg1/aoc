@@ -187,12 +187,12 @@ object Testing:
   private lazy val boss = Character(Boss, 12, 7, 2)
   private lazy val start = State(player, boss, Turn.User)
   lazy val result = Solving.playGame(start)
-Testing.result // part 1: Winner = User
+// Testing.result // part 1: Winner = User
 
 object Main:
-  private lazy val lines = os.read(os.pwd / "21.input.shop.txt")
+  private lazy val lines = os.read(os.pwd / "2015" / "21" / "21.input.shop.txt")
   private lazy val shop = Parsing.parseShop(lines)
   lazy val result1 = Solving.solve1(shop)
   lazy val result2 = Solving.solve2(shop)
-Main.result1 // part 1: 78
-Main.result2 // part 2: 148
+// Main.result1 // part 1: 78
+// Main.result2 // part 2: 148

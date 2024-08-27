@@ -99,7 +99,11 @@ object Solving:
         digitCount += 1
       start = digit + 1
 
-    password.toList.sortBy(_._1).map(_._2).mkString
+    password
+      .toList
+      .sortBy(_._1)
+      .map(_._2)
+      .mkString
 
 object Testing:
   private lazy val input = "abc"

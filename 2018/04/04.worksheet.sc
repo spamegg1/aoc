@@ -156,15 +156,15 @@ object Solving:
     mostAsleepGuard._1 * mostAsleepGuard._2._1
 
 object Testing:
-  private lazy val lines = os.read.lines(os.pwd / "04.test.input.txt")
+  private lazy val lines = os.read.lines(os.pwd / "2018" / "04" / "04.test.input.txt")
   lazy val result1 = Solving.solve1(lines)
   lazy val result2 = Solving.solve2(lines)
-Testing.result1 // part 1: 240
-Testing.result2 // part 2: 4455
+// Testing.result1 // part 1: 240
+// Testing.result2 // part 2: 4455
 
 object Main:
-  private lazy val lines = os.read.lines(os.pwd / "04.input.sorted.txt")
+  private lazy val lines = os.read.lines(os.pwd / "2018" / "04" / "04.input.sorted.txt")
   lazy val result1 = Solving.solve1(lines)
   lazy val result2 = Solving.solve2(lines)
-Main.result1 // part 1: 35184
-Main.result2 // part 2: 37886
+// Main.result1 // part 1: 35184
+// Main.result2 // part 2: 37886

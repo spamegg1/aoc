@@ -121,11 +121,11 @@ object Solving:
     state.regs(Reg.A)
 
 object Testing:
-  private lazy val lines = os.read.lines(os.pwd / "12.test.input.txt")
+  private lazy val lines = os.read.lines(os.pwd / "2016" / "12" / "12.test.input.txt")
   lazy val result = Solving.solve(lines)
 // Testing.result // part 1: 42
 
 object Main:
-  private lazy val lines = os.read.lines(os.pwd / "12.input.txt")
+  private lazy val lines = os.read.lines(os.pwd / "2016" / "12" / "12.input.txt")
   lazy val result = Solving.solve(lines)
 // Main.result // part 1: 318117, part 2: 9227771

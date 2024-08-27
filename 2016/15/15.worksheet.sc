@@ -96,13 +96,13 @@ object Solving:
     state.time
 
 object Testing:
-  private lazy val lines = os.read.lines(os.pwd / "15.test.input.txt")
+  private lazy val lines = os.read.lines(os.pwd / "2016" / "15" / "15.test.input.txt")
   lazy val result = Solving.solve(lines)
 // Testing.result // part 1: 5
 
 object Main:
-  private lazy val lines1 = os.read.lines(os.pwd / "15.input.1.txt")
-  private lazy val lines2 = os.read.lines(os.pwd / "15.input.2.txt")
+  private lazy val lines1 = os.read.lines(os.pwd / "2016" / "15" / "15.input.1.txt")
+  private lazy val lines2 = os.read.lines(os.pwd / "2016" / "15" / "15.input.2.txt")
   lazy val result1 = Solving.solve(lines1)
   lazy val result2 = Solving.solve(lines2)
 // Main.result1 // part 1: 121834

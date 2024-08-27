@@ -266,15 +266,15 @@ object Solving:
     twoProgs.p1.sent
 
 object Testing:
-  lazy val lines1 = os.read.lines(os.pwd / "18.test.input.txt")
-  lazy val lines2 = os.read.lines(os.pwd / "18.test.input.2.txt")
+  lazy val lines1 = os.read.lines(os.pwd / "2017" / "18" / "18.test.input.txt")
+  lazy val lines2 = os.read.lines(os.pwd / "2017" / "18" / "18.test.input.2.txt")
   lazy val result1 = Solving.solve1(lines1)
   lazy val result2 = Solving.solve2(lines2)
 // Testing.result1 // part 1: 4
 // Testing.result2 // part 2: 3
 
 object Main:
-  lazy val lines = os.read.lines(os.pwd / "18.input.txt")
+  lazy val lines = os.read.lines(os.pwd / "2017" / "18" / "18.input.txt")
   lazy val result1 = Solving.solve1(lines)
   lazy val result2 = Solving.solve2(lines)
 // Main.result1 // part 1: 1187

@@ -95,14 +95,14 @@ object Solving:
   def solve2(lines: Seq[String]): Freq = traverse(Parsing.parse(lines))
 
 object Testing:
-  private lazy val lines1 = os.read.lines(os.pwd / "01.test.input.1.txt")
-  private lazy val lines2 = os.read.lines(os.pwd / "01.test.input.2.txt")
-  private lazy val lines3 = os.read.lines(os.pwd / "01.test.input.3.txt")
+  private lazy val lines1 = os.read.lines(os.pwd / "2018" / "01" / "01.test.input.1.txt")
+  private lazy val lines2 = os.read.lines(os.pwd / "2018" / "01" / "01.test.input.2.txt")
+  private lazy val lines3 = os.read.lines(os.pwd / "2018" / "01" / "01.test.input.3.txt")
   lazy val results = Seq(lines1, lines2, lines3) map Solving.solve2
 // Testing.results // part 1: 2, 10, 5
 
 object Main:
-  lazy val lines = os.read.lines(os.pwd / "01.input.txt")
+  lazy val lines = os.read.lines(os.pwd / "2018" / "01" / "01.input.txt")
   lazy val result1 = Solving.solve1(lines)
   lazy val result2 = Solving.solve2(lines)
 // Main.result1 // part 1: 442

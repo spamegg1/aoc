@@ -111,14 +111,14 @@ object Solving:
     helper2(firstSeen.next)(firstSeen.banks)(1)
 
 object Testing:
-  private lazy val line = os.read.lines(os.pwd / "06.test.input.txt").head
+  private lazy val line = os.read.lines(os.pwd / "2017" / "06" / "06.test.input.txt").head
   lazy val result1 = Solving.solve1(line)
   lazy val result2 = Solving.solve2(line)
 // Testing.result1 // part 1: 5
 // Testing.result2 // part 2: 4
 
 object Main:
-  private lazy val line = os.read.lines(os.pwd / "06.input.txt").head
+  private lazy val line = os.read.lines(os.pwd / "2017" / "06" / "06.input.txt").head
   lazy val result1 = Solving.solve1(line)
   lazy val result2 = Solving.solve2(line)
 // Main.result1 // part 1: 12841

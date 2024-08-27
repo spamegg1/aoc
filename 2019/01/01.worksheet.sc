@@ -10,8 +10,8 @@ in the Advent calendar; the second puzzle is unlocked when you complete the
 first. Each puzzle grants one star. Good luck!
 
 The Elves quickly load you into a spacecraft and prepare to launch.
-At the first Go / No Go poll, every Elf is Go until the Fuel Counter-Upper. They
-haven't determined the amount of fuel required yet.
+At the first Go / No Go poll, every Elf is Go until the Fuel Counter-Upper. 
+They haven't determined the amount of fuel required yet.
 
 Fuel required to launch a given module is based on its mass. Specifically, to
 find the fuel required for a module, take its mass, divide by three, round down,
@@ -63,6 +63,7 @@ up at the end.)
  */
 object DataDefs:
   type Fuel = Long
+
   case class Mass(mass: Long):
     def fuel: Fuel = mass / 3 - 2 // part 1
 
@@ -84,19 +85,15 @@ object Solving:
   def solve2(lines: Seq[String]): Fuel = Parsing.parse(lines).map(_.moreFuel).sum
 
 object Testing:
-  lazy val lines =
-    """12
-      |14
-      |1969
-      |100756""".stripMargin.split("\n").toSeq
+  lazy val lines = os.read.lines(os.pwd / "2019" / "01" / "01.test.input.txt")
   lazy val result1 = Solving.solve1(lines)
   lazy val result2 = Solving.solve2(lines)
-Testing.result1 // part 1: 34241
-Testing.result2 // part 2: 51316
+// Testing.result1 // part 1: 34241
+// Testing.result2 // part 2: 51316
 
 object Main:
-  lazy val lines = os.read.lines(os.pwd / "01.input.txt")
+  lazy val lines = os.read.lines(os.pwd / "2019" / "01" / "01.input.txt")
   lazy val result1 = Solving.solve1(lines)
   lazy val result2 = Solving.solve2(lines)
-Main.result1 // part 1: 3448043
-Main.result2 // part 2: 5169198
+// Main.result1 // part 1: 3448043
+// Main.result2 // part 2: 5169198

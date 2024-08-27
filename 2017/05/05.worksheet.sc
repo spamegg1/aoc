@@ -74,15 +74,15 @@ object Solving:
     solve(lines)(rule)
 
 object Testing:
-  private lazy val lines = os.read.lines(os.pwd / "05.test.input.txt")
+  private lazy val lines = os.read.lines(os.pwd / "2017" / "05" / "05.test.input.txt")
   lazy val result1 = Solving.solve1(lines)
   lazy val result2 = Solving.solve2(lines)
 Testing.result1 // part 1: 5
 Testing.result2 // part 2: 10
 
 object Main:
-  private lazy val lines = os.read.lines(os.pwd / "05.input.txt")
+  private lazy val lines = os.read.lines(os.pwd / "2017" / "05" / "05.input.txt")
   lazy val result1 = Solving.solve1(lines)
   lazy val result2 = Solving.solve2(lines)
-Main.result1 // part 1: 342669
+// Main.result1 // part 1: 342669
 // Main.result2 // part 2: 25136209

@@ -85,15 +85,15 @@ object Solving:
   def solve2(lines: Seq[String]) = Parsing.parse(lines).count(_.supportsSSL)
 
 object Testing:
-  private lazy val lines = os.read.lines(os.pwd / "07.test.input.txt")
+  private lazy val lines = os.read.lines(os.pwd / "2016" / "07" / "07.test.input.txt")
   lazy val result1 = Solving.solve1(lines)
   lazy val result2 = Solving.solve2(lines)
-Testing.result1 // part 1: 2 out of the first 4
-Testing.result2 // part 2: 3 out of the second 4
+// Testing.result1 // part 1: 2 out of the first 4
+// Testing.result2 // part 2: 3 out of the second 4
 
 object Main:
-  private lazy val lines = os.read.lines(os.pwd / "07.input.txt")
+  private lazy val lines = os.read.lines(os.pwd / "2016" / "07" / "07.input.txt")
   lazy val result1 = Solving.solve1(lines)
   lazy val result2 = Solving.solve2(lines)
-Main.result1 // part 1: 118
-Main.result2 // part 2: 260
+// Main.result1 // part 1: 118
+// Main.result2 // part 2: 260

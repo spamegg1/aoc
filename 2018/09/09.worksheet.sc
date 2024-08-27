@@ -99,8 +99,7 @@ object Testing:
 // Testing.result1 // part 1:
 // Testing.result2 // part 2:
 
-object Main:
-  // 470 players; last marble is worth 72170 points
+object Main: // 470 players; last marble is worth 72170 points
   lazy val result1 = Solving.solve1(470)(72170)
   lazy val result2 = Solving.solve2(470)(72170)
 // Main.result1 // part 1:

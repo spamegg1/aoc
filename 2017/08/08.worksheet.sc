@@ -96,14 +96,14 @@ object Solving:
     maxSoFar
 
 object Testing:
-  lazy val lines = os.read.lines(os.pwd / "08.test.input.txt")
+  lazy val lines = os.read.lines(os.pwd / "2017" / "08" / "08.test.input.txt")
   lazy val result1 = Solving.solve1(lines)
   lazy val result2 = Solving.solve2(lines)
 // Testing.result1 // part 1: 1
 // Testing.result2 // part 2: 10
 
 object Main:
-  private lazy val lines = os.read.lines(os.pwd / "08.input.txt")
+  private lazy val lines = os.read.lines(os.pwd / "2017" / "08" / "08.input.txt")
   lazy val result1 = Solving.solve1(lines)
   lazy val result2 = Solving.solve2(lines)
 // Main.result1 // part 1: 5946

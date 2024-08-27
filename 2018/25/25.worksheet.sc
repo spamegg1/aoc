@@ -53,7 +53,8 @@ points in the list.
 Two points are in the same constellation if their manhattan distance
 apart is no more than 3 or if they can form a chain of points,
 each a manhattan distance no more than 3 from the last, between the two of them.
-(That is, if a point is close enough to a constellation, it "joins" that constellation.)
+(That is, if a point is close enough to a constellation, 
+it "joins" that constellation.)
 For example:
 
  0,0,0,0
@@ -73,7 +74,8 @@ In the above list, the first six points form a single constellation:
   point is close enough to connect them to the first constellation.
   So, in the above list, the number of constellations is 2.
   (If a point at 6,0,0,0 were present, it would connect 3,0,0,0
-  and 9,0,0,0, merging all of the points into a single giant constellation instead.)
+  and 9,0,0,0, merging all of the points into 
+  a single giant constellation instead.)
 
 In this example, the number of constellations is 4:
 
@@ -114,7 +116,8 @@ Finally, in this one, it's 8:
 1,2,2,0
 -1,-2,0,-2
 
-The portly man nervously strokes his white beard. It's time to get that hot chocolate.
+The portly man nervously strokes his white beard. 
+It's time to get that hot chocolate.
 
 How many constellations are formed by the fixed points in spacetime?
 
@@ -131,9 +134,9 @@ object Solving:
   def solve(lines: Seq[String]) = 0L
 
 object Testing:
-  private lazy val lines1 = os.read.lines(os.pwd / "25.test.input.txt")
-  private lazy val lines2 = os.read.lines(os.pwd / "25.test.input.2.txt")
-  private lazy val lines3 = os.read.lines(os.pwd / "25.test.input.3.txt")
+  private lazy val lines1 = os.read.lines(os.pwd / "2018" / "25" / "25.test.input.txt")
+  private lazy val lines2 = os.read.lines(os.pwd / "2018" / "25" / "25.test.input.2.txt")
+  private lazy val lines3 = os.read.lines(os.pwd / "2018" / "25" / "25.test.input.3.txt")
   lazy val result1 = Solving.solve(lines1)
   lazy val result2 = Solving.solve(lines2)
   lazy val result3 = Solving.solve(lines3)
@@ -142,6 +145,6 @@ object Testing:
 // Testing.result3 // part 1: 8
 
 object Main:
-  private lazy val lines = os.read.lines(os.pwd / "25.input.txt")
+  private lazy val lines = os.read.lines(os.pwd / "2018" / "25" / "25.input.txt")
   lazy val result = Solving.solve(lines)
 // Main.result // part 1: ???

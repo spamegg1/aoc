@@ -100,19 +100,19 @@ object Testing:
   lazy val result7 = Solving.solve(input7)(input7.size / 2)
   lazy val result8 = Solving.solve(input8)(input8.size / 2)
   lazy val result9 = Solving.solve(input9)(input9.size / 2)
-Testing.result1 // part 1: 3
-Testing.result2 // part 1: 4
-Testing.result3 // part 1: 0
-Testing.result4 // part 1: 9
-Testing.result5 // part 2: 6
-Testing.result6 // part 2: 0
-Testing.result7 // part 2: 4
-Testing.result8 // part 2: 12
-Testing.result9 // part 2: 4
+// Testing.result1 // part 1: 3
+// Testing.result2 // part 1: 4
+// Testing.result3 // part 1: 0
+// Testing.result4 // part 1: 9
+// Testing.result5 // part 2: 6
+// Testing.result6 // part 2: 0
+// Testing.result7 // part 2: 4
+// Testing.result8 // part 2: 12
+// Testing.result9 // part 2: 4
 
 object Main:
-  lazy val line = os.read.lines(os.pwd / "01.input.txt")(0)
+  lazy val line = os.read.lines(os.pwd / "2017" / "01" / "01.input.txt").head
   lazy val result1 = Solving.solve(line)(1)
   lazy val result2 = Solving.solve(line)(line.size / 2)
-Main.result1 // part 1: 1343
-Main.result2 // part 2: 1274
+// Main.result1 // part 1: 1343
+// Main.result2 // part 2: 1274

@@ -111,8 +111,13 @@ object Parsing:
       Some(Pos(2, 3, 8)),
       Some(Pos(2, 4, 9))
     )
-    val row4 =
-      Seq(None, Some(Pos(3, 1, "A")), Some(Pos(3, 2, "B")), Some(Pos(3, 3, "C")), None)
+    val row4 = Seq(
+      None, 
+      Some(Pos(3, 1, "A")), 
+      Some(Pos(3, 2, "B")), 
+      Some(Pos(3, 3, "C")), 
+      None
+    )
     val row5 = Seq(None, None, Some(Pos(4, 2, "D")), None, None)
     Keypad(Seq(row1, row2, row3, row4, row5))
 
@@ -153,29 +158,24 @@ object Solving:
 
 object Testing:
   import DataDefs.Keypad
-  private lazy val lines =
-    """ULL
-      |RRDDD
-      |LURDL
-      |UUUUD""".stripMargin.split("\n").toSeq
-  // given Keypad = Parsing.generateKeypad1(3) // part 1
+  private lazy val lines = os.read.lines(os.pwd / "2016" / "02" / "02.test.input.txt")
   object Part1:
-    given Keypad = Parsing.generateKeypad1(3) // part 2
+    given Keypad = Parsing.generateKeypad1(3) // part 1
     lazy val result = Solving.solve1(lines)
   object Part2:
     given Keypad = Parsing.generateKeypad2 // part 2
     lazy val result = Solving.solve2(lines)
-Testing.Part1.result // part 1: 1985
-Testing.Part2.result // part 2: 5DB3
+// Testing.Part1.result // part 1: 1985
+// Testing.Part2.result // part 2: 5DB3
 
 object Main:
   import DataDefs.Keypad
-  private lazy val lines = os.read.lines(os.pwd / "02.input.txt")
+  private lazy val lines = os.read.lines(os.pwd / "2016" / "02" / "02.input.txt")
   object Part1:
     given Keypad = Parsing.generateKeypad1(3) // part 2
     lazy val result = Solving.solve1(lines)
   object Part2:
     given Keypad = Parsing.generateKeypad2 // part 2
     lazy val result = Solving.solve2(lines)
-Main.Part1.result // part 1: 78985
-Main.Part2.result // part 2: 57DD8
+// Main.Part1.result // part 1: 78985
+// Main.Part2.result // part 2: 57DD8

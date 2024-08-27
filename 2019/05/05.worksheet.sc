@@ -264,20 +264,15 @@ object Solving:
     0
 
 object Testing:
-  private lazy val lines = os.read.lines(os.pwd / "05.test.input.txt").head
+  private lazy val lines = os.read.lines(os.pwd / "2019" / "05" / "05.test.input.txt").head
   lazy val result1 = Solving.solve1(lines)
   lazy val result2 = Solving.solve2(lines)
-Testing.result1 // part 1: 123456
+// Testing.result1 // part 1: 123456
 // Testing.result2 // part 2:
 
 object Main:
-  lazy val lines = os.read.lines(os.pwd / "05.input.txt").head
+  lazy val lines = os.read.lines(os.pwd / "2019" / "05" / "05.input.txt").head
   lazy val result1 = Solving.solve1(lines)
   lazy val result2 = Solving.solve2(lines)
-Main.result1 // part 1: 9654885
+// Main.result1 // part 1: 9654885
 // Main.result2 // part 2:
-
-// OldSav(225,1)
-// OldAdd(225,6,6)
-// NewAdd(Par(Immediate,1),Par(Immediate,238),225)
-// 104

@@ -99,14 +99,14 @@ object Solving:
       .min
 
 object Testing:
-  lazy val line = os.read.lines(os.pwd / "05.test.input.txt").head
+  lazy val line = os.read.lines(os.pwd / "2018" / "05" / "05.test.input.txt").head
   lazy val result1 = Solving.solve1(line)
   lazy val result2 = Solving.solve2(line)
-Testing.result1 // part 1: 10
-Testing.result2 // part 2: ???
+// Testing.result1 // part 1: 10
+// Testing.result2 // part 2: ???
 
 object Main:
-  lazy val line = os.read.lines(os.pwd / "05.input.txt").head
+  lazy val line = os.read.lines(os.pwd / "2018" / "05" / "05.input.txt").head
   lazy val result1 = Solving.solve1(line)
   lazy val result2 = Solving.solve2(line)
 // Main.result1 // part 1: 9348

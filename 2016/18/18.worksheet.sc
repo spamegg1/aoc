@@ -118,12 +118,12 @@ object Solving:
       .total
 
 object Testing:
-  private lazy val line = os.read.lines(os.pwd / "18.test.input.txt").head
+  private lazy val line = os.read.lines(os.pwd / "2016" / "18" / "18.test.input.txt").head
   lazy val result = Solving.solve(line)(10)
 // Testing.result // part 1: 38
 
 object Main:
-  private lazy val line = os.read.lines(os.pwd / "18.input.txt").head
+  private lazy val line = os.read.lines(os.pwd / "2016" / "18" / "18.input.txt").head
   lazy val result1 = Solving.solve(line)(40)
   lazy val result2 = Solving.solve(line)(400000)
 // Main.result1 // part 1: 1982

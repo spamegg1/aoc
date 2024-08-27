@@ -242,7 +242,7 @@ object Solving:
 
     while states.nonEmpty do
       val state0 = states.dequeue()
-      os.write.append(os.pwd / "22.log.txt", state0.toString())
+      os.write.append(os.pwd / "2015" / "22" / "22.log.txt", state0.toString())
       state0.turn match
         case Player =>
           val state1 = state0 // part 1

@@ -86,7 +86,10 @@ object Parsing:
     case s"L$i" => Left(i.toInt)
     case s"R$i" => Right(i.toInt)
 
-  def parseMoves(line: String): List[Move] = line.split(", ").map(parseMove(_)).toList
+  def parseMoves(line: String): List[Move] = line
+    .split(", ")
+    .map(parseMove(_))
+    .toList
 
 object Solving:
   import DataDefs.*
@@ -121,14 +124,14 @@ object Testing:
   lazy val result2 = Solving.solve1(input2)
   lazy val result3 = Solving.solve1(input3)
   lazy val result4 = Solving.solve2(input4)
-Testing.result1 // part 1: 5
-Testing.result2 // part 1: 2
-Testing.result3 // part 1: 12
-Testing.result4 // part 2: 4 (position is 4,0)
+// Testing.result1 // part 1: 5
+// Testing.result2 // part 1: 2
+// Testing.result3 // part 1: 12
+// Testing.result4 // part 2: 4 (position is 4,0)
 
 object Main:
-  lazy val line = os.read.lines(os.pwd / "01.input.txt")(0)
+  lazy val line = os.read.lines(os.pwd / "2016" / "01" / "01.input.txt").head
   lazy val result1 = Solving.solve1(line)
   lazy val result2 = Solving.solve2(line)
-Main.result1 // part 1: 298
-Main.result2 // part 2: 158 (position is -22, 136)
+// Main.result1 // part 1: 298
+// Main.result2 // part 2: 158 (position is -22, 136)

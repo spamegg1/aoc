@@ -102,17 +102,15 @@ object Solving:
   def solve1(lines: Seq[String]) = 0L
   def solve2(lines: Seq[String]) = 0L
 
-object Testing:
-  // depth 510 target 10, 10
-  private lazy val lines = os.read.lines(os.pwd / "22.test.input.txt")
+object Testing: // depth 510 target 10, 10
+  private lazy val lines = os.read.lines(os.pwd / "2018" / "22" / "22.test.input.txt")
   lazy val result1 = Solving.solve1(lines)
   lazy val result2 = Solving.solve2(lines)
 // Testing.result1 // part 1: 114
 // Testing.result2 // part 2: ???
 
-object Main:
-  // depth: 11817 target: 9, 751
-  private lazy val lines = os.read.lines(os.pwd / "22.input.txt")
+object Main: // depth: 11817 target: 9, 751
+  private lazy val lines = os.read.lines(os.pwd / "2018" / "22" / "22.input.txt")
   lazy val result1 = Solving.solve1(lines)
   lazy val result2 = Solving.solve2(lines)
 // Main.result1 // part 1: ???

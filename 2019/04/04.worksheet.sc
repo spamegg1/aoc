@@ -53,23 +53,21 @@ object Solving:
     (156218 to 652527).view
       .map(_.toString)
       .filter(str => (0 to 4).forall(index => str(index) <= str(index + 1)))
-      .filter(str =>
-        (0 to 4).exists(index =>
+      .filter: str =>
+        (0 to 4).exists: index =>
           str(index) == str(index + 1) && str.count(_ == str(index)) == 2
-        )
-      )
       .size
 
 object Testing:
-  private lazy val lines = os.read.lines(os.pwd / "04.test.input.txt")
+  private lazy val lines = os.read.lines(os.pwd / "2019" / "04" / "04.test.input.txt")
   lazy val result1 = Solving.solve1(lines)
   lazy val result2 = Solving.solve2(lines)
 // Testing.result1 // part 1:
 // Testing.result2 // part 2:
 
 object Main:
-  lazy val lines = os.read.lines(os.pwd / "04.input.txt")
+  lazy val lines = os.read.lines(os.pwd / "2019" / "04" / "04.input.txt")
   lazy val result1 = Solving.solve1(lines)
   lazy val result2 = Solving.solve2(lines)
-Main.result1 // part 1: 1694
-Main.result2 // part 2: 1148
+// Main.result1 // part 1: 1694
+// Main.result2 // part 2: 1148

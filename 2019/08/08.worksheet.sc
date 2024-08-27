@@ -117,6 +117,7 @@ object Parsing:
 
 object Solving:
   import DataDefs.*
+
   def solve1(line: String)(using d: Dim) = Parsing
     .parse(line)
     .layers
@@ -128,21 +129,20 @@ object Solving:
 object Testing:
   import DataDefs.*
   given d: Dim = Dim(2, 2)
-  private lazy val lines = os.read.lines(os.pwd / "08.test.input.txt").head
-  lazy val result1 = Solving.solve1(lines)
-  lazy val result2 = Solving.solve2(lines)
-  val x = "2220".seeThru
-Testing.result1 // part 1: 4
-Testing.result2 // part 2: 0110
+  private lazy val line = os.read.lines(os.pwd / "2019" / "08" / "08.test.input.txt").head
+  lazy val result1 = Solving.solve1(line)
+  lazy val result2 = Solving.solve2(line)
+// Testing.result1 // part 1: 4
+// Testing.result2 // part 2: 0110
 
 object Main:
   import DataDefs.*
   given d: Dim = Dim(25, 6)
-  lazy val line = os.read.lines(os.pwd / "08.input.txt").head
+  lazy val line = os.read.lines(os.pwd / "2019" / "08" / "08.input.txt").head
   lazy val result1 = Solving.solve1(line)
   lazy val result2 = Solving.solve2(line)
-Main.result1 // part 1: 2318
-Main.result2 // part 2: AHFCB
+// Main.result1 // part 1: 2318
+// Main.result2 // part 2: AHFCB
 
 // ./\..|..|.|___..__..|_\..
 // |..|.|..|.|....|..|.|..|.

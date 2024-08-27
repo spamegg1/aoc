@@ -201,13 +201,13 @@ object Solving:
     noun * 100 + verb
 
 object Testing:
-  lazy val line = os.read.lines(os.pwd / "02.test.input.txt").head
+  lazy val line = os.read.lines(os.pwd / "2019" / "02" / "02.test.input.txt").head
   lazy val result1 = Solving.solve1(line)
-Testing.result1 // part 1: 3500
+// Testing.result1 // part 1: 3500
 
 object Main:
-  private lazy val line = os.read.lines(os.pwd / "02.input.txt").head
+  private lazy val line = os.read.lines(os.pwd / "2019" / "02" / "02.input.txt").head
   lazy val result1 = Solving.solve1(line)
   lazy val result2 = Solving.solve2(line)
-Main.result1 // part 1: 3562672
-Main.result2 // part 2: 8250
+// Main.result1 // part 1: 3562672
+// Main.result2 // part 2: 8250

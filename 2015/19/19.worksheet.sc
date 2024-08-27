@@ -114,16 +114,16 @@ object Solving:
     steps
 
 object Testing:
-  private lazy val lines = os.read.lines(os.pwd / "19.test.input.txt")
+  private lazy val lines = os.read.lines(os.pwd / "2015" / "19" / "19.test.input.txt")
   lazy val result1 = Solving.solve1(lines)("HOHOHO")
   lazy val result2 = Solving.solve2(lines)("HOHOHO")
-Testing.result1 // part 1: 7
-Testing.result2 // part 2: 6
+// Testing.result1 // part 1: 7
+// Testing.result2 // part 2: 6
 
 object Main:
-  private lazy val lines = os.read.lines(os.pwd / "19.input.txt")
-  private lazy val line = os.read.lines(os.pwd / "19.input.2.txt").head
+  private lazy val lines = os.read.lines(os.pwd / "2015" / "19" / "19.input.txt")
+  private lazy val line = os.read.lines(os.pwd / "2015" / "19" / "19.input.2.txt").head
   lazy val result1 = Solving.solve1(lines)(line)
   lazy val result2 = Solving.solve2(lines)(line)
-Main.result1 // part 1: 535
+// Main.result1 // part 1: 535
 // Main.result2 // part 2:

@@ -147,15 +147,13 @@ object Solving:
     while state.instrs.nonEmpty do state = state.processInstr
     state.outs.values.filter(_.id.id <= 2).map(_.chips.head).product
 
-object Testing:
-  // there are 3 bots, 3 outputs in test
-  private lazy val lines = os.read.lines(os.pwd / "10.test.input.txt")
+object Testing: // there are 3 bots, 3 outputs in test
+  private lazy val lines = os.read.lines(os.pwd / "2016" / "10" / "10.test.input.txt")
   lazy val result1 = Solving.solve1(lines)(3, 3)(2, 5) // 2
   lazy val result2 = Solving.solve2(lines)(3, 3) // 5*2*3 = 30
 
-object Main:
-  // there are 210 bots, 21 outputs in main
-  private lazy val lines = os.read.lines(os.pwd / "10.input.txt")
+object Main: // there are 210 bots, 21 outputs in main
+  private lazy val lines = os.read.lines(os.pwd / "2016" / "10" / "10.input.txt")
   lazy val result1 = Solving.solve1(lines)(210, 21)(17, 61) // 157
   lazy val result2 = Solving.solve2(lines)(210, 21) // 1085
 

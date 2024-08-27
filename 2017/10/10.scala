@@ -134,7 +134,9 @@ Treating your puzzle input as a string of ASCII characters,
 what is the Knot Hash of your puzzle input?
 Ignore any leading or trailing whitespace you might encounter.
  */
-object DataDefs2:
+package `2017`.day10
+
+object DataDefs:
   case class State(list: Map[Int, Int], size: Int, cur: Int, skip: Int, lens: List[Int]):
     lazy val isFinished = lens.isEmpty
 
@@ -164,14 +166,14 @@ object DataDefs2:
     def apply(lens: List[Int], size: Int) =
       new State((0 until size).map(i => i -> i).toMap, size, 0, 0, lens)
 
-object Parsing2:
-  import DataDefs2.*
+object Parsing:
+  import DataDefs.*
   private lazy val salt = List(17, 31, 73, 47, 23)
   def parse(line: String) = line.split(",").map(_.toInt).toList // part 1
   def parseASCII(line: String) = line.map(_.toByte.toInt).toList ::: salt // part 2
 
-object Solving2:
-  import DataDefs2.*
+object Solving:
+  import DataDefs.*
 
   def bulkXOR(bytes: Seq[Int]) = bytes.foldLeft(0)(_ ^ _)
 
@@ -188,34 +190,33 @@ object Solving2:
     (0 until rounds - 1).foldLeft(list)((l, _) => l ::: list)
 
   def solve1(line: String)(size: Int) =
-    var state = State(Parsing2.parse(line), size)
+    var state = State(Parsing.parse(line), size)
     while !state.isFinished do state = state.next
     state.list(0) * state.list(1)
 
   def solve2(line: String)(size: Int)(rounds: Int) =
-    val lens = repeatList(Parsing2.parseASCII(line))(rounds)
+    val lens = repeatList(Parsing.parseASCII(line))(rounds)
     var state = State(lens, size)
     while !state.isFinished do state = state.next
     convertBytesToHex(denseHash(state.sparseHash))
 
-object Testing2:
-  private lazy val line = os.read.lines(os.pwd / "10.test.input.txt").head
-  lazy val state0 = DataDefs2.State(Parsing2.parse(line), 5)
+object Testing:
+  private lazy val line = os.read.lines(os.pwd / "2017" / "10" / "10.test.input.txt").head
+  lazy val state0 = DataDefs.State(Parsing.parse(line), 5)
   lazy val state1 = state0.next // 2 1 0 [3] 4
   lazy val state2 = state1.next // 4 3 0 [1] 2
   lazy val state3 = state2.next // 4 3 0 [1] 2
   lazy val state4 = state3.next // 3 4 2 1 [0]
-  lazy val result1 = Solving2.solve1(line)(5)
-  lazy val result21 = Solving2.solve2("1,2,3")(256)(64)
-  lazy val result22 = Solving2.solve2("1,2,4")(256)(64)
+  lazy val result1 = Solving.solve1(line)(5)
+  lazy val result21 = Solving.solve2("1,2,3")(256)(64)
+  lazy val result22 = Solving.solve2("1,2,4")(256)(64)
+// Testing.result1 // part 1: 12
+// Testing.result21 // part 2: 3efbe78a8d82f29979031a4aa0b16a9d
+// Testing.result22 // part 2: 63960835bcdc130f0b66d7ff4f6a5a8e
 
-object Main2:
-  private lazy val line = os.read.lines(os.pwd / "10.input.txt").head
-  lazy val result1 = Solving2.solve1(line)(256)
-  lazy val result2 = Solving2.solve2(line)(256)(64)
-
-// Testing2.result1 // part 1: 12
-// Testing2.result21 // part 2: 3efbe78a8d82f29979031a4aa0b16a9d
-// Testing2.result22 // part 2: 63960835bcdc130f0b66d7ff4f6a5a8e
-// Main2.result1 // part 1: 62238
-// Main2.result2 // part 2: 2b0c9cc0449507a0db3babd57ad9e8d8
+object Main:
+  private lazy val line = os.read.lines(os.pwd / "2017" / "10" / "10.input.txt").head
+  lazy val result1 = Solving.solve1(line)(256)
+  lazy val result2 = Solving.solve2(line)(256)(64)
+// Main.result1 // part 1: 62238
+// Main.result2 // part 2: 2b0c9cc0449507a0db3babd57ad9e8d8

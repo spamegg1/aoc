@@ -121,7 +121,7 @@ object Solving:
     state.outs
 
 object Main:
-  private lazy val lines = os.read.lines(os.pwd / "25.input.txt")
+  private lazy val lines = os.read.lines(os.pwd / "2016" / "25" / "25.input.txt")
   lazy val result = Solving.solve(lines)
 // Main.result // part 1: 158
 // Reverse engineering the code shows that it takes the initial value "a'

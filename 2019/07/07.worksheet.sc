@@ -87,9 +87,9 @@ object Solving:
   def solve2(line: String) = 0L
 
 object Testing:
-  private lazy val line1 = os.read.lines(os.pwd / "07.test.input.1.txt").head
-  private lazy val line2 = os.read.lines(os.pwd / "07.test.input.2.txt").head
-  private lazy val line3 = os.read.lines(os.pwd / "07.test.input.3.txt").head
+  private lazy val line1 = os.read.lines(os.pwd / "2019" / "07" / "07.test.1.txt").head
+  private lazy val line2 = os.read.lines(os.pwd / "2019" / "07" / "07.test.2.txt").head
+  private lazy val line3 = os.read.lines(os.pwd / "2019" / "07" / "07.test.3.txt").head
   lazy val result11 = Solving.solve1(line1)
   lazy val result12 = Solving.solve1(line2)
   lazy val result13 = Solving.solve1(line3)
@@ -100,7 +100,7 @@ object Testing:
 // Testing.result2 // part 2:
 
 object Main:
-  lazy val line = os.read.lines(os.pwd / "07.input.txt").head
+  lazy val line = os.read.lines(os.pwd / "2019" / "07" / "07.input.txt").head
   lazy val result1 = Solving.solve1(line)
   lazy val result2 = Solving.solve2(line)
 // Main.result1 // part 1:

@@ -146,15 +146,15 @@ object Solving:
     .foldLeft(pass)((scramble, op) => scramble.operate(op))
 
 object Testing:
-  private lazy val lines = os.read.lines(os.pwd / "21.test.input.txt")
+  private lazy val lines = os.read.lines(os.pwd / "2016" / "21" / "21.test.input.txt")
   // abcde,ebcda,edcba,abcde,bcdea,bdeac,abdec,ecabd,decab
   lazy val result1 = Solving.solve1(lines)("abcde")
   lazy val result2 = Solving.solve2(lines)("decab")
 // Testing.result1 // part 1: decab
-Testing.result2 // part 2: abcde
+// Testing.result2 // part 2: abcde
 
 object Main:
-  private lazy val lines = os.read.lines(os.pwd / "21.input.txt")
+  private lazy val lines = os.read.lines(os.pwd / "2016" / "21" / "21.input.txt")
   lazy val result1 = Solving.solve1(lines)("abcdefgh")
   lazy val result2 = Solving.solve2(lines)("fbgdceah")
 // Main.result1 // part 1: gcedfahb

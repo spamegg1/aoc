@@ -1,7 +1,8 @@
 /*
 --- Day 21: Chronal Conversion ---
 You should have been watching where you were going,
-because as you wander the new North Pole base, you trip and fall into a very deep hole!
+because as you wander the new North Pole base, 
+you trip and fall into a very deep hole!
 Just kidding. You're falling through time again.
 
 If you keep up your current pace, you should have resolved all of the
@@ -22,9 +23,11 @@ for the time travel module. Currently, it appears to run forever without halting
 
 If you can cause the activation system to halt at a specific moment,
 maybe you can make the device send you so far back in time that
-you cause an integer underflow in time itself and wrap around back to your current time!
+you cause an integer underflow in time itself and 
+wrap around back to your current time!
 
-The device executes the program as specified in manual section one and manual section two.
+The device executes the program as specified in manual 
+section one and manual section two.
 
 Your goal is to figure out how the program works and cause it to halt.
 You can only control register 0; every other register begins at 0 as usual.
@@ -41,7 +44,8 @@ introduce a bug while trying to emulate this system with a scripting language.)
 
 What is the lowest non-negative integer value for register 0 that causes
 the program to halt after executing the fewest instructions?
-(Executing the same instruction multiple times counts as multiple instructions executed.)
+(Executing the same instruction multiple times 
+counts as multiple instructions executed.)
 
  */
 object DataDefs:
@@ -58,14 +62,14 @@ object Solving:
   def solve2(lines: Seq[String]) = 0L
 
 object Testing:
-  private lazy val lines = os.read.lines(os.pwd / "21.test.input.txt")
+  private lazy val lines = os.read.lines(os.pwd / "2018" / "21" / "21.test.input.txt")
   lazy val result1 = Solving.solve1(lines)
   lazy val result2 = Solving.solve2(lines)
 // Testing.result1 // part 1: ???
 // Testing.result2 // part 2: ???
 
 object Main:
-  private lazy val lines = os.read.lines(os.pwd / "21.input.txt")
+  private lazy val lines = os.read.lines(os.pwd / "2018" / "21" / "21.input.txt")
   lazy val result1 = Solving.solve1(lines)
   lazy val result2 = Solving.solve2(lines)
 // Main.result1 // part 1: ???

@@ -84,16 +84,7 @@ sure enough, a lone star sits at the bottom, awaiting its friends.
 Looks like you need to provide 49 yourself.
 
  */
-object DataDefs:
-  ???
-
-object Parsing:
-  import DataDefs.*
-  ???
-
 object Solving:
-  import DataDefs.*
-
   def bij(row: Long, col: Long): Long =
     val diagonal = row + col - 1
     val endOfDiagonal = diagonal * (diagonal + 1) / 2 // value at (1, diagonal)

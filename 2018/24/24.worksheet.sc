@@ -23,7 +23,8 @@ and sometimes weaknesses or immunities. Here is an example group:
 Each group also has an effective power: the number of units in
 that group multiplied by their attack damage.
 The above group has an effective power of 18 * 8 = 144.
-Groups never have zero or negative units; instead, the group is removed from combat.
+Groups never have zero or negative units; 
+instead, the group is removed from combat.
 
 Each fight consists of two phases: target selection and attacking.
 
@@ -45,7 +46,8 @@ Defending groups can only be chosen as a target by one attacking group.
 At the end of the target selection phase, each group has selected zero
 or one groups to attack, and each group is being attacked by zero or one groups.
 
-During the attacking phase, each group deals damage to the target it selected, if any.
+During the attacking phase, each group deals 
+damage to the target it selected, if any.
 Groups attack in decreasing order of initiative, regardless of whether they are
 part of the infection or the immune system.
 (If a group contains no units, it cannot attack.)
@@ -62,7 +64,8 @@ The defending group only loses whole units from damage; damage is always dealt
 in such a way that it kills the most units possible, and any remaining damage
 to a unit that does not immediately kill it is ignored.
 For example, if a defending group contains 10 units with 10 hit points each
-and receives 75 damage, it loses exactly 7 units and is left with 3 units at full health.
+and receives 75 damage, it loses exactly 
+7 units and is left with 3 units at full health.
 
 After the fight is over, if both armies still contain units, a new fight begins;
 combat only ends once one army has lost all of its units.
@@ -82,7 +85,8 @@ Infection:
  cold) with an attack that does 12 slashing damage at initiative 4
 
 If these armies were to enter combat, the following fights,
-including details during the target selection and attacking phases, would take place:
+including details during the target selection 
+and attacking phases, would take place:
 
 Immune System:
 Group 1 contains 17 units
@@ -202,8 +206,9 @@ Group 2 contains 4434 units
 
 In the example above, the winning army ends up with 782 + 4434 = 5216 units.
 
-You scan the reindeer's condition (your puzzle input); the white-bearded
-man looks nervous. As it stands now, how many units would the winning army have?
+You scan the reindeer's condition (your puzzle input); 
+the white-bearded man looks nervous. 
+As it stands now, how many units would the winning army have?
 
  */
 object DataDefs:
@@ -219,14 +224,14 @@ object Solving:
   def solve2(lines: Seq[String]) = 0L
 
 object Testing:
-  private lazy val lines = os.read.lines(os.pwd / "24.test.input.txt")
+  private lazy val lines = os.read.lines(os.pwd / "2018" / "24" / "24.test.input.txt")
   lazy val result1 = Solving.solve1(lines)
   lazy val result2 = Solving.solve2(lines)
 // Testing.result1 // part 1: 5216
 // Testing.result2 // part 2: ???
 
 object Main:
-  private lazy val lines = os.read.lines(os.pwd / "24.input.txt")
+  private lazy val lines = os.read.lines(os.pwd / "2018" / "24" / "24.input.txt")
   lazy val result1 = Solving.solve1(lines)
   lazy val result2 = Solving.solve2(lines)
 // Main.result1 // part 1: ???
