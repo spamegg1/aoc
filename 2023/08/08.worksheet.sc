@@ -100,10 +100,17 @@ object DataDefs:
   enum Move: // edge labels
     case Left, Right
   import Move.*
+
+  extension (char: Char)
+    def toMove: Move = char match
+      case 'L' => Left
+      case 'R' => Right      
+
   type Node = String // node labels
-  case class Bond(label: Node, left: Node, right: Node)
   type Wasteland = Graph[Node, LDiEdge[Node, Move]]
 
+  case class Bond(label: Node, left: Node, right: Node)
+  
   // for infix sugar n1 ~> n2 +: l ; ~> is given by DiEdgeImplicits.
   extension (e: DiEdge[Node])
     def +:(move: Move) = new LDiEdge[Node, Move]:
@@ -113,10 +120,6 @@ object DataDefs:
 
 object Parsing:
   import DataDefs.*, Move.*
-  extension (char: Char)
-    def toMove = char match
-      case 'L' => Left
-      case 'R' => Right
 
   def parseMoves(line: String): List[Move] = line.map(_.toMove).toList
 
@@ -132,15 +135,15 @@ object Parsing:
 
 object Wasteland:
   import DataDefs.*, Move.*
+
   def populate(bonds: Seq[Bond]): Wasteland =
     val wasteland: Wasteland = Graph.empty
-    bonds.foreach(bond =>
+    bonds.foreach: bond =>
       wasteland += bond.label
       wasteland += bond.left
       wasteland += bond.right
       wasteland += bond.label ~> bond.left +: Left
       wasteland += bond.label ~> bond.right +: Right
-    )
     wasteland
 
   def go(node: Node)(move: Move)(using wasteland: Wasteland): Node =
@@ -187,19 +190,19 @@ object Testing:
 // Wasteland.runMoves(Testing.moves1)("AAA")
 // given DataDefs.Wasteland = Testing.wasteland2
 // Wasteland.runMoves(Testing.moves2)("AAA")
-Testing.wasteland1
-Testing.testResult1 // part 1: ???
-Testing.testResult2 // part 2: ???
+// Testing.wasteland1
+// Testing.testResult1 // part 1: ???
+// Testing.testResult2 // part 2: ???
 
 object Main:
-  val lines: Seq[String] = os.read.lines(os.pwd / "08.input.txt")
+  private lazy val lines: Seq[String] = os.read.lines(os.pwd / "08.input.txt")
   lazy val (moves, bonds) = Parsing.parseInput(lines)
   lazy val wasteland = Wasteland.populate(bonds)
-  val result1 = 0
-  val result2 = 0
+  lazy val result1 = 0
+  lazy val result2 = 0
 // Main.wasteland.nodes
-Main.result1 // part 1: 11309
-Main.result2 // part 2: 13740108158591
+// Main.result1 // part 1: 11309
+// Main.result2 // part 2: 13740108158591
 
 // (TVA,20777,20777)
 // (VBA,16043,16043)

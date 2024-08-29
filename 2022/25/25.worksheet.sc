@@ -219,11 +219,11 @@ object Solving:
     .toSnafu
 
 object Testing:
-  private lazy val lines = os.read.lines(os.pwd / "25.test.input.txt")
+  private lazy val lines = os.read.lines(os.pwd / "2022" / "25" / "25.test.input.txt")
   lazy val result1 = Solving.solve1(lines)
-Testing.result1 // part 1: 4890, 2=-1=0
+// Testing.result1 // part 1: 4890, 2=-1=0
 
 object Main:
-  private lazy val lines = os.read.lines(os.pwd / "25.input.txt")
+  private lazy val lines = os.read.lines(os.pwd / "2022" / "25" / "25.input.txt")
   lazy val result1 = Solving.solve1(lines)
-Main.result1 // part 1: 32005641587247, 2=20---01==222=0=0-2
+// Main.result1 // part 1: 32005641587247, 2=20---01==222=0=0-2

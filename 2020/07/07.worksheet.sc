@@ -120,15 +120,15 @@ object Solving:
     "shiny gold".totalBags - 1
 
 object Testing:
-  private lazy val lines1 = os.read.lines(os.pwd / "07.test.input.txt")
-  private lazy val lines2 = os.read.lines(os.pwd / "07.test.input.2.txt")
+  private lazy val lines1 = os.read.lines(os.pwd / "2020" / "07" / "07.test.input.txt")
+  private lazy val lines2 = os.read.lines(os.pwd / "2020" / "07" / "07.test.input.2.txt")
   lazy val result1 = Solving.solve1(lines1)
   lazy val result2 = Solving.solve2(lines2)
 // Testing.result1 // part 1: 4
-Testing.result2 // part 2: 126
+// Testing.result2 // part 2: 126
 
 object Main:
-  private lazy val lines = os.read.lines(os.pwd / "07.input.txt")
+  private lazy val lines = os.read.lines(os.pwd / "2020" / "07" / "07.input.txt")
   lazy val result1 = Solving.solve1(lines)
   lazy val result2 = Solving.solve2(lines)
 // Main.result1 // part 1: 268

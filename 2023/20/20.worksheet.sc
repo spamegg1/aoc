@@ -187,16 +187,16 @@ object Solving:
   ???
 
 object Testing:
-  private val lines1 = os.read.lines(os.pwd / "20.test.input.txt")
-  private val lines2 = os.read.lines(os.pwd / "20.test.input.2.txt")
+  private lazy val lines1 = os.read.lines(os.pwd / "2023" / "20" / "20.test.input.txt")
+  private lazy val lines2 = os.read.lines(os.pwd / "2023" / "20" / "20.test.input.2.txt")
   lazy val result1 = 0
   lazy val result2 = 0
-Testing.result1 // part 1: 32000000
-Testing.result2 // part 2: 11687500
+// Testing.result1 // part 1: 32000000
+// Testing.result2 // part 2: 11687500
 
 object Main:
-  private val lines = os.read.lines(os.pwd / "20.input.txt")
+  private lazy val lines = os.read.lines(os.pwd / "2023" / "20" / "20.input.txt")
   lazy val result1 = 0
   lazy val result2 = 0
-Main.result1 // part 1: 839775244
-Main.result2 // part 2: 207787533680413
+// Main.result1 // part 1: 839775244
+// Main.result2 // part 2: 207787533680413

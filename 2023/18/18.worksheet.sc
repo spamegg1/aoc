@@ -167,15 +167,15 @@ object Solving:
   def solve2 = solve(_.map(Parsing.parseDig2(_)))
 
 object Testing:
-  private lazy val lines = os.read.lines(os.pwd / "18.test.input.txt").toList
-  lazy val result1 = Solving.solve1(lines)
-  lazy val result2 = Solving.solve2(lines)
-Testing.result1 // part 1: 62
-Testing.result2 // part 2: 952408144115
+  private lazy val lines = os.read.lines(os.pwd / "2023" / "18" / "18.test.input.txt")
+  lazy val result1 = Solving.solve1(lines.toList)
+  lazy val result2 = Solving.solve2(lines.toList)
+// Testing.result1 // part 1: 62
+// Testing.result2 // part 2: 952408144115
 
 object Main:
-  private lazy val lines = os.read.lines(os.pwd / "18.input.txt").toList
-  lazy val result1 = Solving.solve1(lines)
-  lazy val result2 = Solving.solve2(lines)
-Main.result1 // part 1: 36807
-Main.result2 // part 2: 48797603984357
+  private lazy val lines = os.read.lines(os.pwd / "2023" / "18" / "18.input.txt")
+  lazy val result1 = Solving.solve1(lines.toList)
+  lazy val result2 = Solving.solve2(lines.toList)
+// Main.result1 // part 1: 36807
+// Main.result2 // part 2: 48797603984357

@@ -435,17 +435,17 @@ object Solving:
   def solve2(lines: String) = solve(lines)(1000)(using 1L)
 
 object Testing:
-  private lazy val lines = os.read(os.pwd / "11.test.input.txt")
+  private lazy val lines = os.read(os.pwd / "2022" / "11" / "11.test.input.txt")
   lazy val result1 = Solving.solve1(lines)
   lazy val result2 = Solving.solve2(lines)
-Testing.result1 // part 1: 10605
-Testing.result2 // part 2: 2713310158
+// Testing.result1 // part 1: 10605
+// Testing.result2 // part 2: 2713310158
 
 object Main:
-  private lazy val lines = os.read(os.pwd / "11.input.txt")
+  private lazy val lines = os.read(os.pwd / "2022" / "11" / "11.input.txt")
   lazy val result1 = Solving.solve1(lines)
   lazy val result2 = Solving.solve2(lines)
-Main.result1 // part 1: 58786
+// Main.result1 // part 1: 58786
 // Main.result2 // part 2:
 // == After round 1000 ==
 // Monkey 0 inspected items 5204 times.

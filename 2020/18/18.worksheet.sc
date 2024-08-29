@@ -148,15 +148,14 @@ object Solving:
   val solve2 = solve(many2(0L)(Nil))
 
 object Testing:
-  lazy val lines = os.read.lines(os.pwd / "18.test.input.txt")
+  private lazy val lines = os.read.lines(os.pwd / "2020" / "18" / "18.test.input.txt")
   lazy val result1 = Solving.solve1(lines)
   lazy val result2 = Solving.solve2(lines)
 // Testing.result1 // part 1: 71,51,26,437,12240,13632 = 26457
 // Testing.result2 // part 2: 231,51,46,1445,669060,23340 = 694173
-// Parsing.parse(Testing.lines)
 
 object Main:
-  private lazy val lines = os.read.lines(os.pwd / "18.input.txt")
+  private lazy val lines = os.read.lines(os.pwd / "2020" / "18" / "18.input.txt")
   lazy val result1 = Solving.solve1(lines)
   lazy val result2 = Solving.solve2(lines)
 // Main.result1 // part 1: 45840336521334

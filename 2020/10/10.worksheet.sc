@@ -229,14 +229,14 @@ object Solving:
     paths(jolts.head, 0)
 
 object Testing:
-  private lazy val lines = os.read.lines(os.pwd / "10.test.sorted.txt")
+  private lazy val lines = os.read.lines(os.pwd / "2020" / "10" / "10.test.sorted.txt")
   lazy val result1 = Solving.solve1(lines)
   lazy val result2 = Solving.solve2(lines)
 // Testing.result1 // part 1: 220
 // Testing.result2 // part 2: 19208
 
 object Main:
-  private lazy val lines = os.read.lines(os.pwd / "10.sorted.txt")
+  private lazy val lines = os.read.lines(os.pwd / "2020" / "10" / "10.sorted.txt")
   lazy val result1 = Solving.solve1(lines)
   lazy val result2 = Solving.solve2(lines)
 // Main.result1 // part 1: 1876

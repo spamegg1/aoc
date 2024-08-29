@@ -244,15 +244,15 @@ object Solving:
     points2.drop(points2.length / 2).head
 
 object Testing:
-  private lazy val lines = os.read.lines(os.pwd / "10.test.input.txt")
+  private lazy val lines = os.read.lines(os.pwd / "2021" / "10" / "10.test.input.txt")
   lazy val result1 = Solving.solve1(lines)
   lazy val result2 = Solving.solve2(lines)
-Testing.result1 // part 1: 26397
-Testing.result2 // part 2: 288957
+// Testing.result1 // part 1: 26397
+// Testing.result2 // part 2: 288957
 
 object Main:
-  private lazy val lines = os.read.lines(os.pwd / "10.input.txt")
+  private lazy val lines = os.read.lines(os.pwd / "2021" / "10" / "10.input.txt")
   lazy val result1 = Solving.solve1(lines)
   lazy val result2 = Solving.solve2(lines)
-Main.result1 // part 1: 367059
-Main.result2 // part 2: 1952146692
+// Main.result1 // part 1: 367059
+// Main.result2 // part 2: 1952146692

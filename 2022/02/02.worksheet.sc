@@ -126,15 +126,15 @@ object Solving:
     .sum
 
 object Testing:
-  private lazy val lines = os.read.lines(os.pwd / "02.test.input.txt")
+  private lazy val lines = os.read.lines(os.pwd / "2022" / "02" / "02.test.input.txt")
   lazy val result1 = Solving.solve(lines)(Parsing.parseRound1)
   lazy val result2 = Solving.solve(lines)(Parsing.parseRound2)
-Testing.result1 // part 1: 15
-Testing.result2 // part 2: 12
+// Testing.result1 // part 1: 15
+// Testing.result2 // part 2: 12
 
 object Main:
-  private lazy val lines = os.read.lines(os.pwd / "02.input.txt")
+  private lazy val lines = os.read.lines(os.pwd / "2022" / "02" / "02.input.txt")
   lazy val result1 = Solving.solve(lines)(Parsing.parseRound1)
   lazy val result2 = Solving.solve(lines)(Parsing.parseRound2)
-Main.result1 // part 1: 10816
-Main.result2 // part 2: 11657
+// Main.result1 // part 1: 10816
+// Main.result2 // part 2: 11657

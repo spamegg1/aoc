@@ -204,15 +204,15 @@ object Solving:
 
 object Testing:
   import DataDefs.*
-  private lazy val file = os.read(os.pwd / "14.test.input.txt")
-  lazy val testResult1 = Solving.solve1(file)
-  lazy val testResult2 = Solving.solve2(file)
-Testing.testResult1 // part 1: 136
-Testing.testResult2 // part 2: 64
+  private lazy val lines = os.read(os.pwd / "2023" / "14" / "14.test.input.txt")
+  lazy val result1 = Solving.solve1(lines)
+  lazy val result2 = Solving.solve2(lines)
+// Testing.result1 // part 1: 136
+// Testing.result2 // part 2: 64
 
 object Main:
-  private lazy val file = os.read(os.pwd / "14.input.txt")
-  lazy val result1 = Solving.solve1(file)
-  lazy val result2 = Solving.solve2(file)
-Main.result1 // part 1: 110779
-Main.result2 // part 2: 86069
+  private lazy val lines = os.read(os.pwd / "2023" / "14" / "14.input.txt")
+  lazy val result1 = Solving.solve1(lines)
+  lazy val result2 = Solving.solve2(lines)
+// Main.result1 // part 1: 110779
+// Main.result2 // part 2: 86069

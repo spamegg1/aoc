@@ -104,14 +104,14 @@ object Solving:
     seq.min + seq.max // 0 if this block size did not work.
 
 object Testing:
-  private lazy val lines = os.read.lines(os.pwd / "09.test.input.txt")
+  private lazy val lines = os.read.lines(os.pwd / "2020" / "09" / "09.test.input.txt")
   lazy val result1 = Solving.solve1(lines)(5)
   lazy val result2 = Solving.solve2(lines)(5)(4) // tried: 3,4
 // Testing.result1 // part 1: 127,14
 // Testing.result2 // part 2: 15,25,47,40 => 62
 
 object Main:
-  private lazy val lines = os.read.lines(os.pwd / "09.input.txt")
+  private lazy val lines = os.read.lines(os.pwd / "2020" / "09" / "09.input.txt")
   lazy val result1 = Solving.solve1(lines)(25)
   lazy val result2 = Solving.solve2(lines)(25)(17) // tried: 3,4,5,...,15,16,17
 // Main.result1 // part 1: 530627549,610

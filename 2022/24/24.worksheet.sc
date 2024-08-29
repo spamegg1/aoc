@@ -89,7 +89,8 @@ right is replaced with a new one on the left facing the same direction:
 #.....#
 #####.#
 
-This process repeats at least as long as you are observing it, but probably forever.
+This process repeats at least as long as 
+you are observing it, but probably forever.
 
 Here is a more complex example:
 
@@ -278,14 +279,14 @@ object Solving:
   def solve2(lines: Seq[String]) = 0L
 
 object Testing:
-  private lazy val lines = os.read.lines(os.pwd / "18.test.input.txt")
+  private lazy val lines = os.read.lines(os.pwd / "2022" / "24" / "24.test.input.txt")
   lazy val result1 = Solving.solve1(lines)
   lazy val result2 = Solving.solve2(lines)
 // Testing.result1 // part 1: 18
 // Testing.result2 // part 2:
 
 object Main:
-  private lazy val lines = os.read.lines(os.pwd / "18.input.txt")
+  private lazy val lines = os.read.lines(os.pwd / "2022" / "24" / "24.input.txt")
   lazy val result1 = Solving.solve1(lines)
   lazy val result2 = Solving.solve2(lines)
 // Main.result1 // part 1:

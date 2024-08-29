@@ -2,14 +2,13 @@
 --- Day 23: Unstable Diffusion ---
 You enter a large crater of gray dirt where the grove is supposed to be.
 All around you, plants you imagine were expected to be full of fruit are
-instead withered and broken. A large group of Elves has formed in the middle of the grove.
+instead withered and broken. 
+A large group of Elves has formed in the middle of the grove.
 
-"...but this volcano has been dormant for months. Without ash, the fruit can't grow!"
-
+"...but this volcano has been dormant for months. 
+Without ash, the fruit can't grow!"
 You look up to see a massive, snow-capped mountain towering above you.
-
 "It's not like there are other active volcanoes here; we've looked everywhere."
-
 "But our scanners show active magma flows; clearly it's going somewhere."
 
 They finally notice you at the edge of the grove,
@@ -54,7 +53,8 @@ The process consists of some number of rounds during which Elves
 alternate between considering where to move and actually moving.
 
 During the first half of each round, each Elf considers the eight
-positions adjacent to themself. If no other Elves are in one of those eight positions,
+positions adjacent to themself. 
+If no other Elves are in one of those eight positions,
 the Elf does not do anything during this round. Otherwise, the Elf
 looks in each of four directions in the following order and proposes
 moving one step in the first valid direction:
@@ -236,7 +236,8 @@ round 10 that they're making good progress toward covering enough ground.
 To do this, count the number of empty ground tiles contained by the
 smallest rectangle that contains every Elf. (The edges of the rectangle
 should be aligned to the N/S/E/W directions; the Elves do not have the
-patience to calculate arbitrary rectangles.) In the above example, that rectangle is:
+patience to calculate arbitrary rectangles.) 
+In the above example, that rectangle is:
 
 ......#.....
 ..........#.
@@ -271,14 +272,14 @@ object Solving:
   def solve2(lines: Seq[String]) = 0L
 
 object Testing:
-  private lazy val lines = os.read.lines(os.pwd / "23.test.input.txt")
+  private lazy val lines = os.read.lines(os.pwd / "2022" / "23" / "23.test.input.txt")
   lazy val result1 = Solving.solve1(lines)
   lazy val result2 = Solving.solve2(lines)
 // Testing.result1 // part 1: 110
 // Testing.result2 // part 2:
 
 object Main:
-  private lazy val lines = os.read.lines(os.pwd / "23.input.txt")
+  private lazy val lines = os.read.lines(os.pwd / "2022" / "23" / "23.input.txt")
   lazy val result1 = Solving.solve1(lines)
   lazy val result2 = Solving.solve2(lines)
 // Main.result1 // part 1:

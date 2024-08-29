@@ -53,11 +53,11 @@ object Solving:
   def solve(lines: String) = 0L
 
 object Testing:
-  private lazy val lines = os.read.lines(os.pwd / "25.test.input.txt")
+  private lazy val lines = os.read.lines(os.pwd / "2019" / "25" / "25.test.input.txt")
   lazy val result = lines map Solving.solve
 // Testing.result // part 1:
 
 object Main:
-  lazy val line = os.read.lines(os.pwd / "25.input.txt").head
+  lazy val line = os.read.lines(os.pwd / "2019" / "25" / "25.input.txt").head
   lazy val result = Solving.solve(line)
 // Main.result // part 1:

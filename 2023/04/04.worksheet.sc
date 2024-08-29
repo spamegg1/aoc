@@ -122,6 +122,7 @@ object DataDefs:
 
 object Parsing:
   import DataDefs.Card
+
   def lineToCard(line: String): Card =
     val (id, win, draw) = line match
       case s"Card $i: $w | $d" => (i, w, d)
@@ -129,8 +130,9 @@ object Parsing:
     val drawn = draw.split(" ").filter(_.nonEmpty).map(_.toInt).toSet
     Card(id.trim.toInt, winning, drawn)
 
-object Summing:
+object Solving:
   import collection.mutable.Map
+
   def sumCardPoints(lines: Seq[String]): Int = // part1
     lines.map(Parsing.lineToCard(_).score).sum
 
@@ -146,22 +148,15 @@ object Summing:
     copiesMap.values.sum
 
 object Testing:
-  val testInput = """
-  |Card 1: 41 48 83 86 17 | 83 86  6 31 17  9 48 53
-  |Card 2: 13 32 20 16 61 | 61 30 68 82 17 32 24 19
-  |Card 3:  1 21 53 59 44 | 69 82 63 72 16 21 14  1
-  |Card 4: 41 92 73 84 69 | 59 84 76 51 58  5 54 83
-  |Card 5: 87 83 26 28 32 | 88 30 70 12 93 22 82 36
-  |Card 6: 31 18 13 56 72 | 74 77 10 23 35 67 36 11""".stripMargin
-  val lines = testInput.split("\n").filter(_.nonEmpty).toSeq
-  val testScore1 = Summing.sumCardPoints(lines)
-  val testScore2 = Summing.processCopies(lines)
-Testing.testScore1 // part 1: 13
-Testing.testScore2 // part 2: 30
+  private lazy val lines = os.read.lines(os.pwd / "2023" / "04" / "04.test.input.txt")
+  lazy val result1 = Solving.sumCardPoints(lines)
+  lazy val result2 = Solving.processCopies(lines)
+// Testing.result1 // part 1: 13
+// Testing.result2 // part 2: 30
 
 object Main:
-  val lines: Seq[String] = os.read.lines(os.pwd / "04.input.txt")
-  val result1 = Summing.sumCardPoints(lines)
-  val result2 = Summing.processCopies(lines)
-Main.result1 // part 1: 33950
-Main.result2 // part 2: 14814534
+  private lazy val lines = os.read.lines(os.pwd / "2023" / "04" / "04.input.txt")
+  lazy val result1 = Solving.sumCardPoints(lines)
+  lazy val result2 = Solving.processCopies(lines)
+// Main.result1 // part 1: 33950
+// Main.result2 // part 2: 14814534

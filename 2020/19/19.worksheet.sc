@@ -128,8 +128,8 @@ object Solving:
   def solve2(rules: Seq[String])(msgs: Seq[String])(start: Queue[Rule]) = 0L
 
 object Testing:
-  lazy val rules = os.read.lines(os.pwd / "19.test.input.txt")
-  lazy val msgs = os.read.lines(os.pwd / "19.test.input.2.txt")
+  lazy val rules = os.read.lines(os.pwd / "2020" / "19" / "19.test.input.txt")
+  lazy val msgs = os.read.lines(os.pwd / "2020" / "19" / "19.test.input.2.txt")
   lazy val start = Queue("<4>" -> Seq("a"), "<5>" -> Seq("b"))
   lazy val result1 = Solving.solve1(rules)(msgs)(start)
   lazy val result2 = Solving.solve2(rules)(msgs)(start)
@@ -137,8 +137,8 @@ object Testing:
 // Testing.result2 // part 2:
 
 object Main:
-  lazy val rules = os.read.lines(os.pwd / "19.input.sorted.txt")
-  lazy val msgs = os.read.lines(os.pwd / "19.input.2.txt")
+  lazy val rules = os.read.lines(os.pwd / "2020" / "19" / "19.input.sorted.txt")
+  lazy val msgs = os.read.lines(os.pwd / "2020" / "19" / "19.input.2.txt")
   lazy val start = Queue(
     "<69>" -> Seq("a"),
     "<12>" -> Seq("b"),

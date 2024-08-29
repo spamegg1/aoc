@@ -194,8 +194,7 @@ object Parsing:
     .map(_.toVector)
     .toVector
 
-  def parseFile(file: String): List[Valley] =
-    file.split("\n\n").toList.map(parseValley(_))
+  def parseFile(file: String): List[Valley] = file.split("\n\n").toList.map(parseValley)
 
 object Solving:
   import DataDefs.*
@@ -206,30 +205,15 @@ object Solving:
     .sum
 
 object Testing:
-  lazy val testInput =
-    """#.##..##.
-      |..#.##.#.
-      |##......#
-      |##......#
-      |..#.##.#.
-      |..##..##.
-      |#.#.##.#.
-      |
-      |#...##..#
-      |#....#..#
-      |..##..###
-      |#####.##.
-      |#####.##.
-      |..##..###
-      |#....#..#""".stripMargin
-  lazy val testResult1 = Solving.solve(testInput)(0)
-  lazy val testResult2 = Solving.solve(testInput)(1)
-Testing.testResult1 // part 1: 405
-Testing.testResult2 // part 2: 400
+  private lazy val lines = os.read(os.pwd / "2023" / "13" / "13.test.input.txt")
+  lazy val result1 = Solving.solve(lines)(0)
+  lazy val result2 = Solving.solve(lines)(1)
+// Testing.result1 // part 1: 405
+// Testing.result2 // part 2: 400
 
 object Main:
-  lazy val file = os.read(os.pwd / "13.input.txt")
-  lazy val result1 = Solving.solve(file)(0)
-  lazy val result2 = Solving.solve(file)(1)
-Main.result1 // part 1: 33728
-Main.result2 // part 2: 28235
+  private lazy val lines = os.read(os.pwd / "2023" / "13" / "13.input.txt")
+  lazy val result1 = Solving.solve(lines)(0)
+  lazy val result2 = Solving.solve(lines)(1)
+// Main.result1 // part 1: 33728
+// Main.result2 // part 2: 28235

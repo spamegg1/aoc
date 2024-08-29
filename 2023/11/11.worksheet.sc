@@ -191,25 +191,15 @@ object Solving:
     allDistances(expanded).sum
 
 object Testing:
-  lazy val testInput =
-    """...#......
-      |.......#..
-      |#.........
-      |..........
-      |......#...
-      |.#........
-      |.........#
-      |..........
-      |.......#..
-      |#...#.....""".stripMargin.split("\n").toSeq
-  lazy val result1 = Solving.solve(testInput)(2)
-  lazy val result2 = Solving.solve(testInput)(10)
-Testing.result1 // part 1: 374
-Testing.result2 // part 2: 1030
+  private lazy val lines = os.read.lines(os.pwd / "2023" / "11" / "11.test.input.txt")
+  lazy val result1 = Solving.solve(lines)(2)
+  lazy val result2 = Solving.solve(lines)(10)
+// Testing.result1 // part 1: 374
+// Testing.result2 // part 2: 1030
 
 object Main:
-  lazy val lines = os.read.lines(os.pwd / "11.input.txt")
+  private lazy val lines = os.read.lines(os.pwd / "2023" / "11" / "11.input.txt")
   lazy val result1 = Solving.solve(lines)(2)
   lazy val result2 = Solving.solve(lines)(1000000)
-Main.result1 // part 1: 9556896
-Main.result2 // part 2: 685038186836
+// Main.result1 // part 1: 9556896
+// Main.result2 // part 2: 685038186836

@@ -118,17 +118,17 @@ object Solving:
     slopes.map(slope => solve1(lines)(slope)).product
 
 object Testing:
-  private lazy val lines = os.read.lines(os.pwd / "03.test.input.txt")
+  private lazy val lines = os.read.lines(os.pwd / "2020" / "03" / "03.test.input.txt")
   private lazy val slopes = List((1, 1), (3, 1), (5, 1), (7, 1), (1, 2))
   lazy val result1 = Solving.solve1(lines)(slopes(1))
   lazy val result2 = Solving.solve2(lines)(slopes)
-Testing.result1 // part 1: 7
-Testing.result2 // part 2: 336
+// Testing.result1 // part 1: 7
+// Testing.result2 // part 2: 336
 
 object Main:
-  private lazy val lines = os.read.lines(os.pwd / "03.input.txt")
+  private lazy val lines = os.read.lines(os.pwd / "2020" / "03" / "03.input.txt")
   private lazy val slopes = List((1, 1), (3, 1), (5, 1), (7, 1), (1, 2))
   lazy val result1 = Solving.solve1(lines)(slopes(1))
   lazy val result2 = Solving.solve2(lines)(slopes)
-Main.result1 // part 1: 244
-Main.result2 // part 2: 9406609920
+// Main.result1 // part 1: 244
+// Main.result2 // part 2: 9406609920

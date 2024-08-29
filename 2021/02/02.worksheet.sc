@@ -131,14 +131,14 @@ object Solving:
   val solve2 = solve(process(_.go2))
 
 object Testing:
-  private lazy val lines = os.read.lines(os.pwd / "02.test.input.txt")
+  private lazy val lines = os.read.lines(os.pwd / "2021" / "02" / "02.test.input.txt")
   lazy val result1 = Solving.solve1(lines)
   lazy val result2 = Solving.solve2(lines)
 // Testing.result1 // part 1: 150
 // Testing.result2 // part 2: 900
 
 object Main:
-  private lazy val lines = os.read.lines(os.pwd / "02.input.txt")
+  private lazy val lines = os.read.lines(os.pwd / "2021" / "02" / "02.input.txt")
   lazy val result1 = Solving.solve1(lines)
   lazy val result2 = Solving.solve2(lines)
 // Main.result1 // part 1: 1459206

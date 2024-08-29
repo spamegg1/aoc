@@ -345,14 +345,14 @@ object Solving:
     seats.totalOccupied
 
 object Testing:
-  private lazy val lines = os.read.lines(os.pwd / "11.test.input.txt")
+  private lazy val lines = os.read.lines(os.pwd / "2020" / "11" / "11.test.input.txt")
   lazy val result1 = Solving.solve1(lines)
   lazy val result2 = Solving.solve2(lines)
 // Testing.result1 // part 1: 37
 // Testing.result2 // part 2: 26
 
 object Main:
-  private lazy val lines = os.read.lines(os.pwd / "11.input.txt")
+  private lazy val lines = os.read.lines(os.pwd / "2020" / "11" / "11.input.txt")
   lazy val result1 = Solving.solve1(lines)
   lazy val result2 = Solving.solve2(lines)
 // Main.result1 // part 1: 2270

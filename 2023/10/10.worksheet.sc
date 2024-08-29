@@ -247,19 +247,20 @@ object DataDefs:
       case 'F' => List(S, E)
       // case 'S' => List(N, E) // I just looked at the input file.
       case _ => List()
+
   type Maze[T] = IndexedSeq[IndexedSeq[T]] // this is Vector, really
 
   case class Coord(row: Int, col: Int, exits: Exits):
     def overlaps(that: Coord) = row == that.row && col == that.col
     def neighbors(maze: Maze[Coord]): Map[Exit, Coord] = exits
-      .map(exit =>
+      .map: exit =>
         exit match
           case N => N -> maze(row - 1)(col)
           case S => S -> maze(row + 1)(col)
           case E => E -> maze(row)(col + 1)
           case W => W -> maze(row)(col - 1)
-      )
       .toMap
+
   type Loop = List[Coord]
 
 object Parsing:
@@ -299,40 +300,26 @@ object Solving:
 
 object Testing:
   import DataDefs.*, Exit.*
-  lazy val testInput =
-    """..F7.
-      |.FJ|.
-      |SJ.L7
-      ||F--J
-      |LJ...""".stripMargin.split("\n").toIndexedSeq
-  lazy val animal = Coord(2, 0, List(S, E)) // just look at the input for this.
-  lazy val testResult1 = Solving.solve1(testInput)(animal)
 
-  lazy val testInput2 =
-    """FF7FSF7F7F7F7F7F---7
-      |L|LJ||||||||||||F--J
-      |FL-7LJLJ||||||LJL-77
-      |F--JF--7||LJLJIF7FJ-
-      |L---JF-JLJIIIIFJLJJ7
-      ||F|F-JF---7IIIL7L|7|
-      ||FFJF7L7F-JF7IIL---7
-      |7-L-JL7||F7|L7F-7F7|
-      |L.L7LFJ|||||FJL7||LJ
-      |L7JLJL-JLJLJL--JLJ.L""".stripMargin.split("\n").toIndexedSeq
-  lazy val animal2 = Coord(0, 4, List(S, W)) // just look at the input for this.
-  lazy val exitMaze2 = Parsing.parseExits(testInput2)
-  lazy val coordMaze2 = Parsing.parseCoords(exitMaze2)
-  lazy val loop2 = Solving.findLoop(coordMaze2)(animal2)
-  lazy val loopLines = Solving.loopByLines(20)(loop2)
-  lazy val testResult2 = 0
-Testing.testResult1 // part 1: 8
-Testing.testResult2 // part 2: 10
+  private lazy val lines1 = os.read.lines(os.pwd / "2023" / "10" / "10.test.input.1.txt")
+  private lazy val animal = Coord(2, 0, List(S, E)) // just look at the input for this.
+  lazy val result1 = Solving.solve1(lines1)(animal)
+
+  private lazy val lines2 = os.read.lines(os.pwd / "2023" / "10" / "10.test.input.2.txt")
+  private lazy val animal2 = Coord(0, 4, List(S, W)) // just look at the input for this.
+  private lazy val exitMaze2 = Parsing.parseExits(testInput2)
+  private lazy val coordMaze2 = Parsing.parseCoords(exitMaze2)
+  private lazy val loop2 = Solving.findLoop(coordMaze2)(animal2)
+  private lazy val loopLines = Solving.loopByLines(20)(loop2)
+  lazy val result2 = 0
+// Testing.result1 // part 1: 8
+// Testing.result2 // part 2: 10
 
 object Main:
   import DataDefs.*, Exit.*
-  lazy val lines: IndexedSeq[String] = os.read.lines(os.pwd / "10.input.txt")
-  lazy val animal = Coord(111, 14, List(N, E)) // just look at the input for this.
+  private lazy val lines = os.read.lines(os.pwd / "2023" / "10" / "10.input.txt")
+  private lazy val animal = Coord(111, 14, List(N, E)) // just look at the input for this.
   lazy val result1 = Solving.solve1(lines)(animal)
   lazy val result2 = 0
-Main.result1 // part 1: 6812
-Main.result2 // part 2: 527
+// Main.result1 // part 1: 6812
+// Main.result2 // part 2: 527

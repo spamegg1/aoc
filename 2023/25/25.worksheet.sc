@@ -131,14 +131,11 @@ object Solving:
     graph.componentTraverser().map(_.nodes.size).product
 
 object Testing:
-  val lines = os.read.lines(os.pwd / "25.test.input.txt")
+  val lines = os.read.lines(os.pwd / "2023" / "25" / "25.test.input.txt")
   lazy val result1 = Solving.solve1(lines)
 // Testing.result1 // part 1: 54
 
 object Main:
-  private val lines = os.read.lines(os.pwd / "25.input.txt")
+  private val lines = os.read.lines(os.pwd / "2023" / "25" / "25.input.txt")
   lazy val result1 = Solving.solve1(lines)
 // Main.result1 // part 1: ???
-
-// val nodes = Parsing.parseComponents(Testing.lines)
-// val graph = Solving.populate(nodes)

@@ -171,17 +171,17 @@ object Solving:
   def solve2(stacks: Seq[String])(mvs: Seq[String]) = solve(stacks)(mvs)(false)
 
 object Testing:
-  private lazy val stacks = os.read.lines(os.pwd / "05.test.input.1.txt")
-  private lazy val moves = os.read.lines(os.pwd / "05.test.input.2.txt")
+  private lazy val stacks = os.read.lines(os.pwd / "2022" / "05" / "05.test.input.1.txt")
+  private lazy val moves = os.read.lines(os.pwd / "2022" / "05" / "05.test.input.2.txt")
   lazy val result1 = Solving.solve1(stacks)(moves)
   lazy val result2 = Solving.solve2(stacks)(moves)
-Testing.result1 // part 1: CMZ
-Testing.result2 // part 2: MCD
+// Testing.result1 // part 1: CMZ
+// Testing.result2 // part 2: MCD
 
 object Main:
-  private lazy val stacks = os.read.lines(os.pwd / "05.input.1.txt")
-  private lazy val moves = os.read.lines(os.pwd / "05.input.2.txt")
+  private lazy val stacks = os.read.lines(os.pwd / "2022" / "05" / "05.input.1.txt")
+  private lazy val moves = os.read.lines(os.pwd / "2022" / "05" / "05.input.2.txt")
   lazy val result1 = Solving.solve1(stacks)(moves)
   lazy val result2 = Solving.solve2(stacks)(moves)
-Main.result1 // part 1: VCTFTJQCG
-Main.result2 // part 2: GCFGLDNJZ
+// Main.result1 // part 1: VCTFTJQCG
+// Main.result2 // part 2: GCFGLDNJZ

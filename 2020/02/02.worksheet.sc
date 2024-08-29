@@ -87,15 +87,15 @@ object Solving:
     .count(_.isValid2)
 
 object Testing:
-  private lazy val lines = os.read.lines(os.pwd / "02.test.input.txt")
+  private lazy val lines = os.read.lines(os.pwd / "2020" / "02" / "02.test.input.txt")
   lazy val result1 = Solving.solve1(lines)
   lazy val result2 = Solving.solve2(lines)
-Testing.result1 // part 1: 2
-Testing.result2 // part 2: 1
+// Testing.result1 // part 1: 2
+// Testing.result2 // part 2: 1
 
 object Main:
-  private lazy val lines = os.read.lines(os.pwd / "02.input.txt")
+  private lazy val lines = os.read.lines(os.pwd / "2020" / "02" / "02.input.txt")
   lazy val result1 = Solving.solve1(lines)
   lazy val result2 = Solving.solve2(lines)
-Main.result1 // part 1: 416
-Main.result2 // part 2: 688
+// Main.result1 // part 1: 416
+// Main.result2 // part 2: 688

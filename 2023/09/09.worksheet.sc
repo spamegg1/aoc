@@ -138,12 +138,18 @@ object DataDefs:
 
 object Parsing:
   import DataDefs.*
-  // remove .reverse from the end of this to get Part2 result.
-  def parseHistory(line: String): History = line.split(" ").map(_.toLong).toSeq.reverse
+
+  def parseHistory(line: String): History = line
+    .split(" ")
+    .map(_.toLong)
+    .toSeq
+    .reverse // remove .reverse to get Part2 result.
+
   def parseAll(lines: Seq[String]): Seq[History] = lines.map(parseHistory)
 
 object Solving:
   import DataDefs.*
+
   def processOnce(binOp: BinOp)(history: History): History =
     history.lazyZip(history.tail).map(binOp)
 
@@ -165,18 +171,15 @@ object Solving:
     processHistories.map(reverseProcess(binOp)).sum
 
 object Testing:
-  val testInput =
-    """0 3 6 9 12 15
-      |1 3 6 10 15 21
-      |10 13 16 21 30 45""".stripMargin.split("\n").toSeq
-  lazy val histories = Parsing.parseAll(testInput)
+  private lazy val lines = os.read.lines(os.pwd / "2023" / "09" / "09.test.input.txt")
+  lazy val histories = Parsing.parseAll(lines)
   lazy val processHistories = Solving.processAll(_ - _)(histories)
-  lazy val testResult = Solving.reverseAll(_ + _)(processHistories)
-Testing.testResult // part 1: 114, part2: 2
+  lazy val result = Solving.reverseAll(_ + _)(processHistories)
+// Testing.result // part 1: 114, part2: 2
 
 object Main:
-  lazy val lines: Seq[String] = os.read.lines(os.pwd / "09.input.txt")
+  private lazy val lines = os.read.lines(os.pwd / "2023" / "09" / "09.input.txt")
   lazy val histories = Parsing.parseAll(lines)
   lazy val processHistories1 = Solving.processAll(_ - _)(histories)
   lazy val result = Solving.reverseAll(_ + _)(processHistories1)
-Main.result // part 1: 1479011877, part 2: 973
+// Main.result // part 1: 1479011877, part 2: 973

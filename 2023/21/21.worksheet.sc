@@ -232,7 +232,7 @@ object Solving:
 
 object Testing:
   import DataDefs.*, Ground.*
-  private val lines = os.read.lines(os.pwd / "21.test.input.txt")
+  private lazy val lines = os.read.lines(os.pwd / "2023" / "21" / "21.test.input.txt")
   private lazy val start = Pos(5, 5, Plot) // I replaced S with . in the input file.
   lazy val result1 = Solving.solve1(lines)(start)(6)
   lazy val result2 = Solving.solve2(lines)(start)(5000)
@@ -241,7 +241,7 @@ object Testing:
 
 object Main:
   import DataDefs.*, Ground.*
-  private val lines = os.read.lines(os.pwd / "21.input.txt")
+  private lazy val lines = os.read.lines(os.pwd / "2023" / "21" / "21.input.txt")
   private lazy val start = Pos(65, 65, Plot) // I replaced S with . in the input file.
   lazy val result1 = Solving.solve1(lines)(start)(64)
   lazy val result2 = Solving.solve1(lines)(start)(26501365)

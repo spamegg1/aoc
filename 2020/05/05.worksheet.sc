@@ -94,13 +94,13 @@ object Solving:
     .map(_.head + 1)
 
 object Testing:
-  private lazy val lines = os.read.lines(os.pwd / "05.test.input.txt")
+  private lazy val lines = os.read.lines(os.pwd / "2020" / "05" / "05.test.input.txt")
   lazy val result1 = Solving.solve1(lines) // no testing data for part 2
-Testing.result1 // part 1: 820
+// Testing.result1 // part 1: 820
 
 object Main:
-  private lazy val lines = os.read.lines(os.pwd / "05.input.txt")
+  private lazy val lines = os.read.lines(os.pwd / "2020" / "05" / "05.input.txt")
   lazy val result1 = Solving.solve1(lines)
   lazy val result2 = Solving.solve2(lines)
-Main.result1 // part 1: 888
-Main.result2 // part 2: 522
+// Main.result1 // part 1: 888
+// Main.result2 // part 2: 522

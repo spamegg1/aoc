@@ -201,16 +201,16 @@ object Solving:
       .product
 
 object Testing:
-  private lazy val lines1 = os.read(os.pwd / "16.test.input.txt")
-  private lazy val lines2 = os.read(os.pwd / "16.test.input.2.txt")
+  private lazy val lines1 = os.read(os.pwd / "2020" / "16" / "16.test.input.txt")
+  private lazy val lines2 = os.read(os.pwd / "2020" / "16" / "16.test.input.2.txt")
   lazy val result1 = Solving.solve1(lines1)
   lazy val result2 = Solving.solve2(lines2)
-Testing.result1 // part 1: 71
-Testing.result2 // part 2: row:11,class:12,seat:13 = 1716
+// Testing.result1 // part 1: 71
+// Testing.result2 // part 2: row:11,class:12,seat:13 = 1716
 
 object Main:
-  private lazy val lines = os.read(os.pwd / "16.input.txt")
+  private lazy val lines = os.read(os.pwd / "2020" / "16" / "16.input.txt")
   lazy val result1 = Solving.solve1(lines)
   lazy val result2 = Solving.solve2(lines)
-Main.result1 // part 1: 26009
-Main.result2 // part 2: 589685618167
+// Main.result1 // part 1: 26009
+// Main.result2 // part 2: 589685618167

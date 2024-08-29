@@ -142,15 +142,15 @@ object Solving:
     parseLong(oxygen.head.mkString, 2) * parseLong(co2.head.mkString, 2)
 
 object Testing:
-  private lazy val lines = os.read.lines(os.pwd / "03.test.input.txt")
+  private lazy val lines = os.read.lines(os.pwd / "2021" / "03" / "03.test.input.txt")
   lazy val result1 = Solving.solve1(lines)
   lazy val result2 = Solving.solve2(lines)
-Testing.result1 // part 1: 198
-Testing.result2 // part 2: 230
+// Testing.result1 // part 1: 198
+// Testing.result2 // part 2: 230
 
 object Main:
-  private lazy val lines = os.read.lines(os.pwd / "03.input.txt")
+  private lazy val lines = os.read.lines(os.pwd / "2021" / "03" / "03.input.txt")
   lazy val result1 = Solving.solve1(lines)
   lazy val result2 = Solving.solve2(lines)
-Main.result1 // part 1: 775304
-Main.result2 // part 2: 1370737
+// Main.result1 // part 1: 775304
+// Main.result2 // part 2: 1370737

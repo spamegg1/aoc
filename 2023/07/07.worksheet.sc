@@ -153,14 +153,24 @@ object DataDefs:
       case Ten    => 10
       case Num(n) => n
       case Jack   => 1
-
   import Card.*
+
+  extension (char: Char)
+    def toCard: Card = char match
+      case 'A' => Ace
+      case 'K' => King
+      case 'Q' => Queen
+      case 'J' => Jack
+      case 'T' => Ten
+      case num => Num(num.asDigit)
+
   given Ordering[Card] with // part 1
     def compare(x: Card, y: Card): Int = x.value - y.value
 
   enum Rank:
     case HighCard, OnePair, TwoPairs, ThreeOfAKind, FullHouse, FourOfAKind, FiveOfAKind
   import Rank.*
+
   given Ordering[Rank] with // part 1
     def compare(x: Rank, y: Rank): Int = x.ordinal compare y.ordinal
 
@@ -170,6 +180,7 @@ object DataDefs:
       .values
       .toList
       .sorted
+
     lazy val rank: Rank = partition match
       case List(5)          => FiveOfAKind
       case List(1, 4)       => FourOfAKind
@@ -186,9 +197,11 @@ object DataDefs:
     lazy val substitutes =
       for nonJoker <- nonJokers
       yield jokers.map((_, index) => (nonJoker, index))
+
     lazy val subbedHands = // replace all Jokers with the same card.
       for sub <- substitutes
       yield Hand((others ++ sub).sortBy(_._2).map(_._1))
+
     lazy val jokerRank: Rank =
       if isAllJokers then FiveOfAKind else subbedHands.maxBy(_.rank).rank
 
@@ -217,14 +230,6 @@ object DataDefs:
 
 object Parsing:
   import DataDefs.*, Card.*
-  extension (char: Char)
-    def toCard: Card = char match
-      case 'A' => Ace
-      case 'K' => King
-      case 'Q' => Queen
-      case 'J' => Jack
-      case 'T' => Ten
-      case n   => Num(n.asDigit)
 
   def parseHand(hand: String): Hand = Hand(hand.map(_.toCard))
   def lineToBid(line: String): Bid = line match
@@ -232,6 +237,7 @@ object Parsing:
 
 object Solving:
   import DataDefs.*
+
   def solve(lines: Seq[String])(using Ordering[Bid]): Long = lines
     .map(Parsing.lineToBid)
     .sorted // this is where the magic happens!
@@ -240,26 +246,21 @@ object Solving:
     .sum
 
 object Testing:
-  val testInput = """
-    |32T3K 765
-    |T55J5 684
-    |KK677 28
-    |KTJJT 220
-    |QQQJA 483""".stripMargin.split("\n").filter(_.nonEmpty).toSeq
+  private lazy val lines = os.read.lines(os.pwd / "2023" / "07" / "07.test.input.txt")
   object Part1:
-    val testResult = Solving.solve(testInput)
+    val result = Solving.solve(testInput)
   object Part2:
     import DataDefs.Joker.given // get more specific givens!
-    val testResult = Solving.solve(testInput)
-Testing.Part1.testResult // part 1: 6440
-Testing.Part2.testResult // part 2: 5905
+    val result = Solving.solve(testInput)
+// Testing.Part1.result // part 1: 6440
+// Testing.Part2.result // part 2: 5905
 
 object Main:
-  val lines: Seq[String] = os.read.lines(os.pwd / "07.input.txt")
+  private lazy val lines = os.read.lines(os.pwd / "2023" / "07" / "07.input.txt")
   object Part1:
     val result = Solving.solve(lines)
   object Part2:
     import DataDefs.Joker.given // get more specific givens!
     val result = Solving.solve(lines)
-Main.Part1.result // part 1: 246795406
-Main.Part2.result // part 2: 249356515
+// Main.Part1.result // part 1: 246795406
+// Main.Part2.result // part 2: 249356515

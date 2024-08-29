@@ -216,21 +216,17 @@ object Solving:
 
 object Testing:
   import DataDefs.*, Direction.*
-  private lazy val lines = os.read.lines(os.pwd / "17.test.input.txt")
+  private lazy val lines = os.read.lines(os.pwd / "2023" / "17" / "17.test.input.txt")
   lazy val (grid, start, end) = Parsing.parse(lines)
   lazy val graph = Solving.populate(grid)
   lazy val result1 = Solving.solve1(lines)
   lazy val result2 = Solving.solve2(lines)
-Testing.result1 // part 1: 102
-// import DataDefs.*
-// val g = Testing.graph
-// val start = g.get(Tile(0, 0, 2))
-// val end = g.get(Tile(12, 12, 3))
-Testing.result2 // part 2: ???
+// Testing.result1 // part 1: 102
+// Testing.result2 // part 2: ???
 
 object Main:
-  private lazy val lines = os.read.lines(os.pwd / "17.input.txt")
+  private lazy val lines = os.read.lines(os.pwd / "2023" / "17" / "17.input.txt")
   lazy val result1 = Solving.solve1(lines)
   lazy val result2 = Solving.solve2(lines)
-Main.result1 // part 1: 814
-Main.result2 // part 2: 974
+// Main.result1 // part 1: 814
+// Main.result2 // part 2: 974

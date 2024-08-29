@@ -86,8 +86,11 @@ ratios produces 467835.
 What is the sum of all of the gear ratios in your engine schematic?
  */
 object DataDefs:
-  type X = Int; type Y = Int
+  type X = Int
+  type Y = Int
+
   case class Interval(start: Point, end: Point) // a number's start-end positions
+
   case class Point(x: X, y: Y):
     def isNear(i: Interval): Boolean = // is (x, y) near a number? including diagonally
       i.start.x - 1 <= x && x <= i.end.x + 1 && i.start.y - 1 <= y && y <= i.end.y + 1
@@ -100,6 +103,7 @@ object DataDefs:
 
 object Parsing:
   import DataDefs.*
+
   extension (c: Char)
     def isSymbol: Boolean = !(c.isDigit || c.isLetter || c == '.' || c == ' ')
 
@@ -109,6 +113,7 @@ object Parsing:
       (c, x) <- line.zipWithIndex
       if pred(c)
     yield Point(x, y)
+
   val findAllSymbols = finder(_.isSymbol) // part 1
   val findAsterisks = finder(_ == '*') // part 2
 
@@ -124,7 +129,8 @@ object Parsing:
     numbers.toSeq
 
 object PartsAndGears:
-  import DataDefs.{Point, Part, Gear}
+  import DataDefs.*
+
   def findAllParts(lines: Seq[String], symbols: Seq[Point]): Seq[Part] =
     for
       (line, y) <- lines.zipWithIndex
@@ -143,7 +149,7 @@ object PartsAndGears:
     val parts = findAllParts(lines, symbols)
     asterisks.flatMap(findGear(_, parts))
 
-object Summing:
+object Solving:
   def sumPartNumbers(lines: Seq[String]): Int = // for part 1
     val symbols = Parsing.findAllSymbols(lines)
     val parts = PartsAndGears.findAllParts(lines, symbols)
@@ -155,27 +161,15 @@ object Summing:
     gears.map(_.ratio).sum
 
 object Testing:
-  val testInput = """
-  |467..114..
-  |...*......
-  |..35..633.
-  |......#...
-  |617*......
-  |.....+.58.
-  |..592.....
-  |......755.
-  |...$.*....
-  |.664.598..""".stripMargin
-
-  val lines = testInput.split("\n").toSeq
-  val testResult1 = Summing.sumPartNumbers(lines)
-  val testResult2 = Summing.sumGearRatios(lines)
-Testing.testResult1 // part 1: 4361
-Testing.testResult2 // part 2: 467835
+  private lazy val lines = os.read.lines(os.pwd / "2023" / "03" / "03.test.input.txt")
+  lazy val result1 = Solving.sumPartNumbers(lines)
+  lazy val result2 = Solving.sumGearRatios(lines)
+// Testing.result1 // part 1: 4361
+// Testing.result2 // part 2: 467835
 
 object Main:
-  val lines: Seq[String] = os.read.lines(os.pwd / "03.input.txt")
-  val result1 = Summing.sumPartNumbers(lines)
-  val result2 = Summing.sumGearRatios(lines)
-Main.result1 // Part 1: 514969
-Main.result2 // Part 2: 78915902
+  private lazy val lines = os.read.lines(os.pwd / "2023" / "03" / "03.input.txt")
+  lazy val result1 = Summing.sumPartNumbers(lines)
+  lazy val result2 = Summing.sumGearRatios(lines)
+// Main.result1 // Part 1: 514969
+// Main.result2 // Part 2: 78915902

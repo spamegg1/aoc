@@ -61,47 +61,52 @@ Adding these together produces 281.
 
 What is the sum of all of the calibration values?
  */
+object DataDefs:
+  val numbers = Map(
+    "one" -> 1,
+    "two" -> 2,
+    "three" -> 3,
+    "four" -> 4,
+    "five" -> 5,
+    "six" -> 6,
+    "seven" -> 7,
+    "eight" -> 8,
+    "nine" -> 9,
+    "1" -> 1,
+    "2" -> 2,
+    "3" -> 3,
+    "4" -> 4,
+    "5" -> 5,
+    "6" -> 6,
+    "7" -> 7,
+    "8" -> 8,
+    "9" -> 9
+  )
 
-val path: os.Path = os.pwd / "01.input.txt"
-val lines: Seq[String] = os.read.lines(path)
+  val regex = "(?=([1-9]|one|two|three|four|five|six|seven|eight|nine))".r
 
-// Part 1:
-def calibrationValue(line: String): Int =
-  val numbers = line.filter(_.isDigit)
-  numbers.head.asDigit * 10 + numbers.last.asDigit
+object Solving:
+  import DataDefs.*
 
-lines.map(calibrationValue(_)).sum // 54708
+  def calibrationValue(line: String): Int = // Part 1
+    val nums = line.filter(_.isDigit)
+    nums.head.asDigit * 10 + nums.last.asDigit
 
-// Part 2:
-val numbers = Map(
-  "one" -> 1,
-  "two" -> 2,
-  "three" -> 3,
-  "four" -> 4,
-  "five" -> 5,
-  "six" -> 6,
-  "seven" -> 7,
-  "eight" -> 8,
-  "nine" -> 9,
-  "1" -> 1,
-  "2" -> 2,
-  "3" -> 3,
-  "4" -> 4,
-  "5" -> 5,
-  "6" -> 6,
-  "7" -> 7,
-  "8" -> 8,
-  "9" -> 9
-)
+  def lineToValue(line: String): Int = // Part 2
+    val matches = regex.findAllMatchIn(line).map(_.group(1)).toVector
+    val (first, last) = (numbers(matches.head), numbers(matches.last))
+    first * 10 + last  
+  
+  def solve1(lines: Seq[String]) = lines.map(calibrationValue).sum
+  def solve2(lines: Seq[String]) = lines.map(lineToValue).sum
 
-val regex = "(?=([1-9]|one|two|three|four|five|six|seven|eight|nine))".r
-def lineToValue(line: String): Int =
-  val matches = regex.findAllMatchIn(line).map(_.group(1)).toVector
-  val (first, last) = (numbers(matches.head), numbers(matches.last))
-  first * 10 + last
+object Testing: // Handle overlapping matches
+  val eightyThree = lineToValue("eighthree") // should be 83 not 88
+  val seventyNine = lineToValue("sevenine") // should be 79 not 77
 
-// Handle overlapping matches
-lineToValue("eighthree") // should be 83 not 88
-lineToValue("sevenine") // should be 79 not 77
-
-lines.map(lineToValue).sum // 54087
+object Main:
+  private lazy val lines = os.read.lines(os.pwd / "2023" / "01" / "01.input.txt")
+  val result1 = Solving.solve1(lines)
+  val result2 = Solving.solve2(lines)
+// Main.result1 // 54708
+// Main.result2 // 54087

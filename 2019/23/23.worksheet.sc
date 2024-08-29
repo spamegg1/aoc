@@ -60,14 +60,14 @@ object Solving:
   def solve2(address: Int)(line: String) = 0L
 
 object Testing:
-  private lazy val lines = os.read.lines(os.pwd / "23.test.input.txt")
+  private lazy val lines = os.read.lines(os.pwd / "2019" / "23" / "23.test.input.txt")
   lazy val result1 = lines map Solving.solve1(255)
   lazy val result2 = lines map Solving.solve2(255)
 // Testing.result1 // part 1:
 // Testing.result2 // part 2:
 
 object Main:
-  lazy val line = os.read.lines(os.pwd / "23.input.txt").head
+  lazy val line = os.read.lines(os.pwd / "2019" / "23" / "23.input.txt").head
   lazy val result1 = Solving.solve1(255)(line)
   lazy val result2 = Solving.solve2(255)(line)
 // Main.result1 // part 1:

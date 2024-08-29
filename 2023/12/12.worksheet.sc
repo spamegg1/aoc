@@ -215,10 +215,9 @@ object Solving:
       case (_, head :: next) =>
         val searchRange = springs.size - counts.sum - counts.size + 1
         val result = (1 to searchRange)
-          .filter(index =>
+          .filter: index =>
             isMatch(springs)('.')(index) &&
               isMatch(springs.drop(index))('#')(head)
-          )
           .map(index => memoize(springs.drop(index + head))(next))
           .sum
         memo.addOne(key -> result)
@@ -233,22 +232,16 @@ object Solving:
   def solve2(lines: List[String]): Long = lines.map(solve2OneLine).sum
 
 object Testing:
-  lazy val lines =
-    """???.### 1,1,3
-      |.??..??...?##. 1,1,3
-      |?#?#?#?#?#?#?#? 1,3,1,6
-      |????.#...#... 4,1,1
-      |????.######..#####. 1,6,5
-      |?###???????? 3,2,1""".stripMargin.split("\n").toList
-  lazy val result1 = Solving.solve1(lines)
-  lazy val result2 = Solving.solve2(lines)
-Testing.result1 // part 1: 21
-Testing.result2 // part 2: 525152
+  private lazy val lines = os.read.lines(os.pwd / "2023" / "12" / "12.test.input.txt")
+  lazy val result1 = Solving.solve1(lines.toList)
+  lazy val result2 = Solving.solve2(lines.toList)
+// Testing.result1 // part 1: 21
+// Testing.result2 // part 2: 525152
 
 object Main:
-  lazy val lines = os.read.lines(os.pwd / "12.input.txt").toList
-  lazy val result1 = Solving.solve1(lines)
+  private lazy val lines = os.read.lines(os.pwd / "2023" / "12" / "12.input.txt")
+  lazy val result1 = Solving.solve1(lines.toList)
   // lazy val result2 = Solving.solve2OneLine(lines.head)
-  lazy val result2 = Solving.solve2(lines)
+  lazy val result2 = Solving.solve2(lines.toList)
 // Main.result1 // part 1: 7090
-Main.result2 // part 2: 6792010726878
+// Main.result2 // part 2: 6792010726878

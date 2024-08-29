@@ -201,15 +201,15 @@ object Solving:
   val solve2 = solve((c, i) => c.next2(i))
 
 object Testing:
-  private lazy val lines1 = os.read.lines(os.pwd / "14.test.input.txt")
-  private lazy val lines2 = os.read.lines(os.pwd / "14.test.input.2.txt")
+  private lazy val lines1 = os.read.lines(os.pwd / "2020" / "14" / "14.test.input.txt")
+  private lazy val lines2 = os.read.lines(os.pwd / "2020" / "14" / "14.test.input.2.txt")
   lazy val result1 = Solving.solve1(lines1)
   lazy val result2 = Solving.solve2(lines2)
 // Testing.result1 // part 1: 165
 // Testing.result2 // part 2: 208
 
 object Main:
-  private lazy val lines = os.read.lines(os.pwd / "14.input.txt")
+  private lazy val lines = os.read.lines(os.pwd / "2020" / "14" / "14.input.txt")
   lazy val result1 = Solving.solve1(lines)
   lazy val result2 = Solving.solve2(lines)
 // Main.result1 // part 1: 11884151942312

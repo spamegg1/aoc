@@ -213,14 +213,14 @@ object Solving:
     res + (if res < 0 then div else 0)
 
 object Testing:
-  private lazy val lines = os.read.lines(os.pwd / "13.test.input.txt")
+  private lazy val lines = os.read.lines(os.pwd / "2020" / "13" / "13.test.input.txt")
   lazy val result1 = Solving.solve1(lines.head)(939L)
   lazy val result2 = lines map Solving.solve2
 // Testing.result1 // part 1: 59,5 = 295
 // Testing.result2 // part 2: 1068781,3417,754018,779210,1261476,1202161486
 
 object Main:
-  lazy val line = os.read.lines(os.pwd / "13.input.txt").head
+  lazy val line = os.read.lines(os.pwd / "2020" / "13" / "13.input.txt").head
   lazy val result1 = Solving.solve1(line)(1000390L)
   lazy val result2 = Solving.solve2(line)
 // Main.result1 // part 1: 2298

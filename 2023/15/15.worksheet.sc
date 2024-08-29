@@ -262,15 +262,15 @@ object Solving:
     focusingPower
 
 object Testing:
-  private lazy val file = "rn=1,cm-,qp=3,cm=2,qp-,pc=4,ot=9,ab=5,pc-,pc=6,ot=7"
-  lazy val result1 = Solving.solve1(file)
-  lazy val result2 = Solving.solve2(file)
-Testing.result1 // part 1: 1320
+  private lazy val line = "rn=1,cm-,qp=3,cm=2,qp-,pc=4,ot=9,ab=5,pc-,pc=6,ot=7"
+  lazy val result1 = Solving.solve1(line)
+  lazy val result2 = Solving.solve2(line)
+// Testing.result1 // part 1: 1320
 // Testing.result2 // part 2: 145 // comment out this before running Main, pollutes map
 
 object Main:
-  private lazy val file = os.read.lines(os.pwd / "15.input.txt").head // avoid \n
-  lazy val result1 = Solving.solve1(file)
-  lazy val result2 = Solving.solve2(file)
-Main.result1 // part 1: 521341
-Main.result2 // part 2: 252782
+  private lazy val line = os.read.lines(os.pwd / "2023" / "15" / "15.input.txt").head
+  lazy val result1 = Solving.solve1(line)
+  lazy val result2 = Solving.solve2(line)
+// Main.result1 // part 1: 521341
+// Main.result2 // part 2: 252782

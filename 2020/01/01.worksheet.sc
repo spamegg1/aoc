@@ -95,21 +95,15 @@ object Solving:
     first * second * third
 
 object Testing:
-  lazy val input =
-    """1721
-      |979
-      |366
-      |299
-      |675
-      |1456""".stripMargin.split("\n").toSeq
-  lazy val result1 = Solving.solve1(input)
-  lazy val result2 = Solving.solve2(input)
-Testing.result1 // part 1: 514579
-Testing.result2 // part 2: 241861950
-
-object Main:
-  lazy val lines = os.read.lines(os.pwd / "01.input.txt")
+  lazy val lines = os.read.lines(os.pwd / "2020" / "01" / "01.test.input.txt")
   lazy val result1 = Solving.solve1(lines)
   lazy val result2 = Solving.solve2(lines)
-Main.result1 // part 1: 290784
-Main.result2 // part 2: 177337980
+// Testing.result1 // part 1: 514579
+// Testing.result2 // part 2: 241861950
+
+object Main:
+  lazy val lines = os.read.lines(os.pwd / "2020" / "01" / "01.input.txt")
+  lazy val result1 = Solving.solve1(lines)
+  lazy val result2 = Solving.solve2(lines)
+// Main.result1 // part 1: 290784
+// Main.result2 // part 2: 177337980

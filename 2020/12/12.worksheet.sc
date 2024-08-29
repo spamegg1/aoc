@@ -200,14 +200,14 @@ object Solving:
     waypoint.ship.manhattan
 
 object Testing:
-  lazy val lines = os.read.lines(os.pwd / "12.test.input.txt")
+  lazy val lines = os.read.lines(os.pwd / "2020" / "12" / "12.test.input.txt")
   lazy val result1 = Solving.solve1(lines)
   lazy val result2 = Solving.solve2(lines)
 // Testing.result1 // part 1: 25
 // Testing.result2 // part 2: 286
 
 object Main:
-  private lazy val lines = os.read.lines(os.pwd / "12.input.txt")
+  private lazy val lines = os.read.lines(os.pwd / "2020" / "12" / "12.input.txt")
   lazy val result1 = Solving.solve1(lines)
   lazy val result2 = Solving.solve2(lines)
 // Main.result1 // part 1: 2458

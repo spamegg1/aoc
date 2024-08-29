@@ -169,6 +169,7 @@ object DataDefs:
 
 object Parsing:
   import DataDefs.*
+
   def parseSeeds(seeds: String): Array[Seed] = seeds match // part 1
     case s"seeds: $x" => x.split(" ").map(_.toLong)
 
@@ -188,6 +189,7 @@ object Parsing:
 
 object Solving:
   import DataDefs.*
+
   def checkOneTriple(query: Long)(triple: Triple): Option[Long] =
     triple.contains(query) match
       case true  => Some(triple.corresponding(query))
@@ -199,7 +201,7 @@ object Solving:
       case Some(triple) => triple.corresponding(query)
 
 object TestIndices: // line numbers in the input file.
-  val ls: Seq[String] = os.read.lines(os.pwd / "05.test.input.txt")
+  val ls = os.read.lines(os.pwd / "2023" / "05" / "05.test.input.txt")
   val seedsIndex = ls.indexWhere(_.startsWith("seeds:"))
   val seedToSoil = ls.indexWhere(_ == "seed-to-soil map:")
   val soilToFert = ls.indexWhere(_ == "soil-to-fertilizer map:")
@@ -210,7 +212,7 @@ object TestIndices: // line numbers in the input file.
   val humidToLoc = ls.indexWhere(_ == "humidity-to-location map:")
 
 object MainIndices: // line numbers in the input file.
-  val ls: Seq[String] = os.read.lines(os.pwd / "05.input.txt").filter(_.nonEmpty)
+  val ls = os.read.lines(os.pwd / "2023" / "05" / "05.input.txt").filter(_.nonEmpty)
   val seedsIndex = ls.indexWhere(_.startsWith("seeds:"))
   val seedToSoil = ls.indexWhere(_ == "seed-to-soil map:")
   val soilToFert = ls.indexWhere(_ == "soil-to-fertilizer map:")
@@ -223,6 +225,7 @@ object MainIndices: // line numbers in the input file.
 object TestData:
   import TestIndices.*, Parsing.*
   given lines: Seq[String] = ls // avoid repeated passing of lines
+
   val seeds = parseSeeds(ls(seedsIndex))
   val moreSeeds = parseSeedRanges(ls(seedsIndex))
   val seedToSoilMap = allTriples(seedToSoil, soilToFert)
@@ -236,6 +239,7 @@ object TestData:
 object MainData:
   import MainIndices.*, Parsing.*
   given lines: Seq[String] = ls // avoid repeated passing of lines
+
   val seeds = parseSeeds(ls(seedsIndex)) // part 1
   val moreSeeds = parseSeedRanges(ls(seedsIndex))
   val seedToSoilMap = allTriples(seedToSoil, soilToFert)
@@ -248,6 +252,7 @@ object MainData:
 
 object Testing:
   import TestData.*, Solving.*
+
   val soils = seeds.map(checkAllTriples(seedToSoilMap)(_)) // part 1
   val ferts = soils.map(checkAllTriples(soilToFertMap)(_))
   val waters = ferts.map(checkAllTriples(fertToWaterMap)(_))
@@ -265,11 +270,12 @@ object Testing:
   val humids2 = temps2.map(checkAllTriples(tempToHumidMap)(_))
   val locs2 = humids2.map(checkAllTriples(humidToLocMap)(_))
   val result2 = locs2.min // part 2
-Testing.result1 // part 1: 35
-Testing.result2 // part 2: 46
+// Testing.result1 // part 1: 35
+// Testing.result2 // part 2: 46
 
 object Main:
   import MainData.*, Solving.*
+
   val soils = seeds.map(checkAllTriples(seedToSoilMap)(_)) // part 1
   val ferts = soils.map(checkAllTriples(soilToFertMap)(_))
   val waters = ferts.map(checkAllTriples(fertToWaterMap)(_))
@@ -288,5 +294,5 @@ object Main:
   // val humids2 = temps2.map(checkAllTriples(tempToHumidMap)(_))
   // val locs2 = humids2.map(checkAllTriples(humidToLocMap)(_))
   // val result2 = locs2.min // part 2
-Main.result1 // part 1: 318728750
+// Main.result1 // part 1: 318728750
 // Main.result2 // part 2: 37384986

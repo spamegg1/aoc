@@ -112,6 +112,7 @@ object Parsing:
 
 object Solving:
   import DataDefs.*
+
   private def solve(pred: Predicate)(lines: Group) = Parsing
     .parse(lines)
     .map(group => ('a' to 'z').count(char => pred(group)(_.contains(char))))
@@ -121,15 +122,15 @@ object Solving:
   lazy val solve2 = solve(_.forall)
 
 object Testing:
-  private lazy val lines = os.read.lines(os.pwd / "06.test.input.txt").toList
-  lazy val result1 = Solving.solve1(lines)
-  lazy val result2 = Solving.solve2(lines)
-Testing.result1 // part 1: 11
-Testing.result2 // part 2: 6
+  private lazy val lines = os.read.lines(os.pwd / "2020" / "06" / "06.test.input.txt")
+  lazy val result1 = Solving.solve1(lines.toList)
+  lazy val result2 = Solving.solve2(lines.toList)
+// Testing.result1 // part 1: 11
+// Testing.result2 // part 2: 6
 
 object Main:
-  private lazy val lines = os.read.lines(os.pwd / "06.input.txt").toList
+  private lazy val lines = os.read.lines(os.pwd / "2020" / "06" / "06.input.txt").toList
   lazy val result1 = Solving.solve1(lines)
   lazy val result2 = Solving.solve2(lines)
-Main.result1 // part 1: 6680
-Main.result2 // part 2: 3117
+// Main.result1 // part 1: 6680
+// Main.result2 // part 2: 3117

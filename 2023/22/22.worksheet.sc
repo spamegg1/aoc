@@ -232,15 +232,15 @@ object Solving:
     disintegrable(settled).size
 
 object Testing:
-  val lines = os.read.lines(os.pwd / "22.test.input.txt")
+  val lines = os.read.lines(os.pwd / "2023" / "22" / "22.test.input.txt")
   lazy val result1 = Solving.solve1(lines)
   lazy val result2 = 0
-Testing.result1 // part 1: 5
-Testing.result2 // part 2: ???
+// Testing.result1 // part 1: 5
+// Testing.result2 // part 2: ???
 
 object Main:
-  private val lines = os.read.lines(os.pwd / "22.input.txt")
+  private val lines = os.read.lines(os.pwd / "2023" / "22" / "22.input.txt")
   lazy val result1 = Solving.solve1(lines)
   lazy val result2 = 0
-Main.result1 // part 1: 512
-Main.result2 // part 2: 98167
+// Main.result1 // part 1: 512
+// Main.result2 // part 2: 98167

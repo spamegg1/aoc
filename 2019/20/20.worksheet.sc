@@ -111,8 +111,8 @@ object Solving:
   def solve2(lines: Seq[String]) = 0L
 
 object Testing:
-  private lazy val lines1 = os.read.lines(os.pwd / "20.test.input.1.txt")
-  private lazy val lines2 = os.read.lines(os.pwd / "20.test.input.2.txt")
+  private lazy val lines1 = os.read.lines(os.pwd / "2019" / "20" / "20.test.input.1.txt")
+  private lazy val lines2 = os.read.lines(os.pwd / "2019" / "20" / "20.test.input.2.txt")
   lazy val result11 = Solving.solve1(lines1)
   lazy val result12 = Solving.solve1(lines2)
   lazy val result2 = Solving.solve2(lines1)
@@ -121,7 +121,7 @@ object Testing:
 // Testing.result2 // part 2:
 
 object Main:
-  lazy val lines = os.read.lines(os.pwd / "20.input.txt")
+  lazy val lines = os.read.lines(os.pwd / "2019" / "20" / "20.input.txt")
   lazy val result1 = Solving.solve1(lines)
   lazy val result2 = Solving.solve2(lines)
 // Main.result1 // part 1:

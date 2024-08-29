@@ -185,14 +185,14 @@ object Solving:
   def solve2(lines: Seq[String])(deckSize: Int)(card: Int) = 0L
 
 object Testing:
-  private lazy val lines = os.read.lines(os.pwd / "22.test.input.txt")
+  private lazy val lines = os.read.lines(os.pwd / "2019" / "22" / "22.test.input.txt")
   lazy val result1 = Solving.solve1(lines)(10)(0)
   lazy val result2 = Solving.solve2(lines)(10)(0)
 // Testing.result1 // part 1: 9 2 5 8 1 4 7 0 3 6
 // Testing.result2 // part 2:
 
 object Main:
-  lazy val lines = os.read.lines(os.pwd / "22.input.txt")
+  lazy val lines = os.read.lines(os.pwd / "2019" / "22" / "22.input.txt")
   lazy val result1 = Solving.solve1(lines)(10007)(2019)
   lazy val result2 = Solving.solve2(lines)(10007)(2019)
 // Main.result1 // part 1:

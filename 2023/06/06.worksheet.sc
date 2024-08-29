@@ -115,6 +115,7 @@ object DataDefs:
 
 object Parsing:
   import DataDefs.*
+
   def parseLine1(line: String) = line match // part 1
     case s"Time: $a"     => a.trim.split(" ").filter(_.nonEmpty).map(_.toLong).toSeq
     case s"Distance: $a" => a.trim.split(" ").filter(_.nonEmpty).map(_.toLong).toSeq
@@ -129,6 +130,7 @@ object Parsing:
 
 object Solving:
   import DataDefs.*
+
   private def disc(t: Double, d: Double) = math.sqrt(t * t - 4 * d)
   def waysToWin(race: Race): Long =
     val (t, d) = (race.time.toDouble, race.distance.toDouble)
@@ -139,23 +141,21 @@ object Solving:
     res2.toLong - res1.toLong + 1L
 
 object Testing:
-  val testInput = """
-    |Time:      7  15   30
-    |Distance:  9  40  200""".stripMargin.split("\n").filter(_.nonEmpty).toSeq
-  val raceData = Parsing.parseData(testInput)
-  val races1 = raceData(Parsing.parseLine1)
-  val races2 = raceData(Parsing.parseLine2)
-  val testResult1 = races1.map(Solving.waysToWin).product // part 1
-  val testResult2 = races2.map(Solving.waysToWin).head // part 2
-Testing.testResult1 // part 1: 288
-Testing.testResult2 // part 2: 71503
+  private lazy val lines = os.read.lines(os.pwd / "2023" / "06" / "06.test.input.txt")
+  lazy val raceData = Parsing.parseData(lines)
+  lazy val races1 = raceData(Parsing.parseLine1)
+  lazy val races2 = raceData(Parsing.parseLine2)
+  lazy val result1 = races1.map(Solving.waysToWin).product // part 1
+  lazy val result2 = races2.map(Solving.waysToWin).head // part 2
+// Testing.result1 // part 1: 288
+// Testing.result2 // part 2: 71503
 
 object Main:
-  val lines: Seq[String] = os.read.lines(os.pwd / "06.input.txt")
-  val raceData = Parsing.parseData(lines)
-  val races1 = raceData(Parsing.parseLine1)
-  val races2 = raceData(Parsing.parseLine2)
-  val result1 = races1.map(Solving.waysToWin).product
-  val result2 = races2.map(Solving.waysToWin).head
-Main.result1 // part 1: 316800
-Main.result2 // part 2: 45647654
+  private lazy val lines = os.read.lines(os.pwd / "2023" / "06" / "06.input.txt")
+  lazy val raceData = Parsing.parseData(lines)
+  lazy val races1 = raceData(Parsing.parseLine1)
+  lazy val races2 = raceData(Parsing.parseLine2)
+  lazy val result1 = races1.map(Solving.waysToWin).product
+  lazy val result2 = races2.map(Solving.waysToWin).head
+// Main.result1 // part 1: 316800
+// Main.result2 // part 2: 45647654

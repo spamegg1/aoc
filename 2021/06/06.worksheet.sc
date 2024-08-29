@@ -109,17 +109,17 @@ object Solving:
     lantern.fish.values.sum
 
 object Testing:
-  private lazy val lines = os.read.lines(os.pwd / "06.test.input.txt")
+  private lazy val lines = os.read.lines(os.pwd / "2021" / "06" / "06.test.input.txt")
   lazy val result11 = Solving.solve(lines)(18)
   lazy val result12 = Solving.solve(lines)(80)
   lazy val result2 = Solving.solve(lines)(256)
-Testing.result11 // part 1: 26
-Testing.result12 // part 1: 5934
-Testing.result2 // part 2: 26984457539
+// Testing.result11 // part 1: 26
+// Testing.result12 // part 1: 5934
+// Testing.result2 // part 2: 26984457539
 
 object Main:
-  private lazy val lines = os.read.lines(os.pwd / "06.input.txt")
+  private lazy val lines = os.read.lines(os.pwd / "2021" / "06" / "06.input.txt")
   lazy val result1 = Solving.solve(lines)(80)
   lazy val result2 = Solving.solve(lines)(256)
-Main.result1 // part 1: 372984
-Main.result2 // part 2: 1681503251694
+// Main.result1 // part 1: 372984
+// Main.result2 // part 2: 1681503251694

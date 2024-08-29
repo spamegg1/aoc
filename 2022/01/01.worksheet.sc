@@ -103,15 +103,15 @@ object Solving:
     .sum
 
 object Testing:
-  private lazy val lines = os.read(os.pwd / "01.test.input.txt")
+  private lazy val lines = os.read(os.pwd / "2022" / "01" / "01.test.input.txt")
   lazy val result1 = Solving.solve1(lines)
   lazy val result2 = Solving.solve2(lines)
-Testing.result1 // part 1: 24000
-Testing.result2 // part 2: 45000
+// Testing.result1 // part 1: 24000
+// Testing.result2 // part 2: 45000
 
 object Main:
-  private lazy val lines = os.read(os.pwd / "01.input.txt")
+  private lazy val lines = os.read(os.pwd / "2022" / "01" / "01.input.txt")
   lazy val result1 = Solving.solve1(lines)
   lazy val result2 = Solving.solve2(lines)
-Main.result1 // part 1: 71124
-Main.result2 // part 2: 204639
+// Main.result1 // part 1: 71124
+// Main.result2 // part 2: 204639

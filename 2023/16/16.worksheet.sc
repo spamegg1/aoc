@@ -231,15 +231,15 @@ object Solving:
     part2Beams.map(beam => countEnergized(grid)(List(beam))).max
 
 object Testing:
-  lazy val lines = os.read.lines(os.pwd / "16.test.input.txt")
+  private lazy val lines = os.read.lines(os.pwd / "2023" / "16" / "16.test.input.txt")
   lazy val result1 = Solving.solve1(lines)
   lazy val result2 = Solving.solve2(lines)
-Testing.result1 // part 1: 46
-Testing.result2 // part 2: 51
+// Testing.result1 // part 1: 46
+// Testing.result2 // part 2: 51
 
 object Main:
-  private lazy val lines = os.read.lines(os.pwd / "16.input.txt")
+  private lazy val lines = os.read.lines(os.pwd / "2023" / "16" / "16.input.txt")
   lazy val result1 = Solving.solve1(lines)
   lazy val result2 = Solving.solve2(lines)
-Main.result1 // part 1: 8021
+// Main.result1 // part 1: 8021
 // Main.result2 // part 2: 8216 // very slow! 2 mins, needs speeding up
