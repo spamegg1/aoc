@@ -169,7 +169,7 @@ object Testing:
 
 object Main:
   private lazy val lines = os.read.lines(os.pwd / "2023" / "03" / "03.input.txt")
-  lazy val result1 = Summing.sumPartNumbers(lines)
-  lazy val result2 = Summing.sumGearRatios(lines)
+  lazy val result1 = Solving.sumPartNumbers(lines)
+  lazy val result2 = Solving.sumGearRatios(lines)
 // Main.result1 // Part 1: 514969
 // Main.result2 // Part 2: 78915902

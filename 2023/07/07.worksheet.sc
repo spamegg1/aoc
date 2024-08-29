@@ -248,10 +248,10 @@ object Solving:
 object Testing:
   private lazy val lines = os.read.lines(os.pwd / "2023" / "07" / "07.test.input.txt")
   object Part1:
-    val result = Solving.solve(testInput)
+    val result = Solving.solve(lines)
   object Part2:
     import DataDefs.Joker.given // get more specific givens!
-    val result = Solving.solve(testInput)
+    val result = Solving.solve(lines)
 // Testing.Part1.result // part 1: 6440
 // Testing.Part2.result // part 2: 5905
 

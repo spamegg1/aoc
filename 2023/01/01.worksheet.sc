@@ -95,14 +95,14 @@ object Solving:
   def lineToValue(line: String): Int = // Part 2
     val matches = regex.findAllMatchIn(line).map(_.group(1)).toVector
     val (first, last) = (numbers(matches.head), numbers(matches.last))
-    first * 10 + last  
-  
+    first * 10 + last
+
   def solve1(lines: Seq[String]) = lines.map(calibrationValue).sum
   def solve2(lines: Seq[String]) = lines.map(lineToValue).sum
 
 object Testing: // Handle overlapping matches
-  val eightyThree = lineToValue("eighthree") // should be 83 not 88
-  val seventyNine = lineToValue("sevenine") // should be 79 not 77
+  val eightyThree = Solving.lineToValue("eighthree") // should be 83 not 88
+  val seventyNine = Solving.lineToValue("sevenine") // should be 79 not 77
 
 object Main:
   private lazy val lines = os.read.lines(os.pwd / "2023" / "01" / "01.input.txt")

@@ -156,6 +156,10 @@ object GameDefs:
     Game(gameId, bestHand)
 
 object Solving:
+  import DataDefs.*, Color.*
+
+  val globalLimit = Hand(Cubes(Red, 12), Cubes(Green, 13), Cubes(Green, 14))
+
   def solve1(lines: Seq[String])(globalLimit: Hand) = lines.view
     .map(GameDefs.lineToGame)
     .filter(_.hand.isLegal(globalLimit))
@@ -171,16 +175,14 @@ object Testing:
   private lazy val badLine = "Game 3: 8 green, 6 blue, 20 red; 5 blue, 4 red, 13 green"
   private lazy val goodGame = GameDefs.lineToGame(goodLine)
   private lazy val badGame = GameDefs.lineToGame(badLine)
-  lazy val good = goodGame.hand.isLegal(Main.globalLimit)
-  lazy val bad = badGame.hand.isLegal(Main.globalLimit)
+  lazy val good = goodGame.hand.isLegal(Solving.globalLimit)
+  lazy val bad = badGame.hand.isLegal(Solving.globalLimit)
 // Testing.good // true
 // Testing.bad // false
 
 object Main:
-  import DataDefs.*, Color.*
-  private val globalLimit = Hand(Cubes(Red, 12), Cubes(Green, 13), Cubes(Green, 14))
   private lazy val lines = os.read.lines(os.pwd / "2023" / "02" / "02.input.txt")
-  lazy val result1 = Solving.solve1(lines)(globalLimit)
+  lazy val result1 = Solving.solve1(lines)(Solving.globalLimit)
   lazy val result2 = Solving.solve2(lines)
 // Main.result1 // Part 1: 2913
 // Main.result2 // Part 2: 55593

@@ -307,7 +307,7 @@ object Testing:
 
   private lazy val lines2 = os.read.lines(os.pwd / "2023" / "10" / "10.test.input.2.txt")
   private lazy val animal2 = Coord(0, 4, List(S, W)) // just look at the input for this.
-  private lazy val exitMaze2 = Parsing.parseExits(testInput2)
+  private lazy val exitMaze2 = Parsing.parseExits(lines2)
   private lazy val coordMaze2 = Parsing.parseCoords(exitMaze2)
   private lazy val loop2 = Solving.findLoop(coordMaze2)(animal2)
   private lazy val loopLines = Solving.loopByLines(20)(loop2)
