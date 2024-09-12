@@ -53,30 +53,67 @@ The four square inches marked with X are claimed by both 1 and 2.
 
 If the Elves all proceed with their own plans, none of them will have enough fabric.
 How many square inches of fabric are within two or more claims?
+
+--- Part Two ---
+Amidst the chaos, you notice that exactly one claim doesn't overlap
+by even a single square inch of fabric with any other claim.
+If you can somehow draw attention to it, maybe the Elves
+will be able to make Santa's suit after all!
+
+For example, in the claims above, only claim 3
+is intact after all claims are made.
+
+What is the ID of the only claim that doesn't overlap?
+
  */
 object DataDefs:
-  ???
+  case class Claim(id: Int, rows: Range, cols: Range):
+    def intersect(that: Claim) =
+      for
+        row <- rows.intersect(that.rows)
+        col <- cols.intersect(that.cols)
+      yield (row, col)
 
 object Parsing:
   import DataDefs.*
 
-  def parse(lines: Seq[String]) = ???
+  private def parseLine(line: String) = line match
+    case s"#$id @ $row,$col: ${rows}x$cols" =>
+      Claim(
+        id.toInt,
+        Range(row.toInt, row.toInt + rows.toInt),
+        Range(col.toInt, col.toInt + cols.toInt)
+      )
+
+  def parse(lines: Seq[String]) = lines map parseLine
 
 object Solving:
   import DataDefs.*
-  def solve1(lines: Seq[String]) = 0L
-  def solve2(lines: Seq[String]) = 0L
+  def solve1(lines: Seq[String]) = Parsing
+    .parse(lines)
+    .combinations(2)
+    .flatMap { case Seq(c1, c2) => c1.intersect(c2) }
+    .distinct
+    .size
+
+  def solve2(lines: Seq[String]) =
+    val claims = Parsing.parse(lines)
+    claims
+      .find: c1 =>
+        claims.forall(c2 => c1 == c2 || c1.intersect(c2).isEmpty)
+      .get
+      .id
 
 object Testing:
-  private lazy val lines = os.read.lines(os.pwd / "2018" / "03" / "03.test.input.txt")
+  lazy val lines = os.read.lines(os.pwd / "2018" / "03" / "03.test.input.txt")
   lazy val result1 = Solving.solve1(lines)
   lazy val result2 = Solving.solve2(lines)
 // Testing.result1 // part 1: 4
-// Testing.result2 // part 2: ???
+// Testing.result2 // part 2: 3
 
 object Main:
   private lazy val lines = os.read.lines(os.pwd / "2018" / "03" / "03.input.txt")
   lazy val result1 = Solving.solve1(lines)
   lazy val result2 = Solving.solve2(lines)
-// Main.result1 // part 1: ???
-// Main.result2 // part 2: ???
+// Main.result1 // part 1: 110389
+// Main.result2 // part 2: 552
