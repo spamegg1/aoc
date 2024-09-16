@@ -162,29 +162,50 @@ Of course, your message will be much longer and will take many more seconds to a
 
 What message will eventually appear in the sky?
 
+--- Part Two ---
+Good thing you didn't have to wait,
+because that would have taken a long time -
+much longer than the 3 seconds in the example above.
+
+Impressed by your sub-hour communication capabilities,
+the Elves are curious: exactly how many seconds would
+they have needed to wait for that message to appear?
  */
 object DataDefs:
-  ???
+  case class Light(px: Int, py: Int, vx: Int, vy: Int):
+    def move(seconds: Int) = Light(px + vx * seconds, py + vy * seconds, vx, vy)
+
+  case class Grid(lights: Seq[Light]):
+    val minHeight = lights.minBy(_.py).py
+    val minWidth = lights.minBy(_.px).px
+    val maxHeight = lights.maxBy(_.py).py + 1
+    val maxWidth = lights.maxBy(_.px).px + 1
+    val array = Array.fill(maxHeight - minHeight)(Array.fill(maxWidth - minWidth)(' '))
+    val grid =
+      for light <- lights do array(light.py - minHeight)(light.px - minWidth) = '#'
+      array
+    val show: String = grid.map(_.mkString).mkString("\n")
 
 object Parsing:
   import DataDefs.*
-  def parse(lines: Seq[String]) = ???
+
+  def parseLine(line: String) = line match
+    case s"position=<$px,$py>velocity=<$vx,$vy>" =>
+      Light(px.toInt, py.toInt, vx.toInt, vy.toInt)
+
+  def parse(lines: Seq[String]) = lines map parseLine
 
 object Solving:
   import DataDefs.*
-  def solve1(lines: Seq[String]) = 0L
-  def solve2(lines: Seq[String]) = 0L
 
-object Testing:
-  private lazy val lines = os.read.lines(os.pwd / "2018" / "10" / "10.test.input.txt")
-  lazy val result1 = Solving.solve1(lines)
-  lazy val result2 = Solving.solve2(lines)
-// Testing.result1 // part 1: ???
-// Testing.result2 // part 2: ???
+  def solve(lines: Seq[String]): Unit =
+    val lights = Parsing.parse(lines)
+    val guess = 10595 // 10000 is obvious from input, rest is guesswork
+    val newLights = lights map (_.move(guess))
+    val grid = Grid(newLights)
+    os.write(os.pwd / "2018" / "10" / s"${guess}.txt", grid.show)
 
 object Main:
   private lazy val lines = os.read.lines(os.pwd / "2018" / "10" / "10.input.txt")
-  lazy val result1 = Solving.solve1(lines)
-  lazy val result2 = Solving.solve2(lines)
-// Main.result1 // part 1: ???
-// Main.result2 // part 2: ???
+  lazy val result = Solving.solve(lines) // check output text file
+// Main.result // part 1: JLPZFJRH, part 2: 10595

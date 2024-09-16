@@ -74,33 +74,80 @@ Here are a few more examples:
 
 What is the winning Elf's score?
 
+--- Part Two ---
+Amused by the speed of your answer, the Elves are curious:
+What would the new winning Elf's score be if the number
+of the last marble were 100 times larger?
  */
-object DataDefs:
-  ???
+import collection.mutable.ArrayDeque
 
-object Parsing:
-  import DataDefs.*
-  def parse(lines: Seq[String]) = ???
+object DataDefs:
+  type Scores = Map[Int, Long] // elf player -> that elf's score
+
+  extension (deque: ArrayDeque[Long])
+    def shiftLeft(by: Int): Unit = // remove from left-end, append to right-end
+      for _ <- 1 to by do // assume by > 0
+        val first = deque.removeHead()
+        deque.append(first)
+    def shiftRight(by: Int): Unit = // remove from right-end, prepend to left-end
+      for _ <- 1 to by do // assume by > 0
+        val last = deque.removeLast()
+        deque.prepend(last)
+    def shift(by: Int): Unit = if by < 0 then shiftLeft(-by) else shiftRight(by)
+
+  case class State(
+      scores: Scores,
+      marbles: ArrayDeque[Long],
+      curElf: Int,
+      players: Int,
+      nextMarble: Long
+  ):
+    def highScore = scores.values.max // part 1
+
+    def handleMarbles: Long = // mutates marbles, returns score
+      if nextMarble % 23L == 0 then
+        marbles.shift(7)
+        val deleted = marbles.removeHead()
+        deleted + nextMarble
+      else
+        marbles.shift(-2)
+        marbles.prepend(nextMarble)
+        0L
+
+    def next =
+      val score = handleMarbles
+      State(
+        scores = scores.updated(curElf, scores(curElf) + score),
+        marbles = marbles,
+        curElf = (curElf + 1) % players,
+        players = players,
+        nextMarble = nextMarble + 1L
+      )
+
+  object State:
+    def apply(players: Int) = new State(
+      scores = Map.from((0 until players).map(p => (p, 0L))),
+      marbles = ArrayDeque(0L),
+      curElf = 0,
+      players = players,
+      nextMarble = 1L
+    )
 
 object Solving:
   import DataDefs.*
 
-  def solve1(players: Int)(lastMarble: Int) = 0L
-  def solve2(players: Int)(lastMarble: Int) = 0L
+  def solve(players: Int)(lastMarble: Long) =
+    var state = State(players)
+    while state.nextMarble <= lastMarble do state = state.next
+    state.highScore
 
 object Testing:
-  // 10 players; last marble is worth 1618 points: high score is 8317
-  // 13 players; last marble is worth 7999 points: high score is 146373
-  // 17 players; last marble is worth 1104 points: high score is 2764
-  // 21 players; last marble is worth 6111 points: high score is 54718
-  // 30 players; last marble is worth 5807 points: high score is 37305
-  lazy val result1 = Solving.solve1(0)(0)
-  lazy val result2 = Solving.solve2(0)(0)
-// Testing.result1 // part 1:
-// Testing.result2 // part 2:
+  val pt1 = Seq((9, 25L), (10, 1618L), (13, 7999L), (17, 1104L), (21, 6111L), (30, 5807L))
+  lazy val result1 = pt1.map((p, m) => Solving.solve(p)(m))
+// Testing.result1 // part 1: 32,8317,146373,2764,54718,37305
 
-object Main: // 470 players; last marble is worth 72170 points
-  lazy val result1 = Solving.solve1(470)(72170)
-  lazy val result2 = Solving.solve2(470)(72170)
-// Main.result1 // part 1:
-// Main.result2 // part 2:
+object Main:
+  lazy val result1 = Solving.solve(470)(72170L)
+  lazy val result2 = Solving.solve(470)(7217000L)
+// Main.result1 // part 1: 388024
+// Main.result2 // part 2: 3180929875
