@@ -68,26 +68,88 @@ For grid serial number 42, the largest 3x3 square's top-left is 21,61
 What is the X,Y coordinate of the top-left fuel cell of the
 3x3 square with the largest total power?
 
+--- Part Two ---
+You discover a dial on the side of the device;
+it seems to let you select a square of any size,
+not just 3x3. Sizes from 1x1 to 300x300 are supported.
+
+Realizing this, you now must find the square of any size
+with the largest total power. Identify this square by including
+its size as a third parameter after the top-left coordinate:
+  a 9x9 square with a top-left corner of 3,5 is identified as 3,5,9.
+
+For example:
+For grid serial number 18, the largest total square (with a total power of 113)
+  is 16x16 and has a top-left corner of 90,269, so its identifier is 90,269,16.
+For grid serial number 42, the largest total square (with a total power of 119)
+  is 12x12 and has a top-left corner of 232,251, so its identifier is 232,251,12.
+
+What is the X,Y,size identifier of the square with the largest total power?
  */
+import collection.parallel.CollectionConverters.*
+
 object DataDefs:
-  ???
+  case class Grid(gridSize: Int, serial: Long):
+    lazy val axis = 1 to gridSize
+
+    lazy val powers =
+      (for
+        x <- axis
+        y <- axis
+      yield (x, y) -> Grid.power(x, y, serial)).toMap
+
+    lazy val show =
+      (for x <- axis
+      yield (for y <- axis yield powers(x, y)).mkString("\t")).mkString("\n")
+
+    def squareSum(coordinate: (Int, Int), squareSize: Int) =
+      val (x, y) = coordinate
+      val bound = gridSize - squareSize + 1
+      if x <= bound && y <= bound then
+        (for
+          xx <- x until x + squareSize
+          yy <- y until y + squareSize
+        yield powers((xx, yy))).sum
+      else 0L
+
+  object Grid:
+    def power(x: Int, y: Int, serial: Long) =
+      val rackId = x + 10L
+      val inter = (rackId * y + serial) * rackId / 100
+      inter.toString.last.asDigit - 5L
 
 object Solving:
   import DataDefs.*
-  def solve1(lines: Int) = 0L
-  def solve2(lines: Int) = 0L
+
+  def solve1(gridSize: Int, squareSize: Int)(serial: Long) =
+    val grid = Grid(gridSize, serial)
+    grid.powers.par
+      .map: (coordinate, power) =>
+        coordinate -> grid.squareSum(coordinate, squareSize)
+      .maxBy(_._2)
+
+  def solve2(gridSize: Int)(serial: Long) =
+    val grid = Grid(gridSize, serial)
+    (1 to 16).par // only up to 16 instead of 300, because grid is very negative
+      .map: squareSize =>
+        squareSize -> solve1(gridSize, squareSize)(serial)
+      .maxBy(_._2._2)
 
 object Testing:
-  // Fuel cell at  122,79, grid serial number 57: power level-5.
-  // Fuel cell at 217,196, grid serial number 39: power level 0.
-  // Fuel cell at 101,153, grid serial number 71: power level 4.
-  lazy val result1 = Solving.solve1(0)
-  lazy val result2 = Solving.solve2(0)
-// Testing.result1 // part 1: ???
-// Testing.result2 // part 2: ???
+  private lazy val inputs = Seq((122, 79, 57L), (217, 196, 39L), (101, 153, 71L))
+  private lazy val serials = Seq(18L, 42L)
+  lazy val powers = inputs.map(DataDefs.Grid.power)
+  lazy val result1 = serials map Solving.solve1(300, 3)
+  lazy val result2 = serials map Solving.solve2(300)
+// Testing.powers // -5, 0, 4
+// Testing.result1 // part 1: ((33,45),29),((21,61),30)
+// Testing.result2 // part 2: (16,((90,269),113)),(12,((232,251),119))
 
 object Main:
-  lazy val result1 = Solving.solve1(8444)
-  lazy val result2 = Solving.solve2(8444)
-// Main.result1 // part 1: ???
-// Main.result2 // part 2: ???
+  lazy val result1 = Solving.solve1(300, 3)(8444L)
+  lazy val result2 = Solving.solve2(300)(8444L)
+// Main.result1 // part 1: ((243,68),28)
+// Main.result2 // part 2: (12,((236,252),96))
+
+// val g = DataDefs.Grid(300, 8444L)
+// os.write(os.pwd / "2018" / "11" / "powers.txt", g.show)
