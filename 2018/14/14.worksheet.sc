@@ -8,7 +8,8 @@ When you go to investigate, you discover two Elves in what appears
 to be a makeshift underground kitchen/laboratory.
 
 The Elves are trying to come up with the ultimate hot chocolate recipe;
-they're even maintaining a scoreboard which tracks the quality score (0-9) of each recipe.
+they're even maintaining a scoreboard which tracks the quality
+score (0-9) of each recipe.
 
 Only two recipes are on the board: the first recipe got a
 score of 3, the second, 7. Each of the two Elves has a current recipe:
@@ -23,16 +24,20 @@ score 1 and the second with score 0. If the current recipes' scores
 were 2 and 3, the sum, 5, would only create one recipe (with a score of 5)
 with its single digit.
 
-The new recipes are added to the end of the scoreboard in the order they are created.
+The new recipes are added to the end of the scoreboard in
+the order they are created.
 So, after the first round, the scoreboard is 3, 7, 1, 0.
 
-After all new recipes are added to the scoreboard, each Elf picks a new current recipe.
+After all new recipes are added to the scoreboard,
+each Elf picks a new current recipe.
 To do this, the Elf steps forward through the scoreboard a number of recipes
 equal to 1 plus the score of their current recipe.
 So, after the first round, the first Elf moves forward 1 + 3 = 4 times,
 while the second Elf moves forward 1 + 7 = 8 times. If they run out of recipes,
-they loop back around to the beginning. After the first round, both Elves happen
-to loop around until they land on the same recipe that they had in the beginning;
+they loop back around to the beginning.
+After the first round, both Elves happen
+to loop around until they land on the same recipe
+that they had in the beginning;
 in general, they will move to different recipes.
 
 Drawing the first Elf as parentheses and the second Elf as square brackets,
@@ -55,12 +60,15 @@ they continue this process:
  3  7 [1] 0  1  0 (1) 2  4  5  1  5  8  9  1  6  7  7  9
  3  7  1  0 [1] 0  1  2 (4) 5  1  5  8  9  1  6  7  7  9  2
 
-The Elves think their skill will improve after making a few recipes (your puzzle input).
-However, that could take ages; you can speed this up considerably by identifying
+The Elves think their skill will improve after making a few recipes
+(your puzzle input).
+However, that could take ages; you can speed this up
+considerably by identifying
 the scores of the ten recipes after that. For example:
   If the Elves think their skill will improve after making 9 recipes,
     the scores of the ten recipes after the first nine on
-    the scoreboard would be 5158916779 (highlighted in the last line of the diagram).
+    the scoreboard would be 5158916779 (highlighted in the last line
+    of the diagram).
   After 5 recipes, the scores of the next ten would be 0124515891.
   After 18 recipes, the scores of the next ten would be 9251071085.
   After 2018 recipes, the scores of the next ten would be 5941429882.
@@ -78,13 +86,10 @@ object Solving:
   def solve2(lines: Int) = 0L
 
 object Testing:
-  // After 9 recipes, the scores of the next ten would be 5158916779.
-  // After 5 recipes, the scores of the next ten would be 0124515891.
-  // After 18 recipes, the scores of the next ten would be 9251071085.
-  // After 2018 recipes, the scores of the next ten would be 5941429882.
-  lazy val result1 = Solving.solve1(0)
+  lazy val recipes = Seq(5, 9, 18, 2018)
+  lazy val result1 = recipes map Solving.solve1
   lazy val result2 = Solving.solve2(0)
-// Testing.result1 // part 1: ???
+// Testing.result1 // part 1: 0124515891,5158916779,9251071085,5941429882
 // Testing.result2 // part 2: ???
 
 object Main:

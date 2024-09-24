@@ -1,4 +1,4 @@
-//> using scala 3.5.0
+//> using scala 3.5.1
 //> using toolkit 0.5.0
 //> using dep org.apache.commons:commons-digester3:3.2
 //> using dep org.apache.commons:commons-math4-core:4.0-beta1
