@@ -13,8 +13,8 @@ score (0-9) of each recipe.
 
 Only two recipes are on the board: the first recipe got a
 score of 3, the second, 7. Each of the two Elves has a current recipe:
-  the first Elf starts with the first recipe, and the second
-  Elf starts with the second recipe.
+  the first Elf starts with the first recipe, and
+  the second Elf starts with the second recipe.
 
 To create new recipes, the two Elves combine their current recipes.
 This creates new recipes from the digits of the sum of the current
@@ -33,8 +33,8 @@ each Elf picks a new current recipe.
 To do this, the Elf steps forward through the scoreboard a number of recipes
 equal to 1 plus the score of their current recipe.
 So, after the first round, the first Elf moves forward 1 + 3 = 4 times,
-while the second Elf moves forward 1 + 7 = 8 times. If they run out of recipes,
-they loop back around to the beginning.
+while the second Elf moves forward 1 + 7 = 8 times.
+If they run out of recipes, they loop back around to the beginning.
 After the first round, both Elves happen
 to loop around until they land on the same recipe
 that they had in the beginning;
@@ -76,24 +76,57 @@ the scores of the ten recipes after that. For example:
 What are the scores of the ten recipes immediately
 after the number of recipes in your puzzle input?
 
+--- Part Two ---
+As it turns out, you got the Elves' plan backwards.
+They actually want to know how many recipes appear
+on the scoreboard to the left of the first recipes
+whose scores are the digits from your puzzle input.
+  51589 first appears after 9 recipes.
+  01245 first appears after 5 recipes.
+  92510 first appears after 18 recipes.
+  59414 first appears after 2018 recipes.
+
+How many recipes appear on the scoreboard to
+the left of the score sequence in your puzzle input?
  */
+import collection.mutable.ArrayDeque
+
 object DataDefs:
-  ???
+  case class Recipes(recipes: ArrayDeque[Int], elf1: Int, elf2: Int, size: Int):
+    val total = recipes(elf1) + recipes(elf2)
+    def newRecipes = if total < 10 then Seq(total) else Seq(total / 10, total % 10)
+    val nextSize = size + (if total < 10 then 1 else 2)
+    def nextElf1 = (elf1 + recipes(elf1) + 1) % nextSize
+    def nextElf2 = (elf2 + recipes(elf2) + 1) % nextSize
+    def nextRecipes = recipes.appendAll(newRecipes)
+    def next = Recipes(nextRecipes, nextElf1, nextElf2, nextSize)
+    def show = recipes.mkString
 
 object Solving:
   import DataDefs.*
-  def solve1(lines: Int) = 0L
-  def solve2(lines: Int) = 0L
+
+  def solve1(start: ArrayDeque[Int], count: Int) =
+    var recipes = Recipes(start, 0, 1, start.size)
+    while recipes.size < count + 10 do recipes = recipes.next
+    recipes.recipes.drop(count).take(10).mkString
+
+  def solve2(start: ArrayDeque[Int], appear: String) =
+    var recipes = Recipes(start, 0, 1, start.size)
+    while !recipes.show.contains(appear) do recipes = recipes.next
+    recipes.show.indexOf(appear)
 
 object Testing:
-  lazy val recipes = Seq(5, 9, 18, 2018)
-  lazy val result1 = recipes map Solving.solve1
-  lazy val result2 = Solving.solve2(0)
-// Testing.result1 // part 1: 0124515891,5158916779,9251071085,5941429882
-// Testing.result2 // part 2: ???
+  import DataDefs.*
+  var recipes = Recipes(ArrayDeque(3, 7), 0, 1, 2)
+  for _ <- 1 to 15 do recipes = recipes.next
+  lazy val result1 = Solving.solve1(ArrayDeque(3, 7), 2018)
+  lazy val result2 = Solving.solve2(ArrayDeque(3, 7), "59414")
+// Testing.recipes // 3710[1]012(4)51589167792
+// Testing.result1 // part 1: 5941429882
+// Testing.result2 // part 2: 2018
 
 object Main:
-  lazy val result1 = Solving.solve1(540391)
-  lazy val result2 = Solving.solve2(540391)
-// Main.result1 // part 1: ???
-// Main.result2 // part 2: ???
+  lazy val result1 = Solving.solve1(ArrayDeque(3, 7), 540391)
+  lazy val result2 = Solving.solve2(ArrayDeque(3, 7), "540391")
+// Main.result1 // part 1: 1474315445
+// Main.result2 // part 2: 20278122
