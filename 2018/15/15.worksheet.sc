@@ -7,9 +7,11 @@ Having perfected their hot chocolate, the Elves have a new problem:
 You scan the area, generating a map of the walls (#), open cavern (.),
 and starting position of every Goblin (G) and Elf (E) (your puzzle input).
 
-Combat proceeds in rounds; in each round, each unit that is still alive takes a turn,
+Combat proceeds in rounds; in each round,
+each unit that is still alive takes a turn,
 resolving all of its actions before the next unit's turn begins.
-On each unit's turn, it tries to move into range of an enemy (if it isn't already)
+On each unit's turn, it tries to move into range
+of an enemy (if it isn't already)
 and then attack (if it is in range).
 
 All units are very disciplined and always follow very strict combat rules.
@@ -31,12 +33,14 @@ These units:   turns in this order:
 Each unit begins its turn by identifying all possible targets (enemy units).
 If no targets remain, combat ends.
 
-Then, the unit identifies all of the open squares (.) that are in range of each target;
+Then, the unit identifies all of the open squares (.)
+that are in range of each target;
 these are the squares which are adjacent (immediately up, down, left, or right)
 to any target and which aren't already occupied by a wall or another unit.
 Alternatively, the unit might already be in range of a target.
 If the unit is not already in range of a target,
-and there are no open squares which are in range of a target, the unit ends its turn.
+and there are no open squares which are in range of a target,
+the unit ends its turn.
 
 If the unit is already in range of a target, it does not move,
 but continues its turn with an attack.
@@ -44,7 +48,8 @@ Otherwise, since it is not in range of a target, it moves.
 
 To move, the unit first considers the squares that are in range and
 determines which of those squares it could reach in the fewest steps.
-A step is a single movement to any adjacent (immediately up, down, left, or right)
+A step is a single movement to any adjacent
+(immediately up, down, left, or right)
 open (.) square. Units cannot move into walls or other units.
 The unit does this while considering the current positions of units
 and does not do any prediction about where units will be later.
@@ -64,16 +69,18 @@ In the above scenario, the Elf has three targets (the three Goblins):
   Each of the Goblins has open, adjacent squares which are in range
     (marked with a ? on the map).
   Of those squares, four are reachable (marked @);
-    the other two (on the right) would require moving through a wall or unit to reach.
+    the other two (on the right) would require moving through
+    a wall or unit to reach.
   Three of these reachable squares are nearest,
     requiring the fewest steps (only 2) to reach (marked !).
   Of those, the square which is first in reading order is chosen (+).
 
 The unit then takes a single step toward the chosen square along the
 shortest path to that square. If multiple steps would put the unit equally
-closer to its destination, the unit chooses the step which is first in reading order.
-(This requires knowing when there is more than one shortest path so that you can
-consider the first step of each such path.) For example:
+closer to its destination, the unit chooses the step
+which is first in reading order.
+(This requires knowing when there is more than one shortest path so
+that you can consider the first step of each such path.) For example:
 
 In range:     Nearest:      Chosen:       Distance:     Step:
 #######       #######       #######       #######       #######
@@ -82,7 +89,8 @@ In range:     Nearest:      Chosen:       Distance:     Step:
 #..?G?#       #..!G.#       #...G.#       #432G2#       #...G.#
 #######       #######       #######       #######       #######
 
-The Elf sees three squares in range of a target (?), two of which are nearest (!),
+The Elf sees three squares in range of a target (?),
+two of which are nearest (!),
 and so the first in reading order is chosen (+).
 Under "Distance", each open square is marked with its distance from
 the destination square; the two squares to which the Elf could move
@@ -141,7 +149,8 @@ Once the Goblins and Elf reach the positions above, they all are either
 in range of a target or cannot find any square in range of a target,
 and so none of the units can move until a unit dies.
 
-After moving (or if the unit began its turn in range of a target), the unit attacks.
+After moving (or if the unit began its turn in range of a target),
+the unit attacks.
 
 To attack, the unit first determines all of the targets that are in
 range of it by being immediately adjacent to it.
@@ -155,7 +164,8 @@ reducing its hit points by that amount. If this reduces its hit points
 to 0 or fewer, the selected target dies: its square becomes .
 and it takes no further turns.
 
-Each unit, either Goblin or Elf, has 3 attack power and starts with 200 hit points.
+Each unit, either Goblin or Elf, has 3 attack power
+and starts with 200 hit points.
 
 For example, suppose the only Elf is about to attack:
 
@@ -180,13 +190,16 @@ reducing its hit points to -1, killing it.
 
 After attacking, the unit's turn ends. Regardless of how the unit's turn ends,
 the next unit in the round takes its turn.
-If all units have taken turns in this round, the round ends, and a new round begins.
+If all units have taken turns in this round,
+the round ends, and a new round begins.
 
-The Elves look quite outnumbered. You need to determine the outcome of the battle:
+The Elves look quite outnumbered.
+You need to determine the outcome of the battle:
 the number of full rounds that were completed
 (not counting the round in which combat ends)
-multiplied by the sum of the hit points of all remaining units at
-the moment combat ends. (Combat only ends when a unit finds no targets during its turn.)
+multiplied by the sum of the hit points of all
+remaining units at the moment combat ends.
+(Combat only ends when a unit finds no targets during its turn.)
 
 Below is an entire sample combat. Next to each map, each row's units'
 hit points are listed from left to right.
@@ -371,10 +384,16 @@ object Solving:
   def solve2(lines: Seq[String]) = 0L
 
 object Testing:
-  private lazy val lines = os.read.lines(os.pwd / "2018" / "15" / "15.test.input.txt")
-  lazy val result1 = Solving.solve1(lines)
-  lazy val result2 = Solving.solve2(lines)
-// Testing.result1 // part 1: ???
+  private lazy val lines1 = os.read.lines(os.pwd / "2018" / "15" / "15.test.input.1.txt")
+  private lazy val lines2 = os.read.lines(os.pwd / "2018" / "15" / "15.test.input.2.txt")
+  private lazy val lines3 = os.read.lines(os.pwd / "2018" / "15" / "15.test.input.3.txt")
+  private lazy val lines4 = os.read.lines(os.pwd / "2018" / "15" / "15.test.input.4.txt")
+  private lazy val lines5 = os.read.lines(os.pwd / "2018" / "15" / "15.test.input.5.txt")
+  private lazy val lines6 = os.read.lines(os.pwd / "2018" / "15" / "15.test.input.6.txt")
+  private lazy val lines = Seq(lines1, lines2, lines3, lines4, lines5, lines6)
+  lazy val result1 = lines map Solving.solve1
+  lazy val result2 = Solving.solve2(lines1)
+// Testing.result1 // part 1: 27730,36334,39514,27755,28944,18740
 // Testing.result2 // part 2: ???
 
 object Main:
