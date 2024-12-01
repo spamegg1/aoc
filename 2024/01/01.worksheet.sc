@@ -119,9 +119,6 @@ end of this process is 31 (9 + 4 + 0 + 0 + 9 + 9).
 
 Once again consider your left and right lists. What is their similarity score?
  */
-object DataDefs:
-  extension (num: Long) def similarity(that: Seq[Long]) = that.count(_ == num) * num
-
 object Parsing:
   def parseLine(line: String) = line.split(" ").map(_.toLong).toSeq
   def parse(lines: Seq[String]) =
@@ -131,8 +128,6 @@ object Parsing:
     (lefts, rights)
 
 object Solving:
-  import DataDefs.*
-
   def solve1(lines: Seq[String]) =
     val (lefts, rights) = Parsing.parse(lines)
     lefts
@@ -142,7 +137,8 @@ object Solving:
 
   def solve2(lines: Seq[String]) =
     val (lefts, rights) = Parsing.parse(lines)
-    lefts.map(_.similarity(rights)).sum
+    val freqs = rights.groupMapReduce(identity)(_ => 1L)(_ + _)
+    lefts.map(left => freqs.getOrElse(left, 0L) * left).sum
 
 object Testing:
   private lazy val lines = os.read.lines(os.pwd / "2024" / "01" / "01.test.input.txt")
