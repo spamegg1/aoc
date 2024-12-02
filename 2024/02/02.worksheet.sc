@@ -68,18 +68,18 @@ Update your analysis by handling situations where the Problem Dampener
 can remove a single level from unsafe reports. How many reports are now safe?
  */
 object DataDefs:
-  case class Report(level: Seq[Long]):
-    lazy val pairs = level.init.zip(level.tail)
+  case class Report(levels: Seq[Long]):
+    val pairs = levels.init.zip(levels.tail)
     def allIncr: Boolean = pairs.forall(_ < _)
     def allDecr: Boolean = pairs.forall(_ > _)
     def within(lower: Long, upper: Long): Boolean = pairs.forall: pair =>
       val diff = math.abs(pair._1 - pair._2)
       lower <= diff && diff <= upper
     def isSafe: Boolean = (allIncr || allDecr) && within(1L, 3L)
-    def isDampenedSafe: Boolean = isSafe ||
-      (0 until level.size).exists: index =>
-        val newLevel = level.take(index) ++ level.drop(index + 1)
-        Report(newLevel).isSafe
+    def checkDampenedReports = (0 until levels.size).exists: index =>
+      val newLevels = levels.take(index) ++ levels.drop(index + 1)
+      Report(newLevels).isSafe
+    def isDampenedSafe: Boolean = isSafe || checkDampenedReports
 
 object Parsing:
   import DataDefs.*
@@ -87,13 +87,8 @@ object Parsing:
   def parse(lines: Seq[String]) = lines map parseLine
 
 object Solving:
-  def solve1(lines: Seq[String]) = Parsing
-    .parse(lines)
-    .count(_.isSafe)
-
-  def solve2(lines: Seq[String]) = Parsing
-    .parse(lines)
-    .count(_.isDampenedSafe)
+  def solve1(lines: Seq[String]) = Parsing.parse(lines).count(_.isSafe)
+  def solve2(lines: Seq[String]) = Parsing.parse(lines).count(_.isDampenedSafe)
 
 object Testing:
   private lazy val lines = os.read.lines(os.pwd / "2024" / "02" / "02.test.input.txt")
