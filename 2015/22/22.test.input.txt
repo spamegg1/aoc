@@ -1,2 +1,0 @@
-Player: 10 hit points, 250 mana
-Boss: 13 hit points, 8 damage

@@ -1,2 +1,0 @@
-Player: 8 hit points, 5 damage, 5 armor
-Boss: 12 hit points, 7 damage, 2 armor
