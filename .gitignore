@@ -57,5 +57,4 @@ bin/
 hs_err_pid*
 
 # AoC input files
-*.test.input.txt
-*.input.txt
+*.txt
