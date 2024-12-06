@@ -8,3 +8,4 @@
 //> using dep org.scala-graph:graph-core_2.13:2.0.2
 //> using dep org.scala-lang.modules::scala-parallel-collections:1.0.4
 //> using dep org.scala-lang.modules::scala-collection-contrib:0.4.0
+//> using options -experimental -language:experimental.namedTuples
