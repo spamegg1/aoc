@@ -210,7 +210,17 @@ object DataDefs:
 
   extension (r: Region)
     def perimeter = r.map(pos => pos.neighbors.count(!r.contains(_))).sum
-    def price     = r.perimeter * r.size
+    def groups: Regions = r.foldLeft(Seq.empty[Region]): (regs, pos) =>
+      val (regGroup, rest) = regs.partition(reg => pos.neighbors.exists(reg.contains(_)))
+      (Seq(pos) +: regGroup).reduce(_ ++ _) +: rest
+    def sides =
+      val north = r.filter(pos => !r.contains(pos.move(N))).groups.size
+      val south = r.filter(pos => !r.contains(pos.move(S))).groups.size
+      val east  = r.filter(pos => !r.contains(pos.move(E))).groups.size
+      val west  = r.filter(pos => !r.contains(pos.move(W))).groups.size
+      north + south + east + west
+    def price1 = r.perimeter * r.size // part 1
+    def price2 = r.sides * r.size     // part 2
 
 object Solving:
   import DataDefs.*, collection.mutable.{Set => MSet}
@@ -219,29 +229,30 @@ object Solving:
       map: Seq[String],
       size: Int
   ): Region =
-    if visited.contains(pos) then Seq()
-    else if map(pos.r)(pos.c) == plant then
+    if visited.contains(pos) || map(pos.r)(pos.c) != plant then Seq()
+    else
       visited += pos
       val rest = pos.possible(size).flatMap(findOneRegion(visited, plant))
       pos +: rest
-    else Seq()
 
   def findRegions(using map: Seq[String], size: Int): Regions =
     val visited = MSet.empty[Pos]
     for
       row <- 0 until size
       col <- 0 until size
-      pos = (r = row, c = col)
-      if !visited.contains(pos)
+      pos   = (r = row, c = col)
       plant = map(row)(col)
     yield findOneRegion(visited, plant)(pos)
 
   def solve1(lines: Seq[String]) =
     given map: Seq[String] = lines
     given size: Int        = lines.size // assume map is square
-    findRegions.map(_.price).sum
+    findRegions.map(_.price1).sum
 
-  def solve2(lines: Seq[String]) = 0L
+  def solve2(lines: Seq[String]) =
+    given map: Seq[String] = lines
+    given size: Int        = lines.size // assume map is square
+    findRegions.map(_.price2).sum
 
 object Testing:
   lazy val lines1  = os.read.lines(os.pwd / "2024" / "12" / "12.test.input.1.txt")
