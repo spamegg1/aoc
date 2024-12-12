@@ -163,8 +163,6 @@ You're not sure how, but the reindeer seems to have crafted some tiny flags
 out of toothpicks and bits of paper and is using them to mark trailheads
 on your topographic map. What is the sum of the ratings of all trailheads?
  */
-import language.experimental.namedTuples
-
 object DataDefs:
   enum Dir:
     case N, S, E, W
@@ -182,20 +180,20 @@ object DataDefs:
       .map(p.move)
       .filter(_.inBounds(size))
 
-  type Tile = (p: Pos, h: Int)
-  type Topo = Seq[Seq[Tile]]
+  type Tile  = (p: Pos, h: Int)
+  type Topo  = Seq[Seq[Tile]]
   type Trail = List[Tile]
 
   extension (topo: Topo)
     def findStarts: Seq[Tile] = topo.flatMap(row => row.filter(_.h == 0))
 
     def explore(size: Int)(t: Tile): List[Trail] =
-      val queue = collection.mutable.Queue[Trail](List(t))
+      val queue  = collection.mutable.Queue[Trail](List(t))
       var result = List[Trail]()
 
       while queue.nonEmpty do
         val trail: Trail = queue.dequeue()
-        val lastHeight = trail.head.h
+        val lastHeight   = trail.head.h
         if lastHeight == 9 then result ::= trail
         else
           val possible: Seq[Pos] = trail.head.p.possible(size)
@@ -232,14 +230,14 @@ object Solving:
 
 object Testing:
   private lazy val lines = os.read.lines(os.pwd / "2024" / "10" / "10.test.input.txt")
-  lazy val result1 = Solving.solve1(lines)
-  lazy val result2 = Solving.solve2(lines)
+  lazy val result1       = Solving.solve1(lines)
+  lazy val result2       = Solving.solve2(lines)
 // Testing.result1 // part 1: 36
 // Testing.result2 // part 2: 81
 
 object Main:
   private lazy val lines = os.read.lines(os.pwd / "2024" / "10" / "10.input.txt")
-  lazy val result1 = Solving.solve1(lines)
-  lazy val result2 = Solving.solve2(lines)
+  lazy val result1       = Solving.solve1(lines)
+  lazy val result2       = Solving.solve2(lines)
 // Main.result1 // part 1: 582
 // Main.result2 // part 2: 1302

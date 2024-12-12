@@ -60,8 +60,8 @@ Handle the new instructions; what do you get if you add up
 all of the results of just the enabled multiplications?
  */
 object Parsing:
-  val regex = """(don't|do|mul\([0-9]+,[0-9]+\))""".r
-  def parseLine(line: String) = regex.findAllMatchIn(line).toSeq.map(_.toString)
+  val regex                     = """(don't|do|mul\([0-9]+,[0-9]+\))""".r
+  def parseLine(line: String)   = regex.findAllMatchIn(line).toSeq.map(_.toString)
   def parse(lines: Seq[String]) = lines.flatMap(parseLine)
 
 object Solving:
@@ -75,9 +75,9 @@ object Solving:
     .sum
 
   def solve2(lines: Seq[String]) =
-    val instrs = Parsing.parse(lines)
+    val instrs  = Parsing.parse(lines)
     var enabled = true
-    var result = 0L
+    var result  = 0L
     for instr <- instrs do
       if instr == "don't" then enabled = false
       else if instr == "do" then enabled = true
@@ -86,8 +86,8 @@ object Solving:
     result
 
 object Testing:
-  lazy val lines1 = os.read.lines(os.pwd / "2024" / "03" / "03.test.input.txt")
-  lazy val lines2 = os.read.lines(os.pwd / "2024" / "03" / "03.test.input.2.txt")
+  lazy val lines1  = os.read.lines(os.pwd / "2024" / "03" / "03.test.input.txt")
+  lazy val lines2  = os.read.lines(os.pwd / "2024" / "03" / "03.test.input.2.txt")
   lazy val result1 = Solving.solve1(lines1)
   lazy val result2 = Solving.solve2(lines2)
 // Testing.result1 // part 1: 161
@@ -95,7 +95,7 @@ object Testing:
 
 object Main:
   private lazy val lines = os.read.lines(os.pwd / "2024" / "03" / "03.input.txt")
-  lazy val result1 = Solving.solve1(lines)
-  lazy val result2 = Solving.solve2(lines)
+  lazy val result1       = Solving.solve1(lines)
+  lazy val result2       = Solving.solve2(lines)
 // Main.result1 // part 1: 173529487
 // Main.result2 // part 2: 99532691

@@ -86,7 +86,7 @@ the word search side and try again. How many times does an X-MAS appear?
  */
 object DataDefs:
   val xmas = """(?=(XMAS|SAMX))""".r
-  val mas = Seq("MAS", "SAM")
+  val mas  = Seq("MAS", "SAM")
 
   case class Grid(rows: Seq[String], size: Int): // assume grid is square
     lazy val cols: Seq[String] =
@@ -104,11 +104,11 @@ object DataDefs:
       for j <- 1 until size
       yield (for i <- 0 until size - j yield rows(i)(i + j)).mkString
     lazy val diags = ul ++ lr ++ ll ++ ur
-    lazy val all = rows ++ cols ++ diags
+    lazy val all   = rows ++ cols ++ diags
 
     def x(i: Int, j: Int) = // part 2
       require(0 < i && i < size && 0 < j && j < size)
-      val left = Seq(rows(i - 1)(j - 1), rows(i)(j), rows(i + 1)(j + 1)).mkString
+      val left  = Seq(rows(i - 1)(j - 1), rows(i)(j), rows(i + 1)(j + 1)).mkString
       val right = Seq(rows(i + 1)(j - 1), rows(i)(j), rows(i - 1)(j + 1)).mkString
       (left, right)
 
@@ -131,14 +131,14 @@ object Solving:
 
 object Testing:
   private lazy val lines = os.read.lines(os.pwd / "2024" / "04" / "04.test.input.txt")
-  lazy val result1 = Solving.solve1(lines)
-  lazy val result2 = Solving.solve2(lines)
+  lazy val result1       = Solving.solve1(lines)
+  lazy val result2       = Solving.solve2(lines)
 // Testing.result1 // part 1: 18
 // Testing.result2 // part 2: 9
 
 object Main:
   private lazy val lines = os.read.lines(os.pwd / "2024" / "04" / "04.input.txt")
-  lazy val result1 = Solving.solve1(lines)
-  lazy val result2 = Solving.solve2(lines)
+  lazy val result1       = Solving.solve1(lines)
+  lazy val result2       = Solving.solve2(lines)
 // Main.result1 // part 1: 2545
 // Main.result2 // part 2: 1886

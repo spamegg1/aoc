@@ -69,7 +69,7 @@ can remove a single level from unsafe reports. How many reports are now safe?
  */
 object DataDefs:
   case class Report(levels: Seq[Long]):
-    val pairs = levels.init.zip(levels.tail)
+    val pairs            = levels.init.zip(levels.tail)
     def allIncr: Boolean = pairs.forall(_ < _)
     def allDecr: Boolean = pairs.forall(_ > _)
     def within(lower: Long, upper: Long): Boolean = pairs.forall: pair =>
@@ -83,7 +83,7 @@ object DataDefs:
 
 object Parsing:
   import DataDefs.*
-  def parseLine(line: String) = Report(line.split(" ").map(_.toLong).toSeq)
+  def parseLine(line: String)   = Report(line.split(" ").map(_.toLong).toSeq)
   def parse(lines: Seq[String]) = lines map parseLine
 
 object Solving:
@@ -92,14 +92,14 @@ object Solving:
 
 object Testing:
   private lazy val lines = os.read.lines(os.pwd / "2024" / "02" / "02.test.input.txt")
-  lazy val result1 = Solving.solve1(lines)
-  lazy val result2 = Solving.solve2(lines)
+  lazy val result1       = Solving.solve1(lines)
+  lazy val result2       = Solving.solve2(lines)
 // Testing.result1 // part 1: 2
 // Testing.result2 // part 2: 4
 
 object Main:
   private lazy val lines = os.read.lines(os.pwd / "2024" / "02" / "02.input.txt")
-  lazy val result1 = Solving.solve1(lines)
-  lazy val result2 = Solving.solve2(lines)
+  lazy val result1       = Solving.solve1(lines)
+  lazy val result2       = Solving.solve2(lines)
 // Main.result1 // part 1: 549
 // Main.result2 // part 2: 589

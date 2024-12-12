@@ -122,8 +122,8 @@ Once again consider your left and right lists. What is their similarity score?
 object Parsing:
   def parseLine(line: String) = line.split(" ").map(_.toLong).toSeq
   def parse(lines: Seq[String]) =
-    val pairs = lines.map(parseLine)
-    val lefts = (for pair <- pairs yield pair.head).sorted
+    val pairs  = lines.map(parseLine)
+    val lefts  = (for pair <- pairs yield pair.head).sorted
     val rights = (for pair <- pairs yield pair.last).sorted
     (lefts, rights)
 
@@ -137,18 +137,18 @@ object Solving:
 
   def solve2(lines: Seq[String]) =
     val (lefts, rights) = Parsing.parse(lines)
-    val freqs = rights.groupMapReduce(identity)(_ => 1L)(_ + _)
+    val freqs           = rights.groupMapReduce(identity)(_ => 1L)(_ + _)
     lefts.map(left => freqs.getOrElse(left, 0L) * left).sum
 
 object Testing:
-  private lazy val lines = os.read.lines(os.pwd / "2024" / "01" / "01.test.input.txt")
+  lazy val lines   = os.read.lines(os.pwd / "2024" / "01" / "01.test.input.txt")
   lazy val result1 = Solving.solve1(lines)
   lazy val result2 = Solving.solve2(lines)
 // Testing.result1 // part 1: 11
 // Testing.result2 // part 2: 31
 
 object Main:
-  private lazy val lines = os.read.lines(os.pwd / "2024" / "01" / "01.input.txt")
+  lazy val lines   = os.read.lines(os.pwd / "2024" / "01" / "01.input.txt")
   lazy val result1 = Solving.solve1(lines)
   lazy val result2 = Solving.solve2(lines)
 // Main.result1 // part 1: 1222801

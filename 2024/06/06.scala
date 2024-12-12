@@ -232,7 +232,6 @@ How many different positions could you choose for this obstruction?
  */
 package aoc202406
 
-import language.experimental.namedTuples
 import collection.parallel.CollectionConverters.*
 
 object DataDefs:
@@ -256,9 +255,9 @@ object DataDefs:
       case W => (p.row, p.col - 1)
 
   case class Guard(p: Pos, d: Dir, vis: Map[Pos, Int])(using map: Seq[String], size: Int):
-    val nPos = p.next(d) // do we go out of bounds at the next step?
+    val nPos              = p.next(d) // do we go out of bounds at the next step?
     def inBounds: Boolean = nPos.inBounds(size)
-    def looped = vis.values.exists(_ > 4) // vis.size > size * size
+    def looped      = vis.values.exists(_ > 4) // vis.size > size * size
     def newPos: Pos = if inBounds && map(nPos.row)(nPos.col) == '#' then p else nPos
     def next: Guard =
       if newPos == p then copy(d = d.turn)
@@ -280,8 +279,8 @@ object Solving:
 
   def solve2(map: Seq[String])(startPos: Pos, startDir: Dir) =
     val guard = solve(map)(startPos, startDir) // guard from part 1 finished its path
-    val path = guard.vis.keys.toSeq diff Seq(startPos)
-    val maps = generateMaps(map, path) // .par
+    val path  = guard.vis.keys.toSeq diff Seq(startPos)
+    val maps  = generateMaps(map, path)        // .par
     (for
       m <- maps
       g = solve(m)(startPos, startDir)
@@ -290,15 +289,15 @@ object Solving:
 
 object Testing: // 6, 4, N
   private lazy val lines = os.read.lines(os.pwd / "2024" / "06" / "06.test.input.txt")
-  lazy val result1 = Solving.solve1(lines)((6, 4), DataDefs.Dir.N)
-  lazy val result2 = Solving.solve2(lines)((6, 4), DataDefs.Dir.N)
+  lazy val result1       = Solving.solve1(lines)((6, 4), DataDefs.Dir.N)
+  lazy val result2       = Solving.solve2(lines)((6, 4), DataDefs.Dir.N)
 // Testing.result1 // part 1: 41
 // Testing.result2 // part 2: 6
 
 object Main: // 94, 73, N
   private lazy val lines = os.read.lines(os.pwd / "2024" / "06" / "06.input.txt")
-  lazy val result1 = Solving.solve1(lines)((94, 73), DataDefs.Dir.N)
-  lazy val result2 = Solving.solve2(lines)((94, 73), DataDefs.Dir.N)
+  lazy val result1       = Solving.solve1(lines)((94, 73), DataDefs.Dir.N)
+  lazy val result2       = Solving.solve2(lines)((94, 73), DataDefs.Dir.N)
 // Main.result1 // part 1: 5242
 // Main.result2 // part 2: 1424
 

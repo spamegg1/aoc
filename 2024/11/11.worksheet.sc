@@ -80,15 +80,15 @@ How many stones would you have after blinking a total of 75 times?
 object DataDefs:
   val YEAR = 2024L
 
-  type Stone = Long
+  type Stone  = Long
   type Stones = Seq[Stone]
-  type Freqs = Map[Stone, Stone]
+  type Freqs  = Map[Stone, Stone]
 
   extension (s: Stone)
     def blink: Stones = s match
       case 0L => Seq(1L)
       case _ =>
-        val str = s.toString
+        val str  = s.toString
         val size = str.size
         if size % 2 == 0 then
           val (left, right) = str.splitAt(size / 2)
@@ -126,14 +126,14 @@ object Solving:
       .sum
 
 object Testing:
-  lazy val line = "125 17"
+  lazy val line    = "125 17"
   lazy val result1 = Solving.solve1(line)(25)
   lazy val result2 = Solving.solve2(line)(75)
 // Testing.result1 // part 1: 55312
 // Testing.result2 // part 2: 65601038650482
 
 object Main:
-  lazy val line = "0 5601550 3914 852 50706 68 6 645371"
+  lazy val line    = "0 5601550 3914 852 50706 68 6 645371"
   lazy val result1 = Solving.solve1(line)(25)
   lazy val result2 = Solving.solve2(line)(75)
 // Main.result1 // part 1: 189092

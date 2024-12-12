@@ -151,8 +151,6 @@ Calculate the impact of the signal using this updated model.
 How many unique locations within the bounds of the map contain an antinode?
 
  */
-import language.experimental.namedTuples
-
 object DataDefs:
   type Pos = (row: Int, col: Int)
 
@@ -216,7 +214,7 @@ object Solving:
     .size
 
 object Testing:
-  lazy val lines = os.read.lines(os.pwd / "2024" / "08" / "08.test.input.txt")
+  lazy val lines   = os.read.lines(os.pwd / "2024" / "08" / "08.test.input.txt")
   lazy val result1 = Solving.solve1(lines)(12)
   lazy val result2 = Solving.solve2(lines)
 // Testing.result1 // part 1: 14
@@ -224,7 +222,7 @@ object Testing:
 
 object Main:
   private lazy val lines = os.read.lines(os.pwd / "2024" / "08" / "08.input.txt")
-  lazy val result1 = Solving.solve1(lines)(50)
-  lazy val result2 = Solving.solve2(lines)(50)
+  lazy val result1       = Solving.solve1(lines)(50)
+  lazy val result2       = Solving.solve2(lines)(50)
 // Main.result1 // part 1: 276
 // Main.result2 // part 2: 991

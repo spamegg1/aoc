@@ -123,9 +123,9 @@ object Solving:
   import DataDefs.*
 
   def solve1(line: String) =
-    val disk = Parsing.parse(line)
+    val disk  = Parsing.parse(line)
     var first = disk.indexWhere(_ == FREE)
-    var last = disk.lastIndexWhere(_ != FREE)
+    var last  = disk.lastIndexWhere(_ != FREE)
 
     while first < last do
       disk(first) = disk(last) // swap to defragment
@@ -136,12 +136,12 @@ object Solving:
     disk.checksum
 
   def solve2(line: String) =
-    val disk = Parsing.parse(line)
-    var freeStt = disk.indexWhere(_ == FREE, from = 0)
-    var freeEnd = disk.indexWhere(_ != FREE, from = freeStt)
-    var dataEnd = disk.lastIndexWhere(_ != FREE, end = disk.length - 1)
-    var dataTyp = disk(dataEnd)
-    var dataStt = disk.lastIndexWhere(_ != dataTyp, end = dataEnd)
+    val disk     = Parsing.parse(line)
+    var freeStt  = disk.indexWhere(_ == FREE, from = 0)
+    var freeEnd  = disk.indexWhere(_ != FREE, from = freeStt)
+    var dataEnd  = disk.lastIndexWhere(_ != FREE, end = disk.length - 1)
+    var dataTyp  = disk(dataEnd)
+    var dataStt  = disk.lastIndexWhere(_ != dataTyp, end = dataEnd)
     var dataSize = dataEnd - dataStt // excludes start, includes end
     var freeSize = freeEnd - freeStt // includes start, excludes end
 
@@ -171,14 +171,14 @@ object Solving:
 
 object Testing:
   private lazy val line = os.read(os.pwd / "2024" / "09" / "09.test.input.txt")
-  lazy val result1 = Solving.solve1(line)
-  lazy val result2 = Solving.solve2(line)
+  lazy val result1      = Solving.solve1(line)
+  lazy val result2      = Solving.solve2(line)
 // Testing.result1 // part 1: 1928
 // Testing.result2 // part 2: 2858
 
 object Main:
   private lazy val line = os.read(os.pwd / "2024" / "09" / "09.input.txt")
-  lazy val result1 = Solving.solve1(line)
-  lazy val result2 = Solving.solve2(line)
+  lazy val result1      = Solving.solve1(line)
+  lazy val result2      = Solving.solve2(line)
 // Main.result1 // part 1: 6242766523059
 // Main.result2 // part 2: 6272188244509

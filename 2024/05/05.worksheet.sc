@@ -131,9 +131,9 @@ What do you get if you add up the middle page numbers
 after correctly ordering just those updates?
  */
 object DataDefs:
-  type Rule = (Long, Long)
+  type Rule  = (Long, Long)
   type Rules = Seq[Rule]
-  type Page = Array[Long] // we need to do in-place swaps! Ugh
+  type Page  = Array[Long] // we need to do in-place swaps! Ugh
   type Pages = Seq[Page]
 
 object Parsing:
@@ -142,11 +142,11 @@ object Parsing:
   def parseRule(rule: String) = rule match
     case s"$a|$b" => (a.toLong, b.toLong)
   def parseRules(rules: Array[String]) = rules.map(parseRule).toSeq
-  def parsePage(page: String) = page.split(",").map(_.toLong)
+  def parsePage(page: String)          = page.split(",").map(_.toLong)
   def parsePages(pages: Array[String]) = pages.map(parsePage).toSeq
 
   def parse(lines: String): (Rules, Pages) =
-    val rulesPages = lines.split("\n\n")
+    val rulesPages     = lines.split("\n\n")
     val (rules, pages) = (rulesPages.head.split("\n"), rulesPages.last.split("\n"))
     (parseRules(rules), parsePages(pages))
 
@@ -181,22 +181,22 @@ object Solving:
 
   def solve2(lines: String) =
     val (rules, pages) = Parsing.parse(lines)
-    val incorrect = pages.filterNot(validatePage(rules))
+    val incorrect      = pages.filterNot(validatePage(rules))
     incorrect.view
-      .map(order(rules)) // mutate!
+      .map(order(rules))                // mutate!
       .map(page => page(page.size / 2)) // find mid
       .sum
 
 object Testing:
   private lazy val lines = os.read(os.pwd / "2024" / "05" / "05.test.input.txt")
-  lazy val result1 = Solving.solve1(lines)
-  lazy val result2 = Solving.solve2(lines)
+  lazy val result1       = Solving.solve1(lines)
+  lazy val result2       = Solving.solve2(lines)
 // Testing.result1 // part 1: 143
 // Testing.result2 // part 2: 123
 
 object Main:
   private lazy val lines = os.read(os.pwd / "2024" / "05" / "05.input.txt")
-  lazy val result1 = Solving.solve1(lines)
-  lazy val result2 = Solving.solve2(lines)
+  lazy val result1       = Solving.solve1(lines)
+  lazy val result2       = Solving.solve2(lines)
 // Main.result1 // part 1: 4957
 // Main.result2 // part 2: 6938

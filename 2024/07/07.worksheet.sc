@@ -91,7 +91,7 @@ object DataDefs:
         val next = nextPossible(soFar, toDo.head)
         helper(toDo.tail, next)
     def possible: Seq[Long] = helper(nums.tail, Seq(nums.head))
-    def calibration = if possible.contains(res) then res else 0
+    def calibration         = if possible.contains(res) then res else 0
 
 object Parsing:
   import DataDefs.*
@@ -109,10 +109,10 @@ object Solving:
 
 object Testing:
   private lazy val lines = os.read.lines(os.pwd / "2024" / "07" / "07.test.input.txt")
-  lazy val result = Solving.solve(lines)
+  lazy val result        = Solving.solve(lines)
 // Testing.result // 3749, 11387
 
 object Main:
   private lazy val lines = os.read.lines(os.pwd / "2024" / "07" / "07.input.txt")
-  lazy val result = Solving.solve(lines)
+  lazy val result        = Solving.solve(lines)
 // Main.result // 945512582195, 271691107779347
