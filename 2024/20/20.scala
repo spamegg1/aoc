@@ -218,7 +218,6 @@ package aoc2024.day20
 
 import scalax.collection.edges.UnDiEdge
 import scalax.collection.edges.UnDiEdgeImplicits // for the ~ edge infix operator
-import scalax.collection.immutable.Graph
 import scalax.collection.mutable.{Graph => MGraph}
 
 object DataDefs:
