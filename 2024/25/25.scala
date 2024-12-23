@@ -1,6 +1,8 @@
 /*
 
  */
+package aoc2024.day25
+
 object DataDefs:
   ???
 
