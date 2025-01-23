@@ -29,7 +29,7 @@ object Solving:
     number
 
 object Testing:
-  private lazy val lines = Seq("abcdef", "pqrstuv")
+  lazy val lines   = Seq("abcdef", "pqrstuv")
   lazy val result1 = lines map Solving.solve(5)
 // Testing.result1 // part 1: 609043, 1048970
 
