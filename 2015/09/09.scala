@@ -1,43 +1,6 @@
-/*
---- Day 9: All in a Single Night ---
-Every year, Santa manages to deliver all of his presents in a single night.
-
-This year, however, he has some new locations to visit; his elves have provided
-him the distances between every pair of locations. He can start and end at any
-two (different) locations he wants, but he must visit each location exactly
-once. What is the shortest distance he can travel to achieve this?
-
-For example, given the following distances:
-London to Dublin = 464
-London to Belfast = 518
-Dublin to Belfast = 141
-
-The possible routes are therefore:
-Dublin -> London -> Belfast = 982
-London -> Dublin -> Belfast = 605
-London -> Belfast -> Dublin = 659
-Dublin -> Belfast -> London = 659
-Belfast -> Dublin -> London = 605
-Belfast -> London -> Dublin = 982
-
-The shortest of these is London -> Dublin -> Belfast = 605,
-and so the answer is 605 in this example.
-
-What is the distance of the shortest route?
-
---- Part Two ---
-The next year, just to show off,
-Santa decides to take the route with the longest distance instead.
-
-He can still start and end at any two (different) locations he wants,
-and he still must visit each location exactly once.
-
-For example, given the distances above, the longest route would be 982
-via (for example) Dublin -> London -> Belfast.
-
-What is the distance of the longest route?
- */
-package aoc2015.day09
+package aoc
+package y2015
+package day09
 
 import collection.mutable.{Map => MMap, Queue => MQueue}
 
@@ -116,20 +79,20 @@ object Solving:
   val solve2 = solve(longest)
 
 object Test:
-  lazy val file    = os.pwd / "2015" / "09" / "09.test.input.txt"
-  lazy val lines   = os.read.lines(file)
-  lazy val result1 = Solving.solve1(lines)
-  lazy val result2 = Solving.solve2(lines)
+  lazy val file  = os.pwd / "2015" / "09" / "09.test.input.txt"
+  lazy val lines = os.read.lines(file)
+  lazy val res1  = Solving.solve1(lines)
+  lazy val res2  = Solving.solve2(lines)
 
 object Main:
-  lazy val file    = os.pwd / "2015" / "09" / "09.input.txt"
-  lazy val lines   = os.read.lines(file)
-  lazy val result1 = Solving.solve1(lines)
-  lazy val result2 = Solving.solve2(lines)
+  lazy val file  = os.pwd / "2015" / "09" / "09.input.txt"
+  lazy val lines = os.read.lines(file)
+  lazy val res1  = Solving.solve1(lines)
+  lazy val res2  = Solving.solve2(lines)
 
 @main
 def run: Unit =
-  println(Test.result1) // part 1: 605
-  println(Test.result2) // part 2: 982
-  println(Main.result1) // part 1: 141
-  println(Main.result2) // part 2: 736
+  println(Test.res1) // part 1: 605
+  println(Test.res2) // part 2: 982
+  println(Main.res1) // part 1: 141
+  println(Main.res2) // part 2: 736
