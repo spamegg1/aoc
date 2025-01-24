@@ -74,9 +74,9 @@ import util.matching.Regex, Regex.Match
 
 object DataDefs:
   type Molecule = String
-  type Replacement = String
-  type Rule = (Regex, Replacement)
-  type Rules = Map[Regex, Seq[Replacement]]
+  type Replace  = String
+  type Rule     = (Regex, Replace)
+  type Rules    = Map[Regex, Seq[Replace]]
 
 object Parsing:
   import DataDefs.*
@@ -89,10 +89,10 @@ object Parsing:
 object Solving:
   import DataDefs.*
 
-  def replaceOneMatch(repls: Seq[Replacement])(molecule: Molecule)(mat: Match) =
+  def replaceOneMatch(repls: Seq[Replace])(molecule: Molecule)(mat: Match) =
     repls.map(repl => molecule.patch(mat.start, repl, mat.end - mat.start))
 
-  def replaceAllMatches(molecule: Molecule)(regex: Regex, repls: Seq[Replacement]) =
+  def replaceAllMatches(molecule: Molecule)(regex: Regex, repls: Seq[Replace]) =
     regex.findAllMatchIn(molecule).flatMap(replaceOneMatch(repls)(molecule))
 
   def applyAllRulesToOneMolecule(rules: Rules)(molecule: Molecule) =
@@ -105,8 +105,8 @@ object Solving:
     applyAllRulesToOneMolecule(Parsing.parse(lines))(start).toSet.size
 
   def solve2(lines: Seq[String])(target: Molecule) =
-    val rules = Parsing.parse(lines)
-    var steps = 0
+    val rules     = Parsing.parse(lines)
+    var steps     = 0
     var molecules = Set("e")
     while !molecules.contains(target) do
       molecules = applyAllRulesToAllMolecules(molecules)(rules)
@@ -114,15 +114,18 @@ object Solving:
     steps
 
 object Testing:
-  private lazy val lines = os.read.lines(os.pwd / "2015" / "19" / "19.test.input.txt")
+  lazy val file    = os.pwd / "2015" / "19" / "19.test.input.txt"
+  lazy val lines   = os.read.lines(file)
   lazy val result1 = Solving.solve1(lines)("HOHOHO")
   lazy val result2 = Solving.solve2(lines)("HOHOHO")
 // Testing.result1 // part 1: 7
 // Testing.result2 // part 2: 6
 
 object Main:
-  private lazy val lines = os.read.lines(os.pwd / "2015" / "19" / "19.input.txt")
-  private lazy val line = os.read.lines(os.pwd / "2015" / "19" / "19.input.2.txt").head
+  lazy val file1   = os.pwd / "2015" / "19" / "19.input.txt"
+  lazy val file2   = os.pwd / "2015" / "19" / "19.input.2.txt"
+  lazy val lines   = os.read.lines(file1)
+  lazy val line    = os.read.lines(file2).head
   lazy val result1 = Solving.solve1(lines)(line)
   lazy val result2 = Solving.solve2(lines)(line)
 // Main.result1 // part 1: 535
