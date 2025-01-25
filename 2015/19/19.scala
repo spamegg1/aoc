@@ -7,14 +7,19 @@ object DataDefs:
   type Replace  = String
   type Rule     = (Regex, Replace)
   type Rules    = Map[Regex, Seq[Replace]]
+  type RevRules = Map[Regex, Replace]
 
 object Parsing:
   import DataDefs.*
 
   def parseRule(line: String): Rule = line match
-    case s"$find => $replace" => (find.r, replace)
+    case s"$find => $replace" => find.r -> replace
+
+  def parseRuleRev(line: String): Rule = line match
+    case s"$find => $replace" => replace.r -> find
 
   def parse(lines: Seq[String]): Rules = lines.map(parseRule).groupMap(_._1)(_._2).toMap
+  def parseRev(lines: Seq[String]): RevRules = lines.map(parseRuleRev).toMap
 
 object Solving:
   import DataDefs.*
@@ -28,19 +33,21 @@ object Solving:
   def applyAllRulesToOneMolecule(rules: Rules)(molecule: Molecule) =
     rules.flatMap(replaceAllMatches(molecule))
 
-  def applyAllRulesToAllMolecules(molecules: Set[Molecule])(rules: Rules) =
-    molecules.flatMap(applyAllRulesToOneMolecule(rules))
-
   def solve1(lines: Seq[String])(start: Molecule): Int =
     applyAllRulesToOneMolecule(Parsing.parse(lines))(start).toSet.size
 
   def solve2(lines: Seq[String])(target: Molecule) =
-    val rules     = Parsing.parse(lines)
-    var steps     = 0
-    var molecules = Set("e")
-    while !molecules.contains(target) do
-      molecules = applyAllRulesToAllMolecules(molecules)(rules)
-      steps += 1
+    val revRules = Parsing.parseRev(lines)
+    var steps    = 0
+    var molecule = target
+
+    while molecule.distinct != "e" do
+      for (regex, replacement) <- revRules do
+        regex.findFirstMatchIn(molecule) match
+          case None => ()
+          case Some(_) =>
+            molecule = regex.replaceFirstIn(molecule, replacement)
+            steps += 1
     steps
 
 object Test:
@@ -60,6 +67,6 @@ object Main:
 @main
 def run =
   println(Test.res1) // part 1: 7
-  // println(Test.res2) // part 2: 6
+  println(Test.res2) // part 2: 6
   println(Main.res1) // part 1: 535
-  // println(Main.res2) // part 2:
+  println(Main.res2) // part 2: 212
