@@ -30,11 +30,11 @@ object Solving:
   def replaceAllMatches(molecule: Molecule)(regex: Regex, repls: Seq[Replace]) =
     regex.findAllMatchIn(molecule).flatMap(replaceOneMatch(repls)(molecule))
 
-  def applyAllRulesToOneMolecule(rules: Rules)(molecule: Molecule) =
-    rules.flatMap(replaceAllMatches(molecule))
-
-  def solve1(lines: Seq[String])(start: Molecule): Int =
-    applyAllRulesToOneMolecule(Parsing.parse(lines))(start).toSet.size
+  def solve1(lines: Seq[String])(molecule: Molecule): Int = Parsing
+    .parse(lines)
+    .flatMap(replaceAllMatches(molecule))
+    .toSet
+    .size
 
   def solve2(lines: Seq[String])(target: Molecule) =
     val revRules = Parsing.parseRev(lines)
