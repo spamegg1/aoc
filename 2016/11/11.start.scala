@@ -1,34 +1,34 @@
-package day11
+package aoc2016.day11
 
 object TestStates:
   import DataDefs.*, Level.*, Kind.*, Element.*
 
   val testState1 = State(
     Map(
-      One -> Box(One, Set(Item(Chip, Lithium))),
-      Two -> Box(Two, Set(Item(RTG, Hydrogen))),
+      One   -> Box(One, Set(Item(Chip, Lithium))),
+      Two   -> Box(Two, Set(Item(RTG, Hydrogen))),
       Three -> Box(Three, Set(Item(RTG, Lithium))),
-      Four -> Box(Four, Set())
+      Four  -> Box(Four, Set())
     ),
     Box(One, Set(Item(Chip, Hydrogen))) // elevator
   )
 
   val testState2 = State(
     Map(
-      One -> Box(One, Set(Item(Chip, Hydrogen))),
-      Two -> Box(Two, Set(Item(RTG, Hydrogen))),
+      One   -> Box(One, Set(Item(Chip, Hydrogen))),
+      Two   -> Box(Two, Set(Item(RTG, Hydrogen))),
       Three -> Box(Three, Set(Item(RTG, Lithium))),
-      Four -> Box(Four, Set())
+      Four  -> Box(Four, Set())
     ),
     Box(One, Set(Item(Chip, Lithium))) // elevator
   )
 
   val testState3 = State(
     Map(
-      One -> Box(One, Set()),
-      Two -> Box(Two, Set(Item(RTG, Hydrogen))),
+      One   -> Box(One, Set()),
+      Two   -> Box(Two, Set(Item(RTG, Hydrogen))),
       Three -> Box(Three, Set(Item(RTG, Lithium))),
-      Four -> Box(Four, Set())
+      Four  -> Box(Four, Set())
     ),
     Box(One, Set(Item(Chip, Hydrogen), Item(Chip, Lithium))) // elevator
   )
