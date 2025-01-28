@@ -133,18 +133,18 @@ object Solving:
   import DataDefs.*
   def solve(lines: Seq[String]) = 0L
 
-object Testing:
+object Test:
   private lazy val lines1 = os.read.lines(os.pwd / "2018" / "25" / "25.test.input.txt")
   private lazy val lines2 = os.read.lines(os.pwd / "2018" / "25" / "25.test.input.2.txt")
   private lazy val lines3 = os.read.lines(os.pwd / "2018" / "25" / "25.test.input.3.txt")
-  lazy val result1 = Solving.solve(lines1)
-  lazy val result2 = Solving.solve(lines2)
-  lazy val result3 = Solving.solve(lines3)
-// Testing.result1 // part 1: 4
-// Testing.result2 // part 1: 3
-// Testing.result3 // part 1: 8
+  lazy val res1 = Solving.solve(lines1)
+  lazy val res2 = Solving.solve(lines2)
+  lazy val res3 = Solving.solve(lines3)
+// Test.res1 // part 1: 4
+// Test.res2 // part 1: 3
+// Test.res3 // part 1: 8
 
 object Main:
   private lazy val lines = os.read.lines(os.pwd / "2018" / "25" / "25.input.txt")
-  lazy val result = Solving.solve(lines)
-// Main.result // part 1: ???
+  lazy val res = Solving.solve(lines)
+// Main.res // part 1: ???

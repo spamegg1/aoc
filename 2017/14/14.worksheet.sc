@@ -105,14 +105,14 @@ object Solving:
 
   def solve2(line: String)(size: Int) = 0L
 
-object Testing:
-  lazy val result1 = Solving.solve1("flqrgnkx")(128)
-  lazy val result2 = Solving.solve2("flqrgnkx")(128)
-// Testing.result1 // part 1: 8108
-// Testing.result2 // part 2:
+object Test:
+  lazy val res1 = Solving.solve1("flqrgnkx")(128)
+  lazy val res2 = Solving.solve2("flqrgnkx")(128)
+// Test.res1 // part 1: 8108
+// Test.res2 // part 2:
 
 object Main:
-  lazy val result1 = Solving.solve1("nbysizxe")(128)
-  lazy val result2 = Solving.solve2("nbysizxe")(128)
-// Main.result1 // part 1: 8216
-// Main.result2 // part 2:
+  lazy val res1 = Solving.solve1("nbysizxe")(128)
+  lazy val res2 = Solving.solve2("nbysizxe")(128)
+// Main.res1 // part 1: 8216
+// Main.res2 // part 2:

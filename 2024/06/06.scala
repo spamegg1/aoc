@@ -287,18 +287,18 @@ object Solving:
       if g.looped
     yield 1).size
 
-object Testing: // 6, 4, N
+object Test: // 6, 4, N
   private lazy val lines = os.read.lines(os.pwd / "2024" / "06" / "06.test.input.txt")
-  lazy val result1       = Solving.solve1(lines)((6, 4), DataDefs.Dir.N)
-  lazy val result2       = Solving.solve2(lines)((6, 4), DataDefs.Dir.N)
-// Testing.result1 // part 1: 41
-// Testing.result2 // part 2: 6
+  lazy val res1       = Solving.solve1(lines)((6, 4), DataDefs.Dir.N)
+  lazy val res2       = Solving.solve2(lines)((6, 4), DataDefs.Dir.N)
+// Test.res1 // part 1: 41
+// Test.res2 // part 2: 6
 
 object Main: // 94, 73, N
   private lazy val lines = os.read.lines(os.pwd / "2024" / "06" / "06.input.txt")
-  lazy val result1       = Solving.solve1(lines)((94, 73), DataDefs.Dir.N)
-  lazy val result2       = Solving.solve2(lines)((94, 73), DataDefs.Dir.N)
-// Main.result1 // part 1: 5242
-// Main.result2 // part 2: 1424
+  lazy val res1       = Solving.solve1(lines)((94, 73), DataDefs.Dir.N)
+  lazy val res2       = Solving.solve2(lines)((94, 73), DataDefs.Dir.N)
+// Main.res1 // part 1: 5242
+// Main.res2 // part 2: 1424
 
-@main def run = println(Main.result2)
+@main def run = println(Main.res2)

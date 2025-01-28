@@ -11,7 +11,7 @@ with 256 marks on it. Based on the input to be hashed,
 the function repeatedly selects a span of string,
 brings the ends together, and gives the span a half-twist to
 reverse the order of the marks within it. After doing this many times,
-the order of the marks is used to build the resulting hash.
+the order of the marks is used to build the resing hash.
 
   4--5   pinch   4  5           4   1
  /    \  5,0,1  / \/ \  twist  / \ / \
@@ -67,7 +67,7 @@ to check the process, you can multiply them together to produce 12.
 
 However, you should instead use the standard list size of 256 (with values 0 to 255)
 and the sequence of lengths in your puzzle input. Once this process is complete,
-what is the result of multiplying the first two numbers in the list?
+what is the res of multiplying the first two numbers in the list?
 
 --- Part Two ---
 The logic you've constructed forms a single round of the
@@ -200,23 +200,23 @@ object Solving:
     while !state.isFinished do state = state.next
     convertBytesToHex(denseHash(state.sparseHash))
 
-object Testing:
+object Test:
   private lazy val line = os.read.lines(os.pwd / "2017" / "10" / "10.test.input.txt").head
   lazy val state0 = DataDefs.State(Parsing.parse(line), 5)
   lazy val state1 = state0.next // 2 1 0 [3] 4
   lazy val state2 = state1.next // 4 3 0 [1] 2
   lazy val state3 = state2.next // 4 3 0 [1] 2
   lazy val state4 = state3.next // 3 4 2 1 [0]
-  lazy val result1 = Solving.solve1(line)(5)
-  lazy val result21 = Solving.solve2("1,2,3")(256)(64)
-  lazy val result22 = Solving.solve2("1,2,4")(256)(64)
-// Testing.result1 // part 1: 12
-// Testing.result21 // part 2: 3efbe78a8d82f29979031a4aa0b16a9d
-// Testing.result22 // part 2: 63960835bcdc130f0b66d7ff4f6a5a8e
+  lazy val res1 = Solving.solve1(line)(5)
+  lazy val res21 = Solving.solve2("1,2,3")(256)(64)
+  lazy val res22 = Solving.solve2("1,2,4")(256)(64)
+// Test.res1 // part 1: 12
+// Test.res21 // part 2: 3efbe78a8d82f29979031a4aa0b16a9d
+// Test.res22 // part 2: 63960835bcdc130f0b66d7ff4f6a5a8e
 
 object Main:
   private lazy val line = os.read.lines(os.pwd / "2017" / "10" / "10.input.txt").head
-  lazy val result1 = Solving.solve1(line)(256)
-  lazy val result2 = Solving.solve2(line)(256)(64)
-// Main.result1 // part 1: 62238
-// Main.result2 // part 2: 2b0c9cc0449507a0db3babd57ad9e8d8
+  lazy val res1 = Solving.solve1(line)(256)
+  lazy val res2 = Solving.solve2(line)(256)(64)
+// Main.res1 // part 1: 62238
+// Main.res2 // part 2: 2b0c9cc0449507a0db3babd57ad9e8d8

@@ -108,18 +108,18 @@ object Solving:
     for day <- 0 until days do lantern = lantern.next
     lantern.fish.values.sum
 
-object Testing:
+object Test:
   private lazy val lines = os.read.lines(os.pwd / "2021" / "06" / "06.test.input.txt")
-  lazy val result11 = Solving.solve(lines)(18)
-  lazy val result12 = Solving.solve(lines)(80)
-  lazy val result2 = Solving.solve(lines)(256)
-// Testing.result11 // part 1: 26
-// Testing.result12 // part 1: 5934
-// Testing.result2 // part 2: 26984457539
+  lazy val res11 = Solving.solve(lines)(18)
+  lazy val res12 = Solving.solve(lines)(80)
+  lazy val res2 = Solving.solve(lines)(256)
+// Test.res11 // part 1: 26
+// Test.res12 // part 1: 5934
+// Test.res2 // part 2: 26984457539
 
 object Main:
   private lazy val lines = os.read.lines(os.pwd / "2021" / "06" / "06.input.txt")
-  lazy val result1 = Solving.solve(lines)(80)
-  lazy val result2 = Solving.solve(lines)(256)
-// Main.result1 // part 1: 372984
-// Main.result2 // part 2: 1681503251694
+  lazy val res1 = Solving.solve(lines)(80)
+  lazy val res2 = Solving.solve(lines)(256)
+// Main.res1 // part 1: 372984
+// Main.res2 // part 2: 1681503251694

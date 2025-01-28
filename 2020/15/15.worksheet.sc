@@ -15,7 +15,7 @@ Then, each turn consists of considering the most recently spoken number:
   Otherwise, the number had been spoken before; the current player
     announces how many turns apart the number is from when it was previously spoken.
 
-So, after the starting numbers, each turn results in that player speaking aloud either 0
+So, after the starting numbers, each turn ress in that player speaking aloud either 0
 (if the last number is new) or an age (if the last number is a repeat).
 
 For example, suppose the starting numbers are 0,3,6:
@@ -87,7 +87,7 @@ object Solving:
       turn = game.turn
     game.last._1
 
-object Testing:
+object Test:
   private lazy val nums = Seq(
     Seq(0, 3, 6),
     Seq(1, 3, 2),
@@ -97,13 +97,13 @@ object Testing:
     Seq(3, 2, 1),
     Seq(3, 1, 2)
   )
-  lazy val result1 = nums map Solving.solve(2020)
-  lazy val result2 = nums map Solving.solve(30000000)
-// Testing.result1 // part 1: 436, 1, 10, 27, 78, 438, 1836
-// Testing.result2 // part 2: 175594, 2578, 3544142, 261214, 6895259, 18, 362
+  lazy val res1 = nums map Solving.solve(2020)
+  lazy val res2 = nums map Solving.solve(30000000)
+// Test.res1 // part 1: 436, 1, 10, 27, 78, 438, 1836
+// Test.res2 // part 2: 175594, 2578, 3544142, 261214, 6895259, 18, 362
 
 object Main:
-  lazy val result1 = Solving.solve(2020)(Seq(8, 13, 1, 0, 18, 9))
-  lazy val result2 = Solving.solve(30000000)(Seq(8, 13, 1, 0, 18, 9))
-// Main.result1 // part 1: 755
-// Main.result2 // part 2: 11962
+  lazy val res1 = Solving.solve(2020)(Seq(8, 13, 1, 0, 18, 9))
+  lazy val res2 = Solving.solve(30000000)(Seq(8, 13, 1, 0, 18, 9))
+// Main.res1 // part 1: 755
+// Main.res2 // part 2: 11962

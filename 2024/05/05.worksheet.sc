@@ -154,14 +154,14 @@ object Solving:
   import DataDefs.*, util.boundary, boundary.break
 
   def validatePage(rules: Rules)(page: Page): Boolean =
-    var result = true
+    var res = true
     boundary:
       for i <- 0 to page.size - 2 do
         for j <- i + 1 until page.size do
           if !rules.contains((page(i), page(j))) then
-            result = false
+            res = false
             break()
-    result
+    res
 
   def order(rules: Rules)(page: Page): Page = // part 2
     for i <- 0 to page.size - 2 do
@@ -187,16 +187,16 @@ object Solving:
       .map(page => page(page.size / 2)) // find mid
       .sum
 
-object Testing:
+object Test:
   private lazy val lines = os.read(os.pwd / "2024" / "05" / "05.test.input.txt")
-  lazy val result1       = Solving.solve1(lines)
-  lazy val result2       = Solving.solve2(lines)
-// Testing.result1 // part 1: 143
-// Testing.result2 // part 2: 123
+  lazy val res1       = Solving.solve1(lines)
+  lazy val res2       = Solving.solve2(lines)
+// Test.res1 // part 1: 143
+// Test.res2 // part 2: 123
 
 object Main:
   private lazy val lines = os.read(os.pwd / "2024" / "05" / "05.input.txt")
-  lazy val result1       = Solving.solve1(lines)
-  lazy val result2       = Solving.solve2(lines)
-// Main.result1 // part 1: 4957
-// Main.result2 // part 2: 6938
+  lazy val res1       = Solving.solve1(lines)
+  lazy val res2       = Solving.solve2(lines)
+// Main.res1 // part 1: 4957
+// Main.res2 // part 2: 6938

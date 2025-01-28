@@ -787,17 +787,17 @@ object Solving:
     .keys
     .size
 
-object Testing:
+object Test:
   private lazy val lines = os.read.lines(os.pwd / "2022" / "09" / "09.test.input.txt")
   private lazy val lines2 = os.read.lines(os.pwd / "2022" / "09" / "09.test.input.2.txt")
-  lazy val result1 = Solving.solve(lines)(2)
-  lazy val result2 = Solving.solve(lines2)(10)
-// Testing.result1 // part 1: 13
-// Testing.result2 // part 2: 36
+  lazy val res1 = Solving.solve(lines)(2)
+  lazy val res2 = Solving.solve(lines2)(10)
+// Test.res1 // part 1: 13
+// Test.res2 // part 2: 36
 
 object Main:
   private lazy val lines = os.read.lines(os.pwd / "2022" / "09" / "09.input.txt")
-  lazy val result1 = Solving.solve(lines)(2)
-  lazy val result2 = Solving.solve(lines)(10)
-// Main.result1 // part 1: 6367
-// Main.result2 // part 2: 2536
+  lazy val res1 = Solving.solve(lines)(2)
+  lazy val res2 = Solving.solve(lines)(10)
+// Main.res1 // part 1: 6367
+// Main.res2 // part 2: 2536

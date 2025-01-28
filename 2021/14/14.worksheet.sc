@@ -8,7 +8,7 @@ the necessary input elements in sufficient quantities.
 
 The submarine manual contains instructions for finding the optimal polymer formula;
 specifically, it offers a polymer template and a list of pair insertion rules
-(your puzzle input). You just need to work out what polymer would result after
+(your puzzle input). You just need to work out what polymer would res after
 repeating the pair insertion process a few times.
 
 For example:
@@ -52,7 +52,7 @@ the first element of the next pair. Also, because all pairs are
 considered simultaneously, inserted elements are not considered
 to be part of a pair until the next step.
 After the first step of this process, the polymer becomes NCNBCHB.
-Here are the results of a few steps using the above rules:
+Here are the ress of a few steps using the above rules:
 
 Template:     NNCB
 After step 1: NCNBCHB
@@ -68,7 +68,7 @@ and subtracting the quantity of the least common element (H, 161) produces
 1749 - 161 = 1588.
 
 Apply 10 steps of pair insertion to the polymer template
-and find the most and least common elements in the result.
+and find the most and least common elements in the res.
 What do you get if you take the quantity of the most common
 element and subtract the quantity of the least common element?
 
@@ -86,16 +86,16 @@ object Solving:
   def solve1(lines: Seq[String]) = 0L
   def solve2(lines: Seq[String]) = 0L
 
-object Testing:
+object Test:
   private lazy val lines = os.read.lines(os.pwd / "2021" / "14" / "14.test.input.txt")
-  lazy val result1 = Solving.solve1(lines)
-  lazy val result2 = Solving.solve2(lines)
-// Testing.result1 // part 1: 1588
-// Testing.result2 // part 2:
+  lazy val res1 = Solving.solve1(lines)
+  lazy val res2 = Solving.solve2(lines)
+// Test.res1 // part 1: 1588
+// Test.res2 // part 2:
 
 object Main:
   private lazy val lines = os.read.lines(os.pwd / "2021" / "14" / "14.input.txt")
-  lazy val result1 = Solving.solve1(lines)
-  lazy val result2 = Solving.solve2(lines)
-// Main.result1 // part 1:
-// Main.result2 // part 2:
+  lazy val res1 = Solving.solve1(lines)
+  lazy val res2 = Solving.solve2(lines)
+// Main.res1 // part 1:
+// Main.res2 // part 2:

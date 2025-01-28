@@ -92,14 +92,14 @@ object Solving:
     val index = (billion - start) % (end - start) + start
     memo.find((string, int) => int == index).get._1
 
-object Testing:
+object Test:
   private lazy val line = os.read.lines(os.pwd / "2017" / "16" / "16.test.input.txt").head
-  lazy val result1 = Solving.solve1(line)("abcde")
-// Testing.result1 // part 1: baedc
+  lazy val res1 = Solving.solve1(line)("abcde")
+// Test.res1 // part 1: baedc
 
 object Main:
   private lazy val line = os.read.lines(os.pwd / "2017" / "16" / "16.input.txt").head
-  lazy val result1 = Solving.solve1(line)("abcdefghijklmnop")
-  lazy val result2 = Solving.solve2(line)("abcdefghijklmnop")
-// Main.result1 // part 1: hmefajngplkidocb
-// Main.result2 // part 2: fbidepghmjklcnoa
+  lazy val res1 = Solving.solve1(line)("abcdefghijklmnop")
+  lazy val res2 = Solving.solve2(line)("abcdefghijklmnop")
+// Main.res1 // part 1: hmefajngplkidocb
+// Main.res2 // part 2: fbidepghmjklcnoa

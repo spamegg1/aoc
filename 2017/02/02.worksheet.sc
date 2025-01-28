@@ -32,21 +32,21 @@ none of us are equipped for that kind of calculation - most of us specialize in
 bitwise operations."
 
 It sounds like the goal is to find the only two numbers in each row where one
-evenly divides the other - that is, where the result of the division operation
+evenly divides the other - that is, where the res of the division operation
 is a whole number. They would like you to find those numbers on each line,
-divide them, and add up each line's result.
+divide them, and add up each line's res.
 
 For example, given the following spreadsheet:
 5 9 2 8
 9 4 7 3
 3 8 6 5
 In the first row, the only two numbers that evenly divide are 8 and 2; the
-result of this division is 4.
-In the second row, the two numbers are 9 and 3; the result is 3.
-In the third row, the result is 2.
+res of this division is 4.
+In the second row, the two numbers are 9 and 3; the res is 3.
+In the third row, the res is 2.
 
-In this example, the sum of the results would be 4 + 3 + 2 = 9.
-What is the sum of each row's result in your puzzle input?
+In this example, the sum of the ress would be 4 + 3 + 2 = 9.
+What is the sum of each row's res in your puzzle input?
  */
 object Parsing:
   def parse(lines: Seq[String]) = lines.map(_.split("\t").map(_.toInt).toSeq)
@@ -68,17 +68,17 @@ object Solving:
     .flatMap(_.sorted.combinations(2).map(evenlyDivides))
     .sum
 
-object Testing:
+object Test:
   private lazy val lines1 = os.read.lines(os.pwd / "2017" / "02" / "02.test.input.txt")
   private lazy val lines2 = os.read.lines(os.pwd / "2017" / "02" / "02.test.input.2.txt")
-  lazy val result1 = Solving.solve1(lines1)
-  lazy val result2 = Solving.solve2(lines2)
-// Testing.result1 // part 1: 18
-// Testing.result2 // part 2: 9
+  lazy val res1 = Solving.solve1(lines1)
+  lazy val res2 = Solving.solve2(lines2)
+// Test.res1 // part 1: 18
+// Test.res2 // part 2: 9
 
 object Main:
   private lazy val lines = os.read.lines(os.pwd / "2017" / "02" / "02.input.txt")
-  lazy val result1 = Solving.solve1(lines)
-  lazy val result2 = Solving.solve2(lines)
-// Main.result1 // part 1: 32121
-// Main.result2 // part 2: 197
+  lazy val res1 = Solving.solve1(lines)
+  lazy val res2 = Solving.solve2(lines)
+// Main.res1 // part 1: 32121
+// Main.res2 // part 2: 197

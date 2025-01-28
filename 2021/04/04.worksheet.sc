@@ -142,16 +142,16 @@ object Solving:
           winners = (board.id, board.score(draw)) :: winners
     winners.head
 
-object Testing:
+object Test:
   private lazy val lines = os.read.lines(os.pwd / "2021" / "04" / "04.test.input.txt")
-  lazy val result1 = Solving.solve1(lines)
-  lazy val result2 = Solving.solve2(lines)
-// Testing.result1 // part 1: 4512
-// Testing.result2 // part 2: 1924
+  lazy val res1 = Solving.solve1(lines)
+  lazy val res2 = Solving.solve2(lines)
+// Test.res1 // part 1: 4512
+// Test.res2 // part 2: 1924
 
 object Main:
   private lazy val lines = os.read.lines(os.pwd / "2021" / "04" / "04.input.txt")
-  lazy val result1 = Solving.solve1(lines)
-  lazy val result2 = Solving.solve2(lines)
-// Main.result1 // part 1: 74320
-// Main.result2 // part 2: 17884
+  lazy val res1 = Solving.solve1(lines)
+  lazy val res2 = Solving.solve2(lines)
+// Main.res1 // part 1: 74320
+// Main.res2 // part 2: 17884

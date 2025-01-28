@@ -65,20 +65,20 @@ object Solving:
   def solve1(lines: Seq[String])(start: (Int, Int))(target: String) = 0L
   def solve2(lines: Seq[String])(start: (Int, Int))(target: String) = 0L
 
-object Testing:
+object Test:
   private lazy val lines = os.read.lines(os.pwd / "2017" / "19" / "19.test.input.txt")
   private lazy val start = (0, 5)
   private lazy val target = "ABCDEF"
-  lazy val result1 = Solving.solve1(lines)(start)(target)
-  lazy val result2 = Solving.solve2(lines)(start)(target)
-// Testing.result1 // part 1: ABCDEF
-// Testing.result2 // part 2:
+  lazy val res1 = Solving.solve1(lines)(start)(target)
+  lazy val res2 = Solving.solve2(lines)(start)(target)
+// Test.res1 // part 1: ABCDEF
+// Test.res2 // part 2:
 
 object Main:
   private lazy val lines = os.read.lines(os.pwd / "2017" / "19" / "19.input.txt")
   private lazy val start = (0, 115)
   private lazy val target = "ABFHMPTYZ"
-  lazy val result1 = Solving.solve1(lines)(start)(target)
-  lazy val result2 = Solving.solve2(lines)(start)(target)
-// Main.result1 // part 1: PBAZMFY
-// Main.result2 // part 2:
+  lazy val res1 = Solving.solve1(lines)(start)(target)
+  lazy val res2 = Solving.solve2(lines)(start)(target)
+// Main.res1 // part 1: PBAZMFY
+// Main.res2 // part 2:

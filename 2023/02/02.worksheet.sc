@@ -170,19 +170,19 @@ object Solving:
     .map(GameDefs.lineToGame(_).hand.power)
     .sum
 
-object Testing:
+object Test:
   private lazy val goodLine = "Game 1: 3 blue, 4 red; 1 red, 2 green, 6 blue; 2 green"
   private lazy val badLine = "Game 3: 8 green, 6 blue, 20 red; 5 blue, 4 red, 13 green"
   private lazy val goodGame = GameDefs.lineToGame(goodLine)
   private lazy val badGame = GameDefs.lineToGame(badLine)
   lazy val good = goodGame.hand.isLegal(Solving.globalLimit)
   lazy val bad = badGame.hand.isLegal(Solving.globalLimit)
-// Testing.good // true
-// Testing.bad // false
+// Test.good // true
+// Test.bad // false
 
 object Main:
   private lazy val lines = os.read.lines(os.pwd / "2023" / "02" / "02.input.txt")
-  lazy val result1 = Solving.solve1(lines)(Solving.globalLimit)
-  lazy val result2 = Solving.solve2(lines)
-// Main.result1 // Part 1: 2913
-// Main.result2 // Part 2: 55593
+  lazy val res1 = Solving.solve1(lines)(Solving.globalLimit)
+  lazy val res2 = Solving.solve2(lines)
+// Main.res1 // Part 1: 2913
+// Main.res2 // Part 2: 55593

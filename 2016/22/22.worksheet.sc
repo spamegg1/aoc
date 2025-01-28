@@ -7,7 +7,7 @@ each storage node is only connected to the four nodes directly adjacent to it
 You can directly access data only on node /dev/grid/node-x0-y0,
 but you can perform some limited actions on the other nodes:
   You can get the disk usage of all nodes (via df).
-    The result of doing this is in your puzzle input.
+    The res of doing this is in your puzzle input.
   You can instruct a node to move (not copy) all of its data to an adjacent node
     (if the destination node has enough space to receive the data).
     The sending node is left empty after this operation.
@@ -146,16 +146,16 @@ object Solving:
 
   def solve2(lines: Seq[String]) = 0L
 
-object Testing:
+object Test:
   private lazy val lines = os.read.lines(os.pwd / "2016" / "22" / "22.test.input.txt")
-  lazy val result1 = Solving.solve1(lines)
-  lazy val result2 = Solving.solve2(lines)
-// Testing.result1 // part 2: 7
-// Testing.result2 // part 2: 7
+  lazy val res1 = Solving.solve1(lines)
+  lazy val res2 = Solving.solve2(lines)
+// Test.res1 // part 2: 7
+// Test.res2 // part 2: 7
 
 object Main:
   private lazy val lines = os.read.lines(os.pwd / "2016" / "22" / "22.input.txt")
-  lazy val result1 = Solving.solve1(lines)
-  lazy val result2 = Solving.solve2(lines)
-// Main.result1 // part 1: 981
-// Main.result2 // part 2:
+  lazy val res1 = Solving.solve1(lines)
+  lazy val res2 = Solving.solve2(lines)
+// Main.res1 // part 1: 981
+// Main.res2 // part 2:

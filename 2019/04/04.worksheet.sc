@@ -58,16 +58,16 @@ object Solving:
           str(index) == str(index + 1) && str.count(_ == str(index)) == 2
       .size
 
-object Testing:
+object Test:
   private lazy val lines = os.read.lines(os.pwd / "2019" / "04" / "04.test.input.txt")
-  lazy val result1 = Solving.solve1(lines)
-  lazy val result2 = Solving.solve2(lines)
-// Testing.result1 // part 1:
-// Testing.result2 // part 2:
+  lazy val res1 = Solving.solve1(lines)
+  lazy val res2 = Solving.solve2(lines)
+// Test.res1 // part 1:
+// Test.res2 // part 2:
 
 object Main:
   lazy val lines = os.read.lines(os.pwd / "2019" / "04" / "04.input.txt")
-  lazy val result1 = Solving.solve1(lines)
-  lazy val result2 = Solving.solve2(lines)
-// Main.result1 // part 1: 1694
-// Main.result2 // part 2: 1148
+  lazy val res1 = Solving.solve1(lines)
+  lazy val res2 = Solving.solve2(lines)
+// Main.res1 // part 1: 1694
+// Main.res2 // part 2: 1148

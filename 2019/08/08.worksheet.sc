@@ -82,8 +82,8 @@ object DataDefs:
     lazy val size = w * h
 
   extension (s: String)
-    def seeThru: Char = s.foldLeft('2'): (result, char) =>
-      if result == '2' then char else result
+    def seeThru: Char = s.foldLeft('2'): (res, char) =>
+      if res == '2' then char else res
 
   case class Layer(rows: Seq[String])(using d: Dim):
     lazy val size = rows.size
@@ -126,23 +126,23 @@ object Solving:
 
   def solve2(line: String)(using d: Dim) = Parsing.parse(line).pixels
 
-object Testing:
+object Test:
   import DataDefs.*
   given d: Dim = Dim(2, 2)
   private lazy val line = os.read.lines(os.pwd / "2019" / "08" / "08.test.input.txt").head
-  lazy val result1 = Solving.solve1(line)
-  lazy val result2 = Solving.solve2(line)
-// Testing.result1 // part 1: 4
-// Testing.result2 // part 2: 0110
+  lazy val res1 = Solving.solve1(line)
+  lazy val res2 = Solving.solve2(line)
+// Test.res1 // part 1: 4
+// Test.res2 // part 2: 0110
 
 object Main:
   import DataDefs.*
   given d: Dim = Dim(25, 6)
   lazy val line = os.read.lines(os.pwd / "2019" / "08" / "08.input.txt").head
-  lazy val result1 = Solving.solve1(line)
-  lazy val result2 = Solving.solve2(line)
-// Main.result1 // part 1: 2318
-// Main.result2 // part 2: AHFCB
+  lazy val res1 = Solving.solve1(line)
+  lazy val res2 = Solving.solve2(line)
+// Main.res1 // part 1: 2318
+// Main.res2 // part 2: AHFCB
 
 // ./\..|..|.|___..__..|_\..
 // |..|.|..|.|....|..|.|..|.

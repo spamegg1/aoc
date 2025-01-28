@@ -381,20 +381,20 @@ object Solving:
     carts.carts.head.pos
 
 // I have 2 copies of the input files. One with carts removed.
-object Testing:
+object Test:
   lazy val tracks1 = os.read.lines(os.pwd / "2018" / "13" / "13.test.input.txt")
   lazy val starts1 = os.read.lines(os.pwd / "2018" / "13" / "13.test.input.2.txt")
   lazy val tracks2 = os.read.lines(os.pwd / "2018" / "13" / "13.test.input.3.txt")
   lazy val starts2 = os.read.lines(os.pwd / "2018" / "13" / "13.test.input.4.txt")
-  lazy val result1 = Solving.solve1(tracks1)(starts1)
-  lazy val result2 = Solving.solve2(tracks2)(starts2)
-// Testing.result1 // part 1: 7,3
-// Testing.result2 // part 2: 6,4
+  lazy val res1 = Solving.solve1(tracks1)(starts1)
+  lazy val res2 = Solving.solve2(tracks2)(starts2)
+// Test.res1 // part 1: 7,3
+// Test.res2 // part 2: 6,4
 
 object Main:
   lazy val tracks = os.read.lines(os.pwd / "2018" / "13" / "13.input.txt")
   lazy val starts = os.read.lines(os.pwd / "2018" / "13" / "13.input.2.txt")
-  lazy val result1 = Solving.solve1(tracks)(starts)
-  lazy val result2 = Solving.solve2(tracks)(starts)
-// Main.result1 // part 1: 118,112
-// Main.result2 // part 2: 50,22 this is off-by-1, so it's 50,21
+  lazy val res1 = Solving.solve1(tracks)(starts)
+  lazy val res2 = Solving.solve2(tracks)(starts)
+// Main.res1 // part 1: 118,112
+// Main.res2 // part 2: 50,22 this is off-by-1, so it's 50,21

@@ -293,15 +293,15 @@ object Solving:
 
   def solve2(using track: Seq[String]) = 0L
 
-object Testing: // s=3,1 e=7,5 size=15 saved=100
+object Test: // s=3,1 e=7,5 size=15 saved=100
   import DataDefs.*
   given Track      = os.read.lines(os.pwd / "2024" / "20" / "20.test.input.txt")
   given size: Int  = 15
   val start        = (3, 1)
   val finish       = (7, 5)
-  lazy val result1 = Solving.solve1(start, finish)(10) // 2+3+1+1+1+1+1=10
-  lazy val result2 = Solving.solve2
-// Testing.result2 // part 2:
+  lazy val res1 = Solving.solve1(start, finish)(10) // 2+3+1+1+1+1+1=10
+  lazy val res2 = Solving.solve2
+// Test.res2 // part 2:
 
 object Main: // s=67,75 e=43,71 size=141
   import DataDefs.*
@@ -309,12 +309,12 @@ object Main: // s=67,75 e=43,71 size=141
   given size: Int  = 141
   val start        = (67, 75)
   val finish       = (43, 71)
-  lazy val result1 = Solving.solve1(start, finish)(100)
-  lazy val result2 = Solving.solve2
+  lazy val res1 = Solving.solve1(start, finish)(100)
+  lazy val res2 = Solving.solve2
 
 @main
 def run: Unit =
-  // println(Testing.result1) // part 1: 10
+  // println(Test.res1) // part 1: 10
   // 0->40,2->14,4->14,6->2,8->4,10->2,12->3,20->1,36->1,38->1,40->1,64->1
-  // println(Main.result1) // part 1: 1378
+  // println(Main.res1) // part 1: 1378
   ()

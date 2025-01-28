@@ -90,16 +90,16 @@ object Solving:
   def solve1(lines: Seq[String]) = Parsing.parse(lines).count(_.isSafe)
   def solve2(lines: Seq[String]) = Parsing.parse(lines).count(_.isDampenedSafe)
 
-object Testing:
+object Test:
   private lazy val lines = os.read.lines(os.pwd / "2024" / "02" / "02.test.input.txt")
-  lazy val result1       = Solving.solve1(lines)
-  lazy val result2       = Solving.solve2(lines)
-// Testing.result1 // part 1: 2
-// Testing.result2 // part 2: 4
+  lazy val res1       = Solving.solve1(lines)
+  lazy val res2       = Solving.solve2(lines)
+// Test.res1 // part 1: 2
+// Test.res2 // part 2: 4
 
 object Main:
   private lazy val lines = os.read.lines(os.pwd / "2024" / "02" / "02.input.txt")
-  lazy val result1       = Solving.solve1(lines)
-  lazy val result2       = Solving.solve2(lines)
-// Main.result1 // part 1: 549
-// Main.result2 // part 2: 589
+  lazy val res1       = Solving.solve1(lines)
+  lazy val res2       = Solving.solve2(lines)
+// Main.res1 // part 1: 549
+// Main.res2 // part 2: 589

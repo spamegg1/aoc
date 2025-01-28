@@ -88,17 +88,17 @@ object Solving:
 
   def solve2(lines: Seq[String]) = commonLetters(findCorrectBoxes(lines))
 
-object Testing:
+object Test:
   private lazy val lines1 = os.read.lines(os.pwd / "2018" / "02" / "02.test.input.1.txt")
   private lazy val lines2 = os.read.lines(os.pwd / "2018" / "02" / "02.test.input.2.txt")
-  lazy val result1 = Solving.solve1(lines1)
-  lazy val result2 = Solving.solve2(lines2)
-// Testing.result1 // part 1: 12
-// Testing.result2 // part 2: fgij
+  lazy val res1 = Solving.solve1(lines1)
+  lazy val res2 = Solving.solve2(lines2)
+// Test.res1 // part 1: 12
+// Test.res2 // part 2: fgij
 
 object Main:
   private lazy val lines = os.read.lines(os.pwd / "2018" / "02" / "02.input.txt")
-  lazy val result1 = Solving.solve1(lines)
-  lazy val result2 = Solving.solve2(lines)
-// Main.result1 // part 1: 7350
-// Main.result2 // part 2: wmlnjevbfodamyiqpucrhsukg
+  lazy val res1 = Solving.solve1(lines)
+  lazy val res2 = Solving.solve2(lines)
+// Main.res1 // part 1: 7350
+// Main.res2 // part 2: wmlnjevbfodamyiqpucrhsukg

@@ -141,16 +141,16 @@ object Solving:
       else co2 = if co2.size == 1 then co2 else co2.filter(_(index) == '0')
     parseLong(oxygen.head.mkString, 2) * parseLong(co2.head.mkString, 2)
 
-object Testing:
+object Test:
   private lazy val lines = os.read.lines(os.pwd / "2021" / "03" / "03.test.input.txt")
-  lazy val result1 = Solving.solve1(lines)
-  lazy val result2 = Solving.solve2(lines)
-// Testing.result1 // part 1: 198
-// Testing.result2 // part 2: 230
+  lazy val res1 = Solving.solve1(lines)
+  lazy val res2 = Solving.solve2(lines)
+// Test.res1 // part 1: 198
+// Test.res2 // part 2: 230
 
 object Main:
   private lazy val lines = os.read.lines(os.pwd / "2021" / "03" / "03.input.txt")
-  lazy val result1 = Solving.solve1(lines)
-  lazy val result2 = Solving.solve2(lines)
-// Main.result1 // part 1: 775304
-// Main.result2 // part 2: 1370737
+  lazy val res1 = Solving.solve1(lines)
+  lazy val res2 = Solving.solve2(lines)
+// Main.res1 // part 1: 775304
+// Main.res2 // part 2: 1370737

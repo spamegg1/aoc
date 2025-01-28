@@ -115,18 +115,18 @@ object Solving:
     while !recipes.show.contains(appear) do recipes = recipes.next
     recipes.show.indexOf(appear)
 
-object Testing:
+object Test:
   import DataDefs.*
   var recipes = Recipes(ArrayDeque(3, 7), 0, 1, 2)
   for _ <- 1 to 15 do recipes = recipes.next
-  lazy val result1 = Solving.solve1(ArrayDeque(3, 7), 2018)
-  lazy val result2 = Solving.solve2(ArrayDeque(3, 7), "59414")
-// Testing.recipes // 3710[1]012(4)51589167792
-// Testing.result1 // part 1: 5941429882
-// Testing.result2 // part 2: 2018
+  lazy val res1 = Solving.solve1(ArrayDeque(3, 7), 2018)
+  lazy val res2 = Solving.solve2(ArrayDeque(3, 7), "59414")
+// Test.recipes // 3710[1]012(4)51589167792
+// Test.res1 // part 1: 5941429882
+// Test.res2 // part 2: 2018
 
 object Main:
-  lazy val result1 = Solving.solve1(ArrayDeque(3, 7), 540391)
-  lazy val result2 = Solving.solve2(ArrayDeque(3, 7), "540391")
-// Main.result1 // part 1: 1474315445
-// Main.result2 // part 2: 20278122
+  lazy val res1 = Solving.solve1(ArrayDeque(3, 7), 540391)
+  lazy val res2 = Solving.solve2(ArrayDeque(3, 7), "540391")
+// Main.res1 // part 1: 1474315445
+// Main.res2 // part 2: 20278122

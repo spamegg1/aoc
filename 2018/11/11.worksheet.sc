@@ -135,21 +135,21 @@ object Solving:
         squareSize -> solve1(gridSize, squareSize)(serial)
       .maxBy(_._2._2)
 
-object Testing:
+object Test:
   private lazy val inputs = Seq((122, 79, 57L), (217, 196, 39L), (101, 153, 71L))
   private lazy val serials = Seq(18L, 42L)
   lazy val powers = inputs.map(DataDefs.Grid.power)
-  lazy val result1 = serials map Solving.solve1(300, 3)
-  lazy val result2 = serials map Solving.solve2(300)
-// Testing.powers // -5, 0, 4
-// Testing.result1 // part 1: ((33,45),29),((21,61),30)
-// Testing.result2 // part 2: (16,((90,269),113)),(12,((232,251),119))
+  lazy val res1 = serials map Solving.solve1(300, 3)
+  lazy val res2 = serials map Solving.solve2(300)
+// Test.powers // -5, 0, 4
+// Test.res1 // part 1: ((33,45),29),((21,61),30)
+// Test.res2 // part 2: (16,((90,269),113)),(12,((232,251),119))
 
 object Main:
-  lazy val result1 = Solving.solve1(300, 3)(8444L)
-  lazy val result2 = Solving.solve2(300)(8444L)
-// Main.result1 // part 1: ((243,68),28)
-// Main.result2 // part 2: (12,((236,252),96))
+  lazy val res1 = Solving.solve1(300, 3)(8444L)
+  lazy val res2 = Solving.solve2(300)(8444L)
+// Main.res1 // part 1: ((243,68),28)
+// Main.res2 // part 2: (12,((236,252),96))
 
 // val g = DataDefs.Grid(300, 8444L)
 // os.write(os.pwd / "2018" / "11" / "powers.txt", g.show)

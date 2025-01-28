@@ -138,7 +138,7 @@ After enhancing the original input image twice, 35 pixels are lit.
 
 Start with the original input image and apply the image enhancement algorithm twice,
 being careful to account for the infinite size of the images.
-How many pixels are lit in the resulting image?
+How many pixels are lit in the resing image?
 
  */
 object DataDefs:
@@ -154,16 +154,16 @@ object Solving:
   def solve1(lines: Seq[String]) = 0L
   def solve2(lines: Seq[String]) = 0L
 
-object Testing:
+object Test:
   private lazy val lines = os.read.lines(os.pwd / "2021" / "20" / "01.test.input.txt")
-  lazy val result1 = Solving.solve1(lines)
-  lazy val result2 = Solving.solve2(lines)
-// Testing.result1 // part 1: 35
-// Testing.result2 // part 2:
+  lazy val res1 = Solving.solve1(lines)
+  lazy val res2 = Solving.solve2(lines)
+// Test.res1 // part 1: 35
+// Test.res2 // part 2:
 
 object Main:
   private lazy val lines = os.read.lines(os.pwd / "2021" / "20" / "01.input.txt")
-  lazy val result1 = Solving.solve1(lines)
-  lazy val result2 = Solving.solve2(lines)
-// Main.result1 // part 1:
-// Main.result2 // part 2:
+  lazy val res1 = Solving.solve1(lines)
+  lazy val res2 = Solving.solve2(lines)
+// Main.res1 // part 1:
+// Main.res2 // part 2:

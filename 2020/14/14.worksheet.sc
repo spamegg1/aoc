@@ -37,14 +37,14 @@ By expanding everything out to individual bits, the mask is applied as follows:
 
 value:  000000000000000000000000000000001011  (decimal 11)
 mask:   XXXXXXXXXXXXXXXXXXXXXXXXXXXXX1XXXX0X
-result: 000000000000000000000000000001001001  (decimal 73)
+res: 000000000000000000000000000001001001  (decimal 73)
 
 So, because of the mask, the value 73 is written to memory address 8 instead.
 Then, the program tries to write 101 to address 7:
 
 value:  000000000000000000000000000001100101  (decimal 101)
 mask:   XXXXXXXXXXXXXXXXXXXXXXXXXXXXX1XXXX0X
-result: 000000000000000000000000000001100101  (decimal 101)
+res: 000000000000000000000000000001100101  (decimal 101)
 
 This time, the mask has no effect, as the bits it overwrote
 were already the values the mask tried to set.
@@ -52,7 +52,7 @@ Finally, the program tries to write 0 to address 8:
 
 value:  000000000000000000000000000000000000  (decimal 0)
 mask:   XXXXXXXXXXXXXXXXXXXXXXXXXXXXX1XXXX0X
-result: 000000000000000000000000000001000000  (decimal 64)
+res: 000000000000000000000000000001000000  (decimal 64)
 
 64 is written to address 8 instead, overwriting the value that was there previously.
 
@@ -94,7 +94,7 @@ When this program goes to write to memory address 42, it first applies the bitma
 
 address: 000000000000000000000000000000101010  (decimal 42)
 mask:    000000000000000000000000000000X1001X
-result:  000000000000000000000000000000X1101X
+res:  000000000000000000000000000000X1101X
 
 After applying the mask, four bits are overwritten,
 three of which are different, and two of which are floating.
@@ -110,9 +110,9 @@ Next, the program is about to write to memory address 26 with a different bitmas
 
 address: 000000000000000000000000000000011010  (decimal 26)
 mask:    00000000000000000000000000000000X0XX
-result:  00000000000000000000000000000001X0XX
+res:  00000000000000000000000000000001X0XX
 
-This results in an address with three floating bits,
+This ress in an address with three floating bits,
 causing writes to eight memory addresses:
 
 000000000000000000000000000000010000  (decimal 16)
@@ -200,17 +200,17 @@ object Solving:
   val solve1 = solve((c, i) => c.next1(i))
   val solve2 = solve((c, i) => c.next2(i))
 
-object Testing:
+object Test:
   private lazy val lines1 = os.read.lines(os.pwd / "2020" / "14" / "14.test.input.txt")
   private lazy val lines2 = os.read.lines(os.pwd / "2020" / "14" / "14.test.input.2.txt")
-  lazy val result1 = Solving.solve1(lines1)
-  lazy val result2 = Solving.solve2(lines2)
-// Testing.result1 // part 1: 165
-// Testing.result2 // part 2: 208
+  lazy val res1 = Solving.solve1(lines1)
+  lazy val res2 = Solving.solve2(lines2)
+// Test.res1 // part 1: 165
+// Test.res2 // part 2: 208
 
 object Main:
   private lazy val lines = os.read.lines(os.pwd / "2020" / "14" / "14.input.txt")
-  lazy val result1 = Solving.solve1(lines)
-  lazy val result2 = Solving.solve2(lines)
-// Main.result1 // part 1: 11884151942312
-// Main.result2 // part 2: 2625449018811
+  lazy val res1 = Solving.solve1(lines)
+  lazy val res2 = Solving.solve2(lines)
+// Main.res1 // part 1: 11884151942312
+// Main.res2 // part 2: 2625449018811

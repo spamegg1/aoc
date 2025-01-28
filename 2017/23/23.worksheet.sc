@@ -10,7 +10,7 @@ The code it's running seems to be a variant of the kind you saw recently on that
 The general functionality seems very similar, but some of the instructions are different:
   set X Y sets register X to the value of Y.
   sub X Y decreases register X by the value of Y.
-  mul X Y sets register X to the result of multiplying
+  mul X Y sets register X to the res of multiplying
     the value contained in register X by the value of Y.
   jnz X Y jumps with an offset of the value of Y,
     but only if the value of X is not zero.
@@ -41,16 +41,16 @@ object Solving:
   def solve1(lines: Seq[String]) = 0L
   def solve2(lines: Seq[String]) = 0L
 
-object Testing:
+object Test:
   private lazy val lines = os.read.lines(os.pwd / "2017" / "23" / "23.test.input.txt")
-  lazy val result1 = Solving.solve1(lines)
-  lazy val result2 = Solving.solve2(lines)
-// Testing.result1 // part 1:
-// Testing.result2 // part 2:
+  lazy val res1 = Solving.solve1(lines)
+  lazy val res2 = Solving.solve2(lines)
+// Test.res1 // part 1:
+// Test.res2 // part 2:
 
 object Main:
   private lazy val lines = os.read.lines(os.pwd / "2017" / "23" / "23.input.txt")
-  lazy val result1 = Solving.solve1(lines)
-  lazy val result2 = Solving.solve2(lines)
-// Main.result1 // part 1:
-// Main.result2 // part 2:
+  lazy val res1 = Solving.solve1(lines)
+  lazy val res2 = Solving.solve2(lines)
+// Main.res1 // part 1:
+// Main.res2 // part 2:

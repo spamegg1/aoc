@@ -28,10 +28,10 @@ Now, consider a larger example, dabAcCaCBAcCcaDA:
 
 dabAcCaCBAcCcaDA  The first 'cC' is removed.
 dabAaCBAcCcaDA    This creates 'Aa', which is removed.
-dabCBAcCcaDA      Either 'cC' or 'Cc' are removed (the result is the same).
+dabCBAcCcaDA      Either 'cC' or 'Cc' are removed (the res is the same).
 dabCBAcaDA        No further actions can be taken.
 
-After all possible reactions, the resulting polymer contains 10 units.
+After all possible reactions, the resing polymer contains 10 units.
 How many units remain after fully reacting the polymer you scanned?
 
 --- Part Two ---
@@ -53,7 +53,7 @@ For example, again using the polymer dabAcCaCBAcCcaDA from above:
 
 In this example, removing all C/c units was best, producing the answer 4.
 What is the length of the shortest polymer you can produce by removing all units
-of exactly one type and fully reacting the result?
+of exactly one type and fully reacting the res?
  */
 object DataDefs:
   val pairs = ('a' to 'z').zip('A' to 'Z') ++ ('A' to 'Z').zip('a' to 'z')
@@ -62,18 +62,18 @@ object DataDefs:
   extension (units: String)
     def reactOnce(types: Seq[String]): String =
       var index = 0
-      var result = ""
+      var res = ""
       while index < units.size do
         if index == units.size - 1 then
-          result = result.appended(units(index))
+          res = res.appended(units(index))
           index += 1
         else
           val pair = units.slice(index, index + 2)
           if types contains pair then index += 2
           else
-            result = result.appended(pair.head)
+            res = res.appended(pair.head)
             index += 1
-      result
+      res
 
 object Parsing:
   import DataDefs.*
@@ -98,16 +98,16 @@ object Solving:
         solver(filteredLine)(polars)
       .min
 
-object Testing:
+object Test:
   lazy val line = os.read.lines(os.pwd / "2018" / "05" / "05.test.input.txt").head
-  lazy val result1 = Solving.solve1(line)
-  lazy val result2 = Solving.solve2(line)
-// Testing.result1 // part 1: 10
-// Testing.result2 // part 2: ???
+  lazy val res1 = Solving.solve1(line)
+  lazy val res2 = Solving.solve2(line)
+// Test.res1 // part 1: 10
+// Test.res2 // part 2: ???
 
 object Main:
   lazy val line = os.read.lines(os.pwd / "2018" / "05" / "05.input.txt").head
-  lazy val result1 = Solving.solve1(line)
-  lazy val result2 = Solving.solve2(line)
-// Main.result1 // part 1: 9348
-// Main.result2 // part 2: 4996
+  lazy val res1 = Solving.solve1(line)
+  lazy val res2 = Solving.solve2(line)
+// Main.res1 // part 1: 9348
+// Main.res2 // part 2: 4996

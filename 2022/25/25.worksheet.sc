@@ -176,26 +176,26 @@ object DataDefs:
     def toSnafu: Snafu =
       val digits = baseFive.reverse.map(_.asDigit)
       var carry = 0
-      var result = List[String]()
+      var res = List[String]()
 
       for digit <- digits do
         val newDigit = digit + carry
         newDigit match
           case 5 =>
-            result ::= "0"
+            res ::= "0"
             carry = 1
           case 4 =>
-            result ::= "-"
+            res ::= "-"
             carry = 1
           case 3 =>
-            result ::= "="
+            res ::= "="
             carry = 1
           case _ =>
-            result ::= newDigit.toString
+            res ::= newDigit.toString
             carry = 0
 
-      if carry > 0 then result ::= carry.toString
-      result.mkString
+      if carry > 0 then res ::= carry.toString
+      res.mkString
 
 object Parsing:
   import DataDefs.*
@@ -218,12 +218,12 @@ object Solving:
     .toBaseFive
     .toSnafu
 
-object Testing:
+object Test:
   private lazy val lines = os.read.lines(os.pwd / "2022" / "25" / "25.test.input.txt")
-  lazy val result1 = Solving.solve1(lines)
-// Testing.result1 // part 1: 4890, 2=-1=0
+  lazy val res1 = Solving.solve1(lines)
+// Test.res1 // part 1: 4890, 2=-1=0
 
 object Main:
   private lazy val lines = os.read.lines(os.pwd / "2022" / "25" / "25.input.txt")
-  lazy val result1 = Solving.solve1(lines)
-// Main.result1 // part 1: 32005641587247, 2=20---01==222=0=0-2
+  lazy val res1 = Solving.solve1(lines)
+// Main.res1 // part 1: 32005641587247, 2=20---01==222=0=0-2

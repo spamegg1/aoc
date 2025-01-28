@@ -208,34 +208,34 @@ object Solving:
 
   def solve1(start: Pos)(finish: Pos)(using maze: Seq[String]) =
     var reins  = Reins(start)
-    var result = Seq.empty[Rein]
+    var res = Seq.empty[Rein]
 
-    while result.size < 5 do
-      println(result.size)
+    while res.size < 5 do
+      println(res.size)
       val (finished, going) = reins.next.partition(_.pos == finish)
-      result ++= finished
+      res ++= finished
       reins = going
 
-    result.map(_.visited.map(_.dir)).minBy(_.score).score
+    res.map(_.visited.map(_.dir)).minBy(_.score).score
 
   def solve2(maze: Seq[String])(start: Pos)(finish: Pos) = 0L
 
-object Testing:
+object Test:
   lazy val lines1   = os.read.lines(os.pwd / "2024" / "16" / "16.test.input.1.txt")
   lazy val lines2   = os.read.lines(os.pwd / "2024" / "16" / "16.test.input.2.txt")
-  lazy val result11 = Solving.solve1((13, 1))((1, 13))(using lines1)
-  lazy val result12 = Solving.solve1((15, 1))((1, 15))(using lines2)
-  lazy val result21 = Solving.solve2(lines1) // 45
-  lazy val result22 = Solving.solve2(lines1) // 64
+  lazy val res11 = Solving.solve1((13, 1))((1, 13))(using lines1)
+  lazy val res12 = Solving.solve1((15, 1))((1, 15))(using lines2)
+  lazy val res21 = Solving.solve2(lines1) // 45
+  lazy val res22 = Solving.solve2(lines1) // 64
 
 object Main:
   lazy val lines   = os.read.lines(os.pwd / "2024" / "16" / "16.input.txt")
-  lazy val result1 = Solving.solve1((139, 1))((1, 139))(using lines)
-  lazy val result2 = Solving.solve2(lines)
+  lazy val res1 = Solving.solve1((139, 1))((1, 139))(using lines)
+  lazy val res2 = Solving.solve2(lines)
 
 @main
 def run: Unit =
-  // println(Testing.result11) // part 1: 7036
-  // println(Testing.result12) // part 1: 11048
-  println(Main.result1)     // part 1: 160624
-  println(Main.result1)     // part 2: 692
+  // println(Test.res11) // part 1: 7036
+  // println(Test.res12) // part 1: 11048
+  println(Main.res1)     // part 1: 160624
+  println(Main.res1)     // part 2: 692

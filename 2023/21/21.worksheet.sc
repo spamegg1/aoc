@@ -230,20 +230,20 @@ object Solving:
     given garden: Garden = Parsing.parseGarden(lines)
     afterNsteps(Set(start))(count).size
 
-object Testing:
+object Test:
   import DataDefs.*, Ground.*
   private lazy val lines = os.read.lines(os.pwd / "2023" / "21" / "21.test.input.txt")
   private lazy val start = Pos(5, 5, Plot) // I replaced S with . in the input file.
-  lazy val result1 = Solving.solve1(lines)(start)(6)
-  lazy val result2 = Solving.solve2(lines)(start)(5000)
-// Testing.result1 // part 1: 16
-// Testing.result2 // part 2: 16733044
+  lazy val res1 = Solving.solve1(lines)(start)(6)
+  lazy val res2 = Solving.solve2(lines)(start)(5000)
+// Test.res1 // part 1: 16
+// Test.res2 // part 2: 16733044
 
 object Main:
   import DataDefs.*, Ground.*
   private lazy val lines = os.read.lines(os.pwd / "2023" / "21" / "21.input.txt")
   private lazy val start = Pos(65, 65, Plot) // I replaced S with . in the input file.
-  lazy val result1 = Solving.solve1(lines)(start)(64)
-  lazy val result2 = Solving.solve1(lines)(start)(26501365)
-// Main.result1 // part 1: 3841
-// Main.result2 // part 2: 636391426712747
+  lazy val res1 = Solving.solve1(lines)(start)(64)
+  lazy val res2 = Solving.solve1(lines)(start)(26501365)
+// Main.res1 // part 1: 3841
+// Main.res2 // part 2: 636391426712747

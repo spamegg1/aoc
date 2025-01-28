@@ -32,7 +32,7 @@ expanded in the time it took the light from those galaxies to reach the
 observatory.
 
 Due to something involving gravitational effects, only some space expands.
-In fact, the result is that any rows or columns that contain no galaxies should
+In fact, the res is that any rows or columns that contain no galaxies should
 all actually be twice as big.
 
 In the above example, three columns and two rows contain no galaxies:
@@ -50,7 +50,7 @@ In the above example, three columns and two rows contain no galaxies:
  #...#.....
    ^  ^  ^
 
-These rows and columns need to be twice as big; the result of cosmic expansion
+These rows and columns need to be twice as big; the res of cosmic expansion
 therefore looks like this:
 
 ....#........
@@ -190,16 +190,16 @@ object Solving:
     val expanded = Parsing.expand(universe)(galaxies)(factor)
     allDistances(expanded).sum
 
-object Testing:
+object Test:
   private lazy val lines = os.read.lines(os.pwd / "2023" / "11" / "11.test.input.txt")
-  lazy val result1 = Solving.solve(lines)(2)
-  lazy val result2 = Solving.solve(lines)(10)
-// Testing.result1 // part 1: 374
-// Testing.result2 // part 2: 1030
+  lazy val res1 = Solving.solve(lines)(2)
+  lazy val res2 = Solving.solve(lines)(10)
+// Test.res1 // part 1: 374
+// Test.res2 // part 2: 1030
 
 object Main:
   private lazy val lines = os.read.lines(os.pwd / "2023" / "11" / "11.input.txt")
-  lazy val result1 = Solving.solve(lines)(2)
-  lazy val result2 = Solving.solve(lines)(1000000)
-// Main.result1 // part 1: 9556896
-// Main.result2 // part 2: 685038186836
+  lazy val res1 = Solving.solve(lines)(2)
+  lazy val res2 = Solving.solve(lines)(1000000)
+// Main.res1 // part 1: 9556896
+// Main.res2 // part 2: 685038186836

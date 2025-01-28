@@ -130,7 +130,7 @@ the missing Historian is trapped in the area containing a giant electromagnet
 or molten lava. You'll need to make sure that for each of the five codes,
 you find the shortest sequence of button presses necessary.
 
-The complexity of a single code (like 029A) is equal to the result of
+The complexity of a single code (like 029A) is equal to the res of
 multiplying these two values:
   The length of the shortest sequence of button presses you need to type
     on your directional keypad in order to cause the code to be typed on
@@ -224,19 +224,19 @@ object Solving:
   def solve1(lines: Seq[String]) = 0L
   def solve2(lines: Seq[String]) = 0L
 
-object Testing:
+object Test:
   lazy val lines   = os.read.lines(os.pwd / "2024" / "21" / "21.test.input.txt")
-  lazy val result1 = Solving.solve1(lines)
-  lazy val result2 = Solving.solve2(lines)
+  lazy val res1 = Solving.solve1(lines)
+  lazy val res2 = Solving.solve2(lines)
 
 object Main:
   lazy val lines   = os.read.lines(os.pwd / "2024" / "21" / "21.input.txt")
-  lazy val result1 = Solving.solve1(lines)
-  lazy val result2 = Solving.solve2(lines)
+  lazy val res1 = Solving.solve1(lines)
+  lazy val res2 = Solving.solve2(lines)
 
 @main
 def run: Unit =
-  println(Testing.result1) // part 1: 126384
-  // println(Testing.result2) // part 2:
-  // println(Main.result1) // part 1:
-  // println(Main.result2) // part 2:
+  println(Test.res1) // part 1: 126384
+  // println(Test.res2) // part 2:
+  // println(Main.res1) // part 1:
+  // println(Main.res2) // part 2:

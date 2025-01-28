@@ -174,7 +174,7 @@ Using the same example as above:
     Disintegrating brick F would cause only 1 other brick, G, to fall.
 
 Disintegrating any other brick would cause no other bricks to fall. So, in this
-example, the sum of the number of other bricks that would fall as a result of
+example, the sum of the number of other bricks that would fall as a res of
 disintegrating each brick is 7.
 
 For each brick, determine how many other bricks would fall if that brick were
@@ -231,16 +231,16 @@ object Solving:
     val settled = settle(bricks)
     disintegrable(settled).size
 
-object Testing:
+object Test:
   val lines = os.read.lines(os.pwd / "2023" / "22" / "22.test.input.txt")
-  lazy val result1 = Solving.solve1(lines)
-  lazy val result2 = 0
-// Testing.result1 // part 1: 5
-// Testing.result2 // part 2: ???
+  lazy val res1 = Solving.solve1(lines)
+  lazy val res2 = 0
+// Test.res1 // part 1: 5
+// Test.res2 // part 2: ???
 
 object Main:
   private val lines = os.read.lines(os.pwd / "2023" / "22" / "22.input.txt")
-  lazy val result1 = Solving.solve1(lines)
-  lazy val result2 = 0
-// Main.result1 // part 1: 512
-// Main.result2 // part 2: 98167
+  lazy val res1 = Solving.solve1(lines)
+  lazy val res2 = 0
+// Main.res1 // part 1: 512
+// Main.res2 // part 2: 98167

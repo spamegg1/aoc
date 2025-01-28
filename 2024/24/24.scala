@@ -198,7 +198,7 @@ no gate's output was swapped multiple times.)
 
 For example, the system below is supposed to find the bitwise AND
 of the six-bit number on x00 through x05 and the six-bit number on
-y00 through y05 and then write the result as a six-bit number on z00 through z05:
+y00 through y05 and then write the res as a six-bit number on z00 through z05:
 
 x00: 0
 x01: 1
@@ -228,7 +228,7 @@ The first pair of gates with swapped outputs is
 the second pair of gates is
   x01 AND y01 -> z02 and
   x02 AND y02 -> z01.
-Correcting these two swaps results in this system that works as intended
+Correcting these two swaps ress in this system that works as intended
 for any set of initial values on wires that start with x or y:
 
 x00 AND y00 -> z00
@@ -344,20 +344,20 @@ object Solving:
 
   def solve2(lines: String) = 0L
 
-object Testing:
+object Test:
   lazy val lines   = os.read(os.pwd / "2024" / "24" / "24.test.input.txt")
-  lazy val result1 = Solving.solve1(lines)
-  lazy val result2 = Solving.solve2(lines)
+  lazy val res1 = Solving.solve1(lines)
+  lazy val res2 = Solving.solve2(lines)
 
 object Main:
   lazy val lines   = os.read(os.pwd / "2024" / "24" / "24.input.txt")
-  lazy val result1 = Solving.solve1(lines)
-  lazy val result2 = Solving.solve2(lines)
+  lazy val res1 = Solving.solve1(lines)
+  lazy val res2 = Solving.solve2(lines)
 
 @main
 def run: Unit =
-  // println(Testing.result1) // part 1: 0011111101000
-  // println(Testing.result2) // part 2:
-  // println(Main.result1) // part 1: 1000001100011001000110101100111101110001110000
-  // println(Main.result2) // part 2:
+  // println(Test.res1) // part 1: 0011111101000
+  // println(Test.res2) // part 2:
+  // println(Main.res1) // part 1: 1000001100011001000110101100111101110001110000
+  // println(Main.res2) // part 2:
   ()

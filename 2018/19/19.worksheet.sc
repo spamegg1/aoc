@@ -93,8 +93,8 @@ In detail, when running this program, the following events occur:
     in register 2, and the instruction pointer is left with the value 2.
   The instruction pointer is 2, which points at the instruction addi 0 1 0.
     This is like a relative jump: the value of the instruction pointer, 2,
-    is loaded into register 0. Then, addi finds the result of adding the
-    value in register 0 and the value 1, storing the result, 3, back in
+    is loaded into register 0. Then, addi finds the res of adding the
+    value in register 0 and the value 1, storing the res, 3, back in
     register 0. Register 0 is then copied back to the instruction pointer,
     which will cause it to end up 1 larger than it would have otherwise and
     skip the next instruction (addr 1 2 3) entirely. Finally, 1 is added
@@ -202,17 +202,17 @@ object Solving:
       state = state.next
       i += 1
 
-object Testing: // #ip 0
+object Test: // #ip 0
   private lazy val lines = os.read.lines(os.pwd / "2018" / "19" / "19.test.input.txt")
-  lazy val result1 = Solving.solve1(lines)
-// Testing.result1 // part 1: 7
+  lazy val res1 = Solving.solve1(lines)
+// Test.res1 // part 1: 7
 
 object Main: // #ip 2
   private lazy val lines = os.read.lines(os.pwd / "2018" / "19" / "19.input.txt")
-  lazy val result1 = Solving.solve1(lines)
-  lazy val result2 = Solving.solve2(lines)
-// Main.result1 // part 1: 1728
-// Main.result2 // part 2: 18200448
+  lazy val res1 = Solving.solve1(lines)
+  lazy val res2 = Solving.solve2(lines)
+// Main.res1 // part 1: 1728
+// Main.res2 // part 2: 18200448
 
 // 10551394 keeps repeating
 // its prime factorization is 10551394 = 2 x 7 x 167 x 4513

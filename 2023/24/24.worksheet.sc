@@ -37,7 +37,7 @@ intersections between the paths they will trace.)
 In this example, look for intersections that happen with an X and Y position
 each at least 7 and at most 27; in your actual data, you'll need to check a much
 larger test area. Comparing all pairs of hailstones' future paths produces the
-following results:
+following ress:
 
 Hailstone A: 19, 13, 30 @ -2, 1, -2
 Hailstone B: 18, 19, 22 @ -1, -1, -2
@@ -157,16 +157,16 @@ object Solving:
   import DataDefs.*
   ???
 
-object Testing:
+object Test:
   private lazy val lines = os.read.lines(os.pwd / "2023" / "24" / "24.test.input.txt")
-  lazy val result1 = 0
-  lazy val result2 = 0
-// Testing.result1 // part 1: ???
-// Testing.result2 // part 2: ???
+  lazy val res1 = 0
+  lazy val res2 = 0
+// Test.res1 // part 1: ???
+// Test.res2 // part 2: ???
 
 object Main:
   private lazy val lines = os.read.lines(os.pwd / "2023" / "24" / "24.input.txt")
-  lazy val result1 = 0
-  lazy val result2 = 0
-// Main.result1 // part 1: 15107
-// Main.result2 // part 2: 856642398547748
+  lazy val res1 = 0
+  lazy val res2 = 0
+// Main.res1 // part 1: 15107
+// Main.res2 // part 2: 856642398547748

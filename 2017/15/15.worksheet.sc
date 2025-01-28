@@ -12,7 +12,7 @@ track of the number of times those parts of the values match.
 The generators both work on the same principle.
 To create its next value, a generator will take the previous value it produced,
 multiply it by a factor (generator A uses 16807; generator B uses 48271),
-and then keep the remainder of dividing that resulting product by 2147483647.
+and then keep the remainder of dividing that resing product by 2147483647.
 That final remainder is the value it produces next.
 
 To calculate each generator's first value, it instead uses a specific
@@ -150,22 +150,22 @@ object Solving:
   lazy val solve1 = solve(_.next1)
   lazy val solve2 = solve(_.next2)
 
-object Testing:
+object Test:
   import DataDefs.*
   private val genA = Gen(65L, 16807L, 65L, 4L)
   private val genB = Gen(8921L, 48271L, 8921L, 8L)
   private val judge = Judge(genA, genB, 0L)
-  lazy val result1 = Solving.solve1(judge)(40000000)
-  lazy val result2 = Solving.solve2(judge)(5000000)
-// Testing.result1 // part 1: 588
-// Testing.result2 // part 2: 309
+  lazy val res1 = Solving.solve1(judge)(40000000)
+  lazy val res2 = Solving.solve2(judge)(5000000)
+// Test.res1 // part 1: 588
+// Test.res2 // part 2: 309
 
 object Main:
   import DataDefs.*
   private val genA = Gen(116L, 16807L, 116L, 4L)
   private val genB = Gen(299L, 48271L, 299L, 8L)
   private val judge = Judge(genA, genB, 0L)
-  lazy val result1 = Solving.solve1(judge)(40000000)
-  lazy val result2 = Solving.solve2(judge)(5000000)
-// Main.result1 // part 1: 569
-// Main.result2 // part 2: 298
+  lazy val res1 = Solving.solve1(judge)(40000000)
+  lazy val res2 = Solving.solve2(judge)(5000000)
+// Main.res1 // part 1: 569
+// Main.res2 // part 2: 298

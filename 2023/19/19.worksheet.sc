@@ -264,17 +264,17 @@ object Solving:
     Ranges(Range(1, 4001), Range(1, 4001), Range(1, 4001), Range(1, 4001), Name("in"))
 
   private def processRanges(workflows: Map[Flow, Workflow]): Long =
-    var result = 0L
+    var res = 0L
     var ranges = start
     val queue = Queue(start)
     while queue.nonEmpty do
       ranges = queue.dequeue()
-      if ranges.flow == Accepted then result += ranges.product
+      if ranges.flow == Accepted then res += ranges.product
       else if ranges.flow == Rejected || ranges.isEmpty then ()
       else
         val workflow = workflows(ranges.flow)
         queue ++= ranges.processRules(workflow.rules)(Queue[Ranges]())
-    result
+    res
 
   def solve1(lines1: List[String])(lines2: List[String]): Long =
     val workflows = Parsing.parseWorkflows(lines1)
@@ -285,18 +285,18 @@ object Solving:
     val workflows = Parsing.parseWorkflows(lines)
     processRanges(workflows)
 
-object Testing:
+object Test:
   lazy val workflows = os.read.lines(os.pwd / "2023" / "19" / "19.test.input.txt").toList
   lazy val parts = os.read.lines(os.pwd / "2023" / "19" / "19.test.input.2.txt").toList
-  lazy val result1 = Solving.solve1(workflows)(parts)
-  lazy val result2 = Solving.solve2(workflows)
-// Testing.result1 // part 1: 19114
-// Testing.result2 // part 2: 167.409.079.868.000
+  lazy val res1 = Solving.solve1(workflows)(parts)
+  lazy val res2 = Solving.solve2(workflows)
+// Test.res1 // part 1: 19114
+// Test.res2 // part 2: 167.409.079.868.000
 
 object Main:
   lazy val workflows = os.read.lines(os.pwd / "2023" / "19" / "19.input.txt").toList
   lazy val parts = os.read.lines(os.pwd / "2023" / "19" / "19.input.2.txt").toList
-  lazy val result1 = Solving.solve1(workflows)(parts)
-  lazy val result2 = Solving.solve2(workflows)
-// Main.result1 // part 1: 348378
-// Main.result2 // part 2: 121.158.073.425.385
+  lazy val res1 = Solving.solve1(workflows)(parts)
+  lazy val res2 = Solving.solve2(workflows)
+// Main.res1 // part 1: 348378
+// Main.res2 // part 2: 121.158.073.425.385

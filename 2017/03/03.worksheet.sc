@@ -106,15 +106,15 @@ object Solving:
 
     value
 
-object Testing:
-  lazy val result1 = Solving.solve1(21)
-  lazy val result2 = Solving.solve2(747)
-// Testing.result1 // part 1: 4
-// Testing.result2 // part 2: 806
+object Test:
+  lazy val res1 = Solving.solve1(21)
+  lazy val res2 = Solving.solve2(747)
+// Test.res1 // part 1: 4
+// Test.res2 // part 2: 806
 
 object Main:
   private lazy val input = 361527
-  lazy val result1 = Solving.solve1(input)
-  lazy val result2 = Solving.solve2(input)
-// Main.result1 // part 1: 326
-// Main.result2 // part 2: 363010
+  lazy val res1 = Solving.solve1(input)
+  lazy val res2 = Solving.solve2(input)
+// Main.res1 // part 1: 326
+// Main.res2 // part 2: 363010

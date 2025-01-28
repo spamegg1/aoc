@@ -207,5 +207,5 @@ object Solving:
 
 object Main:
   private lazy val lines = os.read.lines(os.pwd / "2018" / "10" / "10.input.txt")
-  lazy val result = Solving.solve(lines) // check output text file
-// Main.result // part 1: JLPZFJRH, part 2: 10595
+  lazy val res = Solving.solve(lines) // check output text file
+// Main.res // part 1: JLPZFJRH, part 2: 10595

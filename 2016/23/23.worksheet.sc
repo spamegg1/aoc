@@ -32,7 +32,7 @@ positive means forward; negative means backward):
   If toggling produces an invalid instruction (like cpy 1 2)
     and an attempt is later made to execute that instruction, skip it instead.
   If tgl toggles itself (for example, if a is 0, tgl a would target itself and
-    become inc a), the resulting instruction is not executed
+    become inc a), the resing instruction is not executed
     until the next time it is reached.
 
 For example, given this program:
@@ -167,12 +167,12 @@ object Solving:
     while !state.halted do state = state.handleCurrentInst
     state.regs(Reg.A)
 
-object Testing:
+object Test:
   private lazy val lines = os.read.lines(os.pwd / "2016" / "23" / "23.test.input.txt")
-  lazy val result = Solving.solve(lines)
-// Testing.result // part 1: 3
+  lazy val res = Solving.solve(lines)
+// Test.res // part 1: 3
 
 object Main:
   private lazy val lines = os.read.lines(os.pwd / "2016" / "23" / "23.input.txt")
-  lazy val result = Solving.solve(lines)
-// Main.result // part 1: 10584, part 2: 479007144
+  lazy val res = Solving.solve(lines)
+// Main.res // part 1: 10584, part 2: 479007144

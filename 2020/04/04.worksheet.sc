@@ -189,16 +189,16 @@ object Solving:
   def solve1(lines: Seq[String]) = Parsing.parse(lines).count(_.valid1)
   def solve2(lines: Seq[String]) = Parsing.parse(lines).count(_.valid2)
 
-object Testing:
+object Test:
   lazy val lines = os.read.lines(os.pwd / "2020" / "04" / "04.test.input.txt")
-  lazy val result1 = Solving.solve1(lines)
-  lazy val result2 = Solving.solve2(lines)
-// Testing.result1 // part 1: 2
-// Testing.result2 // part 2:
+  lazy val res1 = Solving.solve1(lines)
+  lazy val res2 = Solving.solve2(lines)
+// Test.res1 // part 1: 2
+// Test.res2 // part 2:
 
 object Main:
   private lazy val lines = os.read.lines(os.pwd / "2020" / "04" / "04.input.txt")
-  lazy val result1 = Solving.solve1(lines)
-  lazy val result2 = Solving.solve2(lines)
-// Main.result1 // part 1: 210
-// Main.result2 // part 2: 131
+  lazy val res1 = Solving.solve1(lines)
+  lazy val res2 = Solving.solve2(lines)
+// Main.res1 // part 1: 210
+// Main.res2 // part 2: 131

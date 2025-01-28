@@ -30,7 +30,7 @@ The geologic index can be determined using the first rule that applies from the 
   The region at the coordinates of the target has a geologic index of 0.
   If the region's Y coordinate is 0, the geologic index is its X coordinate times 16807.
   If the region's X coordinate is 0, the geologic index is its Y coordinate times 48271.
-  Otherwise, the region's geologic index is the result of
+  Otherwise, the region's geologic index is the res of
     multiplying the erosion levels of the regions at X-1,Y and X,Y-1.
 
 A region's erosion level is its geologic index plus the cave system's depth,
@@ -102,16 +102,16 @@ object Solving:
   def solve1(lines: Seq[String]) = 0L
   def solve2(lines: Seq[String]) = 0L
 
-object Testing: // depth 510 target 10, 10
+object Test: // depth 510 target 10, 10
   private lazy val lines = os.read.lines(os.pwd / "2018" / "22" / "22.test.input.txt")
-  lazy val result1 = Solving.solve1(lines)
-  lazy val result2 = Solving.solve2(lines)
-// Testing.result1 // part 1: 114
-// Testing.result2 // part 2: ???
+  lazy val res1 = Solving.solve1(lines)
+  lazy val res2 = Solving.solve2(lines)
+// Test.res1 // part 1: 114
+// Test.res2 // part 2: ???
 
 object Main: // depth: 11817 target: 9, 751
   private lazy val lines = os.read.lines(os.pwd / "2018" / "22" / "22.input.txt")
-  lazy val result1 = Solving.solve1(lines)
-  lazy val result2 = Solving.solve2(lines)
-// Main.result1 // part 1: ???
-// Main.result2 // part 2: ???
+  lazy val res1 = Solving.solve1(lines)
+  lazy val res2 = Solving.solve2(lines)
+// Main.res1 // part 1: ???
+// Main.res2 // part 2: ???

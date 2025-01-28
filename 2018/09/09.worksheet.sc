@@ -30,8 +30,8 @@ was removed becomes the new current marble.
 
 For example, suppose there are 9 players. After the marble with value 0 is
 placed in the middle, each player (shown in square brackets) takes a turn.
-The result of each of those turns would produce circles of marbles like this,
-where clockwise is to the right and the resulting current marble is in parentheses:
+The res of each of those turns would produce circles of marbles like this,
+where clockwise is to the right and the resing current marble is in parentheses:
 
 [-] (0)
 [1]  0 (1)
@@ -141,13 +141,13 @@ object Solving:
     while state.nextMarble <= lastMarble do state = state.next
     state.highScore
 
-object Testing:
+object Test:
   val pt1 = Seq((9, 25L), (10, 1618L), (13, 7999L), (17, 1104L), (21, 6111L), (30, 5807L))
-  lazy val result1 = pt1.map((p, m) => Solving.solve(p)(m))
-// Testing.result1 // part 1: 32,8317,146373,2764,54718,37305
+  lazy val res1 = pt1.map((p, m) => Solving.solve(p)(m))
+// Test.res1 // part 1: 32,8317,146373,2764,54718,37305
 
 object Main:
-  lazy val result1 = Solving.solve(470)(72170L)
-  lazy val result2 = Solving.solve(470)(7217000L)
-// Main.result1 // part 1: 388024
-// Main.result2 // part 2: 3180929875
+  lazy val res1 = Solving.solve(470)(72170L)
+  lazy val res2 = Solving.solve(470)(7217000L)
+// Main.res1 // part 1: 388024
+// Main.res2 // part 2: 3180929875

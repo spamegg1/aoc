@@ -95,14 +95,14 @@ object Solving:
     for _ <- 0 until numSteps do spin = spin.next
     spin.nextToZero
 
-object Testing:
-  lazy val result1 = Solving.solve1(3)(2017)
-  lazy val result2 = Solving.solve2(3)(2017)
-// Testing.result1 // part 1: 638
-// Testing.result2 // part 2: 1226
+object Test:
+  lazy val res1 = Solving.solve1(3)(2017)
+  lazy val res2 = Solving.solve2(3)(2017)
+// Test.res1 // part 1: 638
+// Test.res2 // part 2: 1226
 
 object Main:
-  lazy val result1 = Solving.solve1(316)(2017)
-  lazy val result2 = Solving.solve2(316)(50_000_000)
-// Main.result1 // part 1: 180
-// Main.result2 // part 2: 13326437
+  lazy val res1 = Solving.solve1(316)(2017)
+  lazy val res2 = Solving.solve2(316)(50_000_000)
+// Main.res1 // part 1: 180
+// Main.res2 // part 2: 13326437

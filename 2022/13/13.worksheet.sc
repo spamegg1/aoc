@@ -59,7 +59,7 @@ the second value is called right. Then:
     integer as its only value, then retry the comparison.
     For example, if comparing [0,0,0] and 2,
     convert the right value to [2] (a list containing 2);
-    the result is then found by instead comparing [0,0,0] and [2].
+    the res is then found by instead comparing [0,0,0] and [2].
 
 Using these rules, you can determine which of the pairs
 in the example are in the right order:
@@ -149,7 +149,7 @@ Using the same rules as before, organize all packets -
 the ones in your list of received packets as well as the two divider packets -
 into the correct order.
 
-For the example above, the result of putting the packets in the correct order is:
+For the example above, the res of putting the packets in the correct order is:
 
 []
 [[]]
@@ -195,8 +195,8 @@ object DataDefs:
           case (head :: _, Nil) => 1
           case (Nil, head :: _) => -1
           case (pHead :: ps, qHead :: qs) =>
-            val result = pHead compare qHead
-            if result == 0 then Lst(ps) compare Lst(qs) else result
+            val res = pHead compare qHead
+            if res == 0 then Lst(ps) compare Lst(qs) else res
 
     override def toString: String = this match
       case Num(n)       => s"$n"
@@ -268,16 +268,16 @@ object Solving:
     .map((_, index) => index + 1)
     .product
 
-object Testing:
+object Test:
   private lazy val lines = os.read(os.pwd / "2022" / "13" / "13.test.input.txt")
-  lazy val result1 = Solving.solve1(lines)
-  lazy val result2 = Solving.solve2(lines)
-// Testing.result1 // part 1: 13
-// Testing.result2 // part 2: 140
+  lazy val res1 = Solving.solve1(lines)
+  lazy val res2 = Solving.solve2(lines)
+// Test.res1 // part 1: 13
+// Test.res2 // part 2: 140
 
 object Main:
   private lazy val lines = os.read(os.pwd / "2022" / "13" / "13.input.txt")
-  lazy val result1 = Solving.solve1(lines)
-  lazy val result2 = Solving.solve2(lines)
-// Main.result1 // part 1: 6086
-// Main.result2 // part 2: 27930
+  lazy val res1 = Solving.solve1(lines)
+  lazy val res2 = Solving.solve2(lines)
+// Main.res1 // part 1: 6086
+// Main.res2 // part 2: 27930

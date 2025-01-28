@@ -101,16 +101,16 @@ object Solving:
     steps * (steps + 1) / 2
   def solve2(lines: Seq[String]) = solve(lines)(cumulativeDistance)
 
-object Testing:
+object Test:
   private lazy val lines = os.read.lines(os.pwd / "2021" / "07" / "07.test.input.txt")
-  lazy val result1 = Solving.solve1(lines)
-  lazy val result2 = Solving.solve2(lines)
-// Testing.result1 // part 1: 37
-// Testing.result2 // part 2: 168
+  lazy val res1 = Solving.solve1(lines)
+  lazy val res2 = Solving.solve2(lines)
+// Test.res1 // part 1: 37
+// Test.res2 // part 2: 168
 
 object Main:
   private lazy val lines = os.read.lines(os.pwd / "2021" / "07" / "07.input.txt")
-  lazy val result1 = Solving.solve1(lines)
-  lazy val result2 = Solving.solve2(lines)
-// Main.result1 // part 1: 348996
-// Main.result2 // part 2: 98231647
+  lazy val res1 = Solving.solve1(lines)
+  lazy val res2 = Solving.solve2(lines)
+// Main.res1 // part 1: 348996
+// Main.res2 // part 2: 98231647

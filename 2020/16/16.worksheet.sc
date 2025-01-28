@@ -175,13 +175,13 @@ object Solving:
   extension (fields: Seq[(Names, Int)])
     def foldMap: Seq[(Name, Int)] = // part 2
       var solved: Names = Set()
-      var result: Seq[(Name, Int)] = Seq()
+      var res: Seq[(Name, Int)] = Seq()
       for i <- 0 until fields.size do
         val (names, index) = fields(i)
         val newSolved = names diff solved
         solved += newSolved.head
-        result :+= (newSolved.head, index)
-      result
+        res :+= (newSolved.head, index)
+      res
 
   def solve2(lines: String): Long =
     val (fields, myTicket, nearbyTickets) = Parsing.parse(lines)
@@ -200,17 +200,17 @@ object Solving:
       .map(_._2.toLong) // we need long to avoid overflow
       .product
 
-object Testing:
+object Test:
   private lazy val lines1 = os.read(os.pwd / "2020" / "16" / "16.test.input.txt")
   private lazy val lines2 = os.read(os.pwd / "2020" / "16" / "16.test.input.2.txt")
-  lazy val result1 = Solving.solve1(lines1)
-  lazy val result2 = Solving.solve2(lines2)
-// Testing.result1 // part 1: 71
-// Testing.result2 // part 2: row:11,class:12,seat:13 = 1716
+  lazy val res1 = Solving.solve1(lines1)
+  lazy val res2 = Solving.solve2(lines2)
+// Test.res1 // part 1: 71
+// Test.res2 // part 2: row:11,class:12,seat:13 = 1716
 
 object Main:
   private lazy val lines = os.read(os.pwd / "2020" / "16" / "16.input.txt")
-  lazy val result1 = Solving.solve1(lines)
-  lazy val result2 = Solving.solve2(lines)
-// Main.result1 // part 1: 26009
-// Main.result2 // part 2: 589685618167
+  lazy val res1 = Solving.solve1(lines)
+  lazy val res2 = Solving.solve2(lines)
+// Main.res1 // part 1: 26009
+// Main.res2 // part 2: 589685618167

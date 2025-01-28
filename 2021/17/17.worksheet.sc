@@ -149,14 +149,14 @@ object Solving:
   def solve1(lines: Seq[String]) = 0L
   def solve2(lines: Seq[String]) = 0L
 
-object Testing: // target area: x=20..30, y=-10..-5
-  lazy val result1 = Solving.solve1(Nil)
-  lazy val result2 = Solving.solve2(Nil)
-// Testing.result1 // part 1:
-// Testing.result2 // part 2:
+object Test: // target area: x=20..30, y=-10..-5
+  lazy val res1 = Solving.solve1(Nil)
+  lazy val res2 = Solving.solve2(Nil)
+// Test.res1 // part 1:
+// Test.res2 // part 2:
 
 object Main: // target area: x=195..238, y=-93..-67
-  lazy val result1 = Solving.solve1(Nil)
-  lazy val result2 = Solving.solve2(Nil)
-// Main.result1 // part 1:
-// Main.result2 // part 2:
+  lazy val res1 = Solving.solve1(Nil)
+  lazy val res2 = Solving.solve2(Nil)
+// Main.res1 // part 1:
+// Main.res2 // part 2:

@@ -267,16 +267,16 @@ object DataDefs:
 
     // good example of mixing higher order functions + flatMap + local mutable state
     private def goInDirection(row: Int, col: Int)(fun: Stepper) =
-      var result: Option[State] = None
+      var res: Option[State] = None
       var next = fun(row, col)
       boundary:
         while inbounds.tupled(next) do
           val lookup = seats(next._1)(next._2)
           if lookup != Floor then
-            result = Some(lookup)
+            res = Some(lookup)
             break()
           else next = fun.tupled(next)
-      result
+      res
 
     private def visible(row: Int, col: Int): Seq[State] = // part 2
       Seats.allDirs.flatMap(goInDirection(row, col))
@@ -344,16 +344,16 @@ object Solving:
     while !seats.stabilized2 do seats = seats.next2
     seats.totalOccupied
 
-object Testing:
+object Test:
   private lazy val lines = os.read.lines(os.pwd / "2020" / "11" / "11.test.input.txt")
-  lazy val result1 = Solving.solve1(lines)
-  lazy val result2 = Solving.solve2(lines)
-// Testing.result1 // part 1: 37
-// Testing.result2 // part 2: 26
+  lazy val res1 = Solving.solve1(lines)
+  lazy val res2 = Solving.solve2(lines)
+// Test.res1 // part 1: 37
+// Test.res2 // part 2: 26
 
 object Main:
   private lazy val lines = os.read.lines(os.pwd / "2020" / "11" / "11.input.txt")
-  lazy val result1 = Solving.solve1(lines)
-  lazy val result2 = Solving.solve2(lines)
-// Main.result1 // part 1: 2270
-// Main.result2 // part 2: 2042
+  lazy val res1 = Solving.solve1(lines)
+  lazy val res2 = Solving.solve2(lines)
+// Main.res1 // part 1: 2270
+// Main.res2 // part 2: 2042

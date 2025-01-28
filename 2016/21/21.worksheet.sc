@@ -46,11 +46,11 @@ For example, suppose you start with abcde and perform the following operations:
     equal to that index, plus an additional time because the
     index was at least 4, for a total of 6 right rotations: decab.
 
-After these steps, the resulting scrambled password is decab.
+After these steps, the resing scrambled password is decab.
 
 Now, you just need to generate a new scrambled password and you can access the system.
 Given the list of scrambling operations in your puzzle input,
-what is the result of scrambling abcdefgh?
+what is the res of scrambling abcdefgh?
 
 --- Part Two ---
 You scrambled the password correctly, but you discover that you can't
@@ -145,17 +145,17 @@ object Solving:
     .map(_.reverse)
     .foldLeft(pass)((scramble, op) => scramble.operate(op))
 
-object Testing:
+object Test:
   private lazy val lines = os.read.lines(os.pwd / "2016" / "21" / "21.test.input.txt")
   // abcde,ebcda,edcba,abcde,bcdea,bdeac,abdec,ecabd,decab
-  lazy val result1 = Solving.solve1(lines)("abcde")
-  lazy val result2 = Solving.solve2(lines)("decab")
-// Testing.result1 // part 1: decab
-// Testing.result2 // part 2: abcde
+  lazy val res1 = Solving.solve1(lines)("abcde")
+  lazy val res2 = Solving.solve2(lines)("decab")
+// Test.res1 // part 1: decab
+// Test.res2 // part 2: abcde
 
 object Main:
   private lazy val lines = os.read.lines(os.pwd / "2016" / "21" / "21.input.txt")
-  lazy val result1 = Solving.solve1(lines)("abcdefgh")
-  lazy val result2 = Solving.solve2(lines)("fbgdceah")
-// Main.result1 // part 1: gcedfahb
-// Main.result2 // part 2: efacbdhg
+  lazy val res1 = Solving.solve1(lines)("abcdefgh")
+  lazy val res2 = Solving.solve2(lines)("fbgdceah")
+// Main.res1 // part 1: gcedfahb
+// Main.res2 // part 2: efacbdhg

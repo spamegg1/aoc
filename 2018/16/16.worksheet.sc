@@ -24,7 +24,7 @@ it means to take the number given as A literally.
 If something says "register A", it means to use the number given as A
 to read from (or write to) the register with that number.
 So, if the opcode addi adds register A and value B,
-storing the result in register C, and the instruction
+storing the res in register C, and the instruction
 addi 0 7 3 is encountered, it would add 7 to the value
 contained by register 0 and store the sum in register 3,
 never modifying registers 0, 1, or 2 in the process.
@@ -34,27 +34,27 @@ The opcodes fall into seven general categories:
 
 Addition:
   addr (add register) stores into register C
-    result of adding register A and register B.
+    res of adding register A and register B.
   addi (add immediate) stores into register C
-    the result of adding register A and value B.
+    the res of adding register A and value B.
 
 Multiplication:
   mulr (multiply register) stores into register C
-    the result of multiplying register A and register B.
+    the res of multiplying register A and register B.
   muli (multiply immediate) stores into register C
-    the result of multiplying register A and value B.
+    the res of multiplying register A and value B.
 
 Bitwise AND:
   banr (bitwise AND register) stores into register C the
-    result of the bitwise AND of register A and register B.
+    res of the bitwise AND of register A and register B.
   bani (bitwise AND immediate) stores into register C the
-    result of the bitwise AND of register A and value B.
+    res of the bitwise AND of register A and value B.
 
 Bitwise OR:
   borr (bitwise OR register) stores into register C the
-    result of the bitwise OR of register A and register B.
+    res of the bitwise OR of register A and register B.
   bori (bitwise OR immediate) stores into register C the
-    result of the bitwise OR of register A and value B.
+    res of the bitwise OR of register A and value B.
 
 Assignment:
   setr (set register) copies the contents of register A into register C.
@@ -101,7 +101,7 @@ After the instruction is executed, register 2's value becomes 2.
 The instruction itself, 9 2 1 2, means that opcode 9 was executed with
 A=2, B=1, and C=2. Opcode 9 could be any of the 16 opcodes listed above,
 but only three of them behave in a way that would cause
-the result shown in the sample:
+the res shown in the sample:
   Opcode 9 could be mulr: register 2 (which has a value of 1)
     times register 1 (which has a value of 2) produces 2,
     which matches the value stored in the output register, register 2.
@@ -111,7 +111,7 @@ the result shown in the sample:
   Opcode 9 could be seti: value 2 matches the value stored in the
     output register, register 2; the number given for B is irrelevant.
 
-None of the other opcodes produce the result captured in the sample.
+None of the other opcodes produce the res captured in the sample.
 Because of this, the sample above behaves like three opcodes.
 
 You collect many of these samples (the first section of your puzzle input).
@@ -216,18 +216,18 @@ object Solving:
     val finalState = ops.foldLeft(Seq(0, 0, 0, 0))((state, op) => op.execute(state))
     finalState.head
 
-object Testing:
+object Test:
   lazy val lines = os.read(os.pwd / "2018" / "16" / "16.test.input.txt")
-  lazy val result1 = Solving.solve1(lines)
-// Testing.result1 // part 1: 1
+  lazy val res1 = Solving.solve1(lines)
+// Test.res1 // part 1: 1
 
 object Main:
   lazy val lines1 = os.read(os.pwd / "2018" / "16" / "16.input.txt")
   lazy val lines2 = os.read.lines(os.pwd / "2018" / "16" / "16.input.2.txt")
-  lazy val result1 = Solving.solve1(lines1)
-  lazy val result2 = Solving.solve2(lines1, lines2)
-// Main.result1 // part 1: 567
-// Main.result2 // part 2: 610
+  lazy val res1 = Solving.solve1(lines1)
+  lazy val res2 = Solving.solve2(lines1, lines2)
+// Main.res1 // part 1: 567
+// Main.res2 // part 2: 610
 
 // Solving.figureOut(Parsing.parse(Main.lines1))
 // Gtir -> 0,

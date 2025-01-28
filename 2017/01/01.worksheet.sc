@@ -80,39 +80,39 @@ object Solving:
     val pairs = Parsing.parse(line)(size)
     matches(pairs).sum
 
-object Testing:
+object Test:
   lazy val input1 = "1122"
   lazy val input2 = "1111"
   lazy val input3 = "1234"
   lazy val input4 = "91212129"
-  lazy val result1 = Solving.solve(input1)(1)
-  lazy val result2 = Solving.solve(input2)(1)
-  lazy val result3 = Solving.solve(input3)(1)
-  lazy val result4 = Solving.solve(input4)(1)
+  lazy val res1 = Solving.solve(input1)(1)
+  lazy val res2 = Solving.solve(input2)(1)
+  lazy val res3 = Solving.solve(input3)(1)
+  lazy val res4 = Solving.solve(input4)(1)
 
   lazy val input5 = "1212"
   lazy val input6 = "1221"
   lazy val input7 = "123425"
   lazy val input8 = "123123"
   lazy val input9 = "12131415"
-  lazy val result5 = Solving.solve(input5)(input5.size / 2)
-  lazy val result6 = Solving.solve(input6)(input6.size / 2)
-  lazy val result7 = Solving.solve(input7)(input7.size / 2)
-  lazy val result8 = Solving.solve(input8)(input8.size / 2)
-  lazy val result9 = Solving.solve(input9)(input9.size / 2)
-// Testing.result1 // part 1: 3
-// Testing.result2 // part 1: 4
-// Testing.result3 // part 1: 0
-// Testing.result4 // part 1: 9
-// Testing.result5 // part 2: 6
-// Testing.result6 // part 2: 0
-// Testing.result7 // part 2: 4
-// Testing.result8 // part 2: 12
-// Testing.result9 // part 2: 4
+  lazy val res5 = Solving.solve(input5)(input5.size / 2)
+  lazy val res6 = Solving.solve(input6)(input6.size / 2)
+  lazy val res7 = Solving.solve(input7)(input7.size / 2)
+  lazy val res8 = Solving.solve(input8)(input8.size / 2)
+  lazy val res9 = Solving.solve(input9)(input9.size / 2)
+// Test.res1 // part 1: 3
+// Test.res2 // part 1: 4
+// Test.res3 // part 1: 0
+// Test.res4 // part 1: 9
+// Test.res5 // part 2: 6
+// Test.res6 // part 2: 0
+// Test.res7 // part 2: 4
+// Test.res8 // part 2: 12
+// Test.res9 // part 2: 4
 
 object Main:
   lazy val line = os.read.lines(os.pwd / "2017" / "01" / "01.input.txt").head
-  lazy val result1 = Solving.solve(line)(1)
-  lazy val result2 = Solving.solve(line)(line.size / 2)
-// Main.result1 // part 1: 1343
-// Main.result2 // part 2: 1274
+  lazy val res1 = Solving.solve(line)(1)
+  lazy val res2 = Solving.solve(line)(line.size / 2)
+// Main.res1 // part 1: 1343
+// Main.res2 // part 2: 1274

@@ -191,16 +191,16 @@ object Solving:
       !findPath(graph)(ramSize).isDefined
     firstFail.map(bytes)
 
-object Testing: // map size = 7, first 12 bytes only
+object Test: // map size = 7, first 12 bytes only
   lazy val lines   = os.read.lines(os.pwd / "2024" / "18" / "18.test.input.txt")
-  lazy val result1 = Solving.solve1(lines)(7)(12)
-  lazy val result2 = Solving.solve2(lines)(7)(12)
-// Testing.result1 // part 1: 22
-// Testing.result2 // part 2: 1,6 (reverse it for submission)
+  lazy val res1 = Solving.solve1(lines)(7)(12)
+  lazy val res2 = Solving.solve2(lines)(7)(12)
+// Test.res1 // part 1: 22
+// Test.res2 // part 2: 1,6 (reverse it for submission)
 
 object Main: // map size = 71, first 1024 bytes only
   lazy val lines   = os.read.lines(os.pwd / "2024" / "18" / "18.input.txt")
-  lazy val result1 = Solving.solve1(lines)(71)(1024)
-  lazy val result2 = Solving.solve2(lines)(71)(1024)
-// Main.result1 // part 1: 284
-// Main.result2 // part 2: 50,51 (reverse for submission)
+  lazy val res1 = Solving.solve1(lines)(71)(1024)
+  lazy val res2 = Solving.solve2(lines)(71)(1024)
+// Main.res1 // part 1: 284
+// Main.res2 // part 2: 50,51 (reverse for submission)

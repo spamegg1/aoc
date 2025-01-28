@@ -59,7 +59,7 @@ the gondola.
 
 The missing part wasn't the only issue - one of the PartsAndGears in the engine is
 wrong. A gear is any * symbol that is adjacent to exactly two part numbers. Its
-gear ratio is the result of multiplying those two numbers together.
+gear ratio is the res of multiplying those two numbers together.
 
 This time, you need to find the gear ratio of every gear and add them all up so
 that the engineer can figure out which gear needs to be replaced.
@@ -160,16 +160,16 @@ object Solving:
     val gears = PartsAndGears.findAllGears(lines, symbols)
     gears.map(_.ratio).sum
 
-object Testing:
+object Test:
   private lazy val lines = os.read.lines(os.pwd / "2023" / "03" / "03.test.input.txt")
-  lazy val result1 = Solving.sumPartNumbers(lines)
-  lazy val result2 = Solving.sumGearRatios(lines)
-// Testing.result1 // part 1: 4361
-// Testing.result2 // part 2: 467835
+  lazy val res1 = Solving.sumPartNumbers(lines)
+  lazy val res2 = Solving.sumGearRatios(lines)
+// Test.res1 // part 1: 4361
+// Test.res2 // part 2: 467835
 
 object Main:
   private lazy val lines = os.read.lines(os.pwd / "2023" / "03" / "03.input.txt")
-  lazy val result1 = Solving.sumPartNumbers(lines)
-  lazy val result2 = Solving.sumGearRatios(lines)
-// Main.result1 // Part 1: 514969
-// Main.result2 // Part 2: 78915902
+  lazy val res1 = Solving.sumPartNumbers(lines)
+  lazy val res2 = Solving.sumGearRatios(lines)
+// Main.res1 // Part 1: 514969
+// Main.res2 // Part 2: 78915902

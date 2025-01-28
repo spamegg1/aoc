@@ -199,16 +199,16 @@ object Solving:
     for action <- actions do waypoint = waypoint.take(action)
     waypoint.ship.manhattan
 
-object Testing:
+object Test:
   lazy val lines = os.read.lines(os.pwd / "2020" / "12" / "12.test.input.txt")
-  lazy val result1 = Solving.solve1(lines)
-  lazy val result2 = Solving.solve2(lines)
-// Testing.result1 // part 1: 25
-// Testing.result2 // part 2: 286
+  lazy val res1 = Solving.solve1(lines)
+  lazy val res2 = Solving.solve2(lines)
+// Test.res1 // part 1: 25
+// Test.res2 // part 2: 286
 
 object Main:
   private lazy val lines = os.read.lines(os.pwd / "2020" / "12" / "12.input.txt")
-  lazy val result1 = Solving.solve1(lines)
-  lazy val result2 = Solving.solve2(lines)
-// Main.result1 // part 1: 2458
-// Main.result2 // part 2: 145117
+  lazy val res1 = Solving.solve1(lines)
+  lazy val res2 = Solving.solve2(lines)
+// Main.res1 // part 1: 2458
+// Main.res2 // part 2: 145117

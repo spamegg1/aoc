@@ -86,22 +86,22 @@ object Solving:
   def solve1(line: String) = 0L
   def solve2(line: String) = 0L
 
-object Testing:
+object Test:
   private lazy val line1 = os.read.lines(os.pwd / "2019" / "07" / "07.test.1.txt").head
   private lazy val line2 = os.read.lines(os.pwd / "2019" / "07" / "07.test.2.txt").head
   private lazy val line3 = os.read.lines(os.pwd / "2019" / "07" / "07.test.3.txt").head
-  lazy val result11 = Solving.solve1(line1)
-  lazy val result12 = Solving.solve1(line2)
-  lazy val result13 = Solving.solve1(line3)
-  lazy val result2 = Solving.solve2(line1)
-// Testing.result11 // part 1: 43210 4,3,2,1,0
-// Testing.result12 // part 1: 54321 0,1,2,3,4
-// Testing.result13 // part 1: 65210 1,0,4,3,2
-// Testing.result2 // part 2:
+  lazy val res11 = Solving.solve1(line1)
+  lazy val res12 = Solving.solve1(line2)
+  lazy val res13 = Solving.solve1(line3)
+  lazy val res2 = Solving.solve2(line1)
+// Test.res11 // part 1: 43210 4,3,2,1,0
+// Test.res12 // part 1: 54321 0,1,2,3,4
+// Test.res13 // part 1: 65210 1,0,4,3,2
+// Test.res2 // part 2:
 
 object Main:
   lazy val line = os.read.lines(os.pwd / "2019" / "07" / "07.input.txt").head
-  lazy val result1 = Solving.solve1(line)
-  lazy val result2 = Solving.solve2(line)
-// Main.result1 // part 1:
-// Main.result2 // part 2:
+  lazy val res1 = Solving.solve1(line)
+  lazy val res2 = Solving.solve2(line)
+// Main.res1 // part 1:
+// Main.res2 // part 2:

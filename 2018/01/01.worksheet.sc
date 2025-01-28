@@ -30,17 +30,17 @@ current frequency decreases by 3.
 
 For example, if the device displays frequency changes of +1, -2, +3, +1, then
   starting from a frequency of zero, the following changes would occur:
-  Current frequency  0, change of +1; resulting frequency  1.
-  Current frequency  1, change of -2; resulting frequency -1.
-  Current frequency -1, change of +3; resulting frequency  2.
-  Current frequency  2, change of +1; resulting frequency  3.
+  Current frequency  0, change of +1; resing frequency  1.
+  Current frequency  1, change of -2; resing frequency -1.
+  Current frequency -1, change of +3; resing frequency  2.
+  Current frequency  2, change of +1; resing frequency  3.
 
-In this example, the resulting frequency is 3.
+In this example, the resing frequency is 3.
 Here are other example situations:
-    +1, +1, +1 results in  3
-    +1, +1, -2 results in  0
-    -1, -2, -3 results in -6
-Starting with a frequency of zero, what is the resulting frequency after all of
+    +1, +1, +1 ress in  3
+    +1, +1, -2 ress in  0
+    -1, -2, -3 ress in -6
+Starting with a frequency of zero, what is the resing frequency after all of
 the changes in frequency have been applied?
 
 --- Part Two ---
@@ -49,13 +49,13 @@ To calibrate the device, you need to find the first frequency it reaches twice.
 
 For example, using the same list of changes above, the device would loop as
 follows:
-  Current frequency  0, change of +1; resulting frequency  1.
-  Current frequency  1, change of -2; resulting frequency -1.
-  Current frequency -1, change of +3; resulting frequency  2.
-  Current frequency  2, change of +1; resulting frequency  3.
+  Current frequency  0, change of +1; resing frequency  1.
+  Current frequency  1, change of -2; resing frequency -1.
+  Current frequency -1, change of +3; resing frequency  2.
+  Current frequency  2, change of +1; resing frequency  3.
   (At this point, the device continues from the start of the list.)
-  Current frequency  3, change of +1; resulting frequency  4.
-  Current frequency  4, change of -2; resulting frequency  2,
+  Current frequency  3, change of +1; resing frequency  4.
+  Current frequency  4, change of -2; resing frequency  2,
     which has already been seen.
 
 In this example, the first frequency reached twice is 2. Note that your device
@@ -94,16 +94,16 @@ object Solving:
   def solve1(lines: Seq[String]): Freq = Parsing.parse(lines).sum
   def solve2(lines: Seq[String]): Freq = traverse(Parsing.parse(lines))
 
-object Testing:
+object Test:
   private lazy val lines1 = os.read.lines(os.pwd / "2018" / "01" / "01.test.input.1.txt")
   private lazy val lines2 = os.read.lines(os.pwd / "2018" / "01" / "01.test.input.2.txt")
   private lazy val lines3 = os.read.lines(os.pwd / "2018" / "01" / "01.test.input.3.txt")
-  lazy val results = Seq(lines1, lines2, lines3) map Solving.solve2
-// Testing.results // part 1: 2, 10, 5
+  lazy val ress = Seq(lines1, lines2, lines3) map Solving.solve2
+// Test.ress // part 1: 2, 10, 5
 
 object Main:
   lazy val lines = os.read.lines(os.pwd / "2018" / "01" / "01.input.txt")
-  lazy val result1 = Solving.solve1(lines)
-  lazy val result2 = Solving.solve2(lines)
-// Main.result1 // part 1: 442
-// Main.result2 // part 2: 59908, takes a bit long!
+  lazy val res1 = Solving.solve1(lines)
+  lazy val res2 = Solving.solve2(lines)
+// Main.res1 // part 1: 442
+// Main.res2 // part 2: 59908, takes a bit long!

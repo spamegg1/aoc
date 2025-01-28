@@ -52,12 +52,12 @@ object Solving:
   import DataDefs.*
   def solve(lines: String) = 0L
 
-object Testing:
+object Test:
   private lazy val lines = os.read.lines(os.pwd / "2019" / "25" / "25.test.input.txt")
-  lazy val result = lines map Solving.solve
-// Testing.result // part 1:
+  lazy val res = lines map Solving.solve
+// Test.res // part 1:
 
 object Main:
   lazy val line = os.read.lines(os.pwd / "2019" / "25" / "25.input.txt").head
-  lazy val result = Solving.solve(line)
-// Main.result // part 1:
+  lazy val res = Solving.solve(line)
+// Main.res // part 1:

@@ -129,16 +129,16 @@ object Solving:
   import DataDefs.*
   ???
 
-object Testing:
+object Test:
   private lazy val lines = os.read.lines(os.pwd / "2023" / "23" / "23.test.input.txt")
-  lazy val result1 = 0
-  lazy val result2 = 0
-// Testing.result1 // part 1: 94
-// Testing.result2 // part 2: ???
+  lazy val res1 = 0
+  lazy val res2 = 0
+// Test.res1 // part 1: 94
+// Test.res2 // part 2: ???
 
 object Main:
   private lazy val lines = os.read.lines(os.pwd / "2023" / "23" / "23.input.txt")
-  lazy val result1 = 0
-  lazy val result2 = 0
-// Main.result1 // part 1: 2106
-// Main.result2 // part 2: 6350
+  lazy val res1 = 0
+  lazy val res2 = 0
+// Main.res1 // part 1: 2106
+// Main.res2 // part 2: 6350

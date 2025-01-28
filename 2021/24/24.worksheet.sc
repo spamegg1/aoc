@@ -12,10 +12,10 @@ left to give you enough time to build a new ALU.
 The ALU is a four-dimensional processing unit: it has integer variables w, x, y, and z.
 These variables all start with the value 0. The ALU also supports six instructions:
   inp a - Read an input value and write it to variable a.
-  add a b - Add the value of a to the value of b, then store the result in variable a.
-  mul a b - Multiply the value of a by the value of b, then store the result in variable a
-  div a b - Divide the value of a by the value of b, truncate the result to an integer,
-    then store the result in variable a.
+  add a b - Add the value of a to the value of b, then store the res in variable a.
+  mul a b - Multiply the value of a by the value of b, then store the res in variable a
+  div a b - Divide the value of a by the value of b, truncate the res to an integer,
+    then store the res in variable a.
     (Here, "truncate" means to round the value toward zero.)
   mod a b - Divide the value of a by the value of b,
     then store the remainder in variable a. (This is also called the modulo operation.)
@@ -23,7 +23,7 @@ These variables all start with the value 0. The ALU also supports six instructio
     then store the value 1 in variable a. Otherwise, store the value 0 in variable a.
 
 In all of these instructions, a and b are placeholders;
-a will always be the variable where the result of the operation is stored
+a will always be the variable where the res of the operation is stored
 (one of w, x, y, or z), while b can be either a variable or a number.
 Numbers can be positive or negative, but will always be integers.
 
@@ -113,16 +113,16 @@ object Solving:
   def solve1(lines: Seq[String]) = 0L
   def solve2(lines: Seq[String]) = 0L
 
-object Testing:
+object Test:
   private lazy val lines = os.read.lines(os.pwd / "2021" / "24" / "24.test.input.txt")
-  lazy val result1 = Solving.solve1(lines)
-  lazy val result2 = Solving.solve2(lines)
-// Testing.result1 // part 1:
-// Testing.result2 // part 2:
+  lazy val res1 = Solving.solve1(lines)
+  lazy val res2 = Solving.solve2(lines)
+// Test.res1 // part 1:
+// Test.res2 // part 2:
 
 object Main:
   private lazy val lines = os.read.lines(os.pwd / "2021" / "24" / "24.input.txt")
-  lazy val result1 = Solving.solve1(lines)
-  lazy val result2 = Solving.solve2(lines)
-// Main.result1 // part 1:
-// Main.result2 // part 2:
+  lazy val res1 = Solving.solve1(lines)
+  lazy val res2 = Solving.solve2(lines)
+// Main.res1 // part 1:
+// Main.res2 // part 2:

@@ -45,11 +45,11 @@ The adv instruction (opcode 0) performs division.
 The numerator is the value in the A register.
 The denominator is found by raising 2 to the power of the instruction's combo operand.
 (So, an operand of 2 would divide A by 4 (2^2); an operand of 5 would divide A by 2^B.)
-The result of the division operation is truncated to an integer and
+The res of the division operation is truncated to an integer and
 then written to the A register.
 
 The bxl instruction (opcode 1) calculates the bitwise XOR of register B
-and the instruction's literal operand, then stores the result in register B.
+and the instruction's literal operand, then stores the res in register B.
 
 The bst instruction (opcode 2) calculates the value of its combo operand modulo 8
 (thereby keeping only its lowest 3 bits), then writes that value to the B register.
@@ -61,7 +61,7 @@ if this instruction jumps, the instruction pointer is not increased
 by 2 after this instruction.
 
 The bxc instruction (opcode 4) calculates the bitwise XOR of register B
-and register C, then stores the result in register B.
+and register C, then stores the res in register B.
 (For legacy reasons, this instruction reads an operand but ignores it.)
 
 The out instruction (opcode 5) calculates the value of its combo operand modulo 8,
@@ -69,11 +69,11 @@ then outputs that value. (If a program outputs multiple values,
 they are separated by commas.)
 
 The bdv instruction (opcode 6) works exactly like the adv instruction except
-that the result is stored in the B register. (The numerator is still read
+that the res is stored in the B register. (The numerator is still read
 from the A register.)
 
 The cdv instruction (opcode 7) works exactly like the adv instruction except
-that the result is stored in the C register. (The numerator is still read
+that the res is stored in the C register. (The numerator is still read
 from the A register.)
 
 Here are some examples of instruction operation:
@@ -186,25 +186,25 @@ object Solving:
         a += 1L
     a
 
-object Testing1:
+object Test1:
   import DataDefs.*
   val regs: Regs  = (a = 729L, b = 0L, c = 0L)
   given Prog      = List(0, 1, 5, 4, 3, 0)
-  lazy val result = Solving.solve1(regs)
-// Testing1.result // part 1: 4,6,3,5,6,3,5,2,1,0
+  lazy val res = Solving.solve1(regs)
+// Test1.res // part 1: 4,6,3,5,6,3,5,2,1,0
 
-object Testing2:
+object Test2:
   import DataDefs.*
   val regs: Regs  = (a = 2024L, b = 0L, c = 0L)
   given Prog      = List(0, 3, 5, 4, 3, 0)
-  lazy val result = Solving.solve2(regs)
-// Testing2.result // part 2: 117440
+  lazy val res = Solving.solve2(regs)
+// Test2.res // part 2: 117440
 
 object Main:
   import DataDefs.*
   val regs: Regs   = (a = 63281501L, b = 0L, c = 0L)
   given prog: Prog = List(2, 4, 1, 5, 7, 5, 4, 5, 0, 3, 1, 6, 5, 5, 3, 0)
-  lazy val result1 = Solving.solve1(regs)
-  lazy val result2 = Solving.solve2(regs)
-// Main.result1 // part 1: 3,4,3,1,7,6,5,6,0
-// Main.result2 // part 2:
+  lazy val res1 = Solving.solve1(regs)
+  lazy val res2 = Solving.solve2(regs)
+// Main.res1 // part 1: 3,4,3,1,7,6,5,6,0
+// Main.res2 // part 2:

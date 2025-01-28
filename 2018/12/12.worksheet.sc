@@ -123,7 +123,7 @@ what is the sum of the numbers of all pots which contain a plant?
 import collection.mutable.ArrayDeque
 
 object DataDefs:
-  case class Rule(pattern: String, result: String)
+  case class Rule(pattern: String, res: String)
 
   case class State(pots: String, rules: Seq[Rule], min: Int = 0, max: Int):
     lazy val nextPots = s"....$pots...."
@@ -131,7 +131,7 @@ object DataDefs:
       .map: five =>
         rules.find(_.pattern == five) match
           case None        => "."
-          case Some(value) => value.result
+          case Some(value) => value.res
       .mkString
     lazy val newMin = min - (2 - nextPots.takeWhile(_ == '.').size)
     lazy val newMax = max + (2 - nextPots.reverse.takeWhile(_ == '.').size)
@@ -152,7 +152,7 @@ object Parsing:
   import DataDefs.*
 
   def parseRule(line: String): Rule = line match
-    case s"$pattern => $result" => Rule(pattern, result)
+    case s"$pattern => $res" => Rule(pattern, res)
 
   def parseRules(lines: Seq[String]) = lines map parseRule
 
@@ -181,14 +181,14 @@ object Solving:
     // at gen 98, the plant count is 6193
     (generations - 98L) * 51L + 6193L
 
-object Testing:
+object Test:
   private lazy val lines = os.read.lines(os.pwd / "2018" / "12" / "12.test.input.txt")
-  lazy val result1 = Solving.solve1(lines)(20)
-// Testing.result1 // part 1: 325
+  lazy val res1 = Solving.solve1(lines)(20)
+// Test.res1 // part 1: 325
 
 object Main:
   private lazy val lines = os.read.lines(os.pwd / "2018" / "12" / "12.input.txt")
-  lazy val result1 = Solving.solve1(lines)(20)
-  lazy val result2 = Solving.solve2(lines)(50000000000L)
-// Main.result1 // part 1: 3421
-// Main.result2 // part 2: 2550000001195
+  lazy val res1 = Solving.solve1(lines)(20)
+  lazy val res2 = Solving.solve2(lines)(50000000000L)
+// Main.res1 // part 1: 3421
+// Main.res2 // part 2: 2550000001195

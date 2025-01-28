@@ -140,20 +140,20 @@ object Solving:
     given Towels          = towels
     designs.map(solutions).sum
 
-object Testing:
+object Test:
   lazy val lines   = os.read.lines(os.pwd / "2024" / "19" / "19.test.input.txt")
-  lazy val result1 = Solving.solve1(lines)
-  lazy val result2 = Solving.solve2(lines)
+  lazy val res1 = Solving.solve1(lines)
+  lazy val res2 = Solving.solve2(lines)
 
 object Main:
   lazy val lines   = os.read.lines(os.pwd / "2024" / "19" / "19.input.txt")
-  lazy val result1 = Solving.solve1(lines)
-  lazy val result2 = Solving.solve2(lines)
+  lazy val res1 = Solving.solve1(lines)
+  lazy val res2 = Solving.solve2(lines)
 
 @main
 def run: Unit =
-  // println(Testing.result1) // part 1: 6
-  // println(Testing.result2) // part 2: 16
-  // println(Main.result1) // part 1: 360
-  // println(Main.result2) // part 2: 577474410989846
+  // println(Test.res1) // part 1: 6
+  // println(Test.res2) // part 2: 16
+  // println(Main.res1) // part 1: 360
+  // println(Main.res2) // part 2: 577474410989846
   ()

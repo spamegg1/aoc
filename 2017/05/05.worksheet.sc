@@ -73,16 +73,16 @@ object Solving:
     val rule = (jump: Int) => if 3 <= jump then jump - 1 else jump + 1
     solve(lines)(rule)
 
-object Testing:
+object Test:
   private lazy val lines = os.read.lines(os.pwd / "2017" / "05" / "05.test.input.txt")
-  lazy val result1 = Solving.solve1(lines)
-  lazy val result2 = Solving.solve2(lines)
-Testing.result1 // part 1: 5
-Testing.result2 // part 2: 10
+  lazy val res1 = Solving.solve1(lines)
+  lazy val res2 = Solving.solve2(lines)
+Test.res1 // part 1: 5
+Test.res2 // part 2: 10
 
 object Main:
   private lazy val lines = os.read.lines(os.pwd / "2017" / "05" / "05.input.txt")
-  lazy val result1 = Solving.solve1(lines)
-  lazy val result2 = Solving.solve2(lines)
-// Main.result1 // part 1: 342669
-// Main.result2 // part 2: 25136209
+  lazy val res1 = Solving.solve1(lines)
+  lazy val res2 = Solving.solve2(lines)
+// Main.res1 // part 1: 342669
+// Main.res2 // part 2: 25136209

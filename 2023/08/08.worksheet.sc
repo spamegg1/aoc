@@ -163,7 +163,7 @@ object Wasteland:
 object Solving:
   ???
 
-object Testing:
+object Test:
   lazy val testInput1 =
     """RL
       |
@@ -186,23 +186,23 @@ object Testing:
   lazy val wasteland2 = Wasteland.populate(bonds2)
   lazy val testResult1 = 0
   lazy val testResult2 = 0
-// given DataDefs.Wasteland = Testing.wasteland1
-// Wasteland.runMoves(Testing.moves1)("AAA")
-// given DataDefs.Wasteland = Testing.wasteland2
-// Wasteland.runMoves(Testing.moves2)("AAA")
-// Testing.wasteland1
-// Testing.testResult1 // part 1: ???
-// Testing.testResult2 // part 2: ???
+// given DataDefs.Wasteland = Test.wasteland1
+// Wasteland.runMoves(Test.moves1)("AAA")
+// given DataDefs.Wasteland = Test.wasteland2
+// Wasteland.runMoves(Test.moves2)("AAA")
+// Test.wasteland1
+// Test.testResult1 // part 1: ???
+// Test.testResult2 // part 2: ???
 
 object Main:
   private lazy val lines: Seq[String] = os.read.lines(os.pwd / "08.input.txt")
   lazy val (moves, bonds) = Parsing.parseInput(lines)
   lazy val wasteland = Wasteland.populate(bonds)
-  lazy val result1 = 0
-  lazy val result2 = 0
+  lazy val res1 = 0
+  lazy val res2 = 0
 // Main.wasteland.nodes
-// Main.result1 // part 1: 11309
-// Main.result2 // part 2: 13740108158591
+// Main.res1 // part 1: 11309
+// Main.res2 // part 2: 13740108158591
 
 // (TVA,20777,20777)
 // (VBA,16043,16043)

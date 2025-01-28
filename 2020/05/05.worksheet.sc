@@ -93,14 +93,14 @@ object Solving:
     .find(seq => seq.head + 2 == seq.last)
     .map(_.head + 1)
 
-object Testing:
+object Test:
   private lazy val lines = os.read.lines(os.pwd / "2020" / "05" / "05.test.input.txt")
-  lazy val result1 = Solving.solve1(lines) // no testing data for part 2
-// Testing.result1 // part 1: 820
+  lazy val res1 = Solving.solve1(lines) // no testing data for part 2
+// Test.res1 // part 1: 820
 
 object Main:
   private lazy val lines = os.read.lines(os.pwd / "2020" / "05" / "05.input.txt")
-  lazy val result1 = Solving.solve1(lines)
-  lazy val result2 = Solving.solve2(lines)
-// Main.result1 // part 1: 888
-// Main.result2 // part 2: 522
+  lazy val res1 = Solving.solve1(lines)
+  lazy val res2 = Solving.solve2(lines)
+// Main.res1 // part 1: 888
+// Main.res2 // part 2: 522

@@ -53,7 +53,7 @@ turns on a 3x3x3 cuboid consisting of 27 cubes:
 
 The second step (on x=11..13,y=11..13,z=11..13)
 turns on a 3x3x3 cuboid that overlaps with the first.
-As a result, only 19 additional cubes turn on;
+As a res, only 19 additional cubes turn on;
 the rest are already on from the previous step:
   11,11,13
   11,12,13
@@ -140,16 +140,16 @@ object Solving:
   def solve1(lines: Seq[String])(region: Long) = 0L
   def solve2(lines: Seq[String])(region: Long) = 0L
 
-object Testing:
+object Test:
   private lazy val lines = os.read.lines(os.pwd / "2021" / "22" / "22.test.input.txt")
-  lazy val result1 = Solving.solve1(lines)(50)
-  lazy val result2 = Solving.solve2(lines)(50)
-// Testing.result1 // part 1: 590784
-// Testing.result2 // part 2:
+  lazy val res1 = Solving.solve1(lines)(50)
+  lazy val res2 = Solving.solve2(lines)(50)
+// Test.res1 // part 1: 590784
+// Test.res2 // part 2:
 
 object Main:
   private lazy val lines = os.read.lines(os.pwd / "2021" / "22" / "22.input.txt")
-  lazy val result1 = Solving.solve1(lines)(50)
-  lazy val result2 = Solving.solve2(lines)(50)
-// Main.result1 // part 1:
-// Main.result2 // part 2:
+  lazy val res1 = Solving.solve1(lines)(50)
+  lazy val res2 = Solving.solve2(lines)(50)
+// Main.res1 // part 1:
+// Main.res2 // part 2:

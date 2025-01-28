@@ -29,7 +29,7 @@ there needs to be some pair of numbers among 1-19, 21-25, or 45 that add up to i
   26 would still be a valid next number,
     as 1 and 25 are still within the previous 25 numbers.
   65 would not be valid, as no two of the available numbers sum to it.
-  64 and 66 would both be valid, as they are the result of 19+45 and 21+45 respectively.
+  64 and 66 would both be valid, as they are the res of 19+45 and 21+45 respectively.
 
 Here is a larger example which only considers the previous 5 numbers
 (and has a preamble of length 5):
@@ -103,16 +103,16 @@ object Solving:
     val seq = sums.getOrElse(invalid, Seq(0L, 0L))
     seq.min + seq.max // 0 if this block size did not work.
 
-object Testing:
+object Test:
   private lazy val lines = os.read.lines(os.pwd / "2020" / "09" / "09.test.input.txt")
-  lazy val result1 = Solving.solve1(lines)(5)
-  lazy val result2 = Solving.solve2(lines)(5)(4) // tried: 3,4
-// Testing.result1 // part 1: 127,14
-// Testing.result2 // part 2: 15,25,47,40 => 62
+  lazy val res1 = Solving.solve1(lines)(5)
+  lazy val res2 = Solving.solve2(lines)(5)(4) // tried: 3,4
+// Test.res1 // part 1: 127,14
+// Test.res2 // part 2: 15,25,47,40 => 62
 
 object Main:
   private lazy val lines = os.read.lines(os.pwd / "2020" / "09" / "09.input.txt")
-  lazy val result1 = Solving.solve1(lines)(25)
-  lazy val result2 = Solving.solve2(lines)(25)(17) // tried: 3,4,5,...,15,16,17
-// Main.result1 // part 1: 530627549,610
-// Main.result2 // part 2: 77730285
+  lazy val res1 = Solving.solve1(lines)(25)
+  lazy val res2 = Solving.solve2(lines)(25)(17) // tried: 3,4,5,...,15,16,17
+// Main.res1 // part 1: 530627549,610
+// Main.res2 // part 2: 77730285

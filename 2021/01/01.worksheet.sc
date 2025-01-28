@@ -116,16 +116,16 @@ object Solving:
     .sliding(2)
     .foldLeft(0)((acc, list) => acc + (if list(0) < list(1) then 1 else 0))
 
-object Testing:
+object Test:
   private lazy val lines = os.read.lines(os.pwd / "2021" / "01" / "01.test.input.txt")
-  lazy val result1 = Solving.solve1(lines)
-  lazy val result2 = Solving.solve2(lines)
-// Testing.result1 // part 1: 7
-// Testing.result2 // part 2: 5
+  lazy val res1 = Solving.solve1(lines)
+  lazy val res2 = Solving.solve2(lines)
+// Test.res1 // part 1: 7
+// Test.res2 // part 2: 5
 
 object Main:
   private lazy val lines = os.read.lines(os.pwd / "2021" / "01" / "01.input.txt")
-  lazy val result1 = Solving.solve1(lines)
-  lazy val result2 = Solving.solve2(lines)
-// Main.result1 // part 1: 1692
-// Main.result2 // part 2: 1724
+  lazy val res1 = Solving.solve1(lines)
+  lazy val res2 = Solving.solve2(lines)
+// Main.res1 // part 1: 1692
+// Main.res2 // part 2: 1724

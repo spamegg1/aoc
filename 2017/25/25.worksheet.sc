@@ -66,7 +66,7 @@ In state B:
     - Continue with state A.
 
 Running it until the number of steps required to take the listed
-diagnostic checksum would result in the following tape configurations
+diagnostic checksum would res in the following tape configurations
 (with the cursor marked in square brackets):
 
 ... 0  0  0 [0] 0  0 ... (before any steps; about to run state A)
@@ -100,12 +100,12 @@ object Solving:
   import DataDefs.*
   def solve(lines: Seq[String]) = 0L
 
-object Testing:
+object Test:
   private lazy val lines = os.read.lines(os.pwd / "2017" / "25" / "25.test.input.txt")
-  lazy val result = Solving.solve(lines)
-// Testing.result // part 1:
+  lazy val res = Solving.solve(lines)
+// Test.res // part 1:
 
 object Main:
   private lazy val lines = os.read.lines(os.pwd / "2017" / "25" / "25.input.txt")
-  lazy val result = Solving.solve(lines)
-// Main.result // part 1:
+  lazy val res = Solving.solve(lines)
+// Main.res // part 1:

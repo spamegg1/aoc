@@ -2,7 +2,7 @@
 --- Day 8: I Heard You Like Registers ---
 You receive a signal directly from the CPU.
 Because of your recent assistance with jump instructions,
-it would like you to compute the result of a series of unusual register instructions.
+it would like you to compute the res of a series of unusual register instructions.
 
 Each instruction consists of several parts: the register to modify,
 whether to increase or decrease that register's value,
@@ -89,22 +89,22 @@ object Solving:
     val instrs = Parsing.parse(lines)
     val registers = Registers(instrs)
     var maxSoFar = 0
-    val result = instrs.foldLeft(registers)((regs, instr) =>
+    val res = instrs.foldLeft(registers)((regs, instr) =>
       maxSoFar = math.max(maxSoFar, regs.values.max)
       instr.process(regs)
     )
     maxSoFar
 
-object Testing:
+object Test:
   lazy val lines = os.read.lines(os.pwd / "2017" / "08" / "08.test.input.txt")
-  lazy val result1 = Solving.solve1(lines)
-  lazy val result2 = Solving.solve2(lines)
-// Testing.result1 // part 1: 1
-// Testing.result2 // part 2: 10
+  lazy val res1 = Solving.solve1(lines)
+  lazy val res2 = Solving.solve2(lines)
+// Test.res1 // part 1: 1
+// Test.res2 // part 2: 10
 
 object Main:
   private lazy val lines = os.read.lines(os.pwd / "2017" / "08" / "08.input.txt")
-  lazy val result1 = Solving.solve1(lines)
-  lazy val result2 = Solving.solve2(lines)
-// Main.result1 // part 1: 5946
-// Main.result2 // part 2: 6026
+  lazy val res1 = Solving.solve1(lines)
+  lazy val res2 = Solving.solve2(lines)
+// Main.res1 // part 1: 5946
+// Main.res2 // part 2: 6026

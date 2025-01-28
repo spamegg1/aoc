@@ -203,16 +203,16 @@ object Solving:
   def solve1(line: String) = 0L
   def solve2(line: String) = 0L
 
-object Testing:
+object Test:
   private lazy val lines = os.read.lines(os.pwd / "2018" / "20" / "20.test.input.txt")
-  lazy val result1 = lines map Solving.solve1
-  lazy val result2 = lines map Solving.solve2
-// Testing.result1 // part 1: 3,10,18,23,31
-// Testing.result2 // part 2: ???
+  lazy val res1 = lines map Solving.solve1
+  lazy val res2 = lines map Solving.solve2
+// Test.res1 // part 1: 3,10,18,23,31
+// Test.res2 // part 2: ???
 
 object Main:
   private lazy val line = os.read.lines(os.pwd / "2018" / "20" / "20.input.txt").head
-  lazy val result1 = Solving.solve1(line)
-  lazy val result2 = Solving.solve2(line)
-// Main.result1 // part 1: ???
-// Main.result2 // part 2: ???
+  lazy val res1 = Solving.solve1(line)
+  lazy val res2 = Solving.solve2(line)
+// Main.res1 // part 1: ???
+// Main.res2 // part 2: ???

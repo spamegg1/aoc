@@ -7,7 +7,7 @@ Eventually, one of the elephants realizes you don't speak monkey and comes over 
 interpret. As it turns out, they overheard you talking about trying to find the grove;
 they can show you a shortcut if you answer their riddle.
 
-Each monkey is given a job: either to yell a specific number or to yell the result of a
+Each monkey is given a job: either to yell a specific number or to yell the res of a
 math operation. All of the number-yelling monkeys know their number from the start;
 however, the math operation monkeys need to wait for two other monkeys to yell a number,
 and those two other monkeys might also be waiting on other monkeys.
@@ -134,16 +134,16 @@ object Solving:
     val (left, right) = (root.left, root.right)
     (eval(left), eval(right))
 
-object Testing:
+object Test:
   private lazy val lines = os.read.lines(os.pwd / "2022" / "21" / "21.test.input.txt")
-  lazy val result1 = Solving.solve1(lines)
-  lazy val result2 = Solving.solve2(lines)(301L)
-// Testing.result1 // part 1: 152
-// Testing.result2 // part 2: 301
+  lazy val res1 = Solving.solve1(lines)
+  lazy val res2 = Solving.solve2(lines)(301L)
+// Test.res1 // part 1: 152
+// Test.res2 // part 2: 301
 
 object Main:
   private lazy val lines = os.read.lines(os.pwd / "2022" / "21" / "21.input.txt")
-  lazy val result1 = Solving.solve1(lines)
-  lazy val result2 = Solving.solve2(lines)(3_560_324_848_168L) // guess here!
-// Main.result1 // part 1: 85616733059734
-// Main.result2 // part 2: 3560324848168
+  lazy val res1 = Solving.solve1(lines)
+  lazy val res2 = Solving.solve2(lines)(3_560_324_848_168L) // guess here!
+// Main.res1 // part 1: 85616733059734
+// Main.res2 // part 2: 3560324848168

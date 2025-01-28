@@ -14,9 +14,9 @@ In each phase, a new list is constructed with the same length as the input list.
 This new list is also used as the input for the next phase.
 
 Each element in the new list is built by multiplying every value in the input
-list by a value in a repeating pattern and then adding up the results.
+list by a value in a repeating pattern and then adding up the ress.
 So, if the input list were 9, 8, 7, 6, 5 and the pattern for a given element
-were 1, 2, 3, the result would be 9*1 + 8*2 + 7*3 + 6*1 + 5*2
+were 1, 2, 3, the res would be 9*1 + 8*2 + 7*3 + 6*1 + 5*2
 (with each input element on the left and each value in the repeating
 pattern on the right of each multiplication).
 Then, only the ones digit is kept: 38 becomes 8, -17 becomes 7, and so on.
@@ -41,7 +41,7 @@ the new input list for the next phase, if any.
 
 Given the input signal 12345678, below are four phases of FFT.
 Within each phase, each output digit is calculated on a single line
-with the result at the far right; each multiplication operation shows
+with the res at the far right; each multiplication operation shows
 the input digit on the left and the pattern value on the right:
 
 Input signal: 12345678
@@ -112,16 +112,16 @@ object Solving:
   def solve1(rounds: Int)(line: String) = 0L
   def solve2(rounds: Int)(line: String) = 0L
 
-object Testing:
+object Test:
   private lazy val lines = os.read.lines(os.pwd / "2019" / "16" / "16.test.input.txt")
-  lazy val result1 = lines map Solving.solve1(100)
-  lazy val result2 = lines map Solving.solve2(100)
-// Testing.result1 // part 1: 24176176,73745418,52432133
-// Testing.result2 // part 2:
+  lazy val res1 = lines map Solving.solve1(100)
+  lazy val res2 = lines map Solving.solve2(100)
+// Test.res1 // part 1: 24176176,73745418,52432133
+// Test.res2 // part 2:
 
 object Main:
   lazy val line = os.read.lines(os.pwd / "2019" / "16" / "16.input.txt").head
-  lazy val result1 = Solving.solve1(100)(line)
-  lazy val result2 = Solving.solve2(100)(line)
-// Main.result1 // part 1:
-// Main.result2 // part 2:
+  lazy val res1 = Solving.solve1(100)(line)
+  lazy val res2 = Solving.solve2(100)(line)
+// Main.res1 // part 1:
+// Main.res2 // part 2:

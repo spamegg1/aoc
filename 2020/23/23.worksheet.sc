@@ -106,16 +106,16 @@ object Solving:
   def solve1(num: Int)(rounds: Int) = 0L
   def solve2(num: Int)(rounds: Int) = 0L
 
-object Testing:
-  lazy val result11 = Solving.solve1(389125467)(10)
-  lazy val result12 = Solving.solve1(389125467)(100)
-  lazy val result2 = Solving.solve2(389125467)(10)
-// Testing.result11 // part 1: 92658374
-// Testing.result12 // part 1: 67384529
-// Testing.result2 // part 2:
+object Test:
+  lazy val res11 = Solving.solve1(389125467)(10)
+  lazy val res12 = Solving.solve1(389125467)(100)
+  lazy val res2 = Solving.solve2(389125467)(10)
+// Test.res11 // part 1: 92658374
+// Test.res12 // part 1: 67384529
+// Test.res2 // part 2:
 
 object Main:
-  lazy val result1 = Solving.solve1(589174263)(100)
-  lazy val result2 = Solving.solve2(589174263)(100)
-// Main.result1 // part 1:
-// Main.result2 // part 2:
+  lazy val res1 = Solving.solve1(589174263)(100)
+  lazy val res2 = Solving.solve2(589174263)(100)
+// Main.res1 // part 1:
+// Main.res2 // part 2:

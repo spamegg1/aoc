@@ -147,16 +147,16 @@ object Solving:
       copiesMap.update(nextCardId, copiesMap(nextCardId) + copiesMap(cardId))
     copiesMap.values.sum
 
-object Testing:
+object Test:
   private lazy val lines = os.read.lines(os.pwd / "2023" / "04" / "04.test.input.txt")
-  lazy val result1 = Solving.sumCardPoints(lines)
-  lazy val result2 = Solving.processCopies(lines)
-// Testing.result1 // part 1: 13
-// Testing.result2 // part 2: 30
+  lazy val res1 = Solving.sumCardPoints(lines)
+  lazy val res2 = Solving.processCopies(lines)
+// Test.res1 // part 1: 13
+// Test.res2 // part 2: 30
 
 object Main:
   private lazy val lines = os.read.lines(os.pwd / "2023" / "04" / "04.input.txt")
-  lazy val result1 = Solving.sumCardPoints(lines)
-  lazy val result2 = Solving.processCopies(lines)
-// Main.result1 // part 1: 33950
-// Main.result2 // part 2: 14814534
+  lazy val res1 = Solving.sumCardPoints(lines)
+  lazy val res2 = Solving.processCopies(lines)
+// Main.res1 // part 1: 33950
+// Main.res2 // part 2: 14814534

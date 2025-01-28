@@ -29,7 +29,7 @@ if "up" were north, then "right" would be east, and so on. Each trench is also
 listed with the color that the edge of the trench should be painted as an RGB
 hexadecimal color code.
 
-When viewed from above, the above example dig plan would result in the following
+When viewed from above, the above example dig plan would res in the following
 loop of trench (#) having been dug out from otherwise ground-level terrain (.):
 #######
 #.....#
@@ -140,7 +140,7 @@ object Solving:
       val end = start.digOne(digs.head)
       digAll(end)(digs.tail)(end :: posts)
 
-  private val start = Pos(0, 0) // irrelevant, result is same for any start pos
+  private val start = Pos(0, 0) // irrelevant, res is same for any start pos
 
   private def shoelace(posts: List[Pos]): Long = // shoelace theorem / algorithm
     val shiftedPosts = posts.tail :+ posts.head
@@ -166,16 +166,16 @@ object Solving:
   def solve1 = solve(_.map(Parsing.parseDig1(_)))
   def solve2 = solve(_.map(Parsing.parseDig2(_)))
 
-object Testing:
+object Test:
   private lazy val lines = os.read.lines(os.pwd / "2023" / "18" / "18.test.input.txt")
-  lazy val result1 = Solving.solve1(lines.toList)
-  lazy val result2 = Solving.solve2(lines.toList)
-// Testing.result1 // part 1: 62
-// Testing.result2 // part 2: 952408144115
+  lazy val res1 = Solving.solve1(lines.toList)
+  lazy val res2 = Solving.solve2(lines.toList)
+// Test.res1 // part 1: 62
+// Test.res2 // part 2: 952408144115
 
 object Main:
   private lazy val lines = os.read.lines(os.pwd / "2023" / "18" / "18.input.txt")
-  lazy val result1 = Solving.solve1(lines.toList)
-  lazy val result2 = Solving.solve2(lines.toList)
-// Main.result1 // part 1: 36807
-// Main.result2 // part 2: 48797603984357
+  lazy val res1 = Solving.solve1(lines.toList)
+  lazy val res2 = Solving.solve2(lines.toList)
+// Main.res1 // part 1: 36807
+// Main.res2 // part 2: 48797603984357

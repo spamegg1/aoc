@@ -121,16 +121,16 @@ object Solving:
   def solve1(line: String) = findRoot(line).map(_.metaTotal)
   def solve2(line: String) = findRoot(line).map(_.value)
 
-object Testing:
+object Test:
   private lazy val line = os.read.lines(os.pwd / "2018" / "08" / "08.test.input.txt").head
-  lazy val result1 = Solving.solve1(line)
-  lazy val result2 = Solving.solve2(line)
-// Testing.result1 // part 1: 138
-// Testing.result2 // part 2: 66
+  lazy val res1 = Solving.solve1(line)
+  lazy val res2 = Solving.solve2(line)
+// Test.res1 // part 1: 138
+// Test.res2 // part 2: 66
 
 object Main:
   private lazy val line = os.read.lines(os.pwd / "2018" / "08" / "08.input.txt").head
-  lazy val result1 = Solving.solve1(line)
-  lazy val result2 = Solving.solve2(line)
-// Main.result1 // part 1: 43825
-// Main.result2 // part 2: 19276
+  lazy val res1 = Solving.solve1(line)
+  lazy val res2 = Solving.solve2(line)
+// Main.res1 // part 1: 43825
+// Main.res2 // part 2: 19276

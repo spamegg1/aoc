@@ -14,7 +14,7 @@ All of the instructions have been jumbled up!
 
 It seems like the goal of the program is just to multiply some numbers.
 It does that with instructions like mul(X,Y), where X and Y are each 1-3 digit numbers.
-For instance, mul(44,46) multiplies 44 by 46 to get a result of 2024.
+For instance, mul(44,46) multiplies 44 by 46 to get a res of 2024.
 Similarly, mul(123,4) would multiply 123 by 4.
 
 However, because the program's memory has been corrupted,
@@ -27,16 +27,16 @@ For example, consider the following section of corrupted memory:
 xmul(2,4)%&mul[3,7]!@^do_not_mul(5,5)+mul(32,64]then(mul(11,8)mul(8,5))
 
 Only the four highlighted sections are real mul instructions.
-Adding up the result of each instruction produces 161 (2*4 + 5*5 + 11*8 + 8*5).
+Adding up the res of each instruction produces 161 (2*4 + 5*5 + 11*8 + 8*5).
 
 Scan the corrupted memory for uncorrupted mul instructions.
-What do you get if you add up all of the results of the multiplications?
+What do you get if you add up all of the ress of the multiplications?
 
 --- Part Two ---
 As you scan through the corrupted memory, you notice that some of the
 conditional statements are also still intact.
 If you handle some of the uncorrupted conditional statements in the program,
-you might be able to get an even more accurate result.
+you might be able to get an even more accurate res.
 
 There are two new instructions you'll need to handle:
   The do() instruction enables future mul instructions.
@@ -54,10 +54,10 @@ because there is a don't() instruction before them.
 The other mul instructions function normally,
 including the one at the end that gets re-enabled by a do() instruction.
 
-This time, the sum of the results is 48 (2*4 + 8*5).
+This time, the sum of the ress is 48 (2*4 + 8*5).
 
 Handle the new instructions; what do you get if you add up
-all of the results of just the enabled multiplications?
+all of the ress of just the enabled multiplications?
  */
 object Parsing:
   val regex                     = """(don't|do|mul\([0-9]+,[0-9]+\))""".r
@@ -77,25 +77,25 @@ object Solving:
   def solve2(lines: Seq[String]) =
     val instrs  = Parsing.parse(lines)
     var enabled = true
-    var result  = 0L
+    var res  = 0L
     for instr <- instrs do
       if instr == "don't" then enabled = false
       else if instr == "do" then enabled = true
-      else if enabled then result += multiply(instr)
+      else if enabled then res += multiply(instr)
       else ()
-    result
+    res
 
-object Testing:
+object Test:
   lazy val lines1  = os.read.lines(os.pwd / "2024" / "03" / "03.test.input.txt")
   lazy val lines2  = os.read.lines(os.pwd / "2024" / "03" / "03.test.input.2.txt")
-  lazy val result1 = Solving.solve1(lines1)
-  lazy val result2 = Solving.solve2(lines2)
-// Testing.result1 // part 1: 161
-// Testing.result2 // part 2: 48
+  lazy val res1 = Solving.solve1(lines1)
+  lazy val res2 = Solving.solve2(lines2)
+// Test.res1 // part 1: 161
+// Test.res2 // part 2: 48
 
 object Main:
   private lazy val lines = os.read.lines(os.pwd / "2024" / "03" / "03.input.txt")
-  lazy val result1       = Solving.solve1(lines)
-  lazy val result2       = Solving.solve2(lines)
-// Main.result1 // part 1: 173529487
-// Main.result2 // part 2: 99532691
+  lazy val res1       = Solving.solve1(lines)
+  lazy val res2       = Solving.solve2(lines)
+// Main.res1 // part 1: 173529487
+// Main.res2 // part 2: 99532691

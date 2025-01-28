@@ -64,7 +64,7 @@ The first example requires a few more steps:
 
 The final step of this file-compacting process is to update
 the filesystem checksum. To calculate the checksum,
-add up the result of multiplying each of these blocks'
+add up the res of multiplying each of these blocks'
 position with the file ID number it contains.
 The leftmost block is in position 0.
 If a block contains free space, skip it instead.
@@ -74,7 +74,7 @@ file ID number are 0 * 0 = 0, 1 * 0 = 0, 2 * 9 = 18, 3 * 9 = 27, 4 * 8 = 32,
 and so on. In this example, the checksum is the sum of these, 1928.
 
 Compact the amphipod's hard drive using the process he requested.
-What is the resulting filesystem checksum?
+What is the resing filesystem checksum?
 (Be careful copy/pasting the input for this puzzle; it is a single, very long line.)
 
 --- Part Two ---
@@ -104,7 +104,7 @@ The process of updating the filesystem checksum is the same;
 now, this example's checksum would be 2858.
 
 Start over, now compacting the amphipod's hard drive using this new method instead.
-What is the resulting filesystem checksum?
+What is the resing filesystem checksum?
  */
 object DataDefs:
   val FREE = -1L
@@ -169,16 +169,16 @@ object Solving:
 
     disk.checksum
 
-object Testing:
+object Test:
   private lazy val line = os.read(os.pwd / "2024" / "09" / "09.test.input.txt")
-  lazy val result1      = Solving.solve1(line)
-  lazy val result2      = Solving.solve2(line)
-// Testing.result1 // part 1: 1928
-// Testing.result2 // part 2: 2858
+  lazy val res1      = Solving.solve1(line)
+  lazy val res2      = Solving.solve2(line)
+// Test.res1 // part 1: 1928
+// Test.res2 // part 2: 2858
 
 object Main:
   private lazy val line = os.read(os.pwd / "2024" / "09" / "09.input.txt")
-  lazy val result1      = Solving.solve1(line)
-  lazy val result2      = Solving.solve2(line)
-// Main.result1 // part 1: 6242766523059
-// Main.result2 // part 2: 6272188244509
+  lazy val res1      = Solving.solve1(line)
+  lazy val res2      = Solving.solve2(line)
+// Main.res1 // part 1: 6242766523059
+// Main.res2 // part 2: 6272188244509

@@ -262,7 +262,7 @@ from the top edge of the map plus its distance from the left edge of the map.
 (This process does not stop at wall tiles; measure all the way to the edges of the map.)
 
 So, the box shown below has a distance of 1 from the top edge of the map and
-4 from the left edge of the map, resulting in a GPS coordinate of 100 * 1 + 4 = 104.
+4 from the left edge of the map, resing in a GPS coordinate of 100 * 1 + 4 = 104.
 
 #######
 #...O..
@@ -438,7 +438,7 @@ This warehouse also uses GPS to locate the boxes.
 For these larger boxes, distances are measured from the edge of the map
 to the closest edge of the box in question.
 So, the box shown below has a distance of 1 from the top edge of the map and
-5 from the left edge of the map, resulting in a GPS coordinate of 100 * 1 + 5 = 105.
+5 from the left edge of the map, resing in a GPS coordinate of 100 * 1 + 5 = 105.
 
 ##########
 ##...[]...
@@ -555,28 +555,28 @@ object Solving:
 
   def solve2(boxes: Seq[String], moves: Seq[String], start: Pos)(using size: Int) = 0L
 
-object Testing: // robot starts at 2,2 and 4,4
+object Test: // robot starts at 2,2 and 4,4
   lazy val boxes1   = os.read.lines(os.pwd / "2024" / "15" / "15.test.input.1.txt")
   lazy val moves1   = os.read.lines(os.pwd / "2024" / "15" / "15.test.input.2.txt")
   lazy val boxes2   = os.read.lines(os.pwd / "2024" / "15" / "15.test.input.3.txt")
   lazy val moves2   = os.read.lines(os.pwd / "2024" / "15" / "15.test.input.4.txt")
   val start1        = (2, 2)
   val start2        = (4, 4)
-  lazy val result11 = Solving.solve1(boxes1, moves1, start1)(using 8)
-  lazy val result12 = Solving.solve1(boxes2, moves2, start2)(using 10)
-  lazy val result21 = Solving.solve2(boxes1, moves1, start1)(using 8)
-  lazy val result22 = Solving.solve2(boxes2, moves2, start2)(using 10)
-// Testing.result11 // part 1: 2028
-// Testing.result12 // part 1: 10092
-// Testing.result21 // part 2: 9021
-// Testing.result22 // part 2: 9021
+  lazy val res11 = Solving.solve1(boxes1, moves1, start1)(using 8)
+  lazy val res12 = Solving.solve1(boxes2, moves2, start2)(using 10)
+  lazy val res21 = Solving.solve2(boxes1, moves1, start1)(using 8)
+  lazy val res22 = Solving.solve2(boxes2, moves2, start2)(using 10)
+// Test.res11 // part 1: 2028
+// Test.res12 // part 1: 10092
+// Test.res21 // part 2: 9021
+// Test.res22 // part 2: 9021
 
 object Main: // robot starts at 24,24
   lazy val boxes   = os.read.lines(os.pwd / "2024" / "15" / "15.input.1.txt")
   lazy val moves   = os.read.lines(os.pwd / "2024" / "15" / "15.input.2.txt")
   val start        = (24, 24)
   given size: Int  = 50
-  lazy val result1 = Solving.solve1(boxes, moves, start)
-  lazy val result2 = Solving.solve2(boxes, moves, start)
-// Main.result1 // part 1: 1478649
-// Main.result2 // part 2:
+  lazy val res1 = Solving.solve1(boxes, moves, start)
+  lazy val res2 = Solving.solve2(boxes, moves, start)
+// Main.res1 // part 1: 1478649
+// Main.res2 // part 2:

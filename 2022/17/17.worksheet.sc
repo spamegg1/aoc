@@ -377,16 +377,16 @@ object Solving:
   def solve1(rocks: Int)(line: String) = 0L
   def solve2(rocks: Int)(line: String) = 0L
 
-object Testing:
+object Test:
   private lazy val line = os.read.lines(os.pwd / "2022" / "17" / "17.test.input.txt").head
-  lazy val result1 = Solving.solve1(2022)(line)
-  lazy val result2 = Solving.solve2(2022)(line)
-// Testing.result1 // part 1: 3068
-// Testing.result2 // part 2:
+  lazy val res1 = Solving.solve1(2022)(line)
+  lazy val res2 = Solving.solve2(2022)(line)
+// Test.res1 // part 1: 3068
+// Test.res2 // part 2:
 
 object Main:
   private lazy val line = os.read.lines(os.pwd / "2022" / "17" / "17.input.txt").head
-  lazy val result1 = Solving.solve1(2022)(line)
-  lazy val result2 = Solving.solve2(2022)(line)
-// Main.result1 // part 1:
-// Main.result2 // part 2:
+  lazy val res1 = Solving.solve1(2022)(line)
+  lazy val res2 = Solving.solve2(2022)(line)
+// Main.res1 // part 1:
+// Main.res2 // part 2:

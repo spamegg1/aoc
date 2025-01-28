@@ -129,16 +129,16 @@ object Solving:
       if mas.contains(left) && mas.contains(right)
     yield 1).sum
 
-object Testing:
+object Test:
   private lazy val lines = os.read.lines(os.pwd / "2024" / "04" / "04.test.input.txt")
-  lazy val result1       = Solving.solve1(lines)
-  lazy val result2       = Solving.solve2(lines)
-// Testing.result1 // part 1: 18
-// Testing.result2 // part 2: 9
+  lazy val res1       = Solving.solve1(lines)
+  lazy val res2       = Solving.solve2(lines)
+// Test.res1 // part 1: 18
+// Test.res2 // part 2: 9
 
 object Main:
   private lazy val lines = os.read.lines(os.pwd / "2024" / "04" / "04.input.txt")
-  lazy val result1       = Solving.solve1(lines)
-  lazy val result2       = Solving.solve2(lines)
-// Main.result1 // part 1: 2545
-// Main.result2 // part 2: 1886
+  lazy val res1       = Solving.solve1(lines)
+  lazy val res2       = Solving.solve2(lines)
+// Main.res1 // part 1: 2545
+// Main.res2 // part 2: 1886

@@ -78,16 +78,16 @@ object Solving:
       (next, max(dist, next.distance))
     ._2
 
-object Testing:
+object Test:
   private lazy val lines = os.read.lines(os.pwd / "2017" / "11" / "11.test.input.txt")
-  lazy val result1 = lines map Solving.solve1
-  lazy val result2 = lines map Solving.solve2
-// Testing.result1 // part 1: 3,0,2,3
-// Testing.result2 // part 2: 3,2,2,3
+  lazy val res1 = lines map Solving.solve1
+  lazy val res2 = lines map Solving.solve2
+// Test.res1 // part 1: 3,0,2,3
+// Test.res2 // part 2: 3,2,2,3
 
 object Main:
   private lazy val line = os.read.lines(os.pwd / "2017" / "11" / "11.input.txt").head
-  lazy val result1 = Solving.solve1(line)
-  lazy val result2 = Solving.solve2(line)
-// Main.result1 // part 1: 743
-// Main.result2 // part 2: 1493
+  lazy val res1 = Solving.solve1(line)
+  lazy val res2 = Solving.solve2(line)
+// Main.res1 // part 1: 743
+// Main.res2 // part 2: 1493

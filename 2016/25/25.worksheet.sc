@@ -122,8 +122,8 @@ object Solving:
 
 object Main:
   private lazy val lines = os.read.lines(os.pwd / "2016" / "25" / "25.input.txt")
-  lazy val result = Solving.solve(lines)
-// Main.result // part 1: 158
+  lazy val res = Solving.solve(lines)
+// Main.res // part 1: 158
 // Reverse engineering the code shows that it takes the initial value "a'
 // then adds 4 * 643 to create a seed.
 // This seed is then repeatedly bit shifted right by dividing by 2

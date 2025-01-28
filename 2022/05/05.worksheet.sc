@@ -34,7 +34,7 @@ Finally, stack 3 contains a single crate, P.
 Then, the rearrangement procedure is given. In each step of the procedure,
 a quantity of crates is moved from one stack to a different stack.
 In the first step of the above rearrangement procedure, one crate is moved
-from stack 2 to stack 1, resulting in this configuration:
+from stack 2 to stack 1, resing in this configuration:
 
 [D]
 [N] [C]
@@ -100,7 +100,7 @@ Moving a single crate from stack 2 to stack 1 behaves the same as before:
  1   2   3
 
 However, the action of moving three crates from stack 1 to stack 3 means that those
-three moved crates stay in the same order, resulting in this new configuration:
+three moved crates stay in the same order, resing in this new configuration:
 
         [D]
         [N]
@@ -170,18 +170,18 @@ object Solving:
   def solve1(stacks: Seq[String])(mvs: Seq[String]) = solve(stacks)(mvs)(true)
   def solve2(stacks: Seq[String])(mvs: Seq[String]) = solve(stacks)(mvs)(false)
 
-object Testing:
+object Test:
   private lazy val stacks = os.read.lines(os.pwd / "2022" / "05" / "05.test.input.1.txt")
   private lazy val moves = os.read.lines(os.pwd / "2022" / "05" / "05.test.input.2.txt")
-  lazy val result1 = Solving.solve1(stacks)(moves)
-  lazy val result2 = Solving.solve2(stacks)(moves)
-// Testing.result1 // part 1: CMZ
-// Testing.result2 // part 2: MCD
+  lazy val res1 = Solving.solve1(stacks)(moves)
+  lazy val res2 = Solving.solve2(stacks)(moves)
+// Test.res1 // part 1: CMZ
+// Test.res2 // part 2: MCD
 
 object Main:
   private lazy val stacks = os.read.lines(os.pwd / "2022" / "05" / "05.input.1.txt")
   private lazy val moves = os.read.lines(os.pwd / "2022" / "05" / "05.input.2.txt")
-  lazy val result1 = Solving.solve1(stacks)(moves)
-  lazy val result2 = Solving.solve2(stacks)(moves)
-// Main.result1 // part 1: VCTFTJQCG
-// Main.result2 // part 2: GCFGLDNJZ
+  lazy val res1 = Solving.solve1(stacks)(moves)
+  lazy val res2 = Solving.solve2(stacks)(moves)
+// Main.res1 // part 1: VCTFTJQCG
+// Main.res2 // part 2: GCFGLDNJZ

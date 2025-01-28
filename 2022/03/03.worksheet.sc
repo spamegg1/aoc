@@ -134,16 +134,16 @@ object Solving:
     .flatMap(_.priority)
     .sum
 
-object Testing:
+object Test:
   private lazy val lines = os.read.lines(os.pwd / "2022" / "03" / "03.test.input.txt")
-  lazy val result1 = Solving.solve1(lines)
-  lazy val result2 = Solving.solve2(lines)
-// Testing.result1 // part 1: 157
-// Testing.result2 // part 2: 70
+  lazy val res1 = Solving.solve1(lines)
+  lazy val res2 = Solving.solve2(lines)
+// Test.res1 // part 1: 157
+// Test.res2 // part 2: 70
 
 object Main:
   private lazy val lines = os.read.lines(os.pwd / "2022" / "03" / "03.input.txt")
-  lazy val result1 = Solving.solve1(lines)
-  lazy val result2 = Solving.solve2(lines)
-// Main.result1 // part 1: 7446
-// Main.result2 // part 2: 2646
+  lazy val res1 = Solving.solve1(lines)
+  lazy val res2 = Solving.solve2(lines)
+// Main.res1 // part 1: 7446
+// Main.res2 // part 2: 2646

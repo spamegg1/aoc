@@ -117,18 +117,18 @@ object Solving:
   def solve2(lines: Seq[String])(slopes: List[Slope]): Long =
     slopes.map(slope => solve1(lines)(slope)).product
 
-object Testing:
+object Test:
   private lazy val lines = os.read.lines(os.pwd / "2020" / "03" / "03.test.input.txt")
   private lazy val slopes = List((1, 1), (3, 1), (5, 1), (7, 1), (1, 2))
-  lazy val result1 = Solving.solve1(lines)(slopes(1))
-  lazy val result2 = Solving.solve2(lines)(slopes)
-// Testing.result1 // part 1: 7
-// Testing.result2 // part 2: 336
+  lazy val res1 = Solving.solve1(lines)(slopes(1))
+  lazy val res2 = Solving.solve2(lines)(slopes)
+// Test.res1 // part 1: 7
+// Test.res2 // part 2: 336
 
 object Main:
   private lazy val lines = os.read.lines(os.pwd / "2020" / "03" / "03.input.txt")
   private lazy val slopes = List((1, 1), (3, 1), (5, 1), (7, 1), (1, 2))
-  lazy val result1 = Solving.solve1(lines)(slopes(1))
-  lazy val result2 = Solving.solve2(lines)(slopes)
-// Main.result1 // part 1: 244
-// Main.result2 // part 2: 9406609920
+  lazy val res1 = Solving.solve1(lines)(slopes(1))
+  lazy val res2 = Solving.solve2(lines)(slopes)
+// Main.res1 // part 1: 244
+// Main.res2 // part 2: 9406609920

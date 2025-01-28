@@ -189,19 +189,19 @@ object DataDefs:
 
     def explore(size: Int)(t: Tile): List[Trail] =
       val queue  = collection.mutable.Queue[Trail](List(t))
-      var result = List[Trail]()
+      var res = List[Trail]()
 
       while queue.nonEmpty do
         val trail: Trail = queue.dequeue()
         val lastHeight   = trail.head.h
-        if lastHeight == 9 then result ::= trail
+        if lastHeight == 9 then res ::= trail
         else
           val possible: Seq[Pos] = trail.head.p.possible(size)
           val valid: Seq[Pos] = possible.filter(p => topo(p.r)(p.c).h == lastHeight + 1)
           val newTrails: Seq[Trail] = valid.map((_, lastHeight + 1) :: trail)
           queue.enqueueAll(newTrails)
 
-      result
+      res
 
     def exploreAll = topo.findStarts.map(topo.explore(topo.size))
 
@@ -228,16 +228,16 @@ object Solving:
     .map(_.size)
     .sum
 
-object Testing:
+object Test:
   private lazy val lines = os.read.lines(os.pwd / "2024" / "10" / "10.test.input.txt")
-  lazy val result1       = Solving.solve1(lines)
-  lazy val result2       = Solving.solve2(lines)
-// Testing.result1 // part 1: 36
-// Testing.result2 // part 2: 81
+  lazy val res1       = Solving.solve1(lines)
+  lazy val res2       = Solving.solve2(lines)
+// Test.res1 // part 1: 36
+// Test.res2 // part 2: 81
 
 object Main:
   private lazy val lines = os.read.lines(os.pwd / "2024" / "10" / "10.input.txt")
-  lazy val result1       = Solving.solve1(lines)
-  lazy val result2       = Solving.solve2(lines)
-// Main.result1 // part 1: 582
-// Main.result2 // part 2: 1302
+  lazy val res1       = Solving.solve1(lines)
+  lazy val res2       = Solving.solve2(lines)
+// Main.res1 // part 1: 582
+// Main.res2 // part 2: 1302

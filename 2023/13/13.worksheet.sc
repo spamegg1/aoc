@@ -204,16 +204,16 @@ object Solving:
     .map(_.allReflections(smudge))
     .sum
 
-object Testing:
+object Test:
   private lazy val lines = os.read(os.pwd / "2023" / "13" / "13.test.input.txt")
-  lazy val result1 = Solving.solve(lines)(0)
-  lazy val result2 = Solving.solve(lines)(1)
-// Testing.result1 // part 1: 405
-// Testing.result2 // part 2: 400
+  lazy val res1 = Solving.solve(lines)(0)
+  lazy val res2 = Solving.solve(lines)(1)
+// Test.res1 // part 1: 405
+// Test.res2 // part 2: 400
 
 object Main:
   private lazy val lines = os.read(os.pwd / "2023" / "13" / "13.input.txt")
-  lazy val result1 = Solving.solve(lines)(0)
-  lazy val result2 = Solving.solve(lines)(1)
-// Main.result1 // part 1: 33728
-// Main.result2 // part 2: 28235
+  lazy val res1 = Solving.solve(lines)(0)
+  lazy val res2 = Solving.solve(lines)(1)
+// Main.res1 // part 1: 33728
+// Main.res2 // part 2: 28235

@@ -30,26 +30,26 @@ where each secret is derived from the previous.
 
 In particular, each buyer's secret number evolves into
 the next secret number in the sequence via the following process:
-  Calculate the result of multiplying the secret number by 64.
-    Then, mix this result into the secret number.
+  Calculate the res of multiplying the secret number by 64.
+    Then, mix this res into the secret number.
     Finally, prune the secret number.
-  Calculate the result of dividing the secret number by 32.
-    Round the result down to the nearest integer.
-    Then, mix this result into the secret number.
+  Calculate the res of dividing the secret number by 32.
+    Round the res down to the nearest integer.
+    Then, mix this res into the secret number.
     Finally, prune the secret number.
-  Calculate the result of multiplying the secret number by 2048.
-    Then, mix this result into the secret number.
+  Calculate the res of multiplying the secret number by 2048.
+    Then, mix this res into the secret number.
     Finally, prune the secret number.
 
 Each step of the above process involves mixing and pruning:
     To mix a value into the secret number,
       calculate the bitwise XOR of the given value and the secret number.
-      Then, the secret number becomes the result of that operation.
+      Then, the secret number becomes the res of that operation.
       (If the secret number is 42 and you were to mix 15 into the secret number,
       the secret number would become 37.)
     To prune the secret number,
       calculate the value of the secret number modulo 16777216.
-      Then, the secret number becomes the result of that operation.
+      Then, the secret number becomes the res of that operation.
       (If the secret number is 100000000 and you were to prune the secret number,
       the secret number would become 16113920.)
 
@@ -235,20 +235,20 @@ object Solving:
     val changeLists  = digitsLists.map(priceChanges)
     0L // clean this up later!
 
-object Testing:
+object Test:
   lazy val lines   = os.read.lines(os.pwd / "2024" / "22" / "22.test.input.txt")
-  lazy val result1 = Solving.solve1(lines)(2000)
-  lazy val result2 = Solving.solve2(lines)(2000)
+  lazy val res1 = Solving.solve1(lines)(2000)
+  lazy val res2 = Solving.solve2(lines)(2000)
 
 object Main:
   lazy val lines   = os.read.lines(os.pwd / "2024" / "22" / "22.input.txt")
-  lazy val result1 = Solving.solve1(lines)(2000)
-  lazy val result2 = Solving.solve2(lines)(2000)
+  lazy val res1 = Solving.solve1(lines)(2000)
+  lazy val res2 = Solving.solve2(lines)(2000)
 
 @main
 def run: Unit =
-  // println(Testing.result1) // part 1: 37327623
-  // println(Testing.result2) // part 2: 23
-  // println(Main.result1) // part 1: 14119253575
-  // println(Main.result1) // part 2: 1600
+  // println(Test.res1) // part 1: 37327623
+  // println(Test.res2) // part 2: 23
+  // println(Main.res1) // part 1: 14119253575
+  // println(Main.res1) // part 2: 1600
   ()

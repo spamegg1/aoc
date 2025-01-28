@@ -23,9 +23,9 @@ For example, imagine a scenario with only four memory banks:
   Starting with the next bank (the fourth bank) and then continuing to the first bank, the
     second bank, and so on, the 7 blocks are spread out over the memory banks.
     The fourth, first, and second banks get two blocks each, and the third bank gets one
-    back. The final result looks like this: 2 4 1 2.
+    back. The final res looks like this: 2 4 1 2.
   Next, the second bank is chosen because it contains the most blocks (four). Because
-    there are four memory banks, each gets one block. The result is: 3 1 2 3.
+    there are four memory banks, each gets one block. The res is: 3 1 2 3.
   Now, there is a tie between the first and fourth memory banks, both of which have three
     blocks. The first bank wins the tie, and its three blocks are distributed evenly over
     the other three banks, leaving it with none: 0 2 3 4.
@@ -110,16 +110,16 @@ object Solving:
     val firstSeen = helper1(start(line))
     helper2(firstSeen.next)(firstSeen.banks)(1)
 
-object Testing:
+object Test:
   private lazy val line = os.read.lines(os.pwd / "2017" / "06" / "06.test.input.txt").head
-  lazy val result1 = Solving.solve1(line)
-  lazy val result2 = Solving.solve2(line)
-// Testing.result1 // part 1: 5
-// Testing.result2 // part 2: 4
+  lazy val res1 = Solving.solve1(line)
+  lazy val res2 = Solving.solve2(line)
+// Test.res1 // part 1: 5
+// Test.res2 // part 2: 4
 
 object Main:
   private lazy val line = os.read.lines(os.pwd / "2017" / "06" / "06.input.txt").head
-  lazy val result1 = Solving.solve1(line)
-  lazy val result2 = Solving.solve2(line)
-// Main.result1 // part 1: 12841
-// Main.result2 // part 2: 8038
+  lazy val res1 = Solving.solve1(line)
+  lazy val res2 = Solving.solve2(line)
+// Main.res1 // part 1: 12841
+// Main.res2 // part 2: 8038

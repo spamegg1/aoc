@@ -209,19 +209,19 @@ object Solving:
     (memo.get(key), counts) match
       case (Some(value), _) => value
       case (_, Nil) =>
-        val result = if isMatch(springs)('.')(springs.size) then 1L else 0L
-        memo.addOne(key -> result)
-        result
+        val res = if isMatch(springs)('.')(springs.size) then 1L else 0L
+        memo.addOne(key -> res)
+        res
       case (_, head :: next) =>
         val searchRange = springs.size - counts.sum - counts.size + 1
-        val result = (1 to searchRange)
+        val res = (1 to searchRange)
           .filter: index =>
             isMatch(springs)('.')(index) &&
               isMatch(springs.drop(index))('#')(head)
           .map(index => memoize(springs.drop(index + head))(next))
           .sum
-        memo.addOne(key -> result)
-        result
+        memo.addOne(key -> res)
+        res
 
   def solve2OneLine(line: String): Long =
     val (springs, counts) = Parsing.parseLine(line)
@@ -231,17 +231,17 @@ object Solving:
 
   def solve2(lines: List[String]): Long = lines.map(solve2OneLine).sum
 
-object Testing:
+object Test:
   private lazy val lines = os.read.lines(os.pwd / "2023" / "12" / "12.test.input.txt")
-  lazy val result1 = Solving.solve1(lines.toList)
-  lazy val result2 = Solving.solve2(lines.toList)
-// Testing.result1 // part 1: 21
-// Testing.result2 // part 2: 525152
+  lazy val res1 = Solving.solve1(lines.toList)
+  lazy val res2 = Solving.solve2(lines.toList)
+// Test.res1 // part 1: 21
+// Test.res2 // part 2: 525152
 
 object Main:
   private lazy val lines = os.read.lines(os.pwd / "2023" / "12" / "12.input.txt")
-  lazy val result1 = Solving.solve1(lines.toList)
-  // lazy val result2 = Solving.solve2OneLine(lines.head)
-  lazy val result2 = Solving.solve2(lines.toList)
-// Main.result1 // part 1: 7090
-// Main.result2 // part 2: 6792010726878
+  lazy val res1 = Solving.solve1(lines.toList)
+  // lazy val res2 = Solving.solve2OneLine(lines.head)
+  lazy val res2 = Solving.solve2(lines.toList)
+// Main.res1 // part 1: 7090
+// Main.res2 // part 2: 6792010726878

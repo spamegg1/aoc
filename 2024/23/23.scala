@@ -84,7 +84,7 @@ Find all the sets of three inter-connected computers.
 How many contain at least one computer with a name that starts with t?
 
 --- Part Two ---
-There are still way too many results to go through them all.
+There are still way too many ress to go through them all.
 You'll have to find the LAN party another way and go there yourself.
 
 Since it doesn't seem like any employees are around,
@@ -159,20 +159,20 @@ object Solving:
     val cliques    = lan.keys.flatMap(findClique)
     0L
 
-object Testing:
+object Test:
   lazy val lines   = os.read.lines(os.pwd / "2024" / "23" / "23.test.input.txt")
-  lazy val result1 = Solving.solve1(lines)
-  lazy val result2 = Solving.solve2(lines)
+  lazy val res1 = Solving.solve1(lines)
+  lazy val res2 = Solving.solve2(lines)
 
 object Main:
   lazy val lines   = os.read.lines(os.pwd / "2024" / "23" / "23.input.txt")
-  lazy val result1 = Solving.solve1(lines)
-  lazy val result2 = Solving.solve2(lines)
+  lazy val res1 = Solving.solve1(lines)
+  lazy val res2 = Solving.solve2(lines)
 
 @main
 def run: Unit =
-  // println(Testing.result1) // part 1: 7
-  // println(Testing.result2) // part 2: co,de,ka,ta
-  println(Main.result1) // part 1: 1000
-  // println(Main.result2) // part 2:
+  // println(Test.res1) // part 1: 7
+  // println(Test.res2) // part 2: co,de,ka,ta
+  println(Main.res1) // part 1: 1000
+  // println(Main.res2) // part 2:
   ()

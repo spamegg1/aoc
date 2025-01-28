@@ -213,8 +213,8 @@ object DataDefs:
           case Nil =>
             if bracket.isOpen then helper(bs, bracket :: open) else Corrupted(bracket)
 
-    lazy val result: Result = helper(brackets, Nil)
-    lazy val points = result.points
+    lazy val res: Result = helper(brackets, Nil)
+    lazy val points = res.points
 
 object Parsing:
   import DataDefs.*
@@ -226,7 +226,7 @@ object Solving:
   def solve1(lines: Seq[String]) = Parsing
     .parse(lines)
     .view
-    .map(_.result)
+    .map(_.res)
     .filter(_.isCorrupted)
     .map(_.points)
     .sum
@@ -235,7 +235,7 @@ object Solving:
     val points2 = Parsing
       .parse(lines)
       .view
-      .map(_.result)
+      .map(_.res)
       .filterNot(_.isCorrupted)
       .map(_.points)
       .toSeq
@@ -243,16 +243,16 @@ object Solving:
 
     points2.drop(points2.length / 2).head
 
-object Testing:
+object Test:
   private lazy val lines = os.read.lines(os.pwd / "2021" / "10" / "10.test.input.txt")
-  lazy val result1 = Solving.solve1(lines)
-  lazy val result2 = Solving.solve2(lines)
-// Testing.result1 // part 1: 26397
-// Testing.result2 // part 2: 288957
+  lazy val res1 = Solving.solve1(lines)
+  lazy val res2 = Solving.solve2(lines)
+// Test.res1 // part 1: 26397
+// Test.res2 // part 2: 288957
 
 object Main:
   private lazy val lines = os.read.lines(os.pwd / "2021" / "10" / "10.input.txt")
-  lazy val result1 = Solving.solve1(lines)
-  lazy val result2 = Solving.solve2(lines)
-// Main.result1 // part 1: 367059
-// Main.result2 // part 2: 1952146692
+  lazy val res1 = Solving.solve1(lines)
+  lazy val res2 = Solving.solve2(lines)
+// Main.res1 // part 1: 367059
+// Main.res2 // part 2: 1952146692

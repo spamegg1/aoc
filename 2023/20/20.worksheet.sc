@@ -146,7 +146,7 @@ This completes the cycle: a turns off, causing con to remember only low pulses
 and restoring all modules to their original states.
 
 To get the cables warmed up, the Elves have pushed the button 1000 times. How
-many pulses got sent as a result (including the pulses sent by the button
+many pulses got sent as a res (including the pulses sent by the button
 itself)?
 
 In the first example, the same thing happens every time the button is pushed: 8
@@ -186,17 +186,17 @@ object Solving:
   import DataDefs.*
   ???
 
-object Testing:
+object Test:
   private lazy val lines1 = os.read.lines(os.pwd / "2023" / "20" / "20.test.input.txt")
   private lazy val lines2 = os.read.lines(os.pwd / "2023" / "20" / "20.test.input.2.txt")
-  lazy val result1 = 0
-  lazy val result2 = 0
-// Testing.result1 // part 1: 32000000
-// Testing.result2 // part 2: 11687500
+  lazy val res1 = 0
+  lazy val res2 = 0
+// Test.res1 // part 1: 32000000
+// Test.res2 // part 2: 11687500
 
 object Main:
   private lazy val lines = os.read.lines(os.pwd / "2023" / "20" / "20.input.txt")
-  lazy val result1 = 0
-  lazy val result2 = 0
-// Main.result1 // part 1: 839775244
-// Main.result2 // part 2: 207787533680413
+  lazy val res1 = 0
+  lazy val res2 = 0
+// Main.res1 // part 1: 839775244
+// Main.res2 // part 2: 207787533680413

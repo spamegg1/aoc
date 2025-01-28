@@ -12,7 +12,7 @@ Error: No space left on device
 
 Perhaps you can delete some files to make space for the update?
 
-You browse around the filesystem to assess the situation and save the resulting
+You browse around the filesystem to assess the situation and save the resing
 terminal output (your puzzle input). For example:
 
 $ cd /
@@ -47,7 +47,7 @@ listing the contents of the directory you're currently in.
 Within the terminal output, lines that begin with $ are commands you executed,
 very much like some modern computers:
   cd means change directory. This changes which directory is the current directory,
-  but the specific result depends on the argument:
+  but the specific res depends on the argument:
     cd x moves in one level: it looks in the current directory for the directory
       named x and makes it the current directory.
     cd .. moves out one level: it finds the directory that contains the current directory,
@@ -200,16 +200,16 @@ object Solving:
       .minBy(_.totalSize)
       .totalSize
 
-object Testing:
+object Test:
   private lazy val lines = os.read.lines(os.pwd / "2022" / "07" / "07.test.input.txt")
-  lazy val result1 = Solving.solve1(lines)
-  lazy val result2 = Solving.solve2(lines)
-// Testing.result1 // part 1: 95437
-// Testing.result2 // part 2: 24933642
+  lazy val res1 = Solving.solve1(lines)
+  lazy val res2 = Solving.solve2(lines)
+// Test.res1 // part 1: 95437
+// Test.res2 // part 2: 24933642
 
 object Main:
   private lazy val lines = os.read.lines(os.pwd / "2022" / "07" / "07.input.txt")
-  lazy val result1 = Solving.solve1(lines)
-  lazy val result2 = Solving.solve2(lines)
-// Main.result1 // part 1: 1243729
-// Main.result2 // part 2: 4443914
+  lazy val res1 = Solving.solve1(lines)
+  lazy val res2 = Solving.solve2(lines)
+// Main.res1 // part 1: 1243729
+// Main.res2 // part 2: 4443914

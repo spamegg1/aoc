@@ -16,7 +16,7 @@ will find an opcode - either 1, 2, or 99. The opcode indicates what to do; for
 example, 99 means that the program is finished and should immediately halt.
 Encountering an unknown opcode means something went wrong.
 
-Opcode 1 adds together numbers read from two positions and stores the result in
+Opcode 1 adds together numbers read from two positions and stores the res in
 a third position. The three integers immediately after the opcode tell you these
 three positions - the first two indicate the positions from which you should
 read the input values, and the third indicates the position at which the output
@@ -200,14 +200,14 @@ object Solving:
           break()
     noun * 100 + verb
 
-object Testing:
+object Test:
   lazy val line = os.read.lines(os.pwd / "2019" / "02" / "02.test.input.txt").head
-  lazy val result1 = Solving.solve1(line)
-// Testing.result1 // part 1: 3500
+  lazy val res1 = Solving.solve1(line)
+// Test.res1 // part 1: 3500
 
 object Main:
   private lazy val line = os.read.lines(os.pwd / "2019" / "02" / "02.input.txt").head
-  lazy val result1 = Solving.solve1(line)
-  lazy val result2 = Solving.solve2(line)
-// Main.result1 // part 1: 3562672
-// Main.result2 // part 2: 8250
+  lazy val res1 = Solving.solve1(line)
+  lazy val res2 = Solving.solve2(line)
+// Main.res1 // part 1: 3562672
+// Main.res2 // part 2: 8250

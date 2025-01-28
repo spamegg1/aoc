@@ -14,10 +14,10 @@ Here's what you determine:
   snd X plays a sound with a frequency equal to the value of X.
   set X Y sets register X to the value of Y.
   add X Y increases register X by the value of Y.
-  mul X Y sets register X to the result of multiplying the value contained in
+  mul X Y sets register X to the res of multiplying the value contained in
     register X by the value of Y.
   mod X Y sets register X to the remainder of dividing the value contained in
-    register X by the value of Y (that is, it sets X to the result of X modulo Y).
+    register X by the value of Y (that is, it sets X to the res of X modulo Y).
   rcv X recovers the frequency of the last sound played,
     but only when the value of X is not zero.
     (If it is zero, the command does nothing.)
@@ -45,7 +45,7 @@ jgz a -1
 set a 1
 jgz a -2
   The first four instructions set a to 1, add 2 to it = 3, square it 9,
-    and then set it to itself modulo 5, resulting in a value of 4.
+    and then set it to itself modulo 5, resing in a value of 4.
   Then, a sound with frequency 4 (the value of a) is played.
   After that, a is set to 0, causing the subsequent rcv and jgz instructions to both be
     skipped (rcv because a is 0, and jgz because a is not greater than 0).
@@ -164,9 +164,9 @@ object DataDefs:
         copy(regs = regs.updated(x, y.get(regs)), ptr = ptr + 1)
       case Add(x, y) => // increases register X by the value of Y.
         copy(regs = regs.updated(x, regs(x) + y.get(regs)), ptr = ptr + 1)
-      case Mul(x, y) => // sets register X to the result of multiplying X and Y
+      case Mul(x, y) => // sets register X to the res of multiplying X and Y
         copy(regs = regs.updated(x, regs(x) * y.get(regs)), ptr = ptr + 1)
-      case Mod(x, y) => // sets register X to the result of X modulo Y
+      case Mod(x, y) => // sets register X to the res of X modulo Y
         copy(regs = regs.updated(x, regs(x) % y.get(regs)), ptr = ptr + 1)
       case Rcv(x) => // recovers the frequency of the last sound played, if X != 0
         if regs(x) != 0 then copy(ptr = ptr + 1, finished = true, recovered = played.head)
@@ -265,17 +265,17 @@ object Solving:
     while twoProgs.canRun do twoProgs = twoProgs.run
     twoProgs.p1.sent
 
-object Testing:
+object Test:
   lazy val lines1 = os.read.lines(os.pwd / "2017" / "18" / "18.test.input.txt")
   lazy val lines2 = os.read.lines(os.pwd / "2017" / "18" / "18.test.input.2.txt")
-  lazy val result1 = Solving.solve1(lines1)
-  lazy val result2 = Solving.solve2(lines2)
-// Testing.result1 // part 1: 4
-// Testing.result2 // part 2: 3
+  lazy val res1 = Solving.solve1(lines1)
+  lazy val res2 = Solving.solve2(lines2)
+// Test.res1 // part 1: 4
+// Test.res2 // part 2: 3
 
 object Main:
   lazy val lines = os.read.lines(os.pwd / "2017" / "18" / "18.input.txt")
-  lazy val result1 = Solving.solve1(lines)
-  lazy val result2 = Solving.solve2(lines)
-// Main.result1 // part 1: 1187
-// Main.result2 // part 2: 5969
+  lazy val res1 = Solving.solve1(lines)
+  lazy val res2 = Solving.solve2(lines)
+// Main.res1 // part 1: 1187
+// Main.res2 // part 2: 5969

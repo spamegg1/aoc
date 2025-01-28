@@ -140,22 +140,22 @@ object Solving:
     val res2 = if x2.floor == x2 then x2.floor - 1.0 else x2.floor
     res2.toLong - res1.toLong + 1L
 
-object Testing:
+object Test:
   private lazy val lines = os.read.lines(os.pwd / "2023" / "06" / "06.test.input.txt")
   lazy val raceData = Parsing.parseData(lines)
   lazy val races1 = raceData(Parsing.parseLine1)
   lazy val races2 = raceData(Parsing.parseLine2)
-  lazy val result1 = races1.map(Solving.waysToWin).product // part 1
-  lazy val result2 = races2.map(Solving.waysToWin).head // part 2
-// Testing.result1 // part 1: 288
-// Testing.result2 // part 2: 71503
+  lazy val res1 = races1.map(Solving.waysToWin).product // part 1
+  lazy val res2 = races2.map(Solving.waysToWin).head // part 2
+// Test.res1 // part 1: 288
+// Test.res2 // part 2: 71503
 
 object Main:
   private lazy val lines = os.read.lines(os.pwd / "2023" / "06" / "06.input.txt")
   lazy val raceData = Parsing.parseData(lines)
   lazy val races1 = raceData(Parsing.parseLine1)
   lazy val races2 = raceData(Parsing.parseLine2)
-  lazy val result1 = races1.map(Solving.waysToWin).product
-  lazy val result2 = races2.map(Solving.waysToWin).head
-// Main.result1 // part 1: 316800
-// Main.result2 // part 2: 45647654
+  lazy val res1 = races1.map(Solving.waysToWin).product
+  lazy val res2 = races2.map(Solving.waysToWin).head
+// Main.res1 // part 1: 316800
+// Main.res2 // part 2: 45647654

@@ -9,7 +9,7 @@ Each player's starting space is chosen randomly (your puzzle input).
 Player 1 goes first.
 
 Players take turns moving. On each player's turn, the player rolls
-the die three times and adds up the results. Then, the player moves
+the die three times and adds up the ress. Then, the player moves
 their pawn that many times forward around the track (that is, moving
 clockwise on spaces in order of increasing value, wrapping back around
 to 1 after 10). So, if a player is on space 7 and they roll 2, 2, and 1,
@@ -71,14 +71,14 @@ object Solving:
   def solve1 = 0L
   def solve2 = 0L
 
-object Testing: // Player 1 starting position: 4, Player 2 starting position: 8
-  lazy val result1 = Solving.solve1
-  lazy val result2 = Solving.solve2
-// Testing.result1 // part 1: 739785
-// Testing.result2 // part 2:
+object Test: // Player 1 starting position: 4, Player 2 starting position: 8
+  lazy val res1 = Solving.solve1
+  lazy val res2 = Solving.solve2
+// Test.res1 // part 1: 739785
+// Test.res2 // part 2:
 
 object Main: // Player 1 starting position: 3, Player 2 starting position: 10
-  lazy val result1 = Solving.solve1
-  lazy val result2 = Solving.solve2
-// Main.result1 // part 1:
-// Main.result2 // part 2:
+  lazy val res1 = Solving.solve1
+  lazy val res2 = Solving.solve2
+// Main.res1 // part 1:
+// Main.res2 // part 2:

@@ -55,14 +55,14 @@ also means there is now a placeholder in every sequence above it:
     0   0   0   0   0
 
 You can then start filling in placeholders from the bottom up. A needs to be the
-result of increasing 3 (the value to its left) by 0 (the value below it); this
+res of increasing 3 (the value to its left) by 0 (the value below it); this
 means A must be 3:
 
 0   3   6   9  12  15   B
   3   3   3   3   3   3
     0   0   0   0   0
 
-Finally, you can fill in B, which needs to be the result of increasing 15 (the
+Finally, you can fill in B, which needs to be the res of increasing 15 (the
 value to its left) by 3 (the value below it), or 18:
 
 0   3   6   9  12  15  18
@@ -124,7 +124,7 @@ extrapolating back in time:
 Adding the new values on the left side of each sequence from bottom to top
 eventually reveals the new left-most history value: 5.
 
-Doing this for the remaining example data above results in previous values of -3
+Doing this for the remaining example data above ress in previous values of -3
 for the first history and 0 for the second history. Adding all three new values
 together produces 2.
 
@@ -143,7 +143,7 @@ object Parsing:
     .split(" ")
     .map(_.toLong)
     .toSeq
-    .reverse // remove .reverse to get Part2 result.
+    .reverse // remove .reverse to get Part2 res.
 
   def parseAll(lines: Seq[String]): Seq[History] = lines.map(parseHistory)
 
@@ -170,16 +170,16 @@ object Solving:
   def reverseAll(binOp: BinOp)(processHistories: Seq[List[History]]) =
     processHistories.map(reverseProcess(binOp)).sum
 
-object Testing:
+object Test:
   private lazy val lines = os.read.lines(os.pwd / "2023" / "09" / "09.test.input.txt")
   lazy val histories = Parsing.parseAll(lines)
   lazy val processHistories = Solving.processAll(_ - _)(histories)
-  lazy val result = Solving.reverseAll(_ + _)(processHistories)
-// Testing.result // part 1: 114, part2: 2
+  lazy val res = Solving.reverseAll(_ + _)(processHistories)
+// Test.res // part 1: 114, part2: 2
 
 object Main:
   private lazy val lines = os.read.lines(os.pwd / "2023" / "09" / "09.input.txt")
   lazy val histories = Parsing.parseAll(lines)
   lazy val processHistories1 = Solving.processAll(_ - _)(histories)
-  lazy val result = Solving.reverseAll(_ + _)(processHistories1)
-// Main.result // part 1: 1479011877, part 2: 973
+  lazy val res = Solving.reverseAll(_ + _)(processHistories1)
+// Main.res // part 1: 1479011877, part 2: 973

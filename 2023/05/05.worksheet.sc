@@ -250,7 +250,7 @@ object MainData:
   val tempToHumidMap = allTriples(tempToHumid, humidToLoc)
   val humidToLocMap = allTriples(humidToLoc, lines.size)
 
-object Testing:
+object Test:
   import TestData.*, Solving.*
 
   val soils = seeds.map(checkAllTriples(seedToSoilMap)(_)) // part 1
@@ -260,7 +260,7 @@ object Testing:
   val temps = lights.map(checkAllTriples(lightToTempMap)(_))
   val humids = temps.map(checkAllTriples(tempToHumidMap)(_))
   val locs = humids.map(checkAllTriples(humidToLocMap)(_))
-  val result1 = locs.min // part 1
+  val res1 = locs.min // part 1
 
   val soils2 = moreSeeds.map(checkAllTriples(seedToSoilMap)(_)) // part 2
   val ferts2 = soils2.map(checkAllTriples(soilToFertMap)(_))
@@ -269,9 +269,9 @@ object Testing:
   val temps2 = lights2.map(checkAllTriples(lightToTempMap)(_))
   val humids2 = temps2.map(checkAllTriples(tempToHumidMap)(_))
   val locs2 = humids2.map(checkAllTriples(humidToLocMap)(_))
-  val result2 = locs2.min // part 2
-// Testing.result1 // part 1: 35
-// Testing.result2 // part 2: 46
+  val res2 = locs2.min // part 2
+// Test.res1 // part 1: 35
+// Test.res2 // part 2: 46
 
 object Main:
   import MainData.*, Solving.*
@@ -283,7 +283,7 @@ object Main:
   val temps = lights.map(checkAllTriples(lightToTempMap)(_))
   val humids = temps.map(checkAllTriples(tempToHumidMap)(_))
   val locs = humids.map(checkAllTriples(humidToLocMap)(_))
-  val result1 = locs.min // part 1
+  val res1 = locs.min // part 1
 
   // These are too slow (brute force), took 40 mins. Needs speeding up!
   // val soils2 = moreSeeds.map(checkAllTriples(seedToSoilMap)(_)) // part 2
@@ -293,6 +293,6 @@ object Main:
   // val temps2 = lights2.map(checkAllTriples(lightToTempMap)(_))
   // val humids2 = temps2.map(checkAllTriples(tempToHumidMap)(_))
   // val locs2 = humids2.map(checkAllTriples(humidToLocMap)(_))
-  // val result2 = locs2.min // part 2
-// Main.result1 // part 1: 318728750
-// Main.result2 // part 2: 37384986
+  // val res2 = locs2.min // part 2
+// Main.res1 // part 1: 318728750
+// Main.res2 // part 2: 37384986

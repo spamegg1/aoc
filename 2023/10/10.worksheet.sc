@@ -298,12 +298,12 @@ object Solving:
     val loop = findLoop(coordMaze)(animal)
     loop.size / 2
 
-object Testing:
+object Test:
   import DataDefs.*, Exit.*
 
   private lazy val lines1 = os.read.lines(os.pwd / "2023" / "10" / "10.test.input.1.txt")
   private lazy val animal = Coord(2, 0, List(S, E)) // just look at the input for this.
-  lazy val result1 = Solving.solve1(lines1)(animal)
+  lazy val res1 = Solving.solve1(lines1)(animal)
 
   private lazy val lines2 = os.read.lines(os.pwd / "2023" / "10" / "10.test.input.2.txt")
   private lazy val animal2 = Coord(0, 4, List(S, W)) // just look at the input for this.
@@ -311,15 +311,15 @@ object Testing:
   private lazy val coordMaze2 = Parsing.parseCoords(exitMaze2)
   private lazy val loop2 = Solving.findLoop(coordMaze2)(animal2)
   private lazy val loopLines = Solving.loopByLines(20)(loop2)
-  lazy val result2 = 0
-// Testing.result1 // part 1: 8
-// Testing.result2 // part 2: 10
+  lazy val res2 = 0
+// Test.res1 // part 1: 8
+// Test.res2 // part 2: 10
 
 object Main:
   import DataDefs.*, Exit.*
   private lazy val lines = os.read.lines(os.pwd / "2023" / "10" / "10.input.txt")
   private lazy val animal = Coord(111, 14, List(N, E)) // just look at the input for this.
-  lazy val result1 = Solving.solve1(lines)(animal)
-  lazy val result2 = 0
-// Main.result1 // part 1: 6812
-// Main.result2 // part 2: 527
+  lazy val res1 = Solving.solve1(lines)(animal)
+  lazy val res2 = 0
+// Main.res1 // part 1: 6812
+// Main.res2 // part 2: 527

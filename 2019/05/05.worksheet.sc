@@ -59,7 +59,7 @@ This instruction multiplies its first two parameters.
 The first parameter, 4 in position mode, works like it did before -
 its value is the value stored at address 4 (33).
 The second parameter, 3 in immediate mode, simply has value 3.
-The result of this operation, 33 * 3 = 99, is written according
+The res of this operation, 33 * 3 = 99, is written according
 to the third parameter, 4 in position mode, which also works like it did before -
 99 is written to address 4.
 
@@ -70,7 +70,7 @@ Finally, some notes:
     by the number of values in the instruction after the instruction finishes.
     Because of the new instructions, this amount is no longer always 4.
   Integers can be negative: 1101,100,-1,4,0 is a valid program
-    (find 100 + -1, store the result in position 4).
+    (find 100 + -1, store the res in position 4).
 
 The TEST diagnostic program will start by requesting from the user
 the ID of the system to test by running an input instruction -
@@ -78,7 +78,7 @@ provide it 1, the ID for the ship's air conditioner unit.
 
 It will then perform a series of diagnostic tests confirming that various parts
 of the Intcode computer, like parameter modes, function correctly.
-For each test, it will run an output instruction indicating how far the result
+For each test, it will run an output instruction indicating how far the res
 of the test was from the expected value, where 0 means the test was successful.
 Non-zero outputs mean that a function is not working correctly;
 check the instructions that were run before the output instruction to see which one failed
@@ -263,16 +263,16 @@ object Solving:
     val numbers = Parsing.parseLine(line)
     0
 
-object Testing:
+object Test:
   private lazy val lines = os.read.lines(os.pwd / "2019" / "05" / "05.test.input.txt").head
-  lazy val result1 = Solving.solve1(lines)
-  lazy val result2 = Solving.solve2(lines)
-// Testing.result1 // part 1: 123456
-// Testing.result2 // part 2:
+  lazy val res1 = Solving.solve1(lines)
+  lazy val res2 = Solving.solve2(lines)
+// Test.res1 // part 1: 123456
+// Test.res2 // part 2:
 
 object Main:
   lazy val lines = os.read.lines(os.pwd / "2019" / "05" / "05.input.txt").head
-  lazy val result1 = Solving.solve1(lines)
-  lazy val result2 = Solving.solve2(lines)
-// Main.result1 // part 1: 9654885
-// Main.result2 // part 2:
+  lazy val res1 = Solving.solve1(lines)
+  lazy val res2 = Solving.solve2(lines)
+// Main.res1 // part 1: 9654885
+// Main.res2 // part 2:

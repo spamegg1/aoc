@@ -44,7 +44,7 @@ Here are a few more examples:
 
 Before you can help with the homework, you need to understand it yourself.
 Evaluate the expression on each line of the homework;
-what is the sum of the resulting values?
+what is the sum of the resing values?
 
 --- Part Two ---
 You manage to answer the child's questions and
@@ -72,7 +72,7 @@ Here are the other examples from above:
   5 * 9 * (7 * 3 * 3 + 9 * 3 + (8 + 6 * 4)) becomes 669060.
   ((2 + 4 * 9) * (6 + 9 * 8 + 6) + 6) + 2 + 4 * 2 becomes 23340.
 
-What do you get if you add up the results of evaluating
+What do you get if you add up the ress of evaluating
 the homework problems using these new rules?
  */
 object DataDefs:
@@ -147,16 +147,16 @@ object Solving:
   val solve1 = solve(many1(0L))
   val solve2 = solve(many2(0L)(Nil))
 
-object Testing:
+object Test:
   private lazy val lines = os.read.lines(os.pwd / "2020" / "18" / "18.test.input.txt")
-  lazy val result1 = Solving.solve1(lines)
-  lazy val result2 = Solving.solve2(lines)
-// Testing.result1 // part 1: 71,51,26,437,12240,13632 = 26457
-// Testing.result2 // part 2: 231,51,46,1445,669060,23340 = 694173
+  lazy val res1 = Solving.solve1(lines)
+  lazy val res2 = Solving.solve2(lines)
+// Test.res1 // part 1: 71,51,26,437,12240,13632 = 26457
+// Test.res2 // part 2: 231,51,46,1445,669060,23340 = 694173
 
 object Main:
   private lazy val lines = os.read.lines(os.pwd / "2020" / "18" / "18.input.txt")
-  lazy val result1 = Solving.solve1(lines)
-  lazy val result2 = Solving.solve2(lines)
-// Main.result1 // part 1: 45840336521334
-// Main.result2 // part 2:
+  lazy val res1 = Solving.solve1(lines)
+  lazy val res2 = Solving.solve2(lines)
+// Main.res1 // part 1: 45840336521334
+// Main.res2 // part 2:

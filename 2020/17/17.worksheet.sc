@@ -48,7 +48,7 @@ this initial state represents a small 2-dimensional slice of it.
 (In particular, this initial state defines a 3x3x1 region of the 3-dimensional space.)
 
 Simulating a few cycles from this initial state produces the
-following configurations, where the result of each cycle is
+following configurations, where the res of each cycle is
 shown layer-by-layer at each given z coordinate (and the frame
 of view follows the active cells in each cycle):
 
@@ -183,16 +183,16 @@ object Solving:
   def solve1(lines: Seq[String]) = 0L
   def solve2(lines: Seq[String]) = 0L
 
-object Testing:
+object Test:
   private lazy val lines = os.read.lines(os.pwd / "2020" / "17" / "17.test.input.txt")
-  lazy val result1 = Solving.solve1(lines)
-  lazy val result2 = Solving.solve2(lines)
-// Testing.result1 // part 1: 112
-// Testing.result2 // part 2:
+  lazy val res1 = Solving.solve1(lines)
+  lazy val res2 = Solving.solve2(lines)
+// Test.res1 // part 1: 112
+// Test.res2 // part 2:
 
 object Main:
   private lazy val lines = os.read.lines(os.pwd / "2020" / "17" / "17.input.txt")
-  lazy val result1 = Solving.solve1(lines)
-  lazy val result2 = Solving.solve2(lines)
-// Main.result1 // part 1:
-// Main.result2 // part 2:
+  lazy val res1 = Solving.solve1(lines)
+  lazy val res2 = Solving.solve2(lines)
+// Main.res1 // part 1:
+// Main.res2 // part 2:

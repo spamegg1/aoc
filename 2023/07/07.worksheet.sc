@@ -91,7 +91,7 @@ T55J5 and QQQJA are both three of a kind. QQQJA has a stronger first card,
 so it gets rank 5 and T55J5 gets rank 4.
 
 Now, you can determine the total winnings of this set of hands by adding up the
-result of multiplying each hand's bid with its rank
+res of multiplying each hand's bid with its rank
 (765 * 1 + 220 * 2 + 28 * 3 + 684 * 4 + 483 * 5).
 So the total winnings in this example are 6440.
 
@@ -245,22 +245,22 @@ object Solving:
     .map((bid, index) => bid.bid * (index + 1))
     .sum
 
-object Testing:
+object Test:
   private lazy val lines = os.read.lines(os.pwd / "2023" / "07" / "07.test.input.txt")
   object Part1:
-    val result = Solving.solve(lines)
+    val res = Solving.solve(lines)
   object Part2:
     import DataDefs.Joker.given // get more specific givens!
-    val result = Solving.solve(lines)
-// Testing.Part1.result // part 1: 6440
-// Testing.Part2.result // part 2: 5905
+    val res = Solving.solve(lines)
+// Test.Part1.res // part 1: 6440
+// Test.Part2.res // part 2: 5905
 
 object Main:
   private lazy val lines = os.read.lines(os.pwd / "2023" / "07" / "07.input.txt")
   object Part1:
-    val result = Solving.solve(lines)
+    val res = Solving.solve(lines)
   object Part2:
     import DataDefs.Joker.given // get more specific givens!
-    val result = Solving.solve(lines)
-// Main.Part1.result // part 1: 246795406
-// Main.Part2.result // part 2: 249356515
+    val res = Solving.solve(lines)
+// Main.Part1.res // part 1: 246795406
+// Main.Part2.res // part 2: 249356515

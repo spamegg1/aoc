@@ -244,21 +244,21 @@ object Solving:
         println("group found at t = $t secs")
         os.write(os.pwd / "2024" / "14" / s"tree$t", robots.show)
 
-object Testing:
+object Test:
   import DataDefs.Size
   lazy val lines   = os.read.lines(os.pwd / "2024" / "14" / "14.test.input.txt")
   given Size       = (7, 11)
-  lazy val result1 = Solving.solve1(lines)(100) // part 1: 12
+  lazy val res1 = Solving.solve1(lines)(100) // part 1: 12
 
 object Main:
   import DataDefs.Size
   lazy val lines   = os.read.lines(os.pwd / "2024" / "14" / "14.input.txt")
   given Size       = (103, 101)
   given grpSz: Int = 20                          // just try some values here
-  lazy val result1 = Solving.solve1(lines)(100)  // part 1: 236628054
-  lazy val result2 = Solving.solve2(lines)(8000) // just try some values here
+  lazy val res1 = Solving.solve1(lines)(100)  // part 1: 236628054
+  lazy val res2 = Solving.solve2(lines)(8000) // just try some values here
 
 @main
 def run: Unit =
-  // println(Main.result1)
-  Main.result2 // part 2: 7584
+  // println(Main.res1)
+  Main.res2 // part 2: 7584

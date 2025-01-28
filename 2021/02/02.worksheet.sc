@@ -10,7 +10,7 @@ It seems like the submarine can take a series of commands like forward 1, down
     up X decreases the depth by X units.
 
 Note that since you're on a submarine, down and up affect your depth, and so
-they have the opposite result of what you might expect.
+they have the opposite res of what you might expect.
 
 The submarine seems to already have a planned course (your puzzle input). You
 should probably figure out where it's going. For example:
@@ -26,10 +26,10 @@ Your horizontal position and depth both start at 0. The steps above would then
 modify them as follows:
 
     forward 5 adds 5 to your horizontal position, a total of 5.
-    down 5 adds 5 to your depth, resulting in a value of 5.
+    down 5 adds 5 to your depth, resing in a value of 5.
     forward 8 adds 8 to your horizontal position, a total of 13.
-    up 3 decreases your depth by 3, resulting in a value of 2.
-    down 8 adds 8 to your depth, resulting in a value of 10.
+    up 3 decreases your depth by 3, resing in a value of 2.
+    down 8 adds 8 to your depth, resing in a value of 10.
     forward 2 adds 2 to your horizontal position, a total of 15.
 
 After following these instructions, you would have a horizontal position of 15
@@ -61,11 +61,11 @@ Now, the above example does something different:
 
     forward 5 adds 5 to your horizontal position, a total of 5. Because your aim
     is 0, your depth does not change.
-    down 5 adds 5 to your aim, resulting in a value of 5.
+    down 5 adds 5 to your aim, resing in a value of 5.
     forward 8 adds 8 to your horizontal position, a total of 13. Because your
     aim is 5, your depth increases by 8*5=40.
-    up 3 decreases your aim by 3, resulting in a value of 2.
-    down 8 adds 8 to your aim, resulting in a value of 10.
+    up 3 decreases your aim by 3, resing in a value of 2.
+    down 8 adds 8 to your aim, resing in a value of 10.
     forward 2 adds 2 to your horizontal position, a total of 15. Because your
     aim is 10, your depth increases by 2*10=20 to a total of 60.
 
@@ -130,16 +130,16 @@ object Solving:
   val solve1 = solve(process(_.go))
   val solve2 = solve(process(_.go2))
 
-object Testing:
+object Test:
   private lazy val lines = os.read.lines(os.pwd / "2021" / "02" / "02.test.input.txt")
-  lazy val result1 = Solving.solve1(lines)
-  lazy val result2 = Solving.solve2(lines)
-// Testing.result1 // part 1: 150
-// Testing.result2 // part 2: 900
+  lazy val res1 = Solving.solve1(lines)
+  lazy val res2 = Solving.solve2(lines)
+// Test.res1 // part 1: 150
+// Test.res2 // part 2: 900
 
 object Main:
   private lazy val lines = os.read.lines(os.pwd / "2021" / "02" / "02.input.txt")
-  lazy val result1 = Solving.solve1(lines)
-  lazy val result2 = Solving.solve2(lines)
-// Main.result1 // part 1: 1459206
-// Main.result2 // part 2: 1320534480
+  lazy val res1 = Solving.solve1(lines)
+  lazy val res2 = Solving.solve2(lines)
+// Main.res1 // part 1: 1459206
+// Main.res2 // part 2: 1320534480

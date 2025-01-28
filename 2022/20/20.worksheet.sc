@@ -180,7 +180,7 @@ object Solving:
 
   def solve2(lines: Seq[String]) = 0L
 
-object Testing:
+object Test:
   import DataDefs.*
   val nums = Seq(
     Num(0, 1, 0),
@@ -194,11 +194,11 @@ object Testing:
   given size: Int = 7
   lazy val start = State(nums)
   private lazy val lines = os.read.lines(os.pwd / "2022" / "20" / "20.test.input.txt")
-  lazy val result1 = Solving.solve1(lines)
-  lazy val result2 = Solving.solve2(lines)
-// Testing.result1 // part 1: 4 -3 2
-// Testing.result2 // part 2:
-// Testing.start //  1, 2, -3, 3, -2, 0, 4 start
+  lazy val res1 = Solving.solve1(lines)
+  lazy val res2 = Solving.solve2(lines)
+// Test.res1 // part 1: 4 -3 2
+// Test.res2 // part 2:
+// Test.start //  1, 2, -3, 3, -2, 0, 4 start
 //   .next(0, 1) //  2, 1, -3, 3, -2, 0, 4 move 1
 //   .next(1, 2) //  1, -3, 2, 3, -2, 0, 4 move 2
 //   .next(2, -3) // 1, 2, 3, -2, -3, 0, 4 move -3
@@ -209,7 +209,7 @@ object Testing:
 
 object Main:
   private lazy val lines = os.read.lines(os.pwd / "2022" / "20" / "20.input.txt")
-  lazy val result1 = Solving.solve1(lines)
-  lazy val result2 = Solving.solve2(lines)
-// Main.result1 // part 1: 2034 5418 -1490 = 5962
-// Main.result2 // part 2:
+  lazy val res1 = Solving.solve1(lines)
+  lazy val res2 = Solving.solve2(lines)
+// Main.res1 // part 1: 2034 5418 -1490 = 5962
+// Main.res2 // part 2:

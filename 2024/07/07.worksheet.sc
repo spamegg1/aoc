@@ -46,16 +46,16 @@ Only three of the above equations can be made true by inserting operators:
     81 + 40 * 27 and 81 * 40 + 27 both equal 3267 (when evaluated left-to-right)!
   292: 11 6 16 20 can be solved in exactly one way: 11 + 6 * 16 + 20.
 
-The engineers just need the total calibration result,
+The engineers just need the total calibration res,
 which is the sum of the test values from just the equations
 that could possibly be true. In the above example,
 the sum of the test values for the three equations listed above is 3749.
 
 Determine which equations could possibly be true.
-What is their total calibration result?
+What is their total calibration res?
 
 --- Part Two ---
-The engineers seem concerned; the total calibration result you gave them
+The engineers seem concerned; the total calibration res you gave them
 is nowhere close to being within safety tolerances.
 Just then, you spot your mistake: some well-hidden elephants are holding
 a third type of operator.
@@ -73,11 +73,11 @@ that can be made true by inserting operators:
 
 Adding up all six test values (the three that could be made before
 using only + and * plus the new three that can now be made by also
-using ||) produces the new total calibration result of 11387.
+using ||) produces the new total calibration res of 11387.
 
 Using your new knowledge of elephant hiding spots,
 determine which equations could possibly be true.
-What is their total calibration result?
+What is their total calibration res?
  */
 object DataDefs:
   case class Eqn(res: Long, nums: Seq[Long]):
@@ -107,12 +107,12 @@ object Solving:
     .map(_.calibration)
     .sum
 
-object Testing:
+object Test:
   private lazy val lines = os.read.lines(os.pwd / "2024" / "07" / "07.test.input.txt")
-  lazy val result        = Solving.solve(lines)
-// Testing.result // 3749, 11387
+  lazy val res        = Solving.solve(lines)
+// Test.res // 3749, 11387
 
 object Main:
   private lazy val lines = os.read.lines(os.pwd / "2024" / "07" / "07.input.txt")
-  lazy val result        = Solving.solve(lines)
-// Main.result // 945512582195, 271691107779347
+  lazy val res        = Solving.solve(lines)
+// Main.res // 945512582195, 271691107779347

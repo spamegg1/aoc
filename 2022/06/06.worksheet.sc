@@ -71,16 +71,16 @@ object Solving:
   val solve1 = solve(4)
   val solve2 = solve(14)
 
-object Testing:
+object Test:
   private lazy val lines = os.read.lines(os.pwd / "2022" / "06" / "06.test.input.txt")
-  lazy val result1 = lines.map(line => Solving.solve1(line))
-  lazy val result2 = lines.map(line => Solving.solve2(line))
-// Testing.result1 // part 1: 7,5,6,10,11
-// Testing.result2 // part 2: 19,23,23,29,26
+  lazy val res1 = lines.map(line => Solving.solve1(line))
+  lazy val res2 = lines.map(line => Solving.solve2(line))
+// Test.res1 // part 1: 7,5,6,10,11
+// Test.res2 // part 2: 19,23,23,29,26
 
 object Main:
   private lazy val line = os.read.lines(os.pwd / "2022" / "06" / "06.input.txt").head
-  lazy val result1 = Solving.solve1(line)
-  lazy val result2 = Solving.solve2(line)
-// Main.result1 // part 1: 1361
-// Main.result2 // part 2: 3263
+  lazy val res1 = Solving.solve1(line)
+  lazy val res2 = Solving.solve2(line)
+// Main.res1 // part 1: 1361
+// Main.res2 // part 2: 3263

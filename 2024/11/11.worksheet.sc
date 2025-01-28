@@ -125,16 +125,16 @@ object Solving:
       .values
       .sum
 
-object Testing:
+object Test:
   lazy val line    = "125 17"
-  lazy val result1 = Solving.solve1(line)(25)
-  lazy val result2 = Solving.solve2(line)(75)
-// Testing.result1 // part 1: 55312
-// Testing.result2 // part 2: 65601038650482
+  lazy val res1 = Solving.solve1(line)(25)
+  lazy val res2 = Solving.solve2(line)(75)
+// Test.res1 // part 1: 55312
+// Test.res2 // part 2: 65601038650482
 
 object Main:
   lazy val line    = "0 5601550 3914 852 50706 68 6 645371"
-  lazy val result1 = Solving.solve1(line)(25)
-  lazy val result2 = Solving.solve2(line)(75)
-// Main.result1 // part 1: 189092
-// Main.result2 // part 2: 224869647102559
+  lazy val res1 = Solving.solve1(line)(25)
+  lazy val res2 = Solving.solve2(line)(75)
+// Main.res1 // part 1: 189092
+// Main.res2 // part 2: 224869647102559

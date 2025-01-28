@@ -18,9 +18,9 @@ object Solving:
   def allDivisors(house: Int) =
     val decomp        = primeDecomposition(house)
     val listsOfPowers = decomp.map((prime, exp) => (0 to exp).map(math.pow(prime, _)))
-    listsOfPowers.tail.foldLeft(listsOfPowers.head): (result, nextList) =>
+    listsOfPowers.tail.foldLeft(listsOfPowers.head): (res, nextList) =>
       for
-        pow1 <- result
+        pow1 <- res
         pow2 <- nextList
       yield pow1 * pow2
 

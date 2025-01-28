@@ -24,7 +24,7 @@ form a pair from the left and right parameters of the addition operator.
 For example, [1,2] + [[3,4],5] becomes [[1,2],[[3,4],5]].
 
 There's only one problem: snailfish numbers must always be reduced,
-and the process of adding two snailfish numbers can result in snailfish
+and the process of adding two snailfish numbers can res in snailfish
 numbers that need to be reduced.
 
 To reduce a snailfish number, you must repeatedly do the first action
@@ -63,7 +63,7 @@ divided by two and rounded down, while the right element
 of the pair should be the regular number divided by two and rounded up.
 For example, 10 becomes [5,5], 11 becomes [5,6], 12 becomes [6,6], and so on.
 
-Here is the process of finding the reduced result of [[[[4,3],4],4],[7,[[8,4],9]]] + [1,1]
+Here is the process of finding the reduced res of [[[[4,3],4],4],[7,[[8,4],9]]] + [1,1]
   after addition: [[[[[4,3],4],4],[7,[[8,4],9]]],[1,1]]
   after explode:  [[[[0,7],4],[7,[[8,4],9]]],[1,1]]
   after explode:  [[[[0,7],4],[15,[0,13]]],[1,1]]
@@ -72,12 +72,12 @@ Here is the process of finding the reduced result of [[[[4,3],4],4],[7,[[8,4],9]
   after explode:  [[[[0,7],4],[[7,8],[6,0]]],[8,1]]
 
 Once no reduce actions apply, the snailfish number that remains is the actual
-result of the addition operation: [[[[0,7],4],[[7,8],[6,0]]],[8,1]].
+res of the addition operation: [[[[0,7],4],[[7,8],[6,0]]],[8,1]].
 
 The homework assignment involves adding up a list of snailfish numbers
 (your puzzle input). The snailfish numbers are each listed on a separate line.
-Add the first snailfish number and the second, then add that result and the third,
-then add that result and the fourth,
+Add the first snailfish number and the second, then add that res and the third,
+then add that res and the fourth,
 and so on until all numbers in the list have been used once.
 
 For example, the final sum of this list is [[[[1,1],[2,2]],[3,3]],[4,4]]:
@@ -211,16 +211,16 @@ object Solving:
   def solve1(lines: Seq[String]) = 0L
   def solve2(lines: Seq[String]) = 0L
 
-object Testing:
+object Test:
   private lazy val lines = os.read.lines(os.pwd / "2021" / "18" / "18.test.input.txt")
-  lazy val result1 = Solving.solve1(lines)
-  lazy val result2 = Solving.solve2(lines)
-// Testing.result1 // part 1: 4140
-// Testing.result2 // part 2:
+  lazy val res1 = Solving.solve1(lines)
+  lazy val res2 = Solving.solve2(lines)
+// Test.res1 // part 1: 4140
+// Test.res2 // part 2:
 
 object Main:
   private lazy val lines = os.read.lines(os.pwd / "2021" / "18" / "18.input.txt")
-  lazy val result1 = Solving.solve1(lines)
-  lazy val result2 = Solving.solve2(lines)
-// Main.result1 // part 1:
-// Main.result2 // part 2:
+  lazy val res1 = Solving.solve1(lines)
+  lazy val res2 = Solving.solve2(lines)
+// Main.res1 // part 1:
+// Main.res2 // part 2:

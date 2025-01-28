@@ -151,16 +151,16 @@ object Solving:
     val santa = graph.get("SAN")
     you.shortestPathTo(santa).get.length - 2
 
-object Testing:
+object Test:
   private lazy val lines = os.read.lines(os.pwd / "2019" / "06" / "06.test.input.txt")
-  lazy val result1 = Solving.solve1(lines)
-  lazy val result2 = Solving.solve2(lines)
-// Testing.result1 // part 1: 54
-// Testing.result2 // part 2: 4
+  lazy val res1 = Solving.solve1(lines)
+  lazy val res2 = Solving.solve2(lines)
+// Test.res1 // part 1: 54
+// Test.res2 // part 2: 4
 
 object Main:
   private lazy val lines = os.read.lines(os.pwd / "2019" / "06" / "06.input.txt")
-  lazy val result1 = Solving.solve1(lines)
-  lazy val result2 = Solving.solve2(lines)
-// Main.result1 // part 1: 145250
-// Main.result2 // part 2: 274
+  lazy val res1 = Solving.solve1(lines)
+  lazy val res2 = Solving.solve2(lines)
+// Main.res1 // part 1: 145250
+// Main.res2 // part 2: 274

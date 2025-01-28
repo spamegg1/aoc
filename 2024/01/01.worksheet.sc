@@ -140,16 +140,16 @@ object Solving:
     val freqs           = rights.groupMapReduce(identity)(_ => 1L)(_ + _)
     lefts.map(left => freqs.getOrElse(left, 0L) * left).sum
 
-object Testing:
+object Test:
   lazy val lines   = os.read.lines(os.pwd / "2024" / "01" / "01.test.input.txt")
-  lazy val result1 = Solving.solve1(lines)
-  lazy val result2 = Solving.solve2(lines)
-// Testing.result1 // part 1: 11
-// Testing.result2 // part 2: 31
+  lazy val res1 = Solving.solve1(lines)
+  lazy val res2 = Solving.solve2(lines)
+// Test.res1 // part 1: 11
+// Test.res2 // part 2: 31
 
 object Main:
   lazy val lines   = os.read.lines(os.pwd / "2024" / "01" / "01.input.txt")
-  lazy val result1 = Solving.solve1(lines)
-  lazy val result2 = Solving.solve2(lines)
-// Main.result1 // part 1: 1222801
-// Main.result2 // part 2: 22545250
+  lazy val res1 = Solving.solve1(lines)
+  lazy val res2 = Solving.solve2(lines)
+// Main.res1 // part 1: 1222801
+// Main.res2 // part 2: 22545250

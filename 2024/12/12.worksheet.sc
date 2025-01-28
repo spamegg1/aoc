@@ -254,19 +254,19 @@ object Solving:
     given size: Int        = lines.size // assume map is square
     findRegions.map(_.price2).sum
 
-object Testing:
+object Test:
   lazy val lines1  = os.read.lines(os.pwd / "2024" / "12" / "12.test.input.1.txt")
   lazy val lines2  = os.read.lines(os.pwd / "2024" / "12" / "12.test.input.2.txt")
   lazy val lines3  = os.read.lines(os.pwd / "2024" / "12" / "12.test.input.3.txt")
   lazy val lines   = Seq(lines1, lines2, lines3)
-  lazy val result1 = lines map Solving.solve1
-  lazy val result2 = lines map Solving.solve2
-// Testing.result1 // part 1: 140, 772, 1930
-// Testing.result2 // part 2: 80, 436, 1206
+  lazy val res1 = lines map Solving.solve1
+  lazy val res2 = lines map Solving.solve2
+// Test.res1 // part 1: 140, 772, 1930
+// Test.res2 // part 2: 80, 436, 1206
 
 object Main:
   lazy val lines   = os.read.lines(os.pwd / "2024" / "12" / "12.input.txt")
-  lazy val result1 = Solving.solve1(lines)
-  lazy val result2 = Solving.solve2(lines)
-// Main.result1 // part 1: 1489582
-// Main.result2 // part 2: 914966
+  lazy val res1 = Solving.solve1(lines)
+  lazy val res2 = Solving.solve2(lines)
+// Main.res1 // part 1: 1489582
+// Main.res2 // part 2: 914966

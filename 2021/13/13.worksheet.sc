@@ -88,7 +88,7 @@ positions where y is 7 (marked here with -):
 Because this is a horizontal line, fold the bottom half up.
 Some of the dots might end up overlapping after the fold is complete,
 but dots will never appear exactly on a fold line.
-The result of doing this fold looks like this:
+The res of doing this fold looks like this:
 
 #.##..#..#.
 #...#......
@@ -104,7 +104,7 @@ Notice, for example, the two dots in the bottom left corner before the
 transparent paper is folded; after the fold is complete,
 those dots appear in the top left corner (at 0,0 and 0,1).
 Because the paper is transparent, the dot just below them in
-the result (at 0,3) remains visible, as it can be seen through the transparent paper.
+the res (at 0,3) remains visible, as it can be seen through the transparent paper.
 
 Also notice that some dots can end up overlapping; in this case,
 the dots merge together and become a single dot.
@@ -153,16 +153,16 @@ object Solving:
   def solve1(lines: Seq[String]) = 0L
   def solve2(lines: Seq[String]) = 0L
 
-object Testing:
+object Test:
   private lazy val lines = os.read.lines(os.pwd / "2021" / "13" / "13.test.input.txt")
-  lazy val result1 = Solving.solve1(lines)
-  lazy val result2 = Solving.solve2(lines)
-// Testing.result1 // part 1:
-// Testing.result2 // part 2:
+  lazy val res1 = Solving.solve1(lines)
+  lazy val res2 = Solving.solve2(lines)
+// Test.res1 // part 1:
+// Test.res2 // part 2:
 
 object Main:
   private lazy val lines = os.read.lines(os.pwd / "2021" / "13" / "13.input.txt")
-  lazy val result1 = Solving.solve1(lines)
-  lazy val result2 = Solving.solve2(lines)
-// Main.result1 // part 1:
-// Main.result2 // part 2:
+  lazy val res1 = Solving.solve1(lines)
+  lazy val res2 = Solving.solve2(lines)
+// Main.res1 // part 1:
+// Main.res2 // part 2:

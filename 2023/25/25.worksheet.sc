@@ -130,12 +130,12 @@ object Solving:
     graph --= threeEdges
     graph.componentTraverser().map(_.nodes.size).product
 
-object Testing:
+object Test:
   val lines = os.read.lines(os.pwd / "2023" / "25" / "25.test.input.txt")
-  lazy val result1 = Solving.solve1(lines)
-// Testing.result1 // part 1: 54
+  lazy val res1 = Solving.solve1(lines)
+// Test.res1 // part 1: 54
 
 object Main:
   private val lines = os.read.lines(os.pwd / "2023" / "25" / "25.input.txt")
-  lazy val result1 = Solving.solve1(lines)
-// Main.result1 // part 1: ???
+  lazy val res1 = Solving.solve1(lines)
+// Main.res1 // part 1: ???

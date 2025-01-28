@@ -212,16 +212,16 @@ object Solving:
     val res = rem % div
     res + (if res < 0 then div else 0)
 
-object Testing:
+object Test:
   private lazy val lines = os.read.lines(os.pwd / "2020" / "13" / "13.test.input.txt")
-  lazy val result1 = Solving.solve1(lines.head)(939L)
-  lazy val result2 = lines map Solving.solve2
-// Testing.result1 // part 1: 59,5 = 295
-// Testing.result2 // part 2: 1068781,3417,754018,779210,1261476,1202161486
+  lazy val res1 = Solving.solve1(lines.head)(939L)
+  lazy val res2 = lines map Solving.solve2
+// Test.res1 // part 1: 59,5 = 295
+// Test.res2 // part 2: 1068781,3417,754018,779210,1261476,1202161486
 
 object Main:
   lazy val line = os.read.lines(os.pwd / "2020" / "13" / "13.input.txt").head
-  lazy val result1 = Solving.solve1(line)(1000390L)
-  lazy val result2 = Solving.solve2(line)
-// Main.result1 // part 1: 2298
-// Main.result2 // part 2: 783685719679632
+  lazy val res1 = Solving.solve1(line)(1000390L)
+  lazy val res2 = Solving.solve2(line)
+// Main.res1 // part 1: 2298
+// Main.res2 // part 2: 783685719679632

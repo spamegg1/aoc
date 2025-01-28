@@ -100,13 +100,13 @@ object Solving:
   def solve1(lines: Seq[String]) = lines.map(calibrationValue).sum
   def solve2(lines: Seq[String]) = lines.map(lineToValue).sum
 
-object Testing: // Handle overlapping matches
+object Test: // Handle overlapping matches
   val eightyThree = Solving.lineToValue("eighthree") // should be 83 not 88
   val seventyNine = Solving.lineToValue("sevenine") // should be 79 not 77
 
 object Main:
   private lazy val lines = os.read.lines(os.pwd / "2023" / "01" / "01.input.txt")
-  val result1 = Solving.solve1(lines)
-  val result2 = Solving.solve2(lines)
-// Main.result1 // 54708
-// Main.result2 // 54087
+  val res1 = Solving.solve1(lines)
+  val res2 = Solving.solve2(lines)
+// Main.res1 // 54708
+// Main.res2 // 54087
