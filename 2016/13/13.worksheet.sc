@@ -27,7 +27,7 @@ object Solving:
       while queue.nonEmpty do
         val (current, path) = queue.dequeue()
         finalPath = path
-        if current == goal then break()
+        if current == goal then break() // part 1. Part 2 stops when queue is empty.
 
         val neighbors = if cap(path) then current.neighbors(input) else Seq()
         for neighbor <- neighbors do

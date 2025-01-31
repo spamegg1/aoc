@@ -3,9 +3,9 @@ object DataDefs:
     def tick = copy(position = (position + 1) % capacity)
 
   case class State(discs: Seq[Disc], time: Int = 0, capsule: Int = -1):
-    def fallsThrough       = capsule == -1 || discs(capsule).position == 0
-    def tickWithoutCapsule = State(discs.map(_.tick), time + 1)
-    def tickWithCapsule = State(discs.map(_.tick), time + 1, capsule + 1) // assume falls
+    def fallsThrough = capsule == -1 || discs(capsule).position == 0
+    def tickWithout  = State(discs.map(_.tick), time + 1)
+    def tickWith     = State(discs.map(_.tick), time + 1, capsule + 1) // assume falls
 
 object Parsing:
   import DataDefs.*
@@ -21,11 +21,11 @@ object Solving:
 
   def fallsAllTheWay(state: State): Boolean =
     if state.capsule == state.discs.size - 1 then state.fallsThrough
-    else state.fallsThrough && fallsAllTheWay(state.tickWithCapsule)
+    else state.fallsThrough && fallsAllTheWay(state.tickWith)
 
   def solve(lines: Seq[String]) =
     var state = State(Parsing.parse(lines))
-    while !fallsAllTheWay(state) do state = state.tickWithoutCapsule
+    while !fallsAllTheWay(state) do state = state.tickWithout
     state.time
 
 object Test:
