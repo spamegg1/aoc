@@ -18,11 +18,11 @@ object Test:
 
 object Main:
   lazy val res1 = Solving.solve1(3014387)
-  lazy val res2 = Solving.solve2(30000)
+  lazy val res2 = Solving.solve2(3014387)
 
 @main
 def run: Unit =
   println(Test.res1) // part 1: 3, 5, 3, 5
   println(Test.res2) // part 2: 2, 3, 9, 1
   println(Main.res1) // part 1: 1834471 too slow, 30 sec
-  println(Main.res2) // part 2:
+  println(Main.res2) // part 2: 1420064
