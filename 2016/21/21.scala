@@ -1,24 +1,25 @@
+package aoc2016.day21
+
 object DataDefs:
   enum Op:
     case SwapPos(pos1: Int, pos2: Int)
     case SwapLet(let1: Char, let2: Char)
     case RotLeft(steps: Int)
     case RotRight(steps: Int)
-    case RotBasedLeft(letter: Char)
-    case RotBasedRight(letter: Char)
+    case RotBased(letter: Char)
+    case RotRev(letter: Char) // part 2 only
     case Reverse(pos1: Int, pos2: Int)
     case Move(pos1: Int, pos2: Int)
 
     def reverse = this match
-      case SwapPos(pos1, pos2)   => SwapPos(pos2, pos1)
-      case SwapLet(let1, let2)   => SwapLet(let2, let1)
-      case RotLeft(steps)        => RotRight(steps)
-      case RotRight(steps)       => RotLeft(steps)
-      case RotBasedLeft(letter)  => RotBasedRight(letter)
-      case RotBasedRight(letter) => RotBasedLeft(letter)
-      case Reverse(pos1, pos2)   => Reverse(pos2, pos1)
-      case Move(pos1, pos2)      => Move(pos2, pos1)
-
+      case SwapPos(pos1, pos2) => SwapPos(pos2, pos1)
+      case SwapLet(let1, let2) => SwapLet(let2, let1)
+      case RotLeft(steps)      => RotRight(steps)
+      case RotRight(steps)     => RotLeft(steps)
+      case RotBased(letter)    => RotRev(letter)
+      case RotRev(letter)      => ??? // part 2 only
+      case Reverse(pos1, pos2) => Reverse(pos1, pos2)
+      case Move(pos1, pos2)    => Move(pos2, pos1)
   import Op.*
 
   extension (s: String)
@@ -38,14 +39,14 @@ object DataDefs:
           .map(index => s((index + steps) % s.length))
           .mkString
       case RotRight(steps) => s.operate(RotLeft(s.length - steps))
-      case RotBasedLeft(letter) =>
-        val index = s.indexWhere(_ == letter)
-        val steps = 1 + index + (if index >= 4 then 1 else 0)
-        s.operate(RotLeft(steps % s.length))
-      case RotBasedRight(letter) =>
+      case RotBased(letter) =>
         val index = s.indexWhere(_ == letter)
         val steps = 1 + index + (if index >= 4 then 1 else 0)
         s.operate(RotRight(steps % s.length))
+      case RotRev(letter) => // part 2 only
+        val step = (0 until s.length).find: steps =>
+          s.operate(RotLeft(steps)).operate(RotBased(letter)) == s
+        s.operate(RotLeft(step.get))
       case Reverse(pos1, pos2) => // assume pos1 < pos2
         s.take(pos1) + s.drop(pos1).take(pos2 - pos1 + 1).reverse + s.drop(pos2 + 1)
       case Move(pos1, pos2) =>
@@ -66,7 +67,7 @@ object Parsing:
     case s"swap letter $let1 with letter $let2"     => SwapLet(let1.head, let2.head)
     case s"rotate left $steps steps"                => RotLeft(steps.toInt)
     case s"rotate right $steps steps"               => RotRight(steps.toInt)
-    case s"rotate based on position of letter $let" => RotBasedLeft(let.head)
+    case s"rotate based on position of letter $let" => RotBased(let.head)
     case s"reverse positions $pos1 through $pos2"   => Reverse(pos1.toInt, pos2.toInt)
     case s"move position $pos1 to position $pos2"   => Move(pos1.toInt, pos2.toInt)
 
@@ -88,16 +89,18 @@ object Solving:
 object Test:
   lazy val file  = os.pwd / "2016" / "21" / "21.test.input.txt"
   lazy val lines = os.read.lines(file)
-  // abcde,ebcda,edcba,abcde,bcdea,bdeac,abdec,ecabd,decab
-  lazy val res1 = Solving.solve1(lines)("abcde")
-  lazy val res2 = Solving.solve2(lines)("decab")
-// Test.res1 // part 1: decab
-// Test.res2 // part 2: abcde
+  lazy val res1  = Solving.solve1(lines)("abcde")
+  lazy val res2  = Solving.solve2(lines)("decab")
 
 object Main:
   lazy val file  = os.pwd / "2016" / "21" / "21.input.txt"
   lazy val lines = os.read.lines(file)
   lazy val res1  = Solving.solve1(lines)("abcdefgh")
   lazy val res2  = Solving.solve2(lines)("fbgdceah")
-// Main.res1 // part 1: gcedfahb
-// Main.res2 // part 2: hegbdcfa
+
+@main
+def run: Unit =
+  println(Test.res1) // part 1: decab
+  println(Test.res2) // part 2: abcde
+  println(Main.res1) // part 1: gcedfahb
+  println(Main.res2) // part 2: hegbdcfa
