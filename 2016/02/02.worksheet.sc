@@ -63,9 +63,9 @@ object Solving:
   import DataDefs.*
 
   @annotation.tailrec
-  private def traverseLine(start: Pos)(moves: List[Move])(using keypad: Keypad): Pos =
+  private def traverseLine(start: Pos)(moves: List[Move])(keypad: Keypad): Pos =
     moves match
-      case head :: next => traverseLine(keypad.go(start)(head))(next)
+      case head :: next => traverseLine(keypad.go(start)(head))(next)(keypad)
       case Nil          => start
 
   @annotation.tailrec
@@ -73,52 +73,36 @@ object Solving:
       start: Pos,
       moves: List[List[Move]],
       acc: List[Pos]
-  )(using keypad: Keypad): List[Pos] =
+  )(keypad: Keypad): List[Pos] =
     moves match
       case head :: next =>
-        val end = traverseLine(start)(head)
-        traverseLines(end, next, end :: acc)
+        val end = traverseLine(start)(head)(keypad)
+        traverseLines(end, next, end :: acc)(keypad)
       case Nil => acc.reverse
 
-  private val start1 = (1, 1, 5)
-  private val start2 = (2, 0, 5)
-
-  def solve1(lines: Seq[String])(using keypad: Keypad): String =
-    val moves = Parsing.parseMoves(lines)
-    traverseLines(start1, moves, Nil).map(_.code).mkString
-
-  def solve2(lines: Seq[String])(using keypad: Keypad): String =
-    val moves = Parsing.parseMoves(lines)
-    traverseLines(start2, moves, Nil).map(_.code).mkString
+  def solve(lines: Seq[String])(start: (Int, Int, Int))(keypad: Keypad): String =
+    traverseLines(start, Parsing.parseMoves(lines), Nil)(keypad).map(_.code).mkString
 
 object Test:
-  import DataDefs.Keypad
-
-  lazy val file  = os.pwd / "2016" / "02" / "02.test.input.txt"
-  lazy val lines = os.read.lines(file)
-
-  object Part1:
-    given Keypad = Parsing.generateKeypad1(3) // part 1
-    lazy val res = Solving.solve1(lines)
-
-  object Part2:
-    given Keypad = Parsing.generateKeypad2 // part 2
-    lazy val res = Solving.solve2(lines)
-// Test.Part1.res // part 1: 1985
-// Test.Part2.res // part 2: 5DB3
+  lazy val start1  = (1, 1, 5)
+  lazy val start2  = (2, 0, 5)
+  lazy val keypad1 = Parsing.generateKeypad1(3)
+  lazy val keypad2 = Parsing.generateKeypad2
+  lazy val file    = os.pwd / "2016" / "02" / "02.test.input.txt"
+  lazy val lines   = os.read.lines(file)
+  lazy val res1    = Solving.solve(lines)(start1)(keypad1)
+  lazy val res2    = Solving.solve(lines)(start2)(keypad2)
+// Test.res1 // part 1: 1985
+// Test.res2 // part 2: 5DB3
 
 object Main:
-  import DataDefs.Keypad
-
-  lazy val file  = os.pwd / "2016" / "02" / "02.input.txt"
-  lazy val lines = os.read.lines(file)
-
-  object Part1:
-    given Keypad = Parsing.generateKeypad1(3) // part 2
-    lazy val res = Solving.solve1(lines)
-
-  object Part2:
-    given Keypad = Parsing.generateKeypad2 // part 2
-    lazy val res = Solving.solve2(lines)
-// Main.Part1.res // part 1: 78985
-// Main.Part2.res // part 2: 57DD8
+  lazy val start1  = (1, 1, 5)
+  lazy val start2  = (2, 0, 5)
+  lazy val keypad1 = Parsing.generateKeypad1(3)
+  lazy val keypad2 = Parsing.generateKeypad2
+  lazy val file    = os.pwd / "2016" / "02" / "02.input.txt"
+  lazy val lines   = os.read.lines(file)
+  lazy val res1    = Solving.solve(lines)(start1)(keypad1)
+  lazy val res2    = Solving.solve(lines)(start2)(keypad2)
+// Main.res1 // part 1: 78985
+// Main.res2 // part 2: 57DD8
