@@ -1,16 +1,40 @@
 package aoc2016.day19
 
 object DataDefs:
-  ???
+  case class Elf(value: Int, var next: Option[Elf]) // part 2
 
 object Solving:
   import DataDefs.*
+  // https://en.wikipedia.org/wiki/Josephus_problem
+  // k = 2 case, recurrence relation f(2n) = 2f(n) + 1
+  // Solution: if n = 2^m + l with 0 <= l < 2^m, then f(n) = 2l + 1.
+  // So, f(n) = 2*(n - 2^floor(log_2(n))) + 1.
+  // def solve1(n: Int) =
+  //   val m = math.floor(math.log(n) / math.log(2)).toInt
+  //   2 * (n - math.pow(2, m).toInt) + 1
 
-  def solve1(elves: Int) =
-    0
+  // more efficient solution: if elves = 1abc...z in binary, then answer = abc...z1.
+  // do 1abc...z - 1000...0 = 0abc...z, then left-shift by 1: abc...z0, then add 1.
+  def solve1(elves: Int) = ((elves - Integer.highestOneBit(elves)) << 1) + 1
 
   def solve2(elves: Int) =
-    0
+    var elf = Elf(1, None)
+    elf.next = Some(elf)
+
+    for n <- 2 to elves do
+      val nextElf = Elf(n, elf.next)
+      elf.next = Some(nextElf)
+      elf = nextElf
+
+    for i <- 1 to elves / 2 do elf = elf.next.getOrElse(elf)
+
+    for i <- elves to 2 by -1 do
+      elf.next = elf.next match
+        case None        => None
+        case Some(value) => value.next
+      if i % 2 == 1 then elf = elf.next.getOrElse(elf)
+
+    elf.value
 
 object Test:
   lazy val res1 = Seq(5, 6, 9, 10) map Solving.solve1
@@ -24,5 +48,5 @@ object Main:
 def run: Unit =
   println(Test.res1) // part 1: 3, 5, 3, 5
   println(Test.res2) // part 2: 2, 3, 9, 1
-  println(Main.res1) // part 1: 1834471 too slow, 30 sec
+  println(Main.res1) // part 1: 1834471
   println(Main.res2) // part 2: 1420064
