@@ -118,4 +118,3 @@ def run: Unit =
   println(Test.res2) // 5 * 2 * 3 = 30
   println(Main.res1) // bot id 157
   println(Main.res2) // 1085
-  println("Done.")

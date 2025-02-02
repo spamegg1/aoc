@@ -32,8 +32,8 @@ object DataDefs:
         copy(ptr = ptr + (if regs(notZero) != 0 then offset else 1))
 
   object State:
-    def apply(instrs: Seq[Instr]) =
-      new State(Map(A -> 0, B -> 0, C -> 1, D -> 0), instrs, 0) // change this for part1/2
+    def apply(instrs: Seq[Instr]) = // change C=0/1 for part=1/2
+      new State(Map(A -> 0, B -> 0, C -> 1, D -> 0), instrs, 0)
 
 object Parsing:
   import DataDefs.*, Instr.*

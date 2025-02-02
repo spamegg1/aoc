@@ -1,3 +1,5 @@
+package aoc2016.day14
+
 import org.apache.commons.codec.digest.DigestUtils.md5Hex
 import scala.util.boundary, boundary.break
 
@@ -51,11 +53,14 @@ object Solving:
 object Test:
   lazy val res1 = Solving.solve("abc", 64, 0)
   lazy val res2 = Solving.solve("abc", 64, 2016)
-// Test.res1 // part 1: 22728
-// Test.res2 // part 2: 22551
 
 object Main:
   lazy val res1 = Solving.solve("qzyelonm", 64, 0)
   lazy val res2 = Solving.solve("qzyelonm", 64, 2016)
-// Main.res1 // part 1: 15168
-// Main.res2 // part 2: 20864
+
+@main
+def run: Unit =
+  println(Test.res1) // part 1: 22728
+  println(Test.res2) // part 2: 22551 kind of slow
+  println(Main.res1) // part 1: 15168
+  println(Main.res2) // part 2: 20864 kind of slow

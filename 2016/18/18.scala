@@ -1,3 +1,5 @@
+package aoc2016.day18
+
 object DataDefs:
   enum Tile:
     case Safe, Trap
@@ -44,12 +46,15 @@ object Test:
   lazy val file = os.pwd / "2016" / "18" / "18.test.input.txt"
   lazy val line = os.read.lines(file).head
   lazy val res  = Solving.solve(line)(10)
-// Test.res // part 1: 38
 
 object Main:
   lazy val file = os.pwd / "2016" / "18" / "18.input.txt"
   lazy val line = os.read.lines(file).head
   lazy val res1 = Solving.solve(line)(40)
   lazy val res2 = Solving.solve(line)(400000)
-// Main.res1 // part 1: 1982
-// Main.res2 // part 2: 20005203
+
+@main
+def run: Unit =
+  println(Test.res)  // part 1: 38
+  println(Main.res1) // part 1: 1982
+  println(Main.res2) // part 2: 20005203 a bit slow
