@@ -1,3 +1,5 @@
+package aoc2016.day23
+
 object DataDefs:
   enum Reg:
     case A, B, C, D
@@ -20,6 +22,9 @@ object DataDefs:
     case JnzRegVal(notZero: Reg, offset: Int)
     case JnzRegReg(notZero: Reg, reg: Reg)
     case Toggle(reg: Reg)
+    case Add(reg1: Reg, reg2: Reg, reg3: Reg)
+    case Mul(reg1: Reg, reg2: Reg, reg3: Reg)
+    case Noop
     case Illegal
 
     def toggle = this match
@@ -32,6 +37,9 @@ object DataDefs:
       case JnzValVal(notZero, offset) => Illegal // these cause illegal copy instructions
       case JnzRegVal(notZero, offset) => Illegal
       case Toggle(reg)                => Inc(reg)
+      case Add(reg1, reg2, reg3)      => ???     // these 3 are all above tgl in input.
+      case Mul(reg1, reg2, reg3)      => ???
+      case Noop                       => ???
       case Illegal                    => Illegal
   import Instr.*
 
@@ -57,13 +65,18 @@ object DataDefs:
         else
           val newInstrs = instrs.updated(ptr + regs(reg), instrs(ptr + regs(reg)).toggle)
           copy(instrs = newInstrs, ptr = ptr + 1)
+      case Add(reg1, reg2, reg3) =>
+        copy(regs = regs.updated(reg3, regs(reg1) + regs(reg2)), ptr = ptr + 1)
+      case Mul(reg1, reg2, reg3) =>
+        copy(regs = regs.updated(reg3, regs(reg1) * regs(reg2)), ptr = ptr + 1)
+      case Noop    => copy(ptr = ptr + 1)
       case Illegal => copy(ptr = ptr + 1)
 
     def handleCurrentInst = handleInstr(instrs(ptr))
 
   object State:
-    def apply(instrs: Seq[Instr]) = // change this for parts 1/2
-      new State(Map(A -> 12, B -> 0, C -> 0, D -> 0), instrs, 0)
+    def apply(instrs: Seq[Instr], a: Int) =
+      new State(Map(A -> a, B -> 0, C -> 0, D -> 0), instrs, 0)
 
 object Parsing:
   import DataDefs.*, Instr.*
@@ -82,25 +95,53 @@ object Parsing:
         case (None, Some(value))  => JnzRegVal(regOrVal1.toReg, value)
         case (Some(value), None)  => JnzValReg(value, regOrVal2.toReg)
         case (Some(v1), Some(v2)) => JnzValVal(v1, v2)
+    case s"add $reg1 $reg2 $reg3" => Add(reg1.toReg, reg2.toReg, reg3.toReg)
+    case s"mul $reg1 $reg2 $reg3" => Mul(reg1.toReg, reg2.toReg, reg3.toReg)
+    case s"nop"                   => Noop
 
   def parse(lines: Seq[String]) = lines map parseLine
 
 object Solving:
   import DataDefs.*
 
-  def solve(lines: Seq[String]) =
-    var state = State(Parsing.parse(lines))
+  def solve(lines: Seq[String])(a: Int) =
+    var state = State(Parsing.parse(lines), a)
     while !state.halted do state = state.handleCurrentInst
     state.regs(Reg.A)
+
+  // For part 2, optimizations are applied directly to the input.
+  // (Thankfully, the only tgl comes after both add and mul in the input.)
+  // This is multiplication:
+  // inc X       mul Y Z X
+  // dec Y       cpy 0 Y
+  // jnz Y -2 => cpy 0 Z
+  // dec Z       nop
+  // jnz Z -5    nop
+  //
+  // These are both addition:
+  // inc X       add X Y X
+  // dec Y    => cpy 0 Y
+  // jnz Y -2    nop
+  //
+  // dec X       add X Y Y
+  // inc Y    => cpy 0 X
+  // jnz X -2    nop
 
 object Test:
   lazy val file  = os.pwd / "2016" / "23" / "23.test.input.txt"
   lazy val lines = os.read.lines(file)
-  lazy val res   = Solving.solve(lines)
-// Test.res // part 1: 3
+  lazy val res   = Solving.solve(lines)(7)
 
 object Main:
-  lazy val file  = os.pwd / "2016" / "23" / "23.input.txt"
-  lazy val lines = os.read.lines(file)
-  lazy val res   = Solving.solve(lines)
-// Main.res // part 1: 10584, part 2: 479007144
+  lazy val file1 = os.pwd / "2016" / "23" / "23.input.1.txt"
+  lazy val file2 = os.pwd / "2016" / "23" / "23.input.2.txt" // optimized
+  lazy val line1 = os.read.lines(file1)
+  lazy val line2 = os.read.lines(file2)
+  lazy val res1  = Solving.solve(line1)(7)
+  lazy val res2  = Solving.solve(line2)(12)
+
+@main
+def run: Unit =
+  println(Test.res)  // part 1: 3
+  println(Main.res1) // part 1: 10584
+  println(Main.res2) // part 2: 479007144
