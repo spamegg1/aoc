@@ -3,6 +3,10 @@ package aoc2016.day22
 object DataDefs:
   enum State:
     case Full, Empty, Moveable
+    def toChar = this match
+      case Full     => '#'
+      case Empty    => '_'
+      case Moveable => '.'
   import State.*
 
   type Pos = (x: Int, y: Int)
@@ -19,6 +23,8 @@ object DataDefs:
       if used > emptySize then Full
       else if used == 0 then Empty
       else Moveable
+    def show(start: Pos, goal: Pos, emptySize: Int) =
+      if pos == start then '@' else if pos == goal then 'G' else state(emptySize).toChar
 
 object Parsing:
   import DataDefs.*
@@ -28,6 +34,13 @@ object Parsing:
       Node((x = x.toInt, y = y.toInt), size.toInt, used.toInt, avail.toInt, use.toInt)
 
   def parse(lines: Seq[String]): Seq[Node] = lines map parseLine
+  def graph(nodes: Seq[Node])(row: Int, start: Pos, goal: Pos, emptySize: Int): String =
+    nodes
+      .map(_.show(start, goal, emptySize))
+      .grouped(row)
+      .toSeq
+      .map(_.mkString)
+      .mkString("\n")
 
 object Solving:
   import DataDefs.*, State.*, util.boundary, boundary.break, collection.mutable.Queue
@@ -49,6 +62,16 @@ object Solving:
     var res   = 0                                         // number of steps
     val grid  = nodes.map(node => node.pos -> node.state(empty.size)).toMap
 
+    // val target = os.pwd / "2016" / "22" / "grid.txt"
+    // val graph  = Parsing.graph(nodes)(29, empty.pos, goal.pos, empty.size)
+    // os.write(target, graph) // this treats x=row (0-34), y=col (0-28)
+
+    // We can use this information: to get the goal data to the top left,
+    // we have to first move the empty spot to directly above the goal data.
+    // After we’ve done that, we ‘walk’ it up by moving the empty data
+    // down, right, up, up, left in a continuous loop.
+    // println(s"empty: ${empty.pos}") // 8,28, move this to 33,0
+    // println(s"goal: ${goal.pos}")   // 34,0, it takes (34-1)*5 moves to reach 0,0
     boundary:
       while queue.nonEmpty do
         val (pos, steps) = queue.dequeue()
