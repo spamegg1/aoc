@@ -1,7 +1,7 @@
 package aoc2016.day19
 
 object DataDefs:
-  case class Elf(value: Int, var next: Option[Elf]) // part 2
+  case class Elf(pos: Int, var next: Option[Elf]) // part 2
 
 object Solving:
   import DataDefs.*
@@ -18,23 +18,22 @@ object Solving:
   def solve1(elves: Int) = ((elves - Integer.highestOneBit(elves)) << 1) + 1
 
   def solve2(elves: Int) =
-    var elf = Elf(1, None)
-    elf.next = Some(elf)
+    var elf = Elf(1, None) // elf = elf1
+    elf.next = Some(elf) // elf1(elf1)
 
     for n <- 2 to elves do
-      val nextElf = Elf(n, elf.next)
-      elf.next = Some(nextElf)
-      elf = nextElf
+      val nextElf = Elf(n, elf.next) // e2->e1, e3->e1, ...
+      elf.next = Some(nextElf) // e1->e2, e2->e3, ...
+      elf = nextElf            // elf = e2, elf = e3, ...
+    // at the end we have: e1 -> e2 -> e3 -> ... -> en -> e1, elf = en
 
-    for i <- 1 to elves / 2 do elf = elf.next.getOrElse(elf)
+    for i <- 1 to elves / 2 do elf = elf.next.get // now elf = en/2->en/2+1
 
     for i <- elves to 2 by -1 do
-      elf.next = elf.next match
-        case None        => None
-        case Some(value) => value.next
-      if i % 2 == 1 then elf = elf.next.getOrElse(elf)
+      elf.next = elf.next.get.next
+      if i % 2 == 1 then elf = elf.next.get
 
-    elf.value
+    elf.pos
 
 object Test:
   lazy val res1 = Seq(5, 6, 9, 10) map Solving.solve1
