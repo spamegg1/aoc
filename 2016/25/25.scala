@@ -1,3 +1,5 @@
+package aoc2016.day25
+
 object DataDefs:
   enum Reg:
     case A, B, C, D
@@ -21,26 +23,36 @@ object DataDefs:
     case OutReg(reg: Reg)
   import Instr.*
 
-  case class State(regs: Map[Reg, Int], instrs: Seq[Instr], ptr: Int, outs: List[Int]):
+  case class State(
+      regs: Map[Reg, Int],
+      instrs: Seq[Instr],
+      ptr: Int,
+      out: Option[Int] = None
+  ):
     def halted = ptr < 0 || instrs.size <= ptr
     def handleInstr(instr: Instr): State = instr match
-      case CopyValReg(value, to) => copy(regs = regs.updated(to, value), ptr = ptr + 1)
+      case CopyValReg(value, to) =>
+        copy(regs = regs.updated(to, value), ptr = ptr + 1, out = None)
       case CopyRegReg(from, to) =>
-        copy(regs = regs.updated(to, regs(from)), ptr = ptr + 1)
-      case Inc(reg) => copy(regs = regs.updated(reg, regs(reg) + 1), ptr = ptr + 1)
-      case Dec(reg) => copy(regs = regs.updated(reg, regs(reg) - 1), ptr = ptr + 1)
+        copy(regs = regs.updated(to, regs(from)), ptr = ptr + 1, out = None)
+      case Inc(reg) =>
+        copy(regs = regs.updated(reg, regs(reg) + 1), ptr = ptr + 1, out = None)
+      case Dec(reg) =>
+        copy(regs = regs.updated(reg, regs(reg) - 1), ptr = ptr + 1, out = None)
       case JnzValVal(notZero, offset) =>
-        copy(ptr = ptr + (if notZero != 0 then offset else 1))
+        copy(ptr = ptr + (if notZero != 0 then offset else 1), out = None)
       case JnzRegVal(notZero, offset) =>
-        copy(ptr = ptr + (if regs(notZero) != 0 then offset else 1))
-      case OutVal(value: Int) => copy(outs = value :: outs, ptr = ptr + 1)
-      case OutReg(reg: Reg)   => copy(outs = regs(reg) :: outs, ptr = ptr + 1)
+        copy(ptr = ptr + (if regs(notZero) != 0 then offset else 1), out = None)
+      case OutVal(value: Int) =>
+        copy(out = Some(value), ptr = ptr + 1)
+      case OutReg(reg: Reg) =>
+        copy(out = Some(regs(reg)), ptr = ptr + 1)
 
     def handleCurrentInst = handleInstr(instrs(ptr))
 
   object State:
-    def apply(instrs: Seq[Instr]) =
-      new State(Map(A -> 10000, B -> 0, C -> 0, D -> 0), instrs, 0, Nil)
+    def apply(instrs: Seq[Instr], a: Int) =
+      new State(Map(A -> a, B -> 0, C -> 0, D -> 0), instrs, 0, None)
 
 object Parsing:
   import DataDefs.*, Instr.*
@@ -68,15 +80,24 @@ object Solving:
 
   def solve(lines: Seq[String]) =
     val instrs = Parsing.parse(lines)
-    var state  = State(instrs)
-    for _ <- 0 until 1000000 do state = state.handleCurrentInst
-    state.outs
+    Iterator
+      .from(0)
+      .map: start =>
+        Iterator
+          .iterate(State(instrs, start))(_.handleCurrentInst)
+          .collect { case State(_, _, _, Some(value)) => value }
+          .take(12)
+          .mkString
+      .indexWhere(_ == "010101010101")
 
 object Main:
   lazy val file  = os.pwd / "2016" / "25" / "25.input.txt"
   lazy val lines = os.read.lines(file)
   lazy val res   = Solving.solve(lines)
-// Main.res // part 1: 158
+
+@main
+def run: Unit = println(Main.res) // part 1: 158
+
 // Reverse engineering the code shows that it takes the initial value "a'
 // then adds 4 * 643 to create a seed.
 // This seed is then repeatedly bit shifted right by dividing by 2
