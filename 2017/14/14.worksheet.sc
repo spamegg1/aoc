@@ -98,7 +98,7 @@ object Solving:
 
   def solve1(line: String)(size: Int) = (0 until size).view
     .map(row => s"$line-$row")
-    .map(`2017`.day10.Solving.solve2(_)(256)(64))
+    .map(aoc2017.day10.Solving.solve2(_)(256)(64))
     .map(convertHexToBin)
     .map(row => row.count(_ == '1'))
     .sum
