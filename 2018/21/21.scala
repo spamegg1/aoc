@@ -1,3 +1,5 @@
+package aoc2018.day21
+
 object DataDefs:
   type Reg = Long
 
@@ -57,7 +59,6 @@ object DataDefs:
 
 object Parsing:
   import DataDefs.*
-
   def parseLine(line: String) = line match
     case s"$op $a $b $c" => Op(op.toOp, a.toInt, b.toInt, c.toInt)
 
@@ -70,40 +71,42 @@ object Solving:
   import DataDefs.*
 
   def solve1(lines: Seq[String]) =
+    // the only instr that refers to register 0 is on line 28.
+    // it checks if reg2 == reg0, if yes, we exit program.
+    // so we need to find the earliest that we can reach line 28.
+    // then we can exit by setting register 0 to be equal to register 2.
     val (ipReg, ops) = Parsing.parse(lines)
-    var state        = State(ipReg, 0, Seq(0, 0, 0, 0, 0, 0), ops, false)
-    while !state.halted do state = state.next
-    state.regs(0)
+    var state        = State(ipReg, 0, Seq(0L, 0L, 0L, 0L, 0L, 0L), ops, false)
+    while state.ptr != 28 do state = state.next
+    state.regs(2)
 
   def solve2(lines: Seq[String]) =
-    val (ipReg, ops) = Parsing.parse(lines)
-    var state        = State(ipReg, 0, Seq(0, 11, 10, 1, 10551394, 0), ops, false)
-    var i            = 0
-    while i < 100 do
-      println(state.regs)
-      state = state.next
-      i += 1
+    import util.boundary, boundary.break
+    // We keep track of all the values register 2 can have before repeating a cycle.
+    // The last value of the cycle gives us the longest terminating execution.
+    // We run the reverse-engineered code from ptr=5: seti 0 3 2 to ptr:27 seti 7 3 1
+    var r2History = List[Long]()
+    var r2        = 0L
+    var r4        = 0L
+    var r5        = 0L
+    while !r2History.contains(r2) do
+      r2History ::= r2
+      r5 = 65536L | r2
+      r2 = 4843319L
+      boundary:
+        while true do
+          r4 = r5 & 255L
+          r2 = (((r2 + r4) & 16777215L) * 65899L) & 16777215L
+          if r5 >= 256L then r5 /= 256L else break()
+    r2History.head
 
-object Test: // #ip 0
-  lazy val file  = os.pwd / "2018" / "19" / "19.test.input.txt"
-  lazy val lines = os.read.lines(file)
-  lazy val res1  = Solving.solve1(lines)
-// Test.res1 // part 1: 7
-
-object Main: // #ip 2
-  lazy val file  = os.pwd / "2018" / "19" / "19.input.txt"
+object Main:
+  lazy val file  = os.pwd / "2018" / "21" / "21.input.txt"
   lazy val lines = os.read.lines(file)
   lazy val res1  = Solving.solve1(lines)
   lazy val res2  = Solving.solve2(lines)
-// Main.res1 // part 1: 1728
-// Main.res2 // part 2: 18200448
 
-// Code is calculating the sum of all divisors of a number.
-// 10551394 keeps repeating
-// its prime factorization is 10551394 = 2 x 7 x 167 x 4513
-// so
-// 1 +
-// 2 + 7 + 167 + 4513 +
-// 2*7 + 2*167 + 2*4513 + 7*167 + 7*4513 + 167*4513 +
-// 2*7*167 + 2*7*4513 + 2*167*4513 + 7*167*4513 +
-// 2*7*167*4513
+@main
+def run: Unit =
+  println(Main.res1) // part 1: 8797248
+  println(Main.res2) // part 2: 3007673
