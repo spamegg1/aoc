@@ -2,7 +2,8 @@ package AdventOfCode2018
 
 object Day25:
   case class Point(x: Int, y: Int, z: Int, w: Int):
-    def manhattan(other: Point): Int = (x - other.x).abs + (y - other.y).abs + (z - other.z).abs + (w - other.w).abs
+    def manhattan(other: Point): Int =
+      (x - other.x).abs + (y - other.y).abs + (z - other.z).abs + (w - other.w).abs
 
   def part1(input: Seq[String]): Int = input
     .map { _.split(",").map(_.toInt) }
@@ -14,5 +15,7 @@ object Day25:
     .size
 
   def main(args: Array[String]): Unit =
-    val data = io.Source.fromResource("AdventOfCode2018/Day25.txt").getLines().toSeq
+    // val data = io.Source.fromResource("AdventOfCode2018/Day25.txt").getLines().toSeq
+    // val data = os.read.lines(os.pwd / "2018" / "25" / "25.test.input.txt")
+    val data = os.read.lines(os.pwd / "2018" / "25" / "25.input.txt")
     println(part1(data))

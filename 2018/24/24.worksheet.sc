@@ -23,7 +23,7 @@ and sometimes weaknesses or immunities. Here is an example group:
 Each group also has an effective power: the number of units in
 that group multiplied by their attack damage.
 The above group has an effective power of 18 * 8 = 144.
-Groups never have zero or negative units; 
+Groups never have zero or negative units;
 instead, the group is removed from combat.
 
 Each fight consists of two phases: target selection and attacking.
@@ -46,7 +46,7 @@ Defending groups can only be chosen as a target by one attacking group.
 At the end of the target selection phase, each group has selected zero
 or one groups to attack, and each group is being attacked by zero or one groups.
 
-During the attacking phase, each group deals 
+During the attacking phase, each group deals
 damage to the target it selected, if any.
 Groups attack in decreasing order of initiative, regardless of whether they are
 part of the infection or the immune system.
@@ -64,7 +64,7 @@ The defending group only loses whole units from damage; damage is always dealt
 in such a way that it kills the most units possible, and any remaining damage
 to a unit that does not immediately kill it is ignored.
 For example, if a defending group contains 10 units with 10 hit points each
-and receives 75 damage, it loses exactly 
+and receives 75 damage, it loses exactly
 7 units and is left with 3 units at full health.
 
 After the fight is over, if both armies still contain units, a new fight begins;
@@ -85,7 +85,7 @@ Infection:
  cold) with an attack that does 12 slashing damage at initiative 4
 
 If these armies were to enter combat, the following fights,
-including details during the target selection 
+including details during the target selection
 and attacking phases, would take place:
 
 Immune System:
@@ -206,9 +206,154 @@ Group 2 contains 4434 units
 
 In the example above, the winning army ends up with 782 + 4434 = 5216 units.
 
-You scan the reindeer's condition (your puzzle input); 
-the white-bearded man looks nervous. 
+You scan the reindeer's condition (your puzzle input);
+the white-bearded man looks nervous.
 As it stands now, how many units would the winning army have?
+
+--- Part Two ---
+
+Things aren't looking good for the reindeer. The man asks whether more milk and cookies would help you think.
+
+If only you could give the reindeer's immune system a boost, you might be able to change the outcome of the combat.
+
+A boost is an integer increase in immune system units' attack damage. For example, if you were to boost the above example's immune system's units by 1570, the armies would instead look like this:
+
+Immune System:
+17 units each with 5390 hit points (weak to radiation, bludgeoning) with
+ an attack that does 6077 fire damage at initiative 2
+989 units each with 1274 hit points (immune to fire; weak to bludgeoning,
+ slashing) with an attack that does 1595 slashing damage at initiative 3
+
+Infection:
+801 units each with 4706 hit points (weak to radiation) with an attack
+ that does 116 bludgeoning damage at initiative 1
+4485 units each with 2961 hit points (immune to radiation; weak to fire,
+ cold) with an attack that does 12 slashing damage at initiative 4
+
+With this boost, the combat proceeds differently:
+
+Immune System:
+Group 2 contains 989 units
+Group 1 contains 17 units
+Infection:
+Group 1 contains 801 units
+Group 2 contains 4485 units
+
+Infection group 1 would deal defending group 2 185832 damage
+Infection group 1 would deal defending group 1 185832 damage
+Infection group 2 would deal defending group 1 53820 damage
+Immune System group 2 would deal defending group 1 1577455 damage
+Immune System group 2 would deal defending group 2 1577455 damage
+Immune System group 1 would deal defending group 2 206618 damage
+
+Infection group 2 attacks defending group 1, killing 9 units
+Immune System group 2 attacks defending group 1, killing 335 units
+Immune System group 1 attacks defending group 2, killing 32 units
+Infection group 1 attacks defending group 2, killing 84 units
+
+Immune System:
+Group 2 contains 905 units
+Group 1 contains 8 units
+Infection:
+Group 1 contains 466 units
+Group 2 contains 4453 units
+
+Infection group 1 would deal defending group 2 108112 damage
+Infection group 1 would deal defending group 1 108112 damage
+Infection group 2 would deal defending group 1 53436 damage
+Immune System group 2 would deal defending group 1 1443475 damage
+Immune System group 2 would deal defending group 2 1443475 damage
+Immune System group 1 would deal defending group 2 97232 damage
+
+Infection group 2 attacks defending group 1, killing 8 units
+Immune System group 2 attacks defending group 1, killing 306 units
+Infection group 1 attacks defending group 2, killing 29 units
+
+Immune System:
+Group 2 contains 876 units
+Infection:
+Group 2 contains 4453 units
+Group 1 contains 160 units
+
+Infection group 2 would deal defending group 2 106872 damage
+Immune System group 2 would deal defending group 2 1397220 damage
+Immune System group 2 would deal defending group 1 1397220 damage
+
+Infection group 2 attacks defending group 2, killing 83 units
+Immune System group 2 attacks defending group 2, killing 427 units
+
+After a few fights...
+
+Immune System:
+Group 2 contains 64 units
+Infection:
+Group 2 contains 214 units
+Group 1 contains 19 units
+
+Infection group 2 would deal defending group 2 5136 damage
+Immune System group 2 would deal defending group 2 102080 damage
+Immune System group 2 would deal defending group 1 102080 damage
+
+Infection group 2 attacks defending group 2, killing 4 units
+Immune System group 2 attacks defending group 2, killing 32 units
+
+Immune System:
+Group 2 contains 60 units
+Infection:
+Group 1 contains 19 units
+Group 2 contains 182 units
+
+Infection group 1 would deal defending group 2 4408 damage
+Immune System group 2 would deal defending group 1 95700 damage
+Immune System group 2 would deal defending group 2 95700 damage
+
+Immune System group 2 attacks defending group 1, killing 19 units
+
+Immune System:
+Group 2 contains 60 units
+Infection:
+Group 2 contains 182 units
+
+Infection group 2 would deal defending group 2 4368 damage
+Immune System group 2 would deal defending group 2 95700 damage
+
+Infection group 2 attacks defending group 2, killing 3 units
+Immune System group 2 attacks defending group 2, killing 30 units
+
+After a few more fights...
+
+Immune System:
+Group 2 contains 51 units
+Infection:
+Group 2 contains 40 units
+
+Infection group 2 would deal defending group 2 960 damage
+Immune System group 2 would deal defending group 2 81345 damage
+
+Infection group 2 attacks defending group 2, killing 0 units
+Immune System group 2 attacks defending group 2, killing 27 units
+
+Immune System:
+Group 2 contains 51 units
+Infection:
+Group 2 contains 13 units
+
+Infection group 2 would deal defending group 2 312 damage
+Immune System group 2 would deal defending group 2 81345 damage
+
+Infection group 2 attacks defending group 2, killing 0 units
+Immune System group 2 attacks defending group 2, killing 13 units
+
+Immune System:
+Group 2 contains 51 units
+Infection:
+No groups remain.
+
+This boost would allow the immune system's armies to win! It would be left with 51 units.
+
+You don't even know how you could boost the reindeer's immune system or what effect it might have, so you need to be cautious and find the smallest boost that would allow the immune system to win.
+
+How many units does the immune system have left after getting the smallest boost it needs to win?
 
  */
 object DataDefs:
@@ -224,15 +369,15 @@ object Solving:
   def solve2(lines: Seq[String]) = 0L
 
 object Test:
-  private lazy val lines = os.read.lines(os.pwd / "2018" / "24" / "24.test.input.txt")
-  lazy val res1 = Solving.solve1(lines)
-  lazy val res2 = Solving.solve2(lines)
+  lazy val lines = os.read.lines(os.pwd / "2018" / "24" / "24.test.input.txt")
+  lazy val res1  = Solving.solve1(lines)
+  lazy val res2  = Solving.solve2(lines)
 // Test.res1 // part 1: 5216
-// Test.res2 // part 2: ???
+// Test.res2 // part 2: 51
 
 object Main:
-  private lazy val lines = os.read.lines(os.pwd / "2018" / "24" / "24.input.txt")
-  lazy val res1 = Solving.solve1(lines)
-  lazy val res2 = Solving.solve2(lines)
-// Main.res1 // part 1: ???
-// Main.res2 // part 2: ???
+  lazy val lines = os.read.lines(os.pwd / "2018" / "24" / "24.input.txt")
+  lazy val res1  = Solving.solve1(lines)
+  lazy val res2  = Solving.solve2(lines)
+// Main.res1 // part 1: 21070
+// Main.res2 // part 2: 7500
