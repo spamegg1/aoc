@@ -1,93 +1,75 @@
-/*
---- Day 9: Sensor Boost ---
-You've just said goodbye to the rebooted rover and left Mars
-when you receive a faint distress signal coming from the asteroid belt.
-It must be the Ceres monitoring station!
-
-In order to lock on to the signal, you'll need to boost your sensors.
-The Elves send up the latest BOOST program - Basic Operation Of System Test.
-
-While BOOST (your puzzle input) is capable of boosting your sensors,
-for tenuous safety reasons, it refuses to do so until the computer
-it runs on passes some checks to demonstrate it is a complete Intcode computer.
-
-Your existing Intcode computer is missing one key feature:
-  it needs support for parameters in relative mode.
-
-Parameters in mode 2, relative mode, behave very similarly to
-parameters in position mode: the parameter is interpreted as a position.
-Like position mode, parameters in relative mode can be read from or written to.
-
-The important difference is that relative mode parameters don't count from address 0.
-Instead, they count from a value called the relative base. The relative base starts at 0.
-
-The address a relative mode parameter refers to is itself plus the current relative base.
-When the relative base is 0, relative mode parameters and position mode parameters
-with the same value refer to the same address.
-
-For example, given a relative base of 50, a relative mode
-parameter of -7 refers to memory address 50 + -7 = 43.
-
-The relative base is modified with the relative base offset instruction:
-  Opcode 9 adjusts the relative base by the value of its only parameter.
-  The relative base increases (or decreases, if the value is negative)
-  by the value of the parameter.
-
-For example, if the relative base is 2000, then after the instruction 109,19,
-the relative base would be 2019. If the next instruction were 204,-34,
-then the value at address 1985 would be output.
-
-Your Intcode computer will also need a few other capabilities:
-  The computer's available memory should be much larger than the initial program.
-    Memory beyond the initial program starts with the value 0 and can be read or
-    written like any other memory. (It is invalid to try to access memory at a
-    negative address, though.)
-  The computer should have support for large numbers.
-    Some instructions near the beginning of the BOOST program will verify this capability.
-
-Here are some example programs that use these features:
-  109,1,204,-1,1001,100,1,100,1008,100,16,101,1006,101,0,99
-    takes no input and produces a copy of itself as output.
-  1102,34915192,34915192,7,4,7,99,0 should output a 16-digit number.
-  104,1125899906842624,99 should output the large number in the middle.
-
-The BOOST program will ask for a single input;
-run it in test mode by providing it the value 1.
-It will perform a series of checks on each opcode,
-output any opcodes (and the associated parameter modes)
-that seem to be functioning incorrectly, and finally output a BOOST keycode.
-
-Once your Intcode computer is fully functional, the BOOST program should
-report no malfunctioning opcodes when run in test mode;
-it should only output a single value, the BOOST keycode.
-What BOOST keycode does it produce?
-
- */
 package aoc2019.day09
 
 object DataDefs:
-  ???
+  val powers = Map(1 -> 100, 2 -> 1000, 3 -> 10000)
+  type Memory = Map[Long, Long]
+
+  enum State:
+    case Init, Run, Halt
+    case Out(value: Long)
+  import State.*
+
+  case class Cpu(ptr: Long, relBase: Long, mem: Memory, in: Seq[Long], state: State):
+    private def read(offset: Int): Long = (mem(ptr) / powers(offset)) % 10 match
+      case 0 => mem(mem(ptr + offset))
+      case 1 => mem(ptr + offset)
+      case 2 => mem(relBase + mem(ptr + offset))
+
+    private def write(offset: Int, value: Long): Map[Long, Long] =
+      (mem(ptr) / powers(offset)) % 10 match
+        case 0 => mem.updated(mem(ptr + offset), value)
+        case 2 => mem.updated(relBase + mem(ptr + offset), value)
+
+    def next: Cpu = mem(ptr) % 100 match
+      case 1 => copy(ptr = ptr + 4, mem = write(3, read(1) + read(2)), state = Run) // Add
+      case 2 => copy(ptr = ptr + 4, mem = write(3, read(1) * read(2)), state = Run) // Mul
+      case 3 => copy(ptr = ptr + 2, mem = write(1, in.head), in = in.tail, state = Run)
+      case 4 => copy(ptr = ptr + 2, state = Out(read(1))) // Write
+      case 5 => copy(ptr = if read(1) != 0 then read(2) else ptr + 3, state = Run) // jit
+      case 6 => copy(ptr = if read(1) == 0 then read(2) else ptr + 3, state = Run) // jif
+      case 7 =>
+        val newMem = write(3, if read(1) < read(2) then 1 else 0)
+        copy(ptr = ptr + 4, mem = newMem, state = Run) // Less than
+      case 8 =>
+        val newMem = write(3, if read(1) == read(2) then 1 else 0)
+        copy(ptr = ptr + 4, mem = newMem, state = Run) // Equals
+      case 9  => copy(ptr = ptr + 2, relBase = relBase + read(1), state = Run) // Rel base
+      case 99 => copy(state = Halt)                                            // Halt
+
+    def withIn(next: Long*): Cpu = copy(in = next)
+    def nextOut: Cpu = Iterator.iterate(next)(_.next).dropWhile(_.state == Run).next()
+    def allOut: Seq[Long] =
+      val output = Iterator.iterate(this)(_.nextOut).takeWhile(_.state != Halt)
+      output.toSeq.map(_.state).collect { case Out(value) => value }
+
+  object Cpu:
+    def apply(in: Seq[Long]): Cpu =
+      val mem = in.zipWithIndex.map((value, index) => index.toLong -> value)
+      new Cpu(0, 0, mem.toMap.withDefaultValue(0), Seq(), Init)
 
 object Parsing:
-  import DataDefs.*
-  def parseLine(line: String)   = ???
-  def parse(lines: Seq[String]) = lines map parseLine
+  def parse(line: String) = line.split(",").map(_.toLong).toSeq
 
 object Solving:
   import DataDefs.*
-  def solve1(line: String) = 0L
-  def solve2(line: String) = 0L
+
+  def solve(in: Long)(line: String) = Cpu(Parsing.parse(line)).withIn(in).allOut.last
+  val solve1                        = solve(1L)
+  val solve2                        = solve(2L)
 
 object Test:
-  private lazy val lines = os.read.lines(os.pwd / "2019" / "09" / "09.test.input.txt")
-  lazy val res1          = lines map Solving.solve1
-  lazy val res2          = lines map Solving.solve2
-// Test.res1 // part 1:
-// Test.res2 // part 2:
+  lazy val file  = os.pwd / "2019" / "09" / "09.test.input.txt"
+  lazy val lines = os.read.lines(file)
+  lazy val res1  = lines map Solving.solve1
 
 object Main:
-  lazy val line = os.read.lines(os.pwd / "2019" / "09" / "09.input.txt").head
+  lazy val file = os.pwd / "2019" / "09" / "09.input.txt"
+  lazy val line = os.read.lines(file).head
   lazy val res1 = Solving.solve1(line)
   lazy val res2 = Solving.solve2(line)
-// Main.res1 // part 1:
-// Main.res2 // part 2:
+
+@main
+def run: Unit =
+  println(Test.res1) // part 1: 99, 1219070632396864, 1125899906842624
+  println(Main.res1) // part 1: 3839402290
+  println(Main.res2) // part 2: 35734
