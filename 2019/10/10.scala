@@ -1,157 +1,92 @@
-/*
---- Day 10: Monitoring Station ---
-You fly into the asteroid belt and reach the Ceres monitoring station.
-The Elves here have an emergency: they're having trouble tracking all
-of the asteroids and can't be sure they're safe.
-
-The Elves would like to build a new monitoring station in a nearby area of space;
-they hand you a map of all of the asteroids in that region (your puzzle input).
-
-The map indicates whether each position is empty (.) or contains an asteroid (#).
-The asteroids are much smaller than they appear on the map,
-and every asteroid is exactly in the center of its marked position.
-The asteroids can be described with X,Y coordinates where X is the
-distance from the left edge and Y is the distance from the top edge
-(so the top-left corner is 0,0 and the position immediately to its right is 1,0).
-
-Your job is to figure out which asteroid would be the best place to build
-a new monitoring station. A monitoring station can detect any asteroid to
-which it has direct line of sight - that is, there cannot be another
-asteroid exactly between them. This line of sight can be at any angle,
-not just lines aligned to the grid or diagonally.
-The best location is the asteroid that can detect the largest number of other asteroids.
-
-For example, consider the following map:
-
-.#..#
-.....
-#####
-....#
-...##
-
-The best location for a new monitoring station on this map is the
-highlighted asteroid at 3,4 because it can detect 8 asteroids,
-more than any other location. (The only asteroid it cannot detect
-is the one at 1,0; its view of this asteroid is blocked by the
-asteroid at 2,2.) All other asteroids are worse locations;
-they can detect 7 or fewer other asteroids. Here is the number
-of other asteroids a monitoring station on each asteroid could detect:
-
-.7..7
-.....
-67775
-....7
-...87
-
-Here is an asteroid (#) and some examples of the ways its line of sight might
-be blocked. If there were another asteroid at the location of a capital letter,
-the locations marked with the corresponding lowercase letter would be blocked
-and could not be detected:
-
-#.........
-...A......
-...B..a...
-.EDCG....a
-..F.c.b...
-.....c....
-..efd.c.gb
-.......c..
-....f...c.
-...e..d..c
-
-Here are some larger examples:
-
-    Best is 5,8 with 33 other asteroids detected:
-
-    ......#.#.
-    #..#.#....
-    ..#######.
-    .#.#.###..
-    .#..#.....
-    ..#....#.#
-    #..#....#.
-    .##.#..###
-    ##...#..#.
-    .#....####
-
-    Best is 1,2 with 35 other asteroids detected:
-
-    #.#...#.#.
-    .###....#.
-    .#....#...
-    ##.#.#.#.#
-    ....#.#.#.
-    .##..###.#
-    ..#...##..
-    ..##....##
-    ......#...
-    .####.###.
-
-    Best is 6,3 with 41 other asteroids detected:
-
-    .#..#..###
-    ####.###.#
-    ....###.#.
-    ..###.##.#
-    ##.##.#.#.
-    ....###..#
-    ..#.#..#.#
-    #..#.#.###
-    .##...##.#
-    .....#.#..
-
-    Best is 11,13 with 210 other asteroids detected:
-
-    .#..##.###...#######
-    ##.############..##.
-    .#.######.########.#
-    .###.#######.####.#.
-    #####.##.#.##.###.##
-    ..#####..#.#########
-    ####################
-    #.####....###.#.#.##
-    ##.#################
-    #####.##.###..####..
-    ..######..##.#######
-    ####.##.####...##..#
-    .#####..#.######.###
-    ##...#.##########...
-    #.##########.#######
-    .####.#.###.###.#.##
-    ....##.##.###..#####
-    .#.#.###########.###
-    #.#.#.#####.####.###
-    ###.##.####.##.#..##
-
-Find the best location for a new monitoring station.
-How many other asteroids can be detected from that location?
-
- */
 package aoc2019.day10
 
 object DataDefs:
-  ???
+  type Pos  = (x: Int, y: Int)
+  type Line = (a: Int, b: Int, c: Int)
+  type Data = (Int, Int, Int)
+  type Dist = Map[Pos, Int]
+
+  extension (p: Pos)
+    def to(that: Pos): Line = (p.y - that.y, that.x - p.x, p.x * that.y - that.x * p.y)
+
+  extension (l: Line)
+    def distance(p: Pos): Int = l.a * p.x + l.b * p.y + l.c
+    def normal(p: Pos): Line  = (l.b, -l.a, l.a * p.y - l.b * p.x)
+
+  extension (ps: Set[Pos])
+    def groupByLine(origin: Pos): Map[Line, Dist] =
+      (ps - origin)
+        .foldLeft(Map.empty[Line, List[Pos]]): (lines, pos) =>
+          lines.keys.find(_.distance(pos) == 0) match
+            case Some(line) => lines.updated(line, pos :: lines(line))
+            case None       => lines.updated(origin.to(pos), List(pos))
+        .map: (line, poses) =>
+          val normal = line.normal(origin)
+          line -> poses.zip(poses.map(normal.distance)).toMap
+
+    def countVisible: Set[(Pos, Int)] =
+      ps.map: origin =>
+        val visible = ps
+          .groupByLine(origin) // Map[Line, Dist]
+          .values              // Iterable[Dist]
+          .map: pairs =>       // Map[Pos, Int]
+            val distances = pairs.values // Iterable[Int]
+            distances.count(_ < 0).min(1) + distances.count(_ > 0).min(1)
+        origin -> visible.sum
 
 object Parsing:
   import DataDefs.*
-  def parseLine(line: String)   = ???
-  def parse(lines: Seq[String]) = lines map parseLine
+
+  def parse(lines: Seq[String]): Set[Pos] =
+    (for
+      x <- 0 until lines.head.size
+      y <- 0 until lines.size
+      if lines(y)(x) == '#'
+    yield (x, y)).toSet
 
 object Solving:
   import DataDefs.*
-  def solve1(lines: Seq[String]) = 0L
-  def solve2(lines: Seq[String]) = 0L
+
+  def clockwise(quad: Int, origin: Pos, ps: Set[Pos]): Map[Data, Pos] = ps
+    .groupByLine(origin)
+    .flatMap: (line, distances) =>
+      val toLeft  = ps.count(pos => line.distance(pos) < 0)
+      val inOrder = distances.values.toSeq.sorted.zipWithIndex.toMap
+      distances.map((pos, distance) => (inOrder(distance), quad, toLeft) -> pos)
+
+  def solve1(lines: Seq[String]) = Parsing
+    .parse(lines)
+    .countVisible
+    .maxBy(_._2)
+    ._2
+
+  def solve2(lines: Seq[String])(count: Int) =
+    val ps                = Parsing.parse(lines)
+    val (origin, visible) = ps.countVisible.maxBy(_._2)
+    val topRight = clockwise(0, origin, ps.filter(p => p.x >= origin.x && p.y < origin.y))
+    val botRight = clockwise(1, origin, ps.filter(p => p.x > origin.x && p.y >= origin.y))
+    val botLeft  = clockwise(2, origin, ps.filter(p => p.x <= origin.x && p.y > origin.y))
+    val topLeft  = clockwise(3, origin, ps.filter(p => p.x < origin.x && p.y <= origin.y))
+    val all      = topRight ++ botRight ++ botLeft ++ topLeft
+    val key      = all.keys.toSeq.sorted.apply(count - 1)
+    val result   = all(key)
+    100 * result.x + result.y
 
 object Test:
-  private lazy val lines = os.read.lines(os.pwd / "2019" / "10" / "10.test.input.txt")
-  lazy val res1          = Solving.solve1(lines)
-  lazy val res2          = Solving.solve2(lines)
-// Test.res1 // part 1: 11,13 with 210
-// Test.res2 // part 2:
+  lazy val file  = os.pwd / "2019" / "10" / "10.test.input.txt"
+  lazy val lines = os.read.lines(file)
+  lazy val res1  = Solving.solve1(lines)
+  lazy val res2  = Solving.solve2(lines)(200)
 
 object Main:
-  lazy val lines = os.read.lines(os.pwd / "2019" / "10" / "10.input.txt")
+  lazy val file  = os.pwd / "2019" / "10" / "10.input.txt"
+  lazy val lines = os.read.lines(file)
   lazy val res1  = Solving.solve1(lines)
-  lazy val res2  = Solving.solve2(lines)
-// Main.res1 // part 1:
-// Main.res2 // part 2:
+  lazy val res2  = Solving.solve2(lines)(200)
+
+@main
+def run: Unit =
+  println(Test.res1) // part 1: 210
+  println(Test.res2) // part 2: 802
+  println(Main.res1) // part 1: 227
+  println(Main.res2) // part 2: 604
