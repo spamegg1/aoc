@@ -7,6 +7,9 @@ object DataDefs:
   enum State:
     case Init, Run, Halt
     case Out(value: Long)
+    def out = this match
+      case Out(value) => value
+      case _          => -1L
   import State.*
 
   case class Cpu(ptr: Long, relBase: Long, mem: Memory, in: Seq[Long], state: State):

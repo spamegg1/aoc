@@ -2,7 +2,7 @@ package AdventOfCode2019
 
 object Day22:
   case class Technique(a: BigInt, c: BigInt, m: BigInt):
-    def mod(n: BigInt) = n % m
+    def mod(n: BigInt)             = n % m
     def shuffle(index: Long): Long = mod(a * index + c).toLong
 
     def merge(other: Technique): Technique =
@@ -21,17 +21,19 @@ object Day22:
       Technique(nextA, nextC, m)
   end Technique
 
-  def parse(input: Seq[String], size: Long): Technique = input.map(_.split(" "))
+  def parse(input: Seq[String], size: Long): Technique = input
+    .map(_.split(" "))
     .map {
       case Array(_, "into", _, _) => Technique(size - 1, size - 1, size)
-      case Array(_, "with" ,_, n) => Technique(n.toLong, 0, size)
-      case Array("cut", n) => Technique(1, size - n.toLong, size)
+      case Array(_, "with", _, n) => Technique(n.toLong, 0, size)
+      case Array("cut", n)        => Technique(1, size - n.toLong, size)
     }
-    .reduce(_ merge _)
+    .reduce(_.merge(_))
 
   def part1(input: Seq[String]): Long = parse(input, 10007).shuffle(2019)
 
-  def part2(input: Seq[String]): Long = parse(input, 119315717514047L).inverse.pow(101741582076661L).shuffle(2020)
+  def part2(input: Seq[String]): Long =
+    parse(input, 119315717514047L).inverse.pow(101741582076661L).shuffle(2020)
 
   def main(args: Array[String]): Unit =
     val data = io.Source.fromResource("AdventOfCode2019/Day22.txt").getLines().toSeq
