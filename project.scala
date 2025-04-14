@@ -1,5 +1,5 @@
-//> using scala 3.6.3
-//> using toolkit 0.6.0
+//> using scala 3.6.4
+//> using toolkit 0.7.0
 //> using dep org.apache.commons:commons-digester3:3.2
 //> using dep org.apache.commons:commons-math4-core:4.0-beta1
 //> using dep org.apache.commons:commons-numbers-primes:1.2
