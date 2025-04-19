@@ -167,52 +167,52 @@ object DataDefs:
       def target: Num = e.target
 
   val numPad = Graph.empty[Num, LDiEdge[Num, Dir]]
-  numPad ++= (Seq('A', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'), Seq(
-    'A' ~> '0' :+ W,
-    '0' ~> 'A' :+ E,
-    'A' ~> '3' :+ N,
-    '3' ~> 'A' :+ S,
-    '0' ~> '2' :+ N,
-    '2' ~> '0' :+ S,
-    '3' ~> '2' :+ W,
-    '2' ~> '3' :+ E,
-    '3' ~> '6' :+ N,
-    '6' ~> '3' :+ S,
-    '2' ~> '1' :+ W,
-    '1' ~> '2' :+ E,
-    '2' ~> '5' :+ N,
-    '5' ~> '2' :+ S,
-    '1' ~> '4' :+ N,
-    '4' ~> '1' :+ S,
-    '6' ~> '5' :+ W,
-    '5' ~> '6' :+ E,
-    '6' ~> '9' :+ N,
-    '9' ~> '6' :+ S,
-    '5' ~> '4' :+ W,
-    '4' ~> '5' :+ E,
-    '5' ~> '8' :+ N,
-    '8' ~> '5' :+ S,
-    '4' ~> '7' :+ N,
-    '7' ~> '4' :+ S,
-    '9' ~> '8' :+ W,
-    '8' ~> '9' :+ E,
-    '8' ~> '7' :+ W,
-    '7' ~> '8' :+ E
-  ))
+  // numPad ++= (Seq('A', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'), Seq(
+  //   'A' ~> '0' :+ W,
+  //   '0' ~> 'A' :+ E,
+  //   'A' ~> '3' :+ N,
+  //   '3' ~> 'A' :+ S,
+  //   '0' ~> '2' :+ N,
+  //   '2' ~> '0' :+ S,
+  //   '3' ~> '2' :+ W,
+  //   '2' ~> '3' :+ E,
+  //   '3' ~> '6' :+ N,
+  //   '6' ~> '3' :+ S,
+  //   '2' ~> '1' :+ W,
+  //   '1' ~> '2' :+ E,
+  //   '2' ~> '5' :+ N,
+  //   '5' ~> '2' :+ S,
+  //   '1' ~> '4' :+ N,
+  //   '4' ~> '1' :+ S,
+  //   '6' ~> '5' :+ W,
+  //   '5' ~> '6' :+ E,
+  //   '6' ~> '9' :+ N,
+  //   '9' ~> '6' :+ S,
+  //   '5' ~> '4' :+ W,
+  //   '4' ~> '5' :+ E,
+  //   '5' ~> '8' :+ N,
+  //   '8' ~> '5' :+ S,
+  //   '4' ~> '7' :+ N,
+  //   '7' ~> '4' :+ S,
+  //   '9' ~> '8' :+ W,
+  //   '8' ~> '9' :+ E,
+  //   '8' ~> '7' :+ W,
+  //   '7' ~> '8' :+ E
+  // ))
 
   val dirPad = Graph.empty[Num, LDiEdge[Num, Dir]]
-  dirPad ++= (Seq('A', '<', '>', '^', 'v'), Seq(
-    '<' ~> 'v' :+ E,
-    'v' ~> '<' :+ W,
-    'v' ~> '^' :+ N,
-    '^' ~> 'v' :+ S,
-    'v' ~> '>' :+ E,
-    '>' ~> 'v' :+ W,
-    '>' ~> 'A' :+ N,
-    'A' ~> '>' :+ S,
-    'A' ~> '^' :+ E,
-    '^' ~> 'A' :+ W
-  ))
+  // dirPad ++= (Seq('A', '<', '>', '^', 'v'), Seq(
+  //   '<' ~> 'v' :+ E,
+  //   'v' ~> '<' :+ W,
+  //   'v' ~> '^' :+ N,
+  //   '^' ~> 'v' :+ S,
+  //   'v' ~> '>' :+ E,
+  //   '>' ~> 'v' :+ W,
+  //   '>' ~> 'A' :+ N,
+  //   'A' ~> '>' :+ S,
+  //   'A' ~> '^' :+ E,
+  //   '^' ~> 'A' :+ W
+  // ))
 
 object Parsing:
   import DataDefs.*
@@ -225,14 +225,14 @@ object Solving:
   def solve2(lines: Seq[String]) = 0L
 
 object Test:
-  lazy val lines   = os.read.lines(os.pwd / "2024" / "21" / "21.test.input.txt")
-  lazy val res1 = Solving.solve1(lines)
-  lazy val res2 = Solving.solve2(lines)
+  lazy val lines = os.read.lines(os.pwd / "2024" / "21" / "21.test.input.txt")
+  lazy val res1  = Solving.solve1(lines)
+  lazy val res2  = Solving.solve2(lines)
 
 object Main:
-  lazy val lines   = os.read.lines(os.pwd / "2024" / "21" / "21.input.txt")
-  lazy val res1 = Solving.solve1(lines)
-  lazy val res2 = Solving.solve2(lines)
+  lazy val lines = os.read.lines(os.pwd / "2024" / "21" / "21.input.txt")
+  lazy val res1  = Solving.solve1(lines)
+  lazy val res2  = Solving.solve2(lines)
 
 @main
 def run: Unit =
