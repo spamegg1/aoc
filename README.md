@@ -1,4 +1,4 @@
-# Advent of Code 2015-2023, in Scala
+# Advent of Code 2015-2024, in Scala
 
 ![aoc-logo](aoc.png)
 
@@ -12,7 +12,7 @@ From Scala 3.5.0 onward, `scala` is the same as `scala-cli`.
 
 ## Setup
 
-To setup, install Scala, VS Code, Metals, `git` and. Then
+To setup, install Scala, VS Code, Metals, and `git`. Then
 
 ```bash
 git clone https://github.com/spamegg1/aoc
