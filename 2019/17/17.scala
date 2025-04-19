@@ -35,7 +35,27 @@ object Solving:
       then total + pos.x * pos.y
       else total
 
-  def solve2(line: String) = 0L
+  def printPath(line: String) = // result is saved in 17.txt
+    val cpu = Cpu(Parsing.parse(line))
+    val out = cpu
+      .allOut
+      .map(_.toChar)
+      .mkString
+    println(out)
+
+  // Based on the path in 17.txt, written manually:
+  val fullPath   = "R,6,L,12,R,6,R,6,L,12,R,6,L,12,R,6,L,8,L,12,R,12,L,10,L,10,L,12,R,6,L,8,L,12,R,12,L,10,L,10,L,12,R,6,L,8,L,12,R,12,L,10,L,10,L,12,R,6,L,8,L,12,R,6,L,12,R,6"
+  val mainRoutine = "A,A,B,C,B,C,B,C,B,A"
+  val functionA   = "R,6,L,12,R,6" // figured out these by looking at repeating patterns.
+  val functionB   = "L,12,R,6,L,8,L,12"
+  val functionC   = "R,12,L,10,L,10"
+  val videoFeed   = "n" // no, we don't want video feed
+  val movements = Seq(mainRoutine, functionA, functionB, functionC, videoFeed)
+
+  def solve2(line: String) =
+    val cpu = Cpu(Parsing.parse(line).updated(0, 2L))
+    val input = movements.flatMap(_ + "\n").map(_.toLong) // convert to ASCII
+    cpu.withIn(input*).allOut.last
 
 object Main:
   lazy val file = os.pwd / "2019" / "17" / "17.input.txt"
@@ -46,4 +66,4 @@ object Main:
 @main
 def run: Unit =
   println(Main.res1) // part 1: 13580
-  println(Main.res2) // part 2:
+  println(Main.res2) // part 2: 1063081
