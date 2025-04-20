@@ -1,152 +1,137 @@
-/*
---- Day 18: Many-Worlds Interpretation ---
-As you approach Neptune, a planetary security system detects you and
-activates a giant tractor beam on Triton! You have no choice but to land.
-
-A scan of the local area reveals only one interesting feature: a massive
-underground vault. You generate a map of the tunnels (your puzzle input).
-The tunnels are too narrow to move diagonally.
-
-Only one entrance (marked @) is present among the open passages (marked .)
-and stone walls (#), but you also detect an assortment of keys
-(shown as lowercase letters) and doors (shown as uppercase letters).
-Keys of a given letter open the door of the same letter:
-a opens A, b opens B, and so on.
-You aren't sure which key you need to disable the tractor beam,
-so you'll need to collect all of them.
-
-For example, suppose you have the following map:
-
-#########
-#b.A.@.a#
-#########
-
-Starting from the entrance (@), you can only access a large door
-(A) and a key (a). Moving toward the door doesn't help you,
-but you can move 2 steps to collect the key, unlocking A in the process:
-
-#########
-#b.....@#
-#########
-
-Then, you can move 6 steps to collect the only other key, b:
-
-#########
-#@......#
-#########
-
-So, collecting every key took a total of 8 steps.
-
-Here is a larger example:
-
-########################
-#f.D.E.e.C.b.A.@.a.B.c.#
-######################.#
-#d.....................#
-########################
-
-The only reasonable move is to take key a and unlock door A:
-
-########################
-#f.D.E.e.C.b.....@.B.c.#
-######################.#
-#d.....................#
-########################
-
-Then, do the same with key b:
-
-########################
-#f.D.E.e.C.@.........c.#
-######################.#
-#d.....................#
-########################
-
-...and the same with key c:
-
-########################
-#f.D.E.e.............@.#
-######################.#
-#d.....................#
-########################
-
-Now, you have a choice between keys d and e. While key e is closer,
-collecting it now would be slower in the long run than collecting
-key d first, so that's the best choice:
-
-########################
-#f...E.e...............#
-######################.#
-#@.....................#
-########################
-
-Finally, collect key e to unlock door E, then collect key f,
-taking a grand total of 86 steps.
-
-Here are a few more examples:
-
-########################
-#...............b.C.D.f#
-#.######################
-#.....@.a.B.c.d.A.e.F.g#
-########################
-
-Shortest path is 132 steps: b, a, c, d, f, e, g
-
-#################
-#i.G..c...e..H.p#
-########.########
-#j.A..b...f..D.o#
-########@########
-#k.E..a...g..B.n#
-########.########
-#l.F..d...h..C.m#
-#################
-
-Shortest paths are 136 steps;
-one is: a, f, b, j, g, n, h, d, l, o, e, p, c, i, k, m
-
-########################
-#@..............ac.GI.b#
-###d#e#f################
-###A#B#C################
-###g#h#i################
-########################
-
-Shortest paths are 81 steps; one is: a, c, f, i, d, g, b, e, h
-
-How many steps is the shortest path that collects all of the keys?
-
- */
 package aoc2019.day18
 
+import collection.mutable.{Map => MMap, PriorityQueue => PQueue}
+
 object DataDefs:
-  ???
+  type Pos     = (x: Int, y: Int)
+  type Tunnels = Map[Pos, Char]
+  type Keys    = Set[Pos]
+  type Robots  = Set[Pos]
+
+  extension (p: Pos)
+    def delta(dx: Int, dy: Int): Pos = (p.x + dx, p.y + dy)
+    def neighbors = Seq(p.delta(0, -1), p.delta(0, 1), p.delta(-1, 0), p.delta(1, 0))
+
+  case class Move(from: Pos, to: Pos, cost: Int, neededKeys: Set[Char])
+
+  extension (c: Char)
+    def isRobot = c == '@'
+    def isWall  = c == '#'
+    def isKey   = 'a' <= c && c <= 'z'
+    def isDoor  = 'A' <= c && c <= 'Z'
 
 object Parsing:
   import DataDefs.*
-  def parseLine(line: String)   = ???
-  def parse(lines: Seq[String]) = lines map parseLine
+
+  def parse(lines: Seq[String]): (Tunnels, Keys, Robots) =
+    val tunnels =
+      for
+        y <- lines.indices
+        x <- lines.head.indices
+      yield (x = x, y = y) -> lines(y)(x)
+    val remainingKeys = tunnels.filter((_, letter) => letter.isKey).map(_._1)
+    val robots        = tunnels.filter((_, letter) => letter.isRobot).map(_._1)
+    (tunnels.toMap, remainingKeys.toSet, robots.toSet)
 
 object Solving:
   import DataDefs.*
-  def solve1(lines: Seq[String]) = 0L
-  def solve2(lines: Seq[String]) = 0L
+
+  def dijkstra(tunnels: Tunnels, start: Pos): Seq[Move] =
+    val cost       = MMap(start -> 0)
+    val keysNeeded = MMap(start -> Set.empty[Char])
+    val todo       = PQueue(start)(Ordering.by(cost))
+
+    while todo.nonEmpty do
+      val pos = todo.dequeue()
+      pos.neighbors.view
+        .filter(neighbor => !tunnels(neighbor).isWall)
+        .filter(neighbor => !cost.contains(neighbor) || cost(pos) + 1 < cost(neighbor))
+        .foreach: neighbor =>
+          cost(neighbor) = cost(pos) + 1
+          keysNeeded(neighbor) =
+            if tunnels(neighbor).isDoor
+            then keysNeeded(pos) + tunnels(neighbor).toLower
+            else keysNeeded(pos)
+          todo.enqueue(neighbor)
+
+    cost.keys
+      .map(p => Move(start, p, cost(p), keysNeeded(p)))
+      .toSeq
+
+  def explore(tunnels: Tunnels, remainingKeys: Keys, robots: Robots): Int =
+    val cache = MMap[(Set[Pos], Set[Char]), Int]()
+
+    val routes = (remainingKeys ++ robots)
+      .flatMap(pos => dijkstra(tunnels, pos))
+      .map(move => (move.from, move.to) -> move)
+      .toMap
+
+    def helper(
+        remaining: Set[Pos],
+        robots: Set[Pos],
+        collected: Set[Char],
+        total: Int,
+        result: Int
+    ): Int =
+      val cachedRes = cache.getOrElse((robots, collected), Int.MaxValue)
+      if total >= result || total >= cachedRes then result
+      else if remaining.isEmpty then total
+      else
+        cache((robots, collected)) = total
+        val candidates =
+          for
+            from <- robots
+            to   <- remaining
+          yield routes.get((from, to))
+
+        candidates.toSeq.flatten
+          .filter(_.neededKeys.subsetOf(collected))
+          .sortBy(_.cost)
+          .foldLeft(result):
+            case (result, Move(from, to, cost, _)) =>
+              helper(
+                remaining - to,
+                robots - from + to,
+                collected + tunnels(to),
+                total + cost,
+                result
+              )
+    end helper
+    helper(remainingKeys, robots, Set(), 0, Int.MaxValue)
+
+  def solve(lines: Seq[String]) =
+    val (tunnels, remainingKeys, robots) = Parsing.parse(lines)
+    explore(tunnels, remainingKeys, robots)
 
 object Test:
-  private lazy val lines1 = os.read.lines(os.pwd / "2019" / "18" / "18.test.input.txt")
-  private lazy val lines2 = os.read.lines(os.pwd / "2019" / "18" / "18.test.input.2.txt")
-  private lazy val lines3 = os.read.lines(os.pwd / "2019" / "18" / "18.test.input.3.txt")
-  private lazy val lines4 = os.read.lines(os.pwd / "2019" / "18" / "18.test.input.4.txt")
-  private lazy val lines5 = os.read.lines(os.pwd / "2019" / "18" / "18.test.input.5.txt")
-  private lazy val lines  = List(lines1, lines2, lines3, lines4, lines5)
-  lazy val res1           = lines map Solving.solve1
-  lazy val res2           = lines map Solving.solve2
-// Test.res1 // part 1: 8,86,132,136,81
-// Test.res2 // part 2:
+  lazy val path   = os.pwd / "2019" / "18"
+  lazy val file1  = path / "18.test.input.1.txt"
+  lazy val file2  = path / "18.test.input.2.txt"
+  lazy val file3  = path / "18.test.input.3.txt"
+  lazy val file4  = path / "18.test.input.4.txt"
+  lazy val file5  = path / "18.test.input.5.txt"
+  lazy val file6  = path / "18.test.input.6.txt"
+  lazy val file7  = path / "18.test.input.7.txt"
+  lazy val file8  = path / "18.test.input.8.txt"
+  lazy val file9  = path / "18.test.input.9.txt"
+  lazy val files1 = Seq(file1, file2, file3, file4, file5)
+  lazy val files2 = Seq(file6, file7, file8, file9)
+  lazy val lines1 = files1 map os.read.lines
+  lazy val lines2 = files2 map os.read.lines
+  lazy val res1   = lines1 map Solving.solve
+  lazy val res2   = lines2 map Solving.solve
 
 object Main:
-  lazy val lines = os.read.lines(os.pwd / "2019" / "18" / "18.input.txt")
-  lazy val res1  = Solving.solve1(lines)
-  lazy val res2  = Solving.solve2(lines)
-// Main.res1 // part 1:
-// Main.res2 // part 2:
+  lazy val file1 = os.pwd / "2019" / "18" / "18.input.txt"
+  lazy val file2 = os.pwd / "2019" / "18" / "18.input.patched.txt"
+  lazy val line1 = os.read.lines(file1)
+  lazy val line2 = os.read.lines(file2)
+  lazy val res1  = Solving.solve(line1)
+  lazy val res2  = Solving.solve(line2)
+
+@main
+def run: Unit =
+  println(Test.res1) // part 1: 8,86,132,136,81
+  println(Test.res2) // part 2: 8,24,32,72
+  println(Main.res1) // part 1: 3764
+  println(Main.res2) // part 2: 1738
