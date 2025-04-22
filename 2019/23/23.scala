@@ -1,76 +1,80 @@
-/*
---- Day 23: Category Six ---
-The droids have finished repairing as much of the ship as they can.
-Their report indicates that this was a Category 6 disaster -
-not because it was that bad, but because it destroyed the stockpile
-of Category 6 network cables as well as most of the ship's network infrastructure.
-
-You'll need to rebuild the network from scratch.
-
-The computers on the network are standard Intcode computers
-that communicate by sending packets to each other.
-There are 50 of them in total, each running a copy of
-the same Network Interface Controller (NIC) software (your puzzle input).
-The computers have network addresses 0 through 49;
-when each computer boots up, it will request its network address
-via a single input instruction. Be sure to give each computer a unique network address.
-
-Once a computer has received its network address,
-it will begin doing work and communicating over the network
-by sending and receiving packets. All packets contain two
-values named X and Y. Packets sent to a computer are queued
-by the recipient and read in the order they are received.
-
-To send a packet to another computer, the NIC will use three
-output instructions that provide the destination address of
-the packet followed by its X and Y values.
-For example, three output instructions that provide the values
-10, 20, 30 would send a packet with X=20 and Y=30 to the computer with address 10.
-
-To receive a packet from another computer, the NIC will use an input instruction.
-If the incoming packet queue is empty, provide -1.
-Otherwise, provide the X value of the next packet;
-the computer will then use a second input instruction
-to receive the Y value for the same packet.
-Once both values of the packet are read in this way,
-the packet is removed from the queue.
-
-Note that these input and output instructions never block.
-Specifically, output instructions do not wait for the sent
-packet to be received - the computer might send multiple
-packets before receiving any. Similarly, input instructions
-do not wait for a packet to arrive - if no packet is waiting,
-input instructions should receive -1.
-
-Boot up all 50 computers and attach them to your network.
-What is the Y value of the first packet sent to address 255?
-
- */
 package aoc2019.day23
 
+import aoc2019.day09.DataDefs.*
+
 object DataDefs:
-  ???
+  case class Comp(cpu: Cpu, in: Seq[Long], out: Seq[Long]):
+    val nextCpu =
+      if cpu.in.nonEmpty then cpu.next
+      else if in.nonEmpty then cpu.withIn(in*).next
+      else cpu.withIn(-1).next
+    def nextIn = if cpu.in.nonEmpty then in else Seq()
+    def nextOut = nextCpu.state match
+      case State.Out(value) => out.appended(value)
+      case _                => out
+    def next = Comp(nextCpu, nextIn, nextOut)
+
+  type Network = Seq[Comp]
+  type NAT     = Seq[Long]
+
+  extension (network: Network)
+    def step(nat: NAT, adr: Int): (Network, NAT) =
+      val nextNetwork = network.map(_.next)
+      nextNetwork.zipWithIndex
+        .foldLeft((nextNetwork, nat)):
+          case ((network, nat), (comp, src)) =>
+            if comp.out.length != 3 then (network, nat)
+            else
+              val dest    = comp.out.head.toInt
+              val nextSrc = comp.copy(out = Seq())
+              if dest == adr then (network.updated(src, nextSrc), comp.out.tail)
+              else
+                val nextIn   = network(dest).in ++ comp.out.tail
+                val nextDest = network(dest).copy(in = nextIn)
+                (network.updated(src, nextSrc).updated(dest, nextDest), nat)
+
+  object Network:
+    def apply(code: Seq[Long]) = Seq.tabulate(50)(i => Comp(Cpu(code), Seq(i), Seq()))
 
 object Parsing:
-  import DataDefs.*
-  def parseLine(line: String)   = ???
-  def parse(lines: Seq[String]) = lines map parseLine
+  def parse(line: String) = line.split(",").toSeq.map(_.toLong)
 
 object Solving:
   import DataDefs.*
-  def solve1(address: Int)(line: String) = 0L
-  def solve2(address: Int)(line: String) = 0L
 
-object Test:
-  private lazy val lines = os.read.lines(os.pwd / "2019" / "23" / "23.test.input.txt")
-  lazy val res1          = lines map Solving.solve1(255)
-  lazy val res2          = lines map Solving.solve2(255)
-// Test.res1 // part 1:
-// Test.res2 // part 2:
+  @annotation.tailrec
+  def helper1(network: Network, nat: NAT, adr: Int): Long = network.step(nat, adr) match
+    case (_, Seq(_, y))         => y
+    case (nextNetwork, nextNat) => helper1(nextNetwork, nextNat, adr)
+
+  def solve1(adr: Int)(line: String) = helper1(Network(Parsing.parse(line)), Seq(), adr)
+
+  @annotation.tailrec
+  def helper2(nw: Network, nat: NAT, idle: Int, prevIdleY: Option[Long], adr: Int): Long =
+    val (nextNw, nextNat, nextIdle, nextIdleY) =
+      if idle < 700 then // rough guess
+        val (nextNw, nextNat) = nw.step(nat, adr)
+        val active            = nw.exists(comp => comp.in.nonEmpty || comp.out.nonEmpty)
+        val nextIdle          = if active then 0 else idle + 1
+        (nextNw, nextNat, nextIdle, None)
+      else
+        val nextNw = nw.updated(0, nw(0).copy(in = nat))
+        (nextNw, nat, 0, Some(nat.last))
+
+    (prevIdleY, nextIdleY) match
+      case (Some(previous), Some(next)) if previous == next => next
+      case _ => helper2(nextNw, nextNat, nextIdle, nextIdleY.orElse(prevIdleY), adr)
+
+  def solve2(adr: Int)(line: String) =
+    helper2(Network(Parsing.parse(line)), Seq(), 0, None, adr)
 
 object Main:
-  lazy val line = os.read.lines(os.pwd / "2019" / "23" / "23.input.txt").head
+  lazy val file = os.pwd / "2019" / "23" / "23.input.txt"
+  lazy val line = os.read.lines(file).head
   lazy val res1 = Solving.solve1(255)(line)
   lazy val res2 = Solving.solve2(255)(line)
-// Main.res1 // part 1:
-// Main.res2 // part 2:
+
+@main
+def run: Unit =
+  println(Main.res1) // part 1: 27061
+  println(Main.res2) // part 2: 19406
