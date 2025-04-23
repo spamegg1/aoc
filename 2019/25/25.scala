@@ -1,65 +1,48 @@
-/*
---- Day 25: Cryostasis ---
-As you approach Santa's ship, your sensors report two important details:
-First, that you might be too late: the internal temperature is -40 degrees.
-Second, that one faint life signature is somewhere on the ship.
-
-The airlock door is locked with a code;
-your best option is to send in a small droid to investigate the situation.
-You attach your ship to Santa's, break a small hole in the hull,
-and let the droid run in before you seal it up again.
-Before your ship starts freezing, you detach your ship and
-set it to automatically stay within range of Santa's ship.
-
-This droid can follow basic instructions and report on its surroundings;
-you can communicate with it through an Intcode program (your puzzle input)
-running on an ASCII-capable computer.
-
-As the droid moves through its environment, it will describe what it encounters.
-When it says Command?, you can give it a single instruction terminated with a
-newline (ASCII code 10). Possible instructions are:
-  Movement via north, south, east, or west.
-  To take an item the droid sees in the environment,
-    use the command take <name of item>. For example,
-    if the droid reports seeing a red ball, you can pick it up with take red ball.
-  To drop an item the droid is carrying, use the command drop <name of item>.
-    For example, if the droid is carrying a green ball,
-    you can drop it with drop green ball.
-  To get a list of all of the items the droid is currently carrying,
-    use the command inv (for "inventory").
-
-Extra spaces or other characters aren't allowed - instructions must be provided precisely.
-
-Santa's ship is a Reindeer-class starship; these ships use pressure-sensitive
-floors to determine the identity of droids and crew members.
-The standard configuration for these starships is for all droids to weigh
-exactly the same amount to make them easier to detect.
-If you need to get past such a sensor, you might be able to reach the
-correct weight by carrying items from the environment.
-
-Look around the ship and see if you can find the password for the main airlock.
-
- */
 package aoc2019.day25
 
-object DataDefs:
-  ???
+import aoc2019.day09.DataDefs.*
 
 object Parsing:
-  import DataDefs.*
-  def parseLine(line: String)   = ???
-  def parse(lines: Seq[String]) = lines map parseLine
+  def parse(line: String) = line.split(",").toSeq.map(_.toLong)
 
 object Solving:
-  import DataDefs.*
-  def solve(lines: String) = 0L
+  def desc(cpu: Cpu): Cpu =
+    import State.*
 
-object Test:
-  private lazy val lines = os.read.lines(os.pwd / "2019" / "25" / "25.test.input.txt")
-  lazy val res           = lines map Solving.solve
-// Test.res // part 1:
+    @annotation.tailrec
+    def helper(cpu: Cpu, msg: String): Cpu =
+      if msg.endsWith("Command?\n") ||
+        msg.endsWith("!\n\n") ||
+        msg.endsWith("\"\n")
+      then
+        print(msg)
+        cpu
+      else
+        val nextCpu = cpu.next
+        val nextMsg = nextCpu.state match
+          case Out(value) => msg.appended(value.toChar)
+          case _          => msg
+        helper(nextCpu, nextMsg)
+    helper(cpu, "")
+
+  def solve(line: String): Unit =
+    @annotation.tailrec
+    def helper(cpu: Cpu, command: String, precanned: Seq[String]): Unit =
+      if command == "exit" then ()
+      else
+        val input   = command.map(_.toLong).appended(10L)
+        val nextCpu = desc(cpu.withIn(input*))
+        val (nextCommand, nextPrecanned) = precanned match
+          case first +: tail => (first, tail)
+          case _             => (Console.in.readLine(), Seq())
+        helper(nextCpu, nextCommand, nextPrecanned)
+    val code = Parsing.parse(line)
+    helper(Cpu(code), "", Seq())
 
 object Main:
-  lazy val line = os.read.lines(os.pwd / "2019" / "25" / "25.input.txt").head
+  lazy val file = os.pwd / "2019" / "25" / "25.input.txt"
+  lazy val line = os.read.lines(file).head
   lazy val res  = Solving.solve(line)
-// Main.res // part 1:
+
+@main
+def run: Unit = println(Main.res) // play the game manually! Pretty annoying...
