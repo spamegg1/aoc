@@ -45,4 +45,6 @@ object Main:
   lazy val res  = Solving.solve(line)
 
 @main
-def run: Unit = println(Main.res) // play the game manually! Pretty annoying...
+def run: Unit =
+  // play the game manually! Pretty annoying...
+  println(Main.res) // 100667393
