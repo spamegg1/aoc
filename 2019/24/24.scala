@@ -1,108 +1,77 @@
-/*
---- Day 24: Planet of Discord ---
-You land on Eris, your last stop before reaching Santa.
-As soon as you do, your sensors start picking up strange
-life forms moving around: Eris is infested with bugs!
-With an over 24-hour roundtrip for messages between you and Earth,
-you'll have to deal with this problem on your own.
-
-Eris isn't a very large place; a scan of the entire area fits
-into a 5x5 grid (your puzzle input). The scan shows bugs (#) and empty spaces (.).
-
-Each minute, The bugs live and die based on the number of bugs in the four adjacent tiles:
-  A bug dies (becoming an empty space) unless there is exactly one bug adjacent to it.
-  An empty space becomes infested with a bug if exactly one or two bugs are adjacent to it
-
-Otherwise, a bug or empty space remains the same.
-(Tiles on the edges of the grid have fewer than four adjacent tiles;
-the missing tiles count as empty space.) This process happens in every
-location simultaneously; that is, within the same minute, the number
-of adjacent bugs is counted for every tile first, and then the tiles are updated.
-
-Here are the first few minutes of an example scenario:
-
-Initial state:
-....#
-#..#.
-#..##
-..#..
-#....
-
-After 1 minute:
-#..#.
-####.
-###.#
-##.##
-.##..
-
-After 2 minutes:
-#####
-....#
-....#
-...#.
-#.###
-
-After 3 minutes:
-#....
-####.
-...##
-#.##.
-.##.#
-
-After 4 minutes:
-####.
-....#
-##..#
-.....
-##...
-
-To understand the nature of the bugs, watch for the first time a layout
-of bugs and empty spaces matches any previous layout.
-In the example above, the first layout to appear twice is:
-
-.....
-.....
-.....
-#....
-.#...
-
-To calculate the biodiversity rating for this layout,
-consider each tile left-to-right in the top row,
-then left-to-right in the second row, and so on.
-Each of these tiles is worth biodiversity points
-equal to increasing powers of two: 1, 2, 4, 8, 16, 32, and so on.
-Add up the biodiversity points for tiles with bugs;
-in this example, the 16th tile (32768 points) and 22nd tile
-(2097152 points) have bugs, a total biodiversity rating of 2129920.
-
-What is the biodiversity rating for the first layout that appears twice?
-
- */
 package aoc2019.day24
 
 object DataDefs:
-  ???
+  type Pos       = (x: Int, y: Int, z: Int)
+  type Grid      = Set[Pos]
+  type Neighbors = Pos => Seq[Pos]
+
+  extension (p: Pos)
+    def delta(dx: Int, dy: Int): Pos = (p.x + dx, p.y + dy, p.z)
+    def orthogonal: Seq[Pos]         = Seq((1, 0), (-1, 0), (0, 1), (0, -1)).map(p.delta)
+    def neighbours2D: Seq[Pos] =
+      p.orthogonal.filter(q => q.x >= 0 && q.x < 5 && q.y >= 0 && q.y < 5)
+    def neighbours3D: Seq[Pos] = p.orthogonal.flatMap:
+      case (-1, y, z) => Set((1, 2, z - 1))
+      case (5, y, z)  => Set((3, 2, z - 1))
+      case (x, -1, z) => Set((2, 1, z - 1))
+      case (x, 5, z)  => Set((2, 3, z - 1))
+      case (2, 2, z) =>
+        p match
+          case (2, 1, z) => Set.tabulate(5)(x => (x, 0, z + 1))
+          case (2, 3, z) => Set.tabulate(5)(x => (x, 4, z + 1))
+          case (1, 2, z) => Set.tabulate(5)(y => (0, y, z + 1))
+          case (3, 2, z) => Set.tabulate(5)(y => (4, y, z + 1))
+      case other => Set(other)
+
+  extension (g: Grid)
+    def step(neighbors: Neighbors): Grid =
+      val candidates = g ++ g.flatMap(neighbors)
+      candidates.flatMap: pos =>
+        (g.contains(pos), neighbors(pos).count(g.contains)) match
+          case (_, 1)     => Some(pos)
+          case (false, 2) => Some(pos)
+          case _          => None
 
 object Parsing:
   import DataDefs.*
-  def parseLine(line: String)   = ???
-  def parse(lines: Seq[String]) = lines map parseLine
+  def parse(lines: Seq[String]): Set[Pos] = Set
+    .tabulate(5, 5)((x, y) => Option.when(lines(y)(x) == '#')((x, y, 0)))
+    .flatten
+    .flatten
 
 object Solving:
   import DataDefs.*
-  def solve1(lines: Seq[String]) = 0L
-  def solve2(lines: Seq[String]) = 0L
+
+  @annotation.tailrec
+  def helper(grid: Grid, prev: Set[Grid]): Int =
+    val next = grid.step(_.neighbours2D)
+    if prev.contains(next)
+    then next.map(pos => 1 << (pos.x + 5 * pos.y)).sum
+    else helper(next, prev + next)
+
+  def solve1(lines: Seq[String]) = helper(Parsing.parse(lines), Set())
+
+  def solve2(lines: Seq[String])(minutes: Int) = Iterator
+    .iterate(Parsing.parse(lines))(_.step(_.neighbours3D))
+    .drop(minutes)
+    .next()
+    .size
 
 object Test:
-  private lazy val lines = os.read.lines(os.pwd / "2019" / "24" / "24.test.input.txt")
-  lazy val res1          = Solving.solve1(lines)
-  lazy val res2          = Solving.solve2(lines)
-// Test.res1 // part 1: 2129920
-// Test.res2 // part 2:
+  lazy val file  = os.pwd / "2019" / "24" / "24.test.input.txt"
+  lazy val lines = os.read.lines(file)
+  lazy val res1  = Solving.solve1(lines)
+  lazy val res2  = Solving.solve2(lines)(200)
 
 object Main:
-  lazy val lines = os.read.lines(os.pwd / "2019" / "24" / "24.input.txt")
+  lazy val file  = os.pwd / "2019" / "24" / "24.input.txt"
+  lazy val lines = os.read.lines(file)
   lazy val res1  = Solving.solve1(lines)
-  lazy val res2  = Solving.solve2(lines)
-// Main.res1 // part 1:
-// Main.res2 // part 2:
+  lazy val res2  = Solving.solve2(lines)(200)
+
+@main
+def run: Unit =
+  println(Test.res1) // part 1: 2129920
+  println(Test.res2) // part 2: 1922
+  println(Main.res1) // part 1: 32506764
+  println(Main.res2) // part 2: 1963
