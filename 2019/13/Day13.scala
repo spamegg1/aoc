@@ -40,9 +40,10 @@ object Day13:
 
   def part1(memory: Seq[Long]): Int = IntCode(memory).allOutput
     .grouped(3)
-    .foldLeft(Map.empty[Point, Long]) { case (tiles, Seq(x, y, id)) =>
-      tiles.updated(Point(x, y), id)
-    }
+    .foldLeft(Map.empty[Point, Long]):
+      (tiles, seq) =>
+        val Seq(x, y, id) = seq
+        tiles.updated(Point(x, y), id)
     .values
     .count(_ == 2)
 
@@ -59,13 +60,14 @@ object Day13:
         tiles: Map[Point, Long],
         output: Seq[Long]
     ): (Long, Long, Long, Map[Point, Long]) =
-      output.grouped(3).foldLeft((score, paddle, ball, tiles)) {
-        case ((score, paddle, ball, tiles), Seq(x, y, id)) =>
+      output.grouped(3).foldLeft((score, paddle, ball, tiles)):
+        (quad, seq) =>
+          val (score, paddle, ball, tiles) = quad
+          val Seq(x, y, id) = seq
           val nextScore  = if x == -1 then id else score
           val nextPaddle = if id == 3 then x else paddle
           val nextBall   = if id == 4 then x else ball
           (nextScore, nextPaddle, nextBall, tiles.updated(Point(x, y), id))
-      }
 
     @tailrec
     def play(

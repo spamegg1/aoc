@@ -37,7 +37,7 @@ object Creature:
     def attack(enemies: Map[Pos, Creature], creatures: Set[Creature]): Set[Creature] =
       c.pos.neighbors
         .flatMap(enemies.get)
-        .minOption(Orders.attackOrder) match
+        .minOption(using Orders.attackOrder) match
         case Some(enemy) =>
           val nextHealth = enemy.health - c.dmg
           if nextHealth <= 0 then creatures - enemy
@@ -55,7 +55,7 @@ object World:
         val score     = w.creatures.map(_.turn).min * w.creatures.toSeq.map(_.health).sum
         (winner, survivors, score)
       else
-        val current: Creature   = w.creatures.min(Orders.turnOrder)
+        val current: Creature   = w.creatures.min(using Orders.turnOrder)
         val obstacles: Set[Pos] = w.walls ++ w.creatures.map(_.pos)
         val enemies: Map[Pos, Creature] = w.creatures
           .filter(_.kind != current.kind)

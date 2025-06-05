@@ -39,7 +39,7 @@ object Solving:
   def dijkstra(tunnels: Tunnels, start: Pos): Seq[Move] =
     val cost       = MMap(start -> 0)
     val keysNeeded = MMap(start -> Set.empty[Char])
-    val todo       = PQueue(start)(Ordering.by(cost))
+    val todo       = PQueue(start)(using Ordering.by(cost))
 
     while todo.nonEmpty do
       val pos = todo.dequeue()

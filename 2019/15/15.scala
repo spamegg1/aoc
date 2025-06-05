@@ -34,7 +34,7 @@ object Solving:
     val start  = (x = 0, y = 0)
     val costs  = MMap(start -> 0)
     val order  = Ordering.by[(Pos, Cpu), Int]((pos, _) => costs(pos))
-    val todo   = PQueue(start -> initCpu)(order)
+    val todo   = PQueue(start -> initCpu)(using order)
     var target = Option.empty[(Pos, Cpu)]
 
     while todo.nonEmpty do

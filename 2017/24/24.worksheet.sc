@@ -37,7 +37,7 @@ object Solving:
             total + next.str,
             ord
           )
-        .max(ord)
+        .max(using ord)
 
   def solve(lines: Seq[String])(ordering: Ordering[(Int, Int)]) =
     val comps = Parsing.parse(lines)

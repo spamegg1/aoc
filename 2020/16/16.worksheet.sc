@@ -133,7 +133,7 @@ object DataDefs:
   type Ticket = Seq[Int]
   type Tickets = Seq[Ticket]
   extension (nearbyTickets: Tickets)
-    def transpose: Tickets = // part 2
+    def transp: Tickets = // part 2
       for col <- 0 until nearbyTickets.head.size
       yield for row <- 0 until nearbyTickets.size
       yield nearbyTickets(row)(col)
@@ -188,7 +188,7 @@ object Solving:
     val allRanges = fields.flatMap(_.ranges)
     nearbyTickets
       .filter(_.forall(i => allRanges.exists(_.contains(i)))) // valid
-      .transpose // get columns of nearby tickets: field1, field2, ...
+      .transp // get columns of nearby tickets: field1, field2, ...
       .map(_.map(fields.canContain).intersectAll) // possible names
       .zipWithIndex // we need to keep track of the order
       .sortBy(_._1.size) // start with smallest possible names

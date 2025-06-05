@@ -69,7 +69,7 @@ object Solving:
     val start = (pos = (0, 0), tool = Torch)
     val end   = (pos = target, tool = Torch)
     val cost  = MMap[State, Int](start -> 0)
-    val todo  = PriorityQueue[(State, Int)](start -> 0)(Ordering.by(-_._2))
+    val todo  = PriorityQueue[(State, Int)](start -> 0)(using Ordering.by(-_._2))
     var res   = -1
     def heuristic(state: State) = state.pos.dist(end.pos)
 
