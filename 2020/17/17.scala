@@ -1,9 +1,9 @@
 package aoc2020.day17
 
 object DataDefs:
-  type Pos = (x: Int, y: Int, z: Int, w: Int)
-  type Dirs = Set[Pos]
-  type Grid = Set[Pos]
+  type Pos       = (x: Int, y: Int, z: Int, w: Int)
+  type Dirs      = Set[Pos]
+  type Grid      = Set[Pos]
   type Neighbors = Set[Pos]
 
   extension (p: Pos)
@@ -21,7 +21,7 @@ object DataDefs:
 object Parsing:
   import DataDefs.*
   def parse(lines: Seq[String]): Grid =
-    val width = lines.head.size
+    val width  = lines.head.size
     val height = lines.size
     val points =
       for
@@ -34,46 +34,41 @@ object Parsing:
 object Solving:
   import DataDefs.*
 
-  def solve1(lines: Seq[String]) =
-    val grid = Parsing.parse(lines)
-    val dirs: Dirs = Seq
-      .tabulate(3, 3, 3): (x, y, z) =>
-        (x - 1, y - 1, z - 1, 0)
-      .flatten
-      .flatten
-      .toSet
-    Iterator
-      .iterate(grid)(_.step(dirs))
-      .drop(6)
-      .next
-      .size
+  def solve(dirs: Dirs)(lines: Seq[String]) = Iterator
+    .iterate(Parsing.parse(lines))(_.step(dirs))
+    .drop(6)
+    .next
+    .size
 
-  def solve2(lines: Seq[String]) =
-    val grid = Parsing.parse(lines)
-    val dirs: Dirs = Seq
-      .tabulate(3, 3, 3, 3): (x, y, z, w) =>
-        (x - 1, y - 1, z - 1, w - 1)
-      .flatten
-      .flatten
-      .flatten
-      .toSet
-    Iterator
-      .iterate(grid)(_.step(dirs))
-      .drop(6)
-      .next
-      .size
+  val dirs1: Dirs = Seq
+    .tabulate(3, 3, 3): (x, y, z) =>
+      (x - 1, y - 1, z - 1, 0)
+    .flatten
+    .flatten
+    .toSet
+
+  val dirs2: Dirs = Seq
+    .tabulate(3, 3, 3, 3): (x, y, z, w) =>
+      (x - 1, y - 1, z - 1, w - 1)
+    .flatten
+    .flatten
+    .flatten
+    .toSet
+
+  val solve1 = solve(dirs1)
+  val solve2 = solve(dirs2)
 
 object Test:
-  lazy val file = os.pwd / "2020" / "17" / "17.test.input.txt"
+  lazy val file  = os.pwd / "2020" / "17" / "17.test.input.txt"
   lazy val lines = os.read.lines(file)
-  lazy val res1 = Solving.solve1(lines)
-  lazy val res2 = Solving.solve2(lines)
+  lazy val res1  = Solving.solve1(lines)
+  lazy val res2  = Solving.solve2(lines)
 
 object Main:
-  lazy val file = os.pwd / "2020" / "17" / "17.input.txt"
+  lazy val file  = os.pwd / "2020" / "17" / "17.input.txt"
   lazy val lines = os.read.lines(file)
-  lazy val res1 = Solving.solve1(lines)
-  lazy val res2 = Solving.solve2(lines)
+  lazy val res1  = Solving.solve1(lines)
+  lazy val res2  = Solving.solve2(lines)
 
 @main
 def run: Unit =
