@@ -1,7 +1,5 @@
 package aoc2020.day20
 
-import AdventOfCode2020.Day20.corners
-
 object DataDefs:
   val seaMonster = Seq(
     (0, 1),
