@@ -1,83 +1,39 @@
-/*
---- Day 5: Hydrothermal Venture ---
-You come across a field of hydrothermal vents on the ocean floor!
-These vents constantly produce large, opaque clouds,
-so it would be best to avoid them if possible.
-
-They tend to form in lines; the submarine helpfully produces a list of
-nearby lines of vents (your puzzle input) for you to review. For example:
-
-0,9 -> 5,9
-8,0 -> 0,8
-9,4 -> 3,4
-2,2 -> 2,1
-7,0 -> 7,4
-6,4 -> 2,0
-0,9 -> 2,9
-3,4 -> 1,4
-0,0 -> 8,8
-5,5 -> 8,2
-
-Each line of vents is given as a line segment in the format
-x1,y1 -> x2,y2 where x1,y1 are the coordinates of one end the line
-segment and x2,y2 are the coordinates of the other end.
-These line segments include the points at both ends. In other words:
-  An entry like 1,1 -> 1,3 covers points 1,1, 1,2, and 1,3.
-  An entry like 9,7 -> 7,7 covers points 9,7, 8,7, and 7,7.
-
-For now, only consider horizontal and vertical lines:
-  lines where either x1 = x2 or y1 = y2.
-
-So, the horizontal and vertical lines from the above list would
-produce the following diagram:
-
-.......1..
-..1....1..
-..1....1..
-.......1..
-.112111211
-..........
-..........
-..........
-..........
-222111....
-
-In this diagram, the top left corner is 0,0 and the bottom right
-corner is 9,9. Each position is shown as the number of lines which
-cover that point or . if no line covers that point.
-The top-left pair of 1s, for example, comes from 2,2 -> 2,1;
-the very bottom row is formed by the overlapping lines 0,9 -> 5,9 and 0,9 -> 2,9.
-
-To avoid the most dangerous areas, you need to determine the number
-of points where at least two lines overlap. In the above example,
-this is anywhere in the diagram with a 2 or larger - a total of 5 points.
-
-Consider only horizontal and vertical lines.
-At how many points do at least two lines overlap?
-
- */
 object DataDefs:
-  ???
+  case class Line(x1: Int, y1: Int, x2: Int, y2: Int):
+    def isOrthogonal: Boolean = x1 == x2 || y1 == y2
+    def points: Seq[(Int, Int)] =
+      val xs = x1 to x2 by (if x1 < x2 then 1 else -1)
+      val ys = y1 to y2 by (if y1 < y2 then 1 else -1)
+      xs.zipAll(ys, x1, y1)
 
 object Parsing:
   import DataDefs.*
-  ???
+  def parse(lines: Seq[String]): Seq[Line] = lines.map: line =>
+    val Array(x1, y1, x2, y2) = line.split("\\D+").map(_.toInt)
+    Line(x1, y1, x2, y2)
 
 object Solving:
   import DataDefs.*
-  def solve1(lines: Seq[String]) = 0L
-  def solve2(lines: Seq[String]) = 0L
+  def overlap(lines: Seq[Line]): Int = lines
+    .flatMap(_.points)
+    .groupBy(identity)
+    .count(_._2.length > 1)
+
+  def solve1(lines: Seq[String]) = overlap(Parsing.parse(lines).filter(_.isOrthogonal))
+  def solve2(lines: Seq[String]) = overlap(Parsing.parse(lines))
 
 object Test:
-  private lazy val lines = os.read.lines(os.pwd / "2021" / "05" / "05.test.input.txt")
-  lazy val res1 = Solving.solve1(lines)
-  lazy val res2 = Solving.solve2(lines)
-// Test.res1 // part 1:
-// Test.res2 // part 2:
+  val file  = os.pwd / "2021" / "05" / "05.test.input.txt"
+  val lines = os.read.lines(file)
+  val res1  = Solving.solve1(lines)
+  val res2  = Solving.solve2(lines)
+// Test.res1 // part 1: 5
+// Test.res2 // part 2: 12
 
 object Main:
-  private lazy val lines = os.read.lines(os.pwd / "2021" / "05" / "05.input.txt")
-  lazy val res1 = Solving.solve1(lines)
-  lazy val res2 = Solving.solve2(lines)
-// Main.res1 // part 1:
-// Main.res2 // part 2:
+  val file  = os.pwd / "2021" / "05" / "05.input.txt"
+  val lines = os.read.lines(file)
+  val res1  = Solving.solve1(lines)
+  val res2  = Solving.solve2(lines)
+// Main.res1 // part 1: 5698
+// Main.res2 // part 2: 15463
