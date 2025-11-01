@@ -52,10 +52,9 @@ object Solving:
     val mem = Parsing.parse(line)
     Cpu(mem).allOut
       .grouped(3)
-      .foldLeft(Map.empty[Pos, Long]):
-        (tiles, seq) =>
-          val Seq(x, y, id) = seq
-          tiles.updated((x, y), id)
+      .foldLeft(Map.empty[Pos, Long]): (tiles, seq) =>
+        val Seq(x, y, id) = seq
+        tiles.updated((x, y), id)
       .values
       .count(_ == 2)
 
