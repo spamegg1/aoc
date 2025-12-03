@@ -1,15 +1,6 @@
 package aoc2025.day03
 
-object DataDefs:
-  ???
-
-object Parsing:
-  import DataDefs.*
-  ???
-
 object Solving:
-  import DataDefs.*
-
   @annotation.tailrec
   def joltage(batteries: Int)(acc: Long)(bank: String): Long =
     if batteries == 0 then acc
