@@ -2,7 +2,11 @@ package aoc2025.day04
 
 object DataDefs:
   val Deltas = Seq(-1, 0, 1)
-  val Access = 4
+  val Limit  = 4
+  val Roll   = '@'
+  val Access = 'x'
+  val Empty  = '.'
+  val Chars  = Set(Roll, Access)
 
   case class Grid(grid: Array[Array[Char]]):
     def accessible: Int =
@@ -10,7 +14,7 @@ object DataDefs:
       for
         row <- grid.indices
         col <- grid(row).indices
-        if grid(row)(col) == '@'
+        if grid(row)(col) == Roll
         nearby =
           for
             di <- Deltas
@@ -19,12 +23,12 @@ object DataDefs:
             char = grid
               .lift(row + di)
               .flatMap(_.lift(col + dj))
-              .getOrElse('.')
+              .getOrElse(Empty)
           yield char
       do
-        val neighbors = nearby.count(ch => ch == '@' || ch == 'x')
-        if neighbors < Access then
-          grid(row)(col) = 'x'
+        val neighbors = nearby.count(Chars.contains)
+        if neighbors < Limit then
+          grid(row)(col) = Access
           count += 1
       count
 
@@ -35,11 +39,11 @@ object DataDefs:
         done = true
         count += accessible
         for
-          i <- grid.indices
-          j <- grid(i).indices
-          if grid(i)(j) == 'x'
+          row <- grid.indices
+          col <- grid(row).indices
+          if grid(row)(col) == Access
         do
-          grid(i)(j) = '.'
+          grid(row)(col) = Empty
           done = false
       count
 
