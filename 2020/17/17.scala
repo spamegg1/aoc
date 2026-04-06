@@ -37,7 +37,7 @@ object Solving:
   def solve(dirs: Dirs)(lines: Seq[String]) = Iterator
     .iterate(Parsing.parse(lines))(_.step(dirs))
     .drop(6)
-    .next
+    .next()
     .size
 
   val dirs1: Dirs = Seq
