@@ -21,6 +21,7 @@ object DataDefs:
           case (2, 3, z) => Set.tabulate(5)(x => (x, 4, z + 1))
           case (1, 2, z) => Set.tabulate(5)(y => (0, y, z + 1))
           case (3, 2, z) => Set.tabulate(5)(y => (4, y, z + 1))
+          case _         => Set()
       case other => Set(other)
 
   extension (g: Grid)
