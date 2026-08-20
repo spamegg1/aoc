@@ -1,78 +1,77 @@
-/*
---- Day 15: Chiton ---
-You've almost reached the exit of the cave, but the walls are getting closer together.
-Your submarine can barely still fit, though; the main problem is
-that the walls of the cave are covered in chitons,
-and it would be best not to bump any of them.
-
-The cavern is large, but has a very low ceiling,
-restricting your motion to two dimensions.
-The shape of the cavern resembles a square;
-a quick scan of chiton density produces a map of risk level
-throughout the cave (your puzzle input). For example:
-
-1163751742
-1381373672
-2136511328
-3694931569
-7463417111
-1319128137
-1359912421
-3125421639
-1293138521
-2311944581
-
-You start in the top left position, your destination is the
-bottom right position, and you cannot move diagonally.
-The number at each position is its risk level;
-to determine the total risk of an entire path,
-add up the risk levels of each position you enter
-(that is, don't count the risk level of your starting position
-unless you enter it; leaving it adds no risk to your total).
-
-Your goal is to find a path with the lowest total risk.
-In this example, a path with the lowest total risk is highlighted here:
-
-1163751742
-1381373672
-2136511328
-3694931569
-7463417111
-1319128137
-1359912421
-3125421639
-1293138521
-2311944581
-
-The total risk of this path is 40
-(the starting position is never entered, so its risk is not counted).
-
-What is the lowest total risk of any path from the top left to the bottom right?
-
- */
 object DataDefs:
-  ???
+  type Pos  = (x: Int, y: Int)
+  type Grid = Map[Pos, Int]
+
+  val Directions = Seq((1, 0), (-1, 0), (0, -1), (0, 1))
+
+  extension (p: Pos)
+    def delta(dx: Int, dy: Int): Pos =
+      (x = p.x + dx, y = p.y + dy)
+
+  extension (grid: Grid)
+    def neighbours(p: Pos): Seq[Pos] = Directions
+      .map(p.delta)
+      .filter(grid.contains)
 
 object Parsing:
   import DataDefs.*
-  def parseLine(line: String) = 0
-  def parse(lines: Seq[String]) = lines map parseLine
+  def parse(lines: Seq[String]): Grid = Seq
+    .tabulate(lines.head.size, lines.size): (x, y) =>
+      (x, y) -> lines(y)(x).asDigit
+    .flatten
+    .toMap
 
 object Solving:
   import DataDefs.*
-  def solve1(lines: Seq[String]) = 0L
-  def solve2(lines: Seq[String]) = 0L
+
+  @annotation.tailrec
+  def dijkstra(todo: Set[Pos], risk: Grid)(start: Pos, end: Pos, grid: Grid): Int =
+    val point = todo.minBy(risk)
+    if point == end then risk(end)
+    else
+      val (nextTodo, nextRisk) = grid
+        .neighbours(point)
+        .filter: next =>
+          !risk.contains(next) || risk(point) + grid(next) < risk(next)
+        .foldLeft((todo - point, risk)):
+          case ((todo, curRisk), next) =>
+            (todo + next, curRisk.updated(next, curRisk(point) + grid(next)))
+      dijkstra(nextTodo, nextRisk)(start, end, grid)
+  end dijkstra
+
+  def path(grid: Grid): Int =
+    val (start, end) = ((x = 0, y = 0), grid.keys.maxBy(p => p.x * p.y))
+    dijkstra(Set(start), Map(start -> 0))(start, end, grid)
+
+  def expand(grid: Grid): Grid =
+    val end             = grid.keys.maxBy(p => p.x * p.y)
+    val (width, height) = (end.x + 1, end.y + 1)
+    Seq
+      .tabulate(5, 5): (x, y) =>
+        grid.toSeq.map: (pos, value) =>
+          val newX = x * width + pos.x
+          val newY = y * height + pos.y
+          (x = newX, y = newY) -> (1 + (value - 1 + x + y) % 9)
+      .flatten
+      .flatten
+      .toMap
+  end expand
+
+  def solve1(lines: Seq[String]) = path(Parsing.parse(lines))
+  def solve2(lines: Seq[String]) = path(expand(Parsing.parse(lines)))
 
 object Test:
-  private lazy val lines = os.read.lines(os.pwd / "2021" / "15" / "15.test.input.txt")
-  lazy val res1 = Solving.solve1(lines)
-  lazy val res2 = Solving.solve2(lines)
+  val file  = os.pwd / "2021" / "15" / "15.test.input.txt"
+  val lines = os.read.lines(file)
+  val res1  = Solving.solve1(lines)
+  val res2  = Solving.solve2(lines)
 // Test.res1 // part 1: 40
-// Test.res2 // part 2:
+// Test.res2 // part 2: 315
 
 object Main:
-  private lazy val lines = os.read.lines(os.pwd / "2021" / "15" / "15.input.txt")
-  lazy val res1 = Solving.solve1(lines)
-  lazy val res2 = Solving.solve2(lines)
-// Main.res1 // part 1:
-// Main.res2 // part 2:
+  val file  = os.pwd / "2021" / "15" / "15.input.txt"
+  val lines = os.read.lines(file)
+  val res1  = Solving.solve1(lines)
+  val res2  = Solving.solve2(lines)
+// Main.res1 // part 1: 717
+// Main.res2 // part 2: 2993
