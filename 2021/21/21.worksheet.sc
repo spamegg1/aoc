@@ -1,84 +1,79 @@
-/*
---- Day 21: Dirac Dice ---
-There's not much to do as you slowly descend to the bottom of the ocean.
-The submarine computer challenges you to a nice game of Dirac Dice.
-
-This game consists of a single die, two pawns, and a game board with a
-circular track containing ten spaces marked 1 through 10 clockwise.
-Each player's starting space is chosen randomly (your puzzle input).
-Player 1 goes first.
-
-Players take turns moving. On each player's turn, the player rolls
-the die three times and adds up the ress. Then, the player moves
-their pawn that many times forward around the track (that is, moving
-clockwise on spaces in order of increasing value, wrapping back around
-to 1 after 10). So, if a player is on space 7 and they roll 2, 2, and 1,
-they would move forward 5 times, to spaces 8, 9, 10, 1, and finally stopping on 2.
-
-After each player moves, they increase their score by the value of the
-space their pawn stopped on. Players' scores start at 0.
-So, if the first player starts on space 7 and rolls a total of 5,
-they would stop on space 2 and add 2 to their score (for a total score of 2).
-The game immediately ends as a win for any player whose score reaches at least 1000.
-
-Since the first game is a practice game, the submarine opens a compartment
-labeled deterministic dice and a 100-sided die falls out.
-This die always rolls 1 first, then 2, then 3, and so on up to 100,
-after which it starts over at 1 again. Play using this die.
-
-For example, given these starting positions:
-
-Player 1 starting position: 4
-Player 2 starting position: 8
-
-This is how the game would go:
-
-    Player 1 rolls 1+2+3 and moves to space 10 for a total score of 10.
-    Player 2 rolls 4+5+6 and moves to space 3 for a total score of 3.
-    Player 1 rolls 7+8+9 and moves to space 4 for a total score of 14.
-    Player 2 rolls 10+11+12 and moves to space 6 for a total score of 9.
-    Player 1 rolls 13+14+15 and moves to space 6 for a total score of 20.
-    Player 2 rolls 16+17+18 and moves to space 7 for a total score of 16.
-    Player 1 rolls 19+20+21 and moves to space 6 for a total score of 26.
-    Player 2 rolls 22+23+24 and moves to space 6 for a total score of 22.
-
-...after many turns...
-
-    Player 2 rolls 82+83+84 and moves to space 6 for a total score of 742.
-    Player 1 rolls 85+86+87 and moves to space 4 for a total score of 990.
-    Player 2 rolls 88+89+90 and moves to space 3 for a total score of 745.
-    Player 1 rolls 91+92+93 and moves to space 10 for a final score, 1000.
-
-Since player 1 has at least 1000 points, player 1 wins and the game ends.
-At this point, the losing player had 745 points and the die had been
-rolled a total of 993 times; 745 * 993 = 739785.
-
-Play a practice game using the deterministic 100-sided die.
-The moment either player wins, what do you get if you multiply
-the score of the losing player by the number of times the die was rolled during the game?
-
- */
 object DataDefs:
-  ???
+  import collection.mutable.{Map => MMap}
+  type Cache = MMap[State, Total]
 
-object Parsing:
-  import DataDefs.*
-  def parseLine(line: String) = 0
-  def parse(lines: Seq[String]) = lines map parseLine
+  val Threshold  = 1000
+  val ScoreLimit = 21
+  val Dirac: Seq[Int] =
+    for
+      first  <- 1 to 3
+      second <- 1 to 3
+      third  <- 1 to 3
+    yield first + second + third
+
+  case class Player(space: Int, score: Int = 0):
+    def next(move: Int) =
+      val nextSpace = (((space - 1) + move) % 10) + 1
+      Player(nextSpace, score + nextSpace)
+    def partition = Dirac.map(next).partition(_.score >= ScoreLimit)
+
+  case class State(p1: Player, p2: Player)
+
+  case class Dice(value: Int = 1, rolled: Int = 0):
+    def roll = Dice(value % 100 + 1, rolled + 1)
+    def thrice: (Dice, Int) = Iterator
+      .iterate((this, 0))((dice, move) => (dice.roll, move + dice.value))
+      .drop(3)
+      .next()
+
+  case class Total(p1Win: Long, p2Win: Long):
+    def +(other: Total) = Total(p1Win + other.p1Win, p2Win + other.p2Win)
+    def max: Long       = p1Win.max(p2Win)
+end DataDefs
 
 object Solving:
   import DataDefs.*
-  def solve1 = 0L
-  def solve2 = 0L
+
+  @annotation.tailrec
+  def play(state: State, dice: Dice): Int =
+    val State(p1, p2)   = state
+    val (dice1, p1Move) = dice.thrice
+    val nextPlayer1     = p1.next(p1Move)
+    val (dice2, p2Move) = dice1.thrice
+    val nextPlayer2     = p2.next(p2Move)
+    if nextPlayer1.score >= Threshold then p2.score * dice1.rolled
+    else if nextPlayer2.score >= Threshold then nextPlayer1.score * dice2.rolled
+    else play(State(nextPlayer1, nextPlayer2), dice2)
+  end play
+
+  def checkCache(state: State)(using cache: Cache): Total =
+    cache.getOrElseUpdate(state, compute(state))
+
+  def compute(state: State)(using cache: Cache): Total =
+    val (winsP1, rest) = state.p1.partition
+    rest
+      .map: nextP1 =>
+        val (winsP2, other) = state.p2.partition
+        other
+          .map(nextP2 => checkCache(State(nextP1, nextP2)))
+          .fold(Total(0, winsP2.size))(_ + _)
+      .fold(Total(winsP1.size, 0))(_ + _)
+  end compute
+
+  def solve1(p1: Int, p2: Int) = play(State(Player(p1), Player(p2)), Dice())
+  def solve2(p1: Int, p2: Int) =
+    given Cache = collection.mutable.Map[State, Total]()
+    checkCache(State(Player(p1), Player(p2))).max
+end Solving
 
 object Test: // Player 1 starting position: 4, Player 2 starting position: 8
-  lazy val res1 = Solving.solve1
-  lazy val res2 = Solving.solve2
+  val res1 = Solving.solve1(4, 8)
+  val res2 = Solving.solve2(4, 8)
 // Test.res1 // part 1: 739785
-// Test.res2 // part 2:
+// Test.res2 // part 2: res1: Long = 444356092776315
 
 object Main: // Player 1 starting position: 3, Player 2 starting position: 10
-  lazy val res1 = Solving.solve1
-  lazy val res2 = Solving.solve2
-// Main.res1 // part 1:
-// Main.res2 // part 2:
+  val res1 = Solving.solve1(3, 10)
+  val res2 = Solving.solve2(3, 10)
+// Main.res1 // part 1: 713328
+// Main.res2 // part 2: 92399285032143
