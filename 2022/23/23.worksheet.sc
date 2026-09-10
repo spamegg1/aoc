@@ -1,286 +1,98 @@
-/*
---- Day 23: Unstable Diffusion ---
-You enter a large crater of gray dirt where the grove is supposed to be.
-All around you, plants you imagine were expected to be full of fruit are
-instead withered and broken. 
-A large group of Elves has formed in the middle of the grove.
-
-"...but this volcano has been dormant for months. 
-Without ash, the fruit can't grow!"
-You look up to see a massive, snow-capped mountain towering above you.
-"It's not like there are other active volcanoes here; we've looked everywhere."
-"But our scanners show active magma flows; clearly it's going somewhere."
-
-They finally notice you at the edge of the grove,
-your pack almost overflowing from the random star fruit you've been collecting.
-Behind you, elephants and monkeys explore the grove, looking concerned.
-Then, the Elves recognize the ash cloud slowly spreading above your recent detour.
-
-"Why do you--" "How is--" "Did you just--"
-
-Before any of them can form a complete question, another Elf speaks up:
-  "Okay, new plan. We have almost enough fruit already, and ash from the
-  plume should spread here eventually. If we quickly plant new seedlings
-  now, we can still make it to the extraction point. Spread out!"
-
-The Elves each reach into their pack and pull out a tiny plant.
-The plants rely on important nutrients from the ash, so they can't
-be planted too close together.
-
-There isn't enough time to let the Elves figure out where to plant
-the seedlings themselves; you quickly scan the grove (your puzzle input)
-and note their positions.
-
-For example:
-
-....#..
-..###.#
-#...#.#
-.#...##
-#.###..
-##.#.##
-.#..#..
-
-The scan shows Elves # and empty ground .; outside your scan,
-more empty ground extends a long way in every direction.
-The scan is oriented so that north is up; orthogonal directions are
-written N (north), S (south), W (west), and E (east), while diagonal
-directions are written NE, NW, SE, SW.
-
-The Elves follow a time-consuming process to figure out where they
-should each go; you can speed up this process considerably.
-The process consists of some number of rounds during which Elves
-alternate between considering where to move and actually moving.
-
-During the first half of each round, each Elf considers the eight
-positions adjacent to themself. 
-If no other Elves are in one of those eight positions,
-the Elf does not do anything during this round. Otherwise, the Elf
-looks in each of four directions in the following order and proposes
-moving one step in the first valid direction:
-  If there is no Elf in the N, NE, or NW adjacent positions,
-    the Elf proposes moving north one step.
-  If there is no Elf in the S, SE, or SW adjacent positions,
-    the Elf proposes moving south one step.
-  If there is no Elf in the W, NW, or SW adjacent positions,
-    the Elf proposes moving west one step.
-  If there is no Elf in the E, NE, or SE adjacent positions,
-    the Elf proposes moving east one step.
-
-After each Elf has had a chance to propose a move, the second half of the round can begin.
-Simultaneously, each Elf moves to their proposed destination tile
-if they were the only Elf to propose moving to that position.
-If two or more Elves propose moving to the same position, none of those Elves move.
-
-Finally, at the end of the round, the first direction the
-Elves considered is moved to the end of the list of directions.
-For example, during the second round, the Elves would try proposing
-a move to the south first, then west, then east, then north.
-On the third round, the Elves would first consider
-west, then east, then north, then south.
-
-As a smaller example, consider just these five Elves:
-
-.....
-..##.
-..#..
-.....
-..##.
-.....
-
-The northernmost two Elves and southernmost two Elves
-all propose moving north, while the middle Elf cannot
-move north and proposes moving south. The middle Elf
-proposes the same destination as the southwest Elf, so
-neither of them move, but the other three do:
-
-..##.
-.....
-..#..
-...#.
-..#..
-.....
-
-Next, the northernmost two Elves and the southernmost
-Elf all propose moving south. Of the remaining middle
-two Elves, the west one cannot move south and proposes
-moving west, while the east one cannot move south or
-west and proposes moving east. All five Elves succeed
-in moving to their proposed positions:
-
-.....
-..##.
-.#...
-....#
-.....
-..#..
-
-Finally, the southernmost two Elves choose not to move at all.
-Of the remaining three Elves, the west one proposes moving west,
-the east one proposes moving east, and the middle one proposes moving north;
-all three succeed in moving:
-
-..#..
-....#
-#....
-....#
-.....
-..#..
-
-At this point, no Elves need to move, and so the process ends.
-
-The larger example above proceeds as follows:
-
-== Initial State ==
-..............
-..............
-.......#......
-.....###.#....
-...#...#.#....
-....#...##....
-...#.###......
-...##.#.##....
-....#..#......
-..............
-..............
-..............
-
-== End of Round 1 ==
-..............
-.......#......
-.....#...#....
-...#..#.#.....
-.......#..#...
-....#.#.##....
-..#..#.#......
-..#.#.#.##....
-..............
-....#..#......
-..............
-..............
-
-== End of Round 2 ==
-..............
-.......#......
-....#.....#...
-...#..#.#.....
-.......#...#..
-...#..#.#.....
-.#...#.#.#....
-..............
-..#.#.#.##....
-....#..#......
-..............
-..............
-
-== End of Round 3 ==
-..............
-.......#......
-.....#....#...
-..#..#...#....
-.......#...#..
-...#..#.#.....
-.#..#.....#...
-.......##.....
-..##.#....#...
-...#..........
-.......#......
-..............
-
-== End of Round 4 ==
-..............
-.......#......
-......#....#..
-..#...##......
-...#.....#.#..
-.........#....
-.#...###..#...
-..#......#....
-....##....#...
-....#.........
-.......#......
-..............
-
-== End of Round 5 ==
-.......#......
-..............
-..#..#.....#..
-.........#....
-......##...#..
-.#.#.####.....
-...........#..
-....##..#.....
-..#...........
-..........#...
-....#..#......
-..............
-
-After a few more rounds...
-
-== End of Round 10 ==
-.......#......
-...........#..
-..#.#..#......
-......#.......
-...#.....#..#.
-.#......##....
-.....##.......
-..#........#..
-....#.#..#....
-..............
-....#..#..#...
-..............
-
-To make sure they're on the right track, the Elves like to check after
-round 10 that they're making good progress toward covering enough ground.
-To do this, count the number of empty ground tiles contained by the
-smallest rectangle that contains every Elf. (The edges of the rectangle
-should be aligned to the N/S/E/W directions; the Elves do not have the
-patience to calculate arbitrary rectangles.) 
-In the above example, that rectangle is:
-
-......#.....
-..........#.
-.#.#..#.....
-.....#......
-..#.....#..#
-#......##...
-....##......
-.#........#.
-...#.#..#...
-............
-...#..#..#..
-
-In this region, the number of empty ground tiles is 110.
-
-Simulate the Elves' process and find the smallest rectangle
-that contains the Elves after 10 rounds. How many empty ground
-tiles does that rectangle contain?
-
- */
 object DataDefs:
-  ???
+  case class Pos(x: Int, y: Int):
+    def +(other: Pos): Pos = Pos(x + other.x, y + other.y)
+
+  val North    = Pos(0, -1)
+  val NW       = Pos(-1, -1)
+  val NE       = Pos(1, -1)
+  val South    = Pos(0, 1)
+  val SW       = Pos(-1, 1)
+  val SE       = Pos(1, 1)
+  val West     = Pos(-1, 0)
+  val East     = Pos(1, 0)
+  val Order    = Seq(North, South, West, East)
+  val Adjacent = Seq(NW, North, NE, West, East, SW, South, SE)
+
+  case class State(elves: Set[Pos], moves: Seq[Pos], stuck: Boolean):
+    def step: State =
+      val proposals = elves.map(elf => elf -> Solving.propose(elves, moves, elf))
+      val occurrences = proposals.toSeq
+        .flatMap(_._2)
+        .groupMapReduce(identity)(_ => 1)(_ + _)
+      val next = proposals.map: (elf, proposal) =>
+        proposal
+          .map: move =>
+            if occurrences(move) == 1 then move else elf
+          .getOrElse(elf)
+      State(next, moves.tail :+ moves.head, elves == next)
+    end step
 
 object Parsing:
   import DataDefs.*
-  def parse(lines: Seq[String]) = ???
+
+  def parse(lines: Seq[String]): Set[Pos] =
+    (for
+      y <- lines.indices
+      x <- lines.head.indices
+      if lines(y)(x) != '.'
+    yield Pos(x, y)).toSet
 
 object Solving:
   import DataDefs.*
 
-  def solve1(lines: Seq[String]) = 0L
-  def solve2(lines: Seq[String]) = 0L
+  def propose(elves: Set[Pos], moves: Seq[Pos], elf: Pos): Option[Pos] =
+    val checks = Adjacent
+      .map(_ + elf)
+      .map(elves.contains)
+    val Seq(nw, n, ne, w, e, sw, s, se) = checks
+
+    if checks.exists(identity) then
+      moves
+        .find:
+          case `North` => !(nw || n || ne)
+          case `South` => !(sw || s || se)
+          case `West`  => !(nw || w || sw)
+          case `East`  => !(ne || e || se)
+          case _       => false
+        .map(_ + elf)
+    else None
+  end propose
+
+  def solve1(lines: Seq[String]) =
+    val start = State(Parsing.parse(lines), Order, false)
+    val elves = Iterator
+      .iterate(start)(_.step)
+      .drop(10)
+      .next()
+      .elves
+    val (minX, maxX) = (elves.map(_.x).min, elves.map(_.x).max)
+    val (minY, maxY) = (elves.map(_.y).min, elves.map(_.y).max)
+    (for
+      x <- minX to maxX
+      y <- minY to maxY
+    yield Pos(x, y))
+      .filterNot(elves.contains)
+      .size
+  end solve1
+
+  def solve2(lines: Seq[String]) =
+    val start = State(Parsing.parse(lines), Order, false)
+    Iterator
+      .iterate(start)(_.step)
+      .indexWhere(_.stuck == true)
 
 object Test:
-  private lazy val lines = os.read.lines(os.pwd / "2022" / "23" / "23.test.input.txt")
-  lazy val res1 = Solving.solve1(lines)
-  lazy val res2 = Solving.solve2(lines)
+  val file  = os.pwd / "2022" / "23" / "23.test.input.txt"
+  val lines = os.read.lines(file)
+  val res1  = Solving.solve1(lines)
+  val res2  = Solving.solve2(lines)
 // Test.res1 // part 1: 110
-// Test.res2 // part 2:
+// Test.res2 // part 2: 20
 
 object Main:
-  private lazy val lines = os.read.lines(os.pwd / "2022" / "23" / "23.input.txt")
-  lazy val res1 = Solving.solve1(lines)
-  lazy val res2 = Solving.solve2(lines)
-// Main.res1 // part 1:
-// Main.res2 // part 2:
+  val file  = os.pwd / "2022" / "23" / "23.input.txt"
+  val lines = os.read.lines(file)
+  val res1  = Solving.solve1(lines)
+  val res2  = Solving.solve2(lines)
+// Main.res1 // part 1: 4158
+// Main.res2 // part 2: 1014
